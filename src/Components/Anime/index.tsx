@@ -5,8 +5,8 @@ import image from './cat.png'
 
 export const Anime = ({ colors, theme }: any) => {
     const pixiApp = React.useRef(new PIXI.Application({
-        width: 300,
-        height: 300,
+        width: 256,
+        height: 256,
         transparent: false,
         antialias: true,
         resolution: 1,
@@ -16,6 +16,9 @@ export const Anime = ({ colors, theme }: any) => {
     const setup = () => {
         const texture = PIXI.utils.TextureCache[image];
         const sprite = new PIXI.Sprite(texture)
+        // sprite.x = 90
+        // sprite.y = 90
+        sprite.position.set(90, 90)
         pixiApp.stage.addChild(sprite)
     }
 
