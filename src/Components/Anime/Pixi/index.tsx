@@ -28,6 +28,7 @@ const zombieWalk = [
 let spriteCounter = 0
 let frameCount = 0
 let requiredFPS = 3
+let delta = 0
 export const AnimePixi = ({ colors, theme, onLoadingProgress }: any) => {
     const pixiApp = React.useRef(new PIXI.Application({
         width: window.innerWidth,
@@ -40,8 +41,10 @@ export const AnimePixi = ({ colors, theme, onLoadingProgress }: any) => {
     const pixiLoader = React.useRef(new PIXI.Loader()).current
 
     const animate = ({ sprite }: any) => {
+        delta += 0.1
         sprite.x = sprite.x > window.innerWidth + 100 ? 0 : sprite.x + 10
         sprite.y = pixiApp.renderer.screen.height / 2
+        sprite.alpha = Math.sin(delta)
         sprite.texture = pixiLoader.resources[`zombie-walk-${spriteCounter}`].texture
         if (spriteCounter == 9) spriteCounter = 0
         else spriteCounter += 1
@@ -54,6 +57,10 @@ export const AnimePixi = ({ colors, theme, onLoadingProgress }: any) => {
         sprite.anchor.y = 0.5;
         sprite.x = pixiApp.screen.width / 2
         sprite.y = pixiApp.screen.height / 2
+        sprite.scale = new PIXI.Point(0.5, 0.5)
+        sprite.blendMode = PIXI.BLEND_MODES.MULTIPLY
+        sprite.interactive = true
+        sprite.buttonMode = true
         pixiApp.stage.addChild(sprite)
         pixiApp.ticker.add(() => {
             if (frameCount == requiredFPS) {
