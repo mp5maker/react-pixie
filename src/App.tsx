@@ -36,9 +36,7 @@ export const App = () => {
         className="container-fluid">
         <Router history={history}>
             <Route exact path="/" component={Pages.Home} />
-            <Route path="/resume">
-              <Pages.Resume />
-            </Route>
+            <Route path="/resume" component={Pages.Resume} />
         </Router>
       </div>
       <Footer

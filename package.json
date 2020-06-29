@@ -23,7 +23,9 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-three-fiber": "^4.2.12",
     "sass": "^1.26.9",
+    "three": "^0.118.3",
     "typescript": "~3.7.2"
   },
   "scripts": {
