@@ -1,7 +1,5 @@
 import * as React from 'react'
 import * as PIXI from 'pixi.js'
-import get from 'lodash/get'
-import head from 'lodash/head'
 
 import zombieWalkOne from '../../../Sprites/male/walk-1.png'
 import zombieWalkTwo from '../../../Sprites/male/walk-2.png'
