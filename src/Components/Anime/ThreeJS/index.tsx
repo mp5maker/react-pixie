@@ -62,15 +62,21 @@ export const AnimeThreeJS = () => {
 
     /* Mesh ==> Geometry, Material */
     const mesh = React.useRef(new THREE.Mesh(geometry, material)).current
+    mesh.position.set(0, 0, -1000)
+    scene.add(mesh)
 
     /* Lights */
     const lightOne = React.useRef(new THREE.AmbientLight(0xffffff, 0.5)).current
     const lightTwo = React.useRef(new THREE.PointLight(0xffffff, 0.5)).current
+    // const lightTwo = React.useRef(new THREE.DirectionalLight(0xffffff, 0.5)).current
+    // lightTwo.target = mesh
+    // const lightTwo = React.useRef(new THREE.SpotLight(0xffffff, 0.5)).current
+    // lightTwo.target = mesh
+    // const lightTwo = React.useRef(new THREE.HemisphereLight(0xffffff, 0xffffff, 1)).current
 
-    mesh.position.set(0, 0, -1000)
-    scene.add(mesh)
     scene.add(lightOne)
     scene.add(lightTwo)
+
 
     const animate = () => {
         mesh.rotation.x += 0.01
