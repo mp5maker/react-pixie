@@ -14,7 +14,7 @@ import { Colors } from './Constants/Colors'
 
 /* CSS */
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './App.scss';
 
 
 export const history = createBrowserHistory()

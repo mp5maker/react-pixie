@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100%;
+  .container-fluid {
+    min-height: calc(100vh - 60px);
+    & ~ footer {
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+    }
+  }
+}
+
+.common-splitter {
+  display: flex;
+  justify-content: 'space-between';
+  align-items: 'center';
+  > div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    &:first-child {
+      text-align: left;
+    }
+    &:last-child {
+      text-align: right;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

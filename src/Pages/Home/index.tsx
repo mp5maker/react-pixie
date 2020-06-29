@@ -3,7 +3,8 @@ import * as React from 'react'
 import { Colors } from '../../Constants/Colors'
 import { Styles } from '../../Styles/Pages'
 import { AppContext } from '../../AppContext'
-import { Anime } from '../../Components/Anime'
+import { AnimePixi } from '../../Components/Anime/Pixi'
+import "./Styles.scss"
 
 export const Home = ({}: any) => {
     const { theme } = React.useContext(AppContext)
@@ -18,8 +19,8 @@ export const Home = ({}: any) => {
                 }}
                 className="pages-home-container">
                 <div className="row">
-                    <div className="col">
-                        <Anime
+                    <div className="col p-0">
+                        <AnimePixi
                             theme={theme}
                             colors={Colors}/>
                     </div>
