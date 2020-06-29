@@ -40,7 +40,7 @@ export const AnimePixi = ({ colors, theme, onLoadingProgress }: any) => {
     }
 
     React.useEffect(() => {
-        pixiLoader.add(image)
+        pixiLoader.add("cat", image)
         pixiLoader.onProgress.add(loadingOnProgress)
         pixiLoader.load(setup)
         window.addEventListener('resize', onResize)
