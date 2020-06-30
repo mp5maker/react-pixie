@@ -16,6 +16,14 @@ export const AnimeThreeJS = () => {
         300,
         10000
     )).current
+    // const camera = React.useRef(new THREE.OrthographicCamera(
+    //     -500,
+    //     500,
+    //     400,
+    //     -400,
+    //     0.1,
+    //     10000
+    // )).current
 
     /* Colors */
     const lightgrey = React.useRef(new THREE.Color('lightgrey')).current
@@ -30,6 +38,13 @@ export const AnimeThreeJS = () => {
         // React.useRef(new THREE.DirectionalLight(0xffffff, 0.5)).current, // Radiats out from a one sigle point
         // React.useRef(new THREE.SpotLight(0xffffff, 0.5)).current, // Radiates like cone
         // React.useRef(new THREE.HemisphereLight(0xffffff, 0.5)).current, // Top to bottom
+    ]
+
+    /* Helpers */
+    const helpers = [
+        React.useRef(new THREE.CameraHelper(camera)).current,
+        // @ts-ignore
+        React.useRef(new THREE.PointLightHelper(lights[1])).current,
     ]
 
     /* Geometry */
@@ -52,8 +67,9 @@ export const AnimeThreeJS = () => {
     const animate = () => {
         delta += 0.01
 
-        // camera.lookAt(lights[0].position)
-        camera.position.z += Math.sin(delta) * 5
+        helpers.forEach((light) => light.update())
+        camera.lookAt(lights[1].position)
+        // camera.position.z += Math.sin(delta) * 2
         // camera.position.x = Math.sin(delta) * 5000
         // camera.position.y = Math.sin(delta) * 5000
 
@@ -81,6 +97,7 @@ export const AnimeThreeJS = () => {
 
         /* Added in the scene */
         lights.forEach(item => scene.add(item))
+        helpers.forEach(item => scene.add(item))
         scene.add(boxMesh)
         scene.add(sphereMesh)
         scene.add(planeMesh)

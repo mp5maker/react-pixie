@@ -23,6 +23,29 @@
     > Points Material
     > Sprite Material
 
+## Light ##
+    > Ambient Light
+    > Point Light
+    > Directional Light
+    > Spot Light
+    > Hemisphere Light
+
+## Geometry ##
+    > Sphere Geometry
+    > Plane Geometry
+    > Cone Geometry
+    > Cylinder Geometry
+    > TorusKnot Geometry
+
+## Camera Helper (Debugging) ##
+    > Camera Helper
+
+## Specific Helper ##
+    > Point Light Helper
+    > Direction Light Helper
+    > Hemisphere Light Helper
+    > Spot Light Helper
+
 ```javascript
 import * as React from 'react'
 import * as THREE from 'three'
