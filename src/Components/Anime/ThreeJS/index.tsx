@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as THREE from 'three'
 import TreeImage from '../../../Sprites/graveyard/png/Objects/Tree.png'
 
-
+let delta = 0
 export const AnimeThreeJS = () => {
     /* Renderer */
     const renderer = React.useRef(new THREE.WebGLRenderer({
@@ -24,8 +24,13 @@ export const AnimeThreeJS = () => {
     const scene = React.useRef(new THREE.Scene()).current
 
     /* Lights */
-    const ambientLight = React.useRef(new THREE.AmbientLight(0xffffff, 0.5)).current
-    const pointLight = React.useRef(new THREE.PointLight(0xffffff, 0.5)).current
+    const lights = [
+        React.useRef(new THREE.AmbientLight(0xffffff, 0.5)).current, // Consistent Lighting
+        React.useRef(new THREE.PointLight(0xffffff, 0.5)).current, // Radiats out from a single point
+        // React.useRef(new THREE.DirectionalLight(0xffffff, 0.5)).current, // Radiats out from a one sigle point
+        // React.useRef(new THREE.SpotLight(0xffffff, 0.5)).current, // Radiates like cone
+        // React.useRef(new THREE.HemisphereLight(0xffffff, 0.5)).current, // Top to bottom
+    ]
 
     /* Geometry */
     const boxGeometry = React.useRef(new THREE.BoxGeometry(100, 100, 100, 10, 10, 10)).current
@@ -45,6 +50,13 @@ export const AnimeThreeJS = () => {
     const planeMesh = React.useRef(new THREE.Mesh(planeGeometry, meshStandardMaterial)).current
 
     const animate = () => {
+        delta += 0.01
+
+        // camera.lookAt(lights[0].position)
+        camera.position.z += Math.sin(delta) * 5
+        // camera.position.x = Math.sin(delta) * 5000
+        // camera.position.y = Math.sin(delta) * 5000
+
         boxMesh.rotation.x += 0.01
         boxMesh.rotation.y += 0.01
         renderer.render(scene, camera)
@@ -68,8 +80,7 @@ export const AnimeThreeJS = () => {
         planeMesh.rotation.set(-90 * (Math.PI / 180), 0, 0)
 
         /* Added in the scene */
-        scene.add(ambientLight)
-        scene.add(pointLight)
+        lights.forEach(item => scene.add(item))
         scene.add(boxMesh)
         scene.add(sphereMesh)
         scene.add(planeMesh)
