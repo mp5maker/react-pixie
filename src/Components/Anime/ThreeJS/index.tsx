@@ -4,97 +4,85 @@ import TreeImage from '../../../Sprites/graveyard/png/Objects/Tree.png'
 
 
 export const AnimeThreeJS = () => {
-    /* Renderer ==> Scene, Camera */
-    const renderer = React.useRef(new THREE.WebGL1Renderer({
+    /* Renderer */
+    const renderer = React.useRef(new THREE.WebGLRenderer({
         antialias: true
     })).current
-    /* Scene ==> Lights, Mesh */
-    const scene = React.useRef(new THREE.Scene()).current
+
     /* Camera */
     const camera = React.useRef(new THREE.PerspectiveCamera(
-        75,
+        35,
         window.innerWidth / window.innerHeight,
-        0.1,
-        3000
+        300,
+        10000
     )).current
 
-    /* Geometry */
-    const geometry = React.useRef(new THREE.BoxGeometry(100, 100, 100)).current
-    // const geometry = React.useRef(new THREE.SphereGeometry(50, 20, 10)).current
-    // const geometry = React.useRef(new THREE.PlaneGeometry(50, 50)).current
-    // const geometry = React.useRef(new THREE.ConeGeometry(50, 100, 100)).current
-    // const geometry = React.useRef(new THREE.CylinderGeometry(50, 100, 100, 20, 20, true)).current
-    // const geometry = React.useRef(new THREE.TorusKnotGeometry(100, 30, 100, 100)).current
+    /* Colors */
+    const lightgrey = React.useRef(new THREE.Color('lightgrey')).current
 
-    /* Material */
-    // const material = React.useRef(new THREE.MeshBasicMaterial({ color: 0xF3FFE2 })).current
-    // const material = React.useRef(new THREE.MeshBasicMaterial({
-    //     color: 0xff0000,
-    //     transparent: true,
-    //     opacity: 1,
-    //     wireframe: true,
-    //     wireframeLinewidth: 1,
-    // })).current
-    // const material = React.useRef(new THREE.MeshLambertMaterial({
-    //     color: 0xF3FFE2,
-    //     emissive: 0xff0000,
-    // })).current
-    // const material = React.useRef(new THREE.MeshLambertMaterial({
-    //     color: 0xF3FFE2,
-    //     emissive: 0xff0000,
-    //     emissiveIntensity: 0.1,
-    //     map: new THREE.TextureLoader().load(TreeImage)
-    // })).current
-    // const material = React.useRef(new THREE.MeshPhongMaterial({
-    //     color: 0xF3FFE2,
-    //     emissive: 0xff0000,
-    //     emissiveIntensity: 0.1,
-    //     specular: 0xffffff,
-    //     shininess: 2,
-    //     map: new THREE.TextureLoader().load(TreeImage)
-    // })).current
-    const material = React.useRef(new THREE.MeshStandardMaterial({
-        color: 0xF3FFE2,
-        roughness: 0.5,
-        metalness: 0.5,
-        map: new THREE.TextureLoader().load(TreeImage)
-    })).current
-
-    /* Mesh ==> Geometry, Material */
-    const mesh = React.useRef(new THREE.Mesh(geometry, material)).current
-    mesh.position.set(0, 0, -1000)
-    scene.add(mesh)
+    /* Scene */
+    const scene = React.useRef(new THREE.Scene()).current
 
     /* Lights */
-    const lightOne = React.useRef(new THREE.AmbientLight(0xffffff, 0.5)).current
-    const lightTwo = React.useRef(new THREE.PointLight(0xffffff, 0.5)).current
-    // const lightTwo = React.useRef(new THREE.DirectionalLight(0xffffff, 0.5)).current
-    // lightTwo.target = mesh
-    // const lightTwo = React.useRef(new THREE.SpotLight(0xffffff, 0.5)).current
-    // lightTwo.target = mesh
-    // const lightTwo = React.useRef(new THREE.HemisphereLight(0xffffff, 0xffffff, 1)).current
+    const ambientLight = React.useRef(new THREE.AmbientLight(0xffffff, 0.5)).current
+    const pointLight = React.useRef(new THREE.PointLight(0xffffff, 0.5)).current
 
-    scene.add(lightOne)
-    scene.add(lightTwo)
+    /* Geometry */
+    const boxGeometry = React.useRef(new THREE.BoxGeometry(100, 100, 100, 10, 10, 10)).current
+    const sphereGeometry = React.useRef(new THREE.SphereGeometry(50, 20, 20)).current
+    const planeGeometry = React.useRef(new THREE.PlaneGeometry(window.innerWidth * 10, window.innerHeight * 10, 1, 1)).current
 
+    /* Material */
+    const meshLambertMaterial = React.useRef(new THREE.MeshLambertMaterial()).current
+    const meshPhongMaterial = React.useRef(new THREE.MeshPhongMaterial()).current
+    const meshStandardMaterial = React.useRef(new THREE.MeshStandardMaterial({
+        color: lightgrey
+    })).current
+
+    /* Mesh */
+    const boxMesh = React.useRef(new THREE.Mesh(boxGeometry, meshLambertMaterial)).current
+    const sphereMesh = React.useRef(new THREE.Mesh(sphereGeometry, meshPhongMaterial)).current
+    const planeMesh = React.useRef(new THREE.Mesh(planeGeometry, meshStandardMaterial)).current
 
     const animate = () => {
-        mesh.rotation.x += 0.01
-        mesh.rotation.y += 0.01
-        // mesh.rotation.z += 0.01
+        boxMesh.rotation.x += 0.01
+        boxMesh.rotation.y += 0.01
         renderer.render(scene, camera)
         requestAnimationFrame(animate)
     }
 
-    requestAnimationFrame(animate)
+    React.useEffect(() => {
+        requestAnimationFrame(animate)
+    }, [])
 
     const setCanvasRef = (element: any) => {
-        renderer.setSize(window.innerWidth, window.innerHeight)
-        renderer.setClearColor(0x00000);
+        renderer.setClearColor(0xffffff);
         renderer.setPixelRatio(window.devicePixelRatio || 1)
-        renderer.render(scene, camera)
+        renderer.setSize(window.innerWidth, window.innerHeight)
         element.appendChild(renderer.domElement)
+
+        /* Mesh Position */
+        boxMesh.position.set(0, 0, -800)
+        sphereMesh.position.set(200, 0, -800)
+        planeMesh.position.set(0, -100, -2000)
+        planeMesh.rotation.set(-90 * (Math.PI / 180), 0, 0)
+
+        /* Added in the scene */
+        scene.add(ambientLight)
+        scene.add(pointLight)
+        scene.add(boxMesh)
+        scene.add(sphereMesh)
+        scene.add(planeMesh)
     }
+
+    const onWindowResize = () => {
+        // renderer.setSize(window.innerWidth, window.innerHeight)
+        // sphereMesh.scale.set(1, 1, 1)
+        // boxMesh.scale.set(1, 1, 1)
+        // boxMesh.scale.set(100 / window.innerWidth, 100 / window.innerHeight, 1)
+    }
+
+    window.addEventListener('resize', onWindowResize)
 
     return (
         <div ref={setCanvasRef}></div>

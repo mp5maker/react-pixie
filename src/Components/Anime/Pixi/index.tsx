@@ -24,7 +24,6 @@ import femaleZombieWalkNine from '../../../Sprites/female/walk-9.png'
 import femaleZombieWalkTen from '../../../Sprites/female/walk-10.png'
 
 import backgroundImage from '../../../Sprites/graveyard/png/background.png'
-import { filter } from 'lodash'
 
 const maleZombieWalk = [
     maleZombieWalkOne,
