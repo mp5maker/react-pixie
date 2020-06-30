@@ -18,7 +18,9 @@ export const AnimeThreeJS = () => {
     const renderer = React.useRef(new THREE.WebGLRenderer({
         antialias: true
     })).current
-    renderer.setPixelRatio(window.devicePixelRatio * 10)
+    renderer.setClearColor(0xffffff);
+    renderer.setPixelRatio(window.devicePixelRatio)
+    renderer.setSize(window.innerWidth, window.innerHeight)
 
     /* Camera */
     const camera = React.useRef(new THREE.PerspectiveCamera(
@@ -108,9 +110,6 @@ export const AnimeThreeJS = () => {
     }, [])
 
     const setCanvasRef = (element: any) => {
-        renderer.setClearColor(0xffffff);
-        renderer.setPixelRatio(window.devicePixelRatio || 1)
-        renderer.setSize(window.innerWidth, window.innerHeight)
         element.appendChild(renderer.domElement)
 
         /* Mesh Position */
