@@ -1,5 +1,7 @@
 import * as React from 'react'
 import * as THREE from 'three'
+import get from 'lodash/get'
+import head from 'lodash/head'
 import TreeImage from '../../../Sprites/graveyard/png/Objects/Tree.png'
 // @ts-ignore
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
@@ -11,6 +13,8 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
 import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass'
 // @ts-ignore
 import { SepiaShader } from 'three/examples/jsm/shaders/SepiaShader'
+// @ts-ignore
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 let delta = 0
 export const AnimeThreeJS = () => {
@@ -21,6 +25,7 @@ export const AnimeThreeJS = () => {
     renderer.setClearColor(0xffffff);
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.shadowMap.enabled = true
 
     /* Camera */
     const camera = React.useRef(new THREE.PerspectiveCamera(
@@ -85,11 +90,13 @@ export const AnimeThreeJS = () => {
     const sepiaShader = React.useRef(new ShaderPass(SepiaShader)).current
     const glitchShader = React.useRef(new GlitchPass(0)).current
 
+    /* Loader */
+    const loader = React.useRef(new GLTFLoader()).current
+
     const animate = () => {
         delta += 0.01
 
         renderer.clear();
-
         // helpers.forEach((light) => light.update())
         camera.lookAt(lights[1].position)
         camera.position.z += Math.sin(delta) * 2
@@ -106,35 +113,45 @@ export const AnimeThreeJS = () => {
     }
 
     React.useEffect(() => {
-        requestAnimationFrame(animate)
+        const onSuccessLoad = (boxGLTF: any) => {
+            let boxGLTFMesh = get(boxGLTF, 'scene', {})
+            boxGLTFMesh.position.set(-200, 0, -800)
+            boxGLTFMesh.scale.set(40, 40, 40)
+
+            /* Mesh Position */
+            boxMesh.position.set(0, 0, -800)
+            sphereMesh.position.set(200, 0, -800)
+            planeMesh.position.set(0, -100, -2000)
+            planeMesh.rotation.set(-90 * (Math.PI / 180), 0, 0)
+
+            /* Added in the scene */
+            lights.forEach(item => scene.add(item))
+            // helpers.forEach(item => scene.add(item))
+
+            scene.add(boxMesh)
+            scene.add(sphereMesh)
+            scene.add(planeMesh)
+            scene.add(boxGLTFMesh)
+
+            /* Add Shaders */
+            composer.addPass(renderPass)
+            composer.addPass(sepiaShader)
+            composer.addPass(glitchShader)
+            renderPass.renderToScreen = true
+            requestAnimationFrame(animate)
+        }
+
+        loader.load('Sculptures/box.glb', onSuccessLoad)
     }, [])
 
     const setCanvasRef = (element: any) => {
         element.appendChild(renderer.domElement)
-
-        /* Mesh Position */
-        boxMesh.position.set(0, 0, -800)
-        sphereMesh.position.set(200, 0, -800)
-        planeMesh.position.set(0, -100, -2000)
-        planeMesh.rotation.set(-90 * (Math.PI / 180), 0, 0)
-
-        /* Added in the scene */
-        lights.forEach(item => scene.add(item))
-        // helpers.forEach(item => scene.add(item))
-        scene.add(boxMesh)
-        scene.add(sphereMesh)
-        scene.add(planeMesh)
-
-        /* Add Shaders */
-        composer.addPass(renderPass)
-        composer.addPass(sepiaShader)
-        composer.addPass(glitchShader)
-        renderPass.renderToScreen = true
-
     }
 
     const onWindowResize = () => {
-        // renderer.setSize(window.innerWidth, window.innerHeight)
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
         // sphereMesh.scale.set(1, 1, 1)
         // boxMesh.scale.set(1, 1, 1)
         // boxMesh.scale.set(100 / window.innerWidth, 100 / window.innerHeight, 1)
