@@ -1,6 +1,16 @@
 import * as React from 'react'
 import * as THREE from 'three'
 import TreeImage from '../../../Sprites/graveyard/png/Objects/Tree.png'
+// @ts-ignore
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+// @ts-ignore
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+// @ts-ignore
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
+// @ts-ignore
+import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass'
+// @ts-ignore
+import { SepiaShader } from 'three/examples/jsm/shaders/SepiaShader'
 
 let delta = 0
 export const AnimeThreeJS = () => {
@@ -8,6 +18,7 @@ export const AnimeThreeJS = () => {
     const renderer = React.useRef(new THREE.WebGLRenderer({
         antialias: true
     })).current
+    renderer.setPixelRatio(window.devicePixelRatio * 10)
 
     /* Camera */
     const camera = React.useRef(new THREE.PerspectiveCamera(
@@ -40,13 +51,6 @@ export const AnimeThreeJS = () => {
         // React.useRef(new THREE.HemisphereLight(0xffffff, 0.5)).current, // Top to bottom
     ]
 
-    /* Helpers */
-    const helpers = [
-        React.useRef(new THREE.CameraHelper(camera)).current,
-        // @ts-ignore
-        React.useRef(new THREE.PointLightHelper(lights[1])).current,
-    ]
-
     /* Geometry */
     const boxGeometry = React.useRef(new THREE.BoxGeometry(100, 100, 100, 10, 10, 10)).current
     const sphereGeometry = React.useRef(new THREE.SphereGeometry(50, 20, 20)).current
@@ -64,18 +68,38 @@ export const AnimeThreeJS = () => {
     const sphereMesh = React.useRef(new THREE.Mesh(sphereGeometry, meshPhongMaterial)).current
     const planeMesh = React.useRef(new THREE.Mesh(planeGeometry, meshStandardMaterial)).current
 
+    /* Helpers */
+    const helpers = [
+        React.useRef(new THREE.CameraHelper(camera)).current,
+        // @ts-ignore
+        React.useRef(new THREE.PointLightHelper(lights[1])).current,
+    ]
+
+    /* Composer */
+    const composer = new EffectComposer(renderer)
+    const renderPass = new RenderPass(scene, camera)
+
+    /* Passes */
+    const sepiaShader = React.useRef(new ShaderPass(SepiaShader)).current
+    const glitchShader = React.useRef(new GlitchPass(0)).current
+
     const animate = () => {
         delta += 0.01
 
-        helpers.forEach((light) => light.update())
+        renderer.clear();
+
+        // helpers.forEach((light) => light.update())
         camera.lookAt(lights[1].position)
-        // camera.position.z += Math.sin(delta) * 2
+        camera.position.z += Math.sin(delta) * 2
         // camera.position.x = Math.sin(delta) * 5000
         // camera.position.y = Math.sin(delta) * 5000
 
+        renderer.setPixelRatio(window.devicePixelRatio);
         boxMesh.rotation.x += 0.01
         boxMesh.rotation.y += 0.01
-        renderer.render(scene, camera)
+
+        composer.render()
+        // renderer.render(scene, camera)
         requestAnimationFrame(animate)
     }
 
@@ -97,10 +121,17 @@ export const AnimeThreeJS = () => {
 
         /* Added in the scene */
         lights.forEach(item => scene.add(item))
-        helpers.forEach(item => scene.add(item))
+        // helpers.forEach(item => scene.add(item))
         scene.add(boxMesh)
         scene.add(sphereMesh)
         scene.add(planeMesh)
+
+        /* Add Shaders */
+        composer.addPass(renderPass)
+        composer.addPass(sepiaShader)
+        composer.addPass(glitchShader)
+        renderPass.renderToScreen = true
+
     }
 
     const onWindowResize = () => {

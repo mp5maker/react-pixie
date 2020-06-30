@@ -6,7 +6,6 @@
     > Light
     > Mesh
 
-
 ## Mesh ##
     > Material
     > Geometry
@@ -45,6 +44,16 @@
     > Direction Light Helper
     > Hemisphere Light Helper
     > Spot Light Helper
+
+## Composers (Post Processing) ##
+    > EffectComposer
+    > RenderPass
+    > ShaderPass
+    > GlitchPass
+
+## Shaders (Post Processing) ##
+    > SepiaShader
+
 
 ```javascript
 import * as React from 'react'
