@@ -1,165 +1,108 @@
 import * as React from 'react'
 import * as THREE from 'three'
-import get from 'lodash/get'
-import head from 'lodash/head'
-import TreeImage from '../../../Sprites/graveyard/png/Objects/Tree.png'
-// @ts-ignore
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
-// @ts-ignore
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
-// @ts-ignore
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
-// @ts-ignore
-import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass'
-// @ts-ignore
-import { SepiaShader } from 'three/examples/jsm/shaders/SepiaShader'
-// @ts-ignore
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-let delta = 0
-export const AnimeThreeJS = () => {
+export const AnimeThreeJS = ({ colors, theme }: any) => {
     /* Renderer */
     const renderer = React.useRef(new THREE.WebGLRenderer({
         antialias: true
-    })).current
-    renderer.setClearColor(0xffffff);
-    renderer.setPixelRatio(window.devicePixelRatio)
+    })).current;
     renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setPixelRatio(window.devicePixelRatio)
     renderer.shadowMap.enabled = true
 
     /* Camera */
     const camera = React.useRef(new THREE.PerspectiveCamera(
-        35,
+        75,
         window.innerWidth / window.innerHeight,
-        300,
-        10000
+        0.1,
+        1000
     )).current
-    // const camera = React.useRef(new THREE.OrthographicCamera(
-    //     -500,
-    //     500,
-    //     400,
-    //     -400,
-    //     0.1,
-    //     10000
-    // )).current
-
-    /* Colors */
-    const lightgrey = React.useRef(new THREE.Color('lightgrey')).current
 
     /* Scene */
     const scene = React.useRef(new THREE.Scene()).current
 
-    /* Lights */
-    const lights = [
-        React.useRef(new THREE.AmbientLight(0xffffff, 0.5)).current, // Consistent Lighting
-        React.useRef(new THREE.PointLight(0xffffff, 0.5)).current, // Radiats out from a single point
-        // React.useRef(new THREE.DirectionalLight(0xffffff, 0.5)).current, // Radiats out from a one sigle point
-        // React.useRef(new THREE.SpotLight(0xffffff, 0.5)).current, // Radiates like cone
-        // React.useRef(new THREE.HemisphereLight(0xffffff, 0.5)).current, // Top to bottom
-    ]
-
     /* Geometry */
-    const boxGeometry = React.useRef(new THREE.BoxGeometry(100, 100, 100, 10, 10, 10)).current
-    const sphereGeometry = React.useRef(new THREE.SphereGeometry(50, 20, 20)).current
-    const planeGeometry = React.useRef(new THREE.PlaneGeometry(window.innerWidth * 10, window.innerHeight * 10, 1, 1)).current
+    const geometry = React.useRef({
+        box: new THREE.BoxGeometry(),
+        line: new THREE.BufferGeometry().setFromPoints([
+            new THREE.Vector3(-10, 0, 0),
+            new THREE.Vector3(0, 0, 0),
+            new THREE.Vector3(10, 0, 0),
+        ])
+    }).current
 
     /* Material */
-    const meshLambertMaterial = React.useRef(new THREE.MeshLambertMaterial()).current
-    const meshPhongMaterial = React.useRef(new THREE.MeshPhongMaterial()).current
-    const meshStandardMaterial = React.useRef(new THREE.MeshStandardMaterial({
-        color: lightgrey
-    })).current
+    const material = React.useRef({
+        meshBasic: new THREE.MeshBasicMaterial({
+            color: 0x00ff00
+        }),
+        lineBasic: new THREE.LineBasicMaterial({
+            color: 0x0000ff
+        })
+    }).current
 
     /* Mesh */
-    const boxMesh = React.useRef(new THREE.Mesh(boxGeometry, meshLambertMaterial)).current
-    const sphereMesh = React.useRef(new THREE.Mesh(sphereGeometry, meshPhongMaterial)).current
-    const planeMesh = React.useRef(new THREE.Mesh(planeGeometry, meshStandardMaterial)).current
+    const mesh = React.useRef({
+        box: new THREE.Mesh(geometry.box, material.meshBasic),
+    }).current
 
-    /* Helpers */
-    const helpers = [
-        React.useRef(new THREE.CameraHelper(camera)).current,
-        // @ts-ignore
-        React.useRef(new THREE.PointLightHelper(lights[1])).current,
-    ]
+    /* Line */
+    const line = React.useRef(new THREE.Line(geometry.line, material.lineBasic)).current
 
-    /* Composer */
-    const composer = new EffectComposer(renderer)
-    const renderPass = new RenderPass(scene, camera)
+    /* Controls */
+    const orbitControls = React.useRef(new OrbitControls(camera, renderer.domElement)).current
 
-    /* Passes */
-    const sepiaShader = React.useRef(new ShaderPass(SepiaShader)).current
-    const glitchShader = React.useRef(new GlitchPass(0)).current
-
-    /* Loader */
-    const loader = React.useRef(new GLTFLoader()).current
-
+    /* Animate */
     const animate = () => {
-        delta += 0.01
+        renderer.render(scene, camera)
 
-        renderer.clear();
-        // helpers.forEach((light) => light.update())
-        camera.lookAt(lights[1].position)
-        camera.position.z += Math.sin(delta) * 2
-        // camera.position.x = Math.sin(delta) * 5000
-        // camera.position.y = Math.sin(delta) * 5000
+        mesh.box.rotation.x += 0.01;
+        mesh.box.rotation.y += 0.01;
 
-        renderer.setPixelRatio(window.devicePixelRatio);
-        boxMesh.rotation.x += 0.01
-        boxMesh.rotation.y += 0.01
-
-        composer.render()
-        // renderer.render(scene, camera)
+        orbitControls.update()
         requestAnimationFrame(animate)
     }
 
-    React.useEffect(() => {
-        const onSuccessLoad = (boxGLTF: any) => {
-            let boxGLTFMesh = get(boxGLTF, 'scene', {})
-            boxGLTFMesh.position.set(-200, 0, -800)
-            boxGLTFMesh.scale.set(40, 40, 40)
-
-            /* Mesh Position */
-            boxMesh.position.set(0, 0, -800)
-            sphereMesh.position.set(200, 0, -800)
-            planeMesh.position.set(0, -100, -2000)
-            planeMesh.rotation.set(-90 * (Math.PI / 180), 0, 0)
-
-            /* Added in the scene */
-            lights.forEach(item => scene.add(item))
-            // helpers.forEach(item => scene.add(item))
-
-            scene.add(boxMesh)
-            scene.add(sphereMesh)
-            scene.add(planeMesh)
-            scene.add(boxGLTFMesh)
-
-            /* Add Shaders */
-            composer.addPass(renderPass)
-            composer.addPass(sepiaShader)
-            composer.addPass(glitchShader)
-            renderPass.renderToScreen = true
-            requestAnimationFrame(animate)
-        }
-
-        loader.load('Sculptures/box.glb', onSuccessLoad)
-    }, [])
-
-    const setCanvasRef = (element: any) => {
-        element.appendChild(renderer.domElement)
-    }
-
-    const onWindowResize = () => {
+    const onResizeWindow = () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        // sphereMesh.scale.set(1, 1, 1)
-        // boxMesh.scale.set(1, 1, 1)
-        // boxMesh.scale.set(100 / window.innerWidth, 100 / window.innerHeight, 1)
+        orbitControls.update()
     }
 
-    window.addEventListener('resize', onWindowResize)
+    React.useEffect(() => {
+        /* Add Scenes */
+        scene.add(mesh.box)
+        scene.add(line)
+
+        /* Camera Settings */
+        camera.position.set(0, 0, 5)
+        camera.lookAt(0, 0, 0)
+        orbitControls.keys = {
+            RIGHT: 37, //left arrow
+            BOTTOM: 38, // up arrow
+            LEFT: 39, // right arrow
+            UP: 40 // down arrow
+        }
+        orbitControls.update()
+
+        /* Window Size Change */
+        window.addEventListener('resize', onResizeWindow)
+
+        /* Animation */
+        requestAnimationFrame(animate)
+
+        return () => window.removeEventListener('resize', onResizeWindow)
+    }, [])
+
+    const appendThreeJSContainer = (element: any) => {
+        element.appendChild(renderer.domElement)
+    }
 
     return (
-        <div ref={setCanvasRef}></div>
+        <>
+            <div ref={appendThreeJSContainer}></div>
+        </>
     )
 }
