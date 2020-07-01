@@ -3,17 +3,11 @@ import * as THREE from 'three'
 import get from 'lodash/get'
 import head from 'lodash/head'
 import TreeImage from '../../../Sprites/graveyard/png/Objects/Tree.png'
-// @ts-ignore
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
-// @ts-ignore
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
-// @ts-ignore
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
-// @ts-ignore
 import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass'
-// @ts-ignore
 import { SepiaShader } from 'three/examples/jsm/shaders/SepiaShader'
-// @ts-ignore
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 let delta = 0
