@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Colors } from '../../Constants/Colors'
 import { Styles } from '../../Styles/Pages'
 import { AppContext } from '../../AppContext'
-import { AnimePixi } from '../../Components/Anime/Pixi'
+import { AnimeThreeJS } from '../../Components/Anime/ThreeJS/rain'
 import "./Styles.scss"
 
 export const Home = ({}: any) => {
@@ -20,7 +20,7 @@ export const Home = ({}: any) => {
                 className="pages-home-container">
                 <div className="row">
                     <div className="col p-0">
-                        <AnimePixi
+                        <AnimeThreeJS
                             theme={theme}
                             colors={Colors}/>
                     </div>
