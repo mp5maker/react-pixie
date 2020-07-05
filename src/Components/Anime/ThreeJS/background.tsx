@@ -2,9 +2,11 @@ import * as React from 'react'
 import * as THREE from 'three'
 import get from 'lodash/get'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { DragControls } from 'three/examples/jsm/controls/DragControls'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-export const AnimeThreeJS = ({ colors, theme }: any) => {
+export const AnimeThreeJS = ({ colors, theme, history }: any) => {
+    /* Colors */
     const COLORS = React.useRef({
         primaryColor: new THREE.Color(colors[theme].primaryColor),
         backgroundColor: new THREE.Color(colors[theme].backgroundColor),
@@ -32,7 +34,8 @@ export const AnimeThreeJS = ({ colors, theme }: any) => {
 
     /* Geometry */
     const geometry = React.useRef({
-        box: new THREE.BoxGeometry(5, 5, 5)
+        box: new THREE.BoxGeometry(5, 5, 5),
+        sphere: new THREE.SphereGeometry(5, 32, 32)
     }).current
 
     /* Material */
@@ -45,7 +48,7 @@ export const AnimeThreeJS = ({ colors, theme }: any) => {
 
     /* Mesh */
     const mesh = React.useRef({
-        box: new THREE.Mesh(geometry.box, material.lambert)
+        box: new THREE.Mesh(geometry.box, material.lambert),
     }).current
 
     /* Scene */
@@ -55,7 +58,6 @@ export const AnimeThreeJS = ({ colors, theme }: any) => {
     const light = React.useRef({
         ambient: new THREE.AmbientLight(COLORS.primaryColor, 1),
         point: new THREE.PointLight(COLORS.primaryColor, 10, 5000, 500),
-        pointTwo: new THREE.PointLight(COLORS.primaryColor, 10, 5000, 500)
     }).current
 
     /* Loader */
@@ -66,17 +68,20 @@ export const AnimeThreeJS = ({ colors, theme }: any) => {
 
     /* Control */
     const control = React.useRef({
-        orbit: new OrbitControls(camera.perspective, renderer.domElement)
+        orbit: new OrbitControls(camera.perspective, renderer.domElement),
+        drag: new DragControls([
+            mesh.box
+        ], camera.perspective, renderer.domElement)
     }).current
 
     /* Load Background GLTF */
-    const onSuccessLoadGLTF = (bangladeshImageGLTF: any) => {
-        let bangladeshGLTFMesh = get(bangladeshImageGLTF, 'scene', {})
-        bangladeshGLTFMesh.position.set(0, 0, 0)
-        bangladeshGLTFMesh.scale.set(1, 1, 1)
-        scene.add(bangladeshGLTFMesh)
-        control.orbit.update()
-    }
+    // const onSuccessLoadGLTF = (gltfImage: any) => {
+    //     let gltfMesh = get(gltfImage, 'scene', {})
+    //     gltfMesh.position.set(0, 0, 0)
+    //     gltfMesh.scale.set(1, 1, 1)
+    //     scene.add(gltfMesh)
+    //     control.orbit.update()
+    // }
 
     /* Animation */
     const animate = () => {
@@ -87,6 +92,16 @@ export const AnimeThreeJS = ({ colors, theme }: any) => {
 
         control.orbit.update()
         requestAnimationFrame(animate)
+    }
+
+    /* Drag Listener */
+    const onObjectHoverOn = (event: any) => {
+        event.object.geometry = geometry.sphere
+    }
+
+    const onObjectHoverOff = (event: any) => {
+        event.object.geometry = geometry.box
+        history.push('/')
     }
 
     /* On Window Resize */
@@ -112,7 +127,6 @@ export const AnimeThreeJS = ({ colors, theme }: any) => {
         /* Light Settings */
         light.ambient.position.set(0, 0, -25)
         light.point.position.set(0, 0, -25)
-        light.pointTwo.position.set(0, 0, -5000)
 
         /* Scene Settings */
         scene.add(light.ambient)
@@ -129,20 +143,24 @@ export const AnimeThreeJS = ({ colors, theme }: any) => {
         control.orbit.update()
 
         /* Load GLTF */
-        loader.gltf.load('Sculptures/bangladesh-image.glb', onSuccessLoadGLTF)
+        // loader.gltf.load('Sculptures/bangladesh-image.glb', onSuccessLoadGLTF)
 
         /* Start Animation */
         requestAnimationFrame(animate)
 
-        /* Window Resize Event */
+        /* Events */
+        control.drag.addEventListener('hoveron', onObjectHoverOn)
+        control.drag.addEventListener('hoveroff', onObjectHoverOff)
         window.addEventListener('resize', onWindowResize)
         return () => {
             window.removeEventListener('resize', onWindowResize)
+            control.drag.removeEventListener('hoveron', onObjectHoverOn)
+            control.drag.removeEventListener('hoveroff', onObjectHoverOff)
         }
     })
 
     /* Set Canvas */
-    const setCanvasRef = (element: any) => element.appendChild(renderer.domElement)
+    const setCanvasRef = (element: any) => element && element.appendChild(renderer.domElement)
 
 
     return (

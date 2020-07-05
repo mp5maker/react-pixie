@@ -2,9 +2,11 @@
 import React from 'react';
 import {
   Router,
-  Route
+  Route,
+  Switch
 } from 'react-router'
 import { createBrowserHistory } from 'history'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import { AppContext } from './AppContext'
 import { DARK, LIGHT } from './Constants/Settings'
@@ -35,8 +37,18 @@ export const App = () => {
         }}
         className="container-fluid">
         <Router history={history}>
-            <Route exact path="/" component={Pages.Home} />
-            <Route path="/resume" component={Pages.Resume} />
+          <Route
+            render={({ location }) => {
+              return (
+                <AnimatePresence exitBeforeEnter initial={false}>
+                  <Switch location={location}  key={location.pathname}>
+                    <Route exact path="/" component={Pages.Home} />
+                    <Route path="/resume" component={Pages.Resume} />
+                  </Switch>
+                </AnimatePresence>
+              )
+            }}
+          />
         </Router>
       </div>
       <Footer

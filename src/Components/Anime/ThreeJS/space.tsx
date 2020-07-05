@@ -5,9 +5,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 let stars;
 let acceleration = 0.001;
 
-export const AnimeThreeJS = ({ colors, theme }: any) => {
+export const AnimeThreeJS = ({ colors, theme, history }: any) => {
     /* Colors */
-    const preparedColors = React.useRef({
+    const COLORS = React.useRef({
         primaryColor: new THREE.Color(colors[theme].primaryColor),
         backgroundColor: new THREE.Color(colors[theme].backgroundColor),
         secondaryColor: new THREE.Color(colors[theme].secondaryColor),
@@ -37,9 +37,9 @@ export const AnimeThreeJS = ({ colors, theme }: any) => {
 
     /* Light */
     const light = React.useRef({
-        point: new THREE.PointLight(preparedColors.primaryColor, 1),
-        ambient: new THREE.AmbientLight(preparedColors.primaryColor, 1),
-        spot: new THREE.SpotLight(preparedColors.primaryColor, 1)
+        point: new THREE.PointLight(COLORS.primaryColor, 1),
+        ambient: new THREE.AmbientLight(COLORS.primaryColor, 1),
+        spot: new THREE.SpotLight(COLORS.primaryColor, 1)
     }).current
 
     const geometry = React.useRef({
@@ -49,7 +49,7 @@ export const AnimeThreeJS = ({ colors, theme }: any) => {
 
     /* Material */
     const material = React.useRef({
-        meshLambert: new THREE.MeshLambertMaterial({ color: preparedColors.primaryColor }),
+        meshLambert: new THREE.MeshLambertMaterial({ color: COLORS.primaryColor }),
     }).current
 
     /* Mesh */
@@ -118,7 +118,7 @@ export const AnimeThreeJS = ({ colors, theme }: any) => {
     /* Lifecycle */
     React.useEffect(() => {
         /* Renderer Settings */
-        renderer.setClearColor(preparedColors.backgroundColor)
+        renderer.setClearColor(COLORS.backgroundColor)
         renderer.setSize(window.innerWidth, window.innerHeight)
         renderer.setPixelRatio(window.devicePixelRatio || 1)
         renderer.shadowMap.enabled = true
@@ -164,7 +164,7 @@ export const AnimeThreeJS = ({ colors, theme }: any) => {
     }, [theme])
 
     /* Append Child */
-    const setElement = (element: any) => element.appendChild(renderer.domElement)
+    const setElement = (element: any) => element && element.appendChild(renderer.domElement)
 
     return (
         <div ref={setElement}></div>
