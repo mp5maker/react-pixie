@@ -43,11 +43,11 @@ export const AnimeThreeJSResume = ({
     }).current
 
     /* Light */
-    const light = {
+    const light = React.useRef({
         ambient: new THREE.AmbientLight(COLORS.primaryColor, 1),
         point: new THREE.PointLight(COLORS.primaryColor, 10, 5000, 500),
         spot: new THREE.SpotLight(COLORS.primaryColor, 1),
-    }
+    }).current
 
     /* Geometry */
     const geometry = React.useRef({
@@ -70,14 +70,14 @@ export const AnimeThreeJSResume = ({
     }).current
 
     /* Helper */
-    const helper = {
+    const helper = React.useRef({
         light: {
             point: new THREE.PointLightHelper(
                 light.point,
                 1
             )
         }
-    }
+    }).current
 
     /* Loader */
     const loader = React.useRef({
