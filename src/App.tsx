@@ -24,7 +24,7 @@ import './App.scss';
 export const history = createBrowserHistory()
 
 export const App = () => {
-  const [theme, setTheme] = React.useState(LIGHT)
+  const [theme, setTheme] = React.useState(DARK)
 
 
   return (

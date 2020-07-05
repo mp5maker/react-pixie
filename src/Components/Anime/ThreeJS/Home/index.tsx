@@ -14,7 +14,7 @@ export const AnimeThreeJSHome = ({
     acceleration = 0.002
 }: any) => {
     /* Colors */
-    const COLORS = React.useRef({
+    const COLORS = {
         primaryColor: new THREE.Color(colors[theme].primaryColor),
         backgroundColor: new THREE.Color(colors[theme].backgroundColor),
         secondaryColor: new THREE.Color(colors[theme].secondaryColor),
@@ -22,7 +22,7 @@ export const AnimeThreeJSHome = ({
         dangerColor: new THREE.Color(colors[theme].dangerColor),
         warningColor: new THREE.Color(colors[theme].warningColor),
         successColor: new THREE.Color(colors[theme].successColor),
-    }).current
+    }
 
     /* Renderer */
     const renderer = React.useRef(new THREE.WebGLRenderer({
@@ -43,11 +43,11 @@ export const AnimeThreeJSHome = ({
     }).current
 
     /* Light */
-    const light = React.useRef({
+    const light = {
         ambient: new THREE.AmbientLight(COLORS.primaryColor, 1),
         point: new THREE.PointLight(COLORS.primaryColor, 10, 5000, 500),
         spot: new THREE.SpotLight(COLORS.primaryColor, 1),
-    }).current
+    }
 
     /* Geometry */
     const geometry = React.useRef({
@@ -57,14 +57,14 @@ export const AnimeThreeJSHome = ({
     }).current
 
     /* Material */
-    const material = React.useRef({
+    const material = {
         meshLambert: new THREE.MeshLambertMaterial({ color: COLORS.primaryColor }),
-    }).current
+    }
 
     /* Mesh */
-    const mesh = React.useRef({
+    const mesh = {
         box: new THREE.Mesh(geometry.box, material.meshLambert),
-    }).current
+    }
 
     /* Helper */
     const helper = {
@@ -202,6 +202,12 @@ export const AnimeThreeJSHome = ({
 
         /* Start Animation */
         requestAnimationFrame(animate)
+    }, [])
+
+    React.useEffect(() => {
+        /* Renderer Settings */
+        renderer.setClearColor(COLORS.backgroundColor)
+        control.orbit.update()
 
         /* Events */
         control.drag.addEventListener('dragstart', onObjectDragStart)
@@ -219,6 +225,7 @@ export const AnimeThreeJSHome = ({
 
     /* Append Child */
     const setElement = React.useCallback((element: any) => {
+        if (element) element.firstElementChild && element.removeChild(element.firstElementChild)
         element && element.appendChild(renderer.domElement)
     }, [theme])
 

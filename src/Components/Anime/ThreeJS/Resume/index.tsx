@@ -14,7 +14,7 @@ export const AnimeThreeJSResume = ({
     acceleration = 0.002
 }: any) => {
     /* Colors */
-    const COLORS = React.useRef({
+    const COLORS = {
         primaryColor: new THREE.Color(colors[theme].primaryColor),
         backgroundColor: new THREE.Color(colors[theme].backgroundColor),
         secondaryColor: new THREE.Color(colors[theme].secondaryColor),
@@ -22,7 +22,7 @@ export const AnimeThreeJSResume = ({
         dangerColor: new THREE.Color(colors[theme].dangerColor),
         warningColor: new THREE.Color(colors[theme].warningColor),
         successColor: new THREE.Color(colors[theme].successColor),
-    }).current
+    }
 
     /* Renderer */
     const renderer = React.useRef(new THREE.WebGLRenderer({
@@ -39,35 +39,35 @@ export const AnimeThreeJSResume = ({
             window.innerWidth / window.innerHeight,
             1,
             1000
-        )
+        ),
     }).current
 
     /* Light */
-    const light = React.useRef({
+    const light = {
         ambient: new THREE.AmbientLight(COLORS.primaryColor, 1),
         point: new THREE.PointLight(COLORS.primaryColor, 10, 5000, 500),
         spot: new THREE.SpotLight(COLORS.primaryColor, 1),
-    }).current
+    }
 
     /* Geometry */
     const geometry = React.useRef({
         box: new THREE.BoxGeometry(5, 5, 5),
         sphere: new THREE.SphereGeometry(5, 32, 32),
-        stars: new THREE.Geometry()
+        stars: new THREE.Geometry(),
     }).current
 
     /* Material */
-    const material = React.useRef({
-        lambert: new THREE.MeshLambertMaterial({
+    const material = {
+        meshLambert: new THREE.MeshLambertMaterial({
             color: COLORS.primaryColor,
             wireframe: true
-        })
-    }).current
+        }),
+    }
 
     /* Mesh */
-    const mesh = React.useRef({
-        box: new THREE.Mesh(geometry.box, material.lambert),
-    }).current
+    const mesh = {
+        box: new THREE.Mesh(geometry.box, material.meshLambert),
+    }
 
     /* Helper */
     const helper = {
@@ -85,6 +85,7 @@ export const AnimeThreeJSResume = ({
         texture: new THREE.TextureLoader()
     }).current
 
+
     /* Control */
     const control = React.useRef({
         orbit: new OrbitControls(camera.perspective, renderer.domElement),
@@ -95,7 +96,7 @@ export const AnimeThreeJSResume = ({
 
     /* Load Texture */
     const onSuccessLoadTexture = (texture: any) => {
-        for (let i = 0; i < 6000; i ++) {
+        for (let i = 0; i < 6000; i++) {
             let star: any = new THREE.Vector3(
                 Math.random() * 600 - 300,
                 Math.random() * 600 - 300,
@@ -125,11 +126,11 @@ export const AnimeThreeJSResume = ({
     /* Animation */
     const animate = () => {
         /* Box Animation */
-        mesh.box.rotation.y += 0.01
-        mesh.box.rotation.x += 0.01
+        mesh.box.rotation.x += 0.01;
+        mesh.box.rotation.y += 0.01;
 
         /* Stars Animation */
-        geometry.stars.vertices.forEach((star: any) => {
+        geometry.stars.vertices.forEach((star: any, index) => {
             star.velocity += acceleration
             star.z += star.velocity
 
@@ -148,13 +149,16 @@ export const AnimeThreeJSResume = ({
     /* Control Listener */
     const onObjectHoverOn = (event: any) => event.object.geometry = geometry.sphere
     const onObjectHoverOff = (event: any) => event.object.geometry = geometry.box
-    const onObjectDragStart = (event: any) => history.push(Routes.HOME)
+    const onObjectDragStart = (event: any) => history.push(Routes.ROOT)
 
     /* On Window Resize */
     const onWindowResize = () => {
+        /* Renderer Settings */
         renderer.setSize(window.innerWidth, window.innerHeight)
+        /* Camera Settings */
         camera.perspective.aspect = window.innerWidth / window.innerHeight
-        camera.perspective.updateProjectionMatrix()
+        camera.perspective.updateProjectionMatrix();
+        /* Orbit Settings */
         control.orbit.update()
     }
 
@@ -163,7 +167,7 @@ export const AnimeThreeJSResume = ({
         /* Renderer Settings */
         renderer.setClearColor(COLORS.backgroundColor)
         renderer.setSize(window.innerWidth, window.innerHeight)
-        renderer.setPixelRatio(window.devicePixelRatio)
+        renderer.setPixelRatio(window.devicePixelRatio || 1)
         renderer.shadowMap.enabled = true
 
         /* Camera Settings */
@@ -175,16 +179,17 @@ export const AnimeThreeJSResume = ({
         light.point.position.set(0, 0, 0)
         light.spot.position.set(0, 0, 0)
 
-        /* Scene Settings */
-        scene.add(light.ambient)
-        scene.add(light.point)
-        scene.add(mesh.box)
-        // scene.add(helper.light.point)
-
-        /* Mesh Settings  */
+        /* Mesh Settings */
         mesh.box.position.set(0, 0, -25)
 
-        /* Control Settings */
+        /* Scene Settings */
+        scene.add(camera.perspective)
+        scene.add(light.point)
+        scene.add(light.ambient)
+        scene.add(light.spot)
+        scene.add(mesh.box)
+
+        /* Orbit Controls */
         control.orbit.keys = {
             RIGHT: 37, //left arrow
             BOTTOM: 38, // up arrow
@@ -198,35 +203,36 @@ export const AnimeThreeJSResume = ({
         /* Load Texture */
         loader.texture.load('Circle/circle.png', onSuccessLoadTexture)
 
-        /* Load GLTF */
-        // loader.gltf.load('Sculptures/bangladesh-image.glb', onSuccessLoadGLTF)
-
         /* Start Animation */
         requestAnimationFrame(animate)
+    }, [])
+
+    React.useEffect(() => {
+        /* Renderer Settings */
+        renderer.setClearColor(COLORS.backgroundColor)
+        control.orbit.update()
 
         /* Events */
         control.drag.addEventListener('dragstart', onObjectDragStart)
         control.drag.addEventListener('hoveron', onObjectHoverOn)
         control.drag.addEventListener('hoveroff', onObjectHoverOff)
         window.addEventListener('resize', onWindowResize)
+
         return () => {
             window.removeEventListener('resize', onWindowResize)
             control.drag.removeEventListener('dragstart', onObjectDragStart)
             control.drag.removeEventListener('hoveron', onObjectHoverOn)
             control.drag.removeEventListener('hoveroff', onObjectHoverOff)
         }
-    })
+    }, [theme])
 
     /* Append Child */
     const setElement = React.useCallback((element: any) => {
+        if (element) element.firstElementChild && element.removeChild(element.firstElementChild)
         element && element.appendChild(renderer.domElement)
     }, [theme])
 
-
-
     return (
-        <>
-            <div ref={setElement}></div>
-        </>
+        <div ref={setElement}></div>
     )
 }
