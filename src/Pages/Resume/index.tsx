@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Colors } from '../../Constants/Colors'
 import { Styles } from '../../Styles/Pages'
 import { AppContext } from '../../AppContext'
-import { AnimeThreeJS } from '../../Components/Anime/ThreeJS/deploy'
+import { AnimeThreeJS } from '../../Components/Anime/ThreeJS/background'
 import "./Styles.scss"
 
 export const Resume = ({ }: any) => {
@@ -18,9 +18,13 @@ export const Resume = ({ }: any) => {
                     backgroundColor: Colors[theme].backgroundColor
                 }}
                 className="pages-resume-container">
-                <AnimeThreeJS
-                    colors={Colors}
-                    theme={theme} />
+                <div className="row">
+                    <div className="col p-0">
+                        <AnimeThreeJS
+                            colors={Colors}
+                            theme={theme} />
+                    </div>
+                </div>
             </div>
         </>
     )
