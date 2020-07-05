@@ -6,6 +6,7 @@ import { PageTransition } from '../../Constants/PageTransition'
 import { Styles } from '../../Styles/Pages'
 import { AppContext } from '../../AppContext'
 import { AnimeThreeJSError } from '../../Components/Anime/ThreeJS/Error'
+import { ErrorMessage } from '../../Components/ErrorMessage'
 
 export const Error = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
@@ -28,6 +29,7 @@ export const Error = ({ history, location, match }: any) => {
                         history={history}
                         theme={theme}
                         colors={Colors} />
+                    <ErrorMessage />
                 </div>
             </div>
         </motion.div>

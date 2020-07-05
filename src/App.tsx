@@ -8,6 +8,7 @@ import {
 } from 'react-router'
 import { createBrowserHistory } from 'history'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 import { AppContext } from './AppContext'
 import { DARK, LIGHT } from './Constants/Settings'
@@ -26,7 +27,7 @@ export const history = createBrowserHistory()
 
 export const App = () => {
   const [theme, setTheme] = React.useState(DARK)
-
+  const { t, i18n } = useTranslation()
 
   return (
     <AppContext.Provider

@@ -6,7 +6,7 @@ import { AppContext } from '../../AppContext'
 import { Colors } from '../../Constants/Colors'
 import { LIGHT, DARK } from '../../Constants/Settings'
 
-import "./style.scss"
+import "./styles.scss"
 
 export const ThemePicker = () => {
     const { theme, setTheme }: any = React.useContext(AppContext)
