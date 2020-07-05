@@ -3,7 +3,8 @@ import React from 'react';
 import {
   Router,
   Route,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router'
 import { createBrowserHistory } from 'history'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -45,9 +46,10 @@ export const App = () => {
                 <AnimatePresence exitBeforeEnter initial={false}>
                   <Switch location={location}  key={location.pathname}>
                     <Route exact path={Routes.ROOT} component={Pages.Home} />
-                    <Route exact path={Routes.ROOT} component={Pages.Home} />
+                    <Route exact path={Routes.HOME} component={Pages.Home} />
                     <Route exact path={Routes.RESUME} component={Pages.Resume} />
                     <Route exact path={Routes.SKYBOX} component={Pages.Skybox} />
+                    <Route path={Routes.OTHERS} component={Pages.Error} />
                   </Switch>
                 </AnimatePresence>
               )
