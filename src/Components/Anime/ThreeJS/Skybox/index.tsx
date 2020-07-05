@@ -2,15 +2,8 @@ import * as React from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-// import SkyboxBack from 'Skybox/arid_bk.jpg'
-// import SkyboxDown from 'Skybox/arid_dn.jpg'
-// import SkyboxFront from 'Skybox/arid_ft.jpg'
-// import SkyboxLeft from 'Skybox/arid_lf.jpg'
-// import SkyboxRight from 'Skybox/arid_rt.jpg'
-// import SkyboxUp from 'Skybox/arid_up.jpg'
-
 let materialsArray = []
-export const AnimeThreeJS = ({ colors, theme }: any) => {
+export const AnimeThreeJSSkybox = ({ colors, theme }: any) => {
     /* Renderer */
     const renderer = React.useRef(new THREE.WebGLRenderer({
         antialias: true

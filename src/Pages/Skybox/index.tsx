@@ -5,10 +5,10 @@ import { Colors } from '../../Constants/Colors'
 import { PageTransition } from '../../Constants/PageTransition'
 import { Styles } from '../../Styles/Pages'
 import { AppContext } from '../../AppContext'
-import { AnimeThreeJSHome } from '../../Components/Anime/ThreeJS/Home'
+import { AnimeThreeJSSkybox } from '../../Components/Anime/ThreeJS/Skybox'
 
-export const Home = ({ navigation }: any) => {
-    const { theme } = React.useContext(AppContext)
+export const Resume = ({ history, location, match }: any) => {
+    const { theme }: any = React.useContext(AppContext)
 
     return (
         <motion.div
@@ -21,16 +21,17 @@ export const Home = ({ navigation }: any) => {
                 // @ts-ignore
                 backgroundColor: Colors[theme].backgroundColor
             }}
-            className="pages-home-container">
+            className="pages-resume-container">
             <div className="row">
                 <div className="col p-0">
-                    <AnimeThreeJSHome
-                        theme={theme}
-                        colors={Colors}/>
+                    <AnimeThreeJSSkybox
+                        history={history}
+                        colors={Colors}
+                        theme={theme} />
                 </div>
             </div>
         </motion.div>
     )
 }
 
-export default Home
+export default Resume

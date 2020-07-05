@@ -5,7 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 let stars;
 let acceleration = 0.001;
 
-export const AnimeThreeJS = ({ colors, theme, history }: any) => {
+export const AnimeThreeJSHome = ({ colors, theme, history }: any) => {
     /* Colors */
     const COLORS = React.useRef({
         primaryColor: new THREE.Color(colors[theme].primaryColor),

@@ -5,7 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { DragControls } from 'three/examples/jsm/controls/DragControls'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-export const AnimeThreeJS = ({ colors, theme, history }: any) => {
+export const AnimeThreeJSResume = ({ colors, theme, history }: any) => {
     /* Colors */
     const COLORS = React.useRef({
         primaryColor: new THREE.Color(colors[theme].primaryColor),
@@ -59,6 +59,16 @@ export const AnimeThreeJS = ({ colors, theme, history }: any) => {
         ambient: new THREE.AmbientLight(COLORS.primaryColor, 1),
         point: new THREE.PointLight(COLORS.primaryColor, 10, 5000, 500),
     }).current
+
+    /* Helper */
+    const helper = {
+        light: {
+            point: new THREE.PointLightHelper(
+                light.point,
+                1
+            )
+        }
+    }
 
     /* Loader */
     const loader = React.useRef({
@@ -132,6 +142,7 @@ export const AnimeThreeJS = ({ colors, theme, history }: any) => {
         scene.add(light.ambient)
         scene.add(light.point)
         scene.add(mesh.box)
+         // scene.add(helper.light.point)
 
         /* Control Settings */
         control.orbit.keys = {

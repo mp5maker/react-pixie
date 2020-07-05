@@ -44,6 +44,7 @@ export const App = () => {
                   <Switch location={location}  key={location.pathname}>
                     <Route exact path="/" component={Pages.Home} />
                     <Route path="/resume" component={Pages.Resume} />
+                    <Route path="/skybox" component={Pages.Skybox} />
                   </Switch>
                 </AnimatePresence>
               )
