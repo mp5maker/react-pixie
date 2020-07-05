@@ -13,6 +13,7 @@ import { DARK, LIGHT } from './Constants/Settings'
 import * as Pages from './Pages'
 import { Footer } from './Components/Footer'
 import { Colors } from './Constants/Colors'
+import * as Routes from './Constants/Routes'
 
 /* CSS */
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -42,9 +43,10 @@ export const App = () => {
               return (
                 <AnimatePresence exitBeforeEnter initial={false}>
                   <Switch location={location}  key={location.pathname}>
-                    <Route exact path="/" component={Pages.Home} />
-                    <Route path="/resume" component={Pages.Resume} />
-                    <Route path="/skybox" component={Pages.Skybox} />
+                    <Route exact path={Routes.ROOT} component={Pages.Home} />
+                    <Route exact path={Routes.ROOT} component={Pages.Home} />
+                    <Route exact path={Routes.RESUME} component={Pages.Resume} />
+                    <Route exact path={Routes.SKYBOX} component={Pages.Skybox} />
                   </Switch>
                 </AnimatePresence>
               )

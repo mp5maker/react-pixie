@@ -5,7 +5,14 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { DragControls } from 'three/examples/jsm/controls/DragControls'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-export const AnimeThreeJSResume = ({ colors, theme, history }: any) => {
+import * as Routes from '../../../../Constants/Routes'
+
+export const AnimeThreeJSResume = ({
+    colors,
+    theme,
+    history,
+    acceleration = 0.002
+}: any) => {
     /* Colors */
     const COLORS = React.useRef({
         primaryColor: new THREE.Color(colors[theme].primaryColor),
@@ -22,6 +29,9 @@ export const AnimeThreeJSResume = ({ colors, theme, history }: any) => {
         antialias: true
     })).current
 
+    /* Scene */
+    const scene = React.useRef(new THREE.Scene()).current
+
     /* Camera */
     const camera = React.useRef({
         perspective: new THREE.PerspectiveCamera(
@@ -32,10 +42,18 @@ export const AnimeThreeJSResume = ({ colors, theme, history }: any) => {
         )
     }).current
 
+    /* Light */
+    const light = React.useRef({
+        ambient: new THREE.AmbientLight(COLORS.primaryColor, 1),
+        point: new THREE.PointLight(COLORS.primaryColor, 10, 5000, 500),
+        spot: new THREE.SpotLight(COLORS.primaryColor, 1),
+    }).current
+
     /* Geometry */
     const geometry = React.useRef({
         box: new THREE.BoxGeometry(5, 5, 5),
-        sphere: new THREE.SphereGeometry(5, 32, 32)
+        sphere: new THREE.SphereGeometry(5, 32, 32),
+        stars: new THREE.Geometry()
     }).current
 
     /* Material */
@@ -49,15 +67,6 @@ export const AnimeThreeJSResume = ({ colors, theme, history }: any) => {
     /* Mesh */
     const mesh = React.useRef({
         box: new THREE.Mesh(geometry.box, material.lambert),
-    }).current
-
-    /* Scene */
-    const scene = React.useRef(new THREE.Scene()).current
-
-    /* Light */
-    const light = React.useRef({
-        ambient: new THREE.AmbientLight(COLORS.primaryColor, 1),
-        point: new THREE.PointLight(COLORS.primaryColor, 10, 5000, 500),
     }).current
 
     /* Helper */
@@ -84,6 +93,26 @@ export const AnimeThreeJSResume = ({ colors, theme, history }: any) => {
         ], camera.perspective, renderer.domElement)
     }).current
 
+    /* Load Texture */
+    const onSuccessLoadTexture = (texture: any) => {
+        for (let i = 0; i < 6000; i ++) {
+            let star: any = new THREE.Vector3(
+                Math.random() * 600 - 300,
+                Math.random() * 600 - 300,
+                Math.random() * 600 - 300
+            )
+            star.velocity = 0
+            geometry.stars.vertices.push(star)
+        }
+        let starMaterial = new THREE.PointsMaterial({
+            color: COLORS.primaryColor,
+            size: 0.5,
+            map: texture,
+            transparent: true
+        })
+        scene.add(new THREE.Points(geometry.stars, starMaterial))
+    }
+
     /* Load Background GLTF */
     // const onSuccessLoadGLTF = (gltfImage: any) => {
     //     let gltfMesh = get(gltfImage, 'scene', {})
@@ -95,11 +124,23 @@ export const AnimeThreeJSResume = ({ colors, theme, history }: any) => {
 
     /* Animation */
     const animate = () => {
-        renderer.render(scene, camera.perspective)
-
+        /* Box Animation */
         mesh.box.rotation.y += 0.01
         mesh.box.rotation.x += 0.01
 
+        /* Stars Animation */
+        geometry.stars.vertices.forEach((star: any) => {
+            star.velocity += acceleration
+            star.z += star.velocity
+
+            if (star.z > 200) {
+                star.z = -200
+                star.velocity = 0
+            }
+        })
+
+        geometry.stars.verticesNeedUpdate = true
+        renderer.render(scene, camera.perspective)
         control.orbit.update()
         requestAnimationFrame(animate)
     }
@@ -107,7 +148,7 @@ export const AnimeThreeJSResume = ({ colors, theme, history }: any) => {
     /* Control Listener */
     const onObjectHoverOn = (event: any) => event.object.geometry = geometry.sphere
     const onObjectHoverOff = (event: any) => event.object.geometry = geometry.box
-    const onObjectDragStart = (event: any) => history.push('/')
+    const onObjectDragStart = (event: any) => history.push(Routes.HOME)
 
     /* On Window Resize */
     const onWindowResize = () => {
@@ -126,18 +167,22 @@ export const AnimeThreeJSResume = ({ colors, theme, history }: any) => {
         renderer.shadowMap.enabled = true
 
         /* Camera Settings */
-        camera.perspective.position.set(0, 0, -25)
+        camera.perspective.position.set(0, 0, 5)
         camera.perspective.lookAt(0, 0, 0)
 
         /* Light Settings */
-        light.ambient.position.set(0, 0, -25)
-        light.point.position.set(0, 0, -25)
+        light.ambient.position.set(0, 0, 0)
+        light.point.position.set(0, 0, 0)
+        light.spot.position.set(0, 0, 0)
 
         /* Scene Settings */
         scene.add(light.ambient)
         scene.add(light.point)
         scene.add(mesh.box)
-         // scene.add(helper.light.point)
+        // scene.add(helper.light.point)
+
+        /* Mesh Settings  */
+        mesh.box.position.set(0, 0, -25)
 
         /* Control Settings */
         control.orbit.keys = {
@@ -149,6 +194,9 @@ export const AnimeThreeJSResume = ({ colors, theme, history }: any) => {
         control.orbit.minDistance = 0
         control.orbit.maxDistance = 200
         control.orbit.update()
+
+        /* Load Texture */
+        loader.texture.load('Circle/circle.png', onSuccessLoadTexture)
 
         /* Load GLTF */
         // loader.gltf.load('Sculptures/bangladesh-image.glb', onSuccessLoadGLTF)
