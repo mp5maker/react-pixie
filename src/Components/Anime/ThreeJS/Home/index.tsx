@@ -218,7 +218,9 @@ export const AnimeThreeJSHome = ({
     }, [theme])
 
     /* Append Child */
-    const setElement = (element: any) => element && element.appendChild(renderer.domElement)
+    const setElement = React.useCallback((element: any) => {
+        element && element.appendChild(renderer.domElement)
+    }, [theme])
 
     return (
         <div ref={setElement}></div>

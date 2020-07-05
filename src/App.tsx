@@ -12,6 +12,7 @@ import { AppContext } from './AppContext'
 import { DARK, LIGHT } from './Constants/Settings'
 import * as Pages from './Pages'
 import { Footer } from './Components/Footer'
+import { ThemePicker } from './Components/ThemePicker'
 import { Colors } from './Constants/Colors'
 import * as Routes from './Constants/Routes'
 
@@ -23,7 +24,7 @@ import './App.scss';
 export const history = createBrowserHistory()
 
 export const App = () => {
-  const [theme, setTheme] = React.useState(DARK)
+  const [theme, setTheme] = React.useState(LIGHT)
 
 
   return (
@@ -57,6 +58,7 @@ export const App = () => {
       <Footer
         colors={Colors}
         theme={theme} />
+      <ThemePicker />
     </AppContext.Provider>
   );
 }

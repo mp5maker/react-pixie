@@ -217,13 +217,16 @@ export const AnimeThreeJSResume = ({
         }
     })
 
-    /* Set Canvas */
-    const setCanvasRef = (element: any) => element && element.appendChild(renderer.domElement)
+    /* Append Child */
+    const setElement = React.useCallback((element: any) => {
+        element && element.appendChild(renderer.domElement)
+    }, [theme])
+
 
 
     return (
         <>
-            <div ref={setCanvasRef}></div>
+            <div ref={setElement}></div>
         </>
     )
 }
