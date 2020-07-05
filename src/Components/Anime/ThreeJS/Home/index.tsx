@@ -57,14 +57,14 @@ export const AnimeThreeJSHome = ({
     }).current
 
     /* Material */
-    const material = {
+    const material = React.useRef({
         meshLambert: new THREE.MeshLambertMaterial({ color: COLORS.primaryColor }),
-    }
+    }).current
 
     /* Mesh */
-    const mesh = {
+    const mesh = React.useRef({
         box: new THREE.Mesh(geometry.box, material.meshLambert),
-    }
+    }).current
 
     /* Helper */
     const helper = {
@@ -207,6 +207,11 @@ export const AnimeThreeJSHome = ({
     React.useEffect(() => {
         /* Renderer Settings */
         renderer.setClearColor(COLORS.backgroundColor)
+
+        /* Box Settings */
+        material.meshLambert.color = COLORS.primaryColor
+
+        /* Control Settings */
         control.orbit.update()
 
         /* Events */
