@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 let materialsArray = []
-export const AnimeThreeJSSkybox = ({ colors, theme }: any) => {
+export const AnimeThreeJSSkybox = ({ colors, theme, history }: any) => {
     /* Renderer */
     const renderer = React.useRef(new THREE.WebGLRenderer({
         antialias: true

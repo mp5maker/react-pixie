@@ -27,8 +27,8 @@ export const AnimeThreeJSResume = ({ colors, theme, history }: any) => {
         perspective: new THREE.PerspectiveCamera(
             75,
             window.innerWidth / window.innerHeight,
-            0.1,
-            100000
+            1,
+            1000
         )
     }).current
 
@@ -104,15 +104,10 @@ export const AnimeThreeJSResume = ({ colors, theme, history }: any) => {
         requestAnimationFrame(animate)
     }
 
-    /* Drag Listener */
-    const onObjectHoverOn = (event: any) => {
-        event.object.geometry = geometry.sphere
-    }
-
-    const onObjectHoverOff = (event: any) => {
-        event.object.geometry = geometry.box
-        history.push('/')
-    }
+    /* Control Listener */
+    const onObjectHoverOn = (event: any) => event.object.geometry = geometry.sphere
+    const onObjectHoverOff = (event: any) => event.object.geometry = geometry.box
+    const onObjectDragStart = (event: any) => history.push('/')
 
     /* On Window Resize */
     const onWindowResize = () => {
@@ -151,6 +146,8 @@ export const AnimeThreeJSResume = ({ colors, theme, history }: any) => {
             LEFT: 39, // right arrow
             UP: 40 // down arrow
         }
+        control.orbit.minDistance = 0
+        control.orbit.maxDistance = 200
         control.orbit.update()
 
         /* Load GLTF */
@@ -160,11 +157,13 @@ export const AnimeThreeJSResume = ({ colors, theme, history }: any) => {
         requestAnimationFrame(animate)
 
         /* Events */
+        control.drag.addEventListener('dragstart', onObjectDragStart)
         control.drag.addEventListener('hoveron', onObjectHoverOn)
         control.drag.addEventListener('hoveroff', onObjectHoverOff)
         window.addEventListener('resize', onWindowResize)
         return () => {
             window.removeEventListener('resize', onWindowResize)
+            control.drag.removeEventListener('dragstart', onObjectDragStart)
             control.drag.removeEventListener('hoveron', onObjectHoverOn)
             control.drag.removeEventListener('hoveroff', onObjectHoverOff)
         }

@@ -7,7 +7,7 @@ import { Styles } from '../../Styles/Pages'
 import { AppContext } from '../../AppContext'
 import { AnimeThreeJSHome } from '../../Components/Anime/ThreeJS/Home'
 
-export const Home = ({ navigation }: any) => {
+export const Home = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
 
     return (
@@ -25,6 +25,7 @@ export const Home = ({ navigation }: any) => {
             <div className="row">
                 <div className="col p-0">
                     <AnimeThreeJSHome
+                        history={history}
                         theme={theme}
                         colors={Colors}/>
                 </div>
