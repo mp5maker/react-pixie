@@ -1,8 +1,10 @@
 import * as React from 'react'
 import * as THREE from 'three'
+import { useTranslation } from 'react-i18next'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { DragControls } from 'three/examples/jsm/controls/DragControls'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass'
@@ -11,12 +13,15 @@ import get from 'lodash/get'
 import * as Routes from '../../../../Constants/Routes'
 
 let glitch = false
+let textMeshes: Array<any> = []
 export const AnimeThreeJSHome = ({
     colors,
     theme,
     history,
     acceleration = 0.002
 }: any) => {
+    const { t, i18n } = useTranslation()
+
     /* Colors */
     const COLORS = {
         primaryColor: new THREE.Color(colors[theme].primaryColor),
@@ -63,6 +68,7 @@ export const AnimeThreeJSHome = ({
     /* Material */
     const material = React.useRef({
         meshLambert: new THREE.MeshLambertMaterial({ color: COLORS.primaryColor }),
+        meshBasic: new THREE.MeshBasicMaterial({ color: COLORS.primaryColor }),
     }).current
 
     /* Mesh */
@@ -83,7 +89,8 @@ export const AnimeThreeJSHome = ({
     /* Loader */
     const loader = React.useRef({
         gltf: new GLTFLoader(),
-        texture: new THREE.TextureLoader()
+        texture: new THREE.TextureLoader(),
+        ttf: new TTFLoader()
     }).current
 
 
@@ -120,6 +127,39 @@ export const AnimeThreeJSHome = ({
             transparent: true
         })
         scene.add(new THREE.Points(geometry.stars, starMaterial))
+    }
+
+    const onTextDragStart = (event: any) => history.push(event.object.route)
+
+    /* Load Font */
+    const onSuccessLoadFont = (json: any) => {
+        let font = new THREE.Font(json)
+        const texts = [
+            { label: t(`HOME`), route: Routes.HOME},
+            { label: t(`RESUME`), route: Routes.RESUME},
+            { label: t(`SKYBOX`), route: Routes.SKYBOX},
+            { label: t(`RAIN`), route: Routes.RAIN}
+        ]
+
+        texts.forEach((text: any, index: number) => {
+            let textGeometry = new THREE.TextGeometry(text.label, {
+                font,
+                size: 20,
+                height: 10,
+                curveSegments: 5,
+            })
+            textGeometry.computeBoundingBox();
+            textGeometry.computeVertexNormals();
+            let textMesh: any = new THREE.Mesh(textGeometry, material.meshBasic)
+            textMesh.position.set(-(window.innerWidth / 2) + 800, (index - 5) * -50, -500)
+            scene.add(textMesh)
+            const textDrag = new DragControls([
+                textMesh
+            ], camera.perspective, renderer.domElement)
+            textMesh.route = text.route
+            textMeshes.push(textMesh)
+            textDrag.addEventListener('dragstart', onTextDragStart)
+        })
     }
 
     /* Load Background GLTF */
@@ -222,8 +262,14 @@ export const AnimeThreeJSHome = ({
         control.orbit.maxDistance = 200
         control.orbit.update()
 
-        /* Load Texture */
+        /* Text  */
+        textMeshes.forEach((textMesh) => {
+            textMesh.material.color = COLORS.primaryColor
+        })
+
+        /* Loader Settings */
         loader.texture.load('Circle/circle.png', onSuccessLoadTexture)
+        loader.ttf.load('Font/FiraSans-ExtraLight.ttf', onSuccessLoadFont)
 
         /* Composer Settings */
         composer.setSize(window.innerWidth, window.innerHeight)
@@ -256,6 +302,12 @@ export const AnimeThreeJSHome = ({
             control.drag.removeEventListener('dragstart', onObjectDragStart)
             control.drag.removeEventListener('hoveron', onObjectHoverOn)
             control.drag.removeEventListener('hoveroff', onObjectHoverOff)
+            textMeshes.forEach((textMesh) => {
+                const textDrag = new DragControls([
+                    textMesh
+                ], camera.perspective, renderer.domElement)
+                textDrag.removeEventListener('dragstart', onTextDragStart)
+            })
         }
     }, [theme])
 

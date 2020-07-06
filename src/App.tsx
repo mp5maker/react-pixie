@@ -85,7 +85,7 @@ export const App = () => {
         colors={Colors}
         theme={theme} />
       <ThemePicker />
-      <LanguagePicker />
+      <LanguagePicker history={history} />
     </AppContext.Provider>
   );
 }

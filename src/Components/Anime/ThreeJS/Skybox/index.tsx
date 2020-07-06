@@ -79,9 +79,10 @@ export const AnimeThreeJSSkybox = ({ colors, theme, history }: any) => {
     }, [theme])
 
     /* Append Child */
-    const setElement = (element: any) => {
-        element.appendChild(renderer.domElement)
-    }
+    const setElement = React.useCallback((element: any) => {
+        if (element) element.firstElementChild && element.removeChild(element.firstElementChild)
+        element && element.appendChild(renderer.domElement)
+    }, [theme])
 
     return (
         <>
