@@ -1,0 +1,23 @@
+.navigation-container {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    .navigation-content {
+        .navigation-list {
+            list-style-type: none;
+            .navigation-item {
+                display: block;
+                font-size: 24px;
+                text-decoration: none;
+                transition: all ease-in-out 0.25s;
+                transform: scale(1);
+                text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+                &:hover {
+                    transition: all ease-in-out 0.25s;
+                    transform: scale(0.98);
+                    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+                }
+            }
+        }
+    }
+}

@@ -14,6 +14,8 @@ import * as Routes from '../../../../Constants/Routes'
 
 let glitch = false
 let textMeshes: Array<any> = []
+let font: any
+
 export const AnimeThreeJSHome = ({
     colors,
     theme,
@@ -40,6 +42,11 @@ export const AnimeThreeJSHome = ({
 
     /* Scene */
     const scene = React.useRef(new THREE.Scene()).current
+
+    /* Group */
+    const group = React.useRef({
+        text: new THREE.Group()
+    }).current
 
     /* Camera */
     const camera = React.useRef({
@@ -129,38 +136,38 @@ export const AnimeThreeJSHome = ({
         scene.add(new THREE.Points(geometry.stars, starMaterial))
     }
 
-    const onTextDragStart = (event: any) => history.push(event.object.route)
-
     /* Load Font */
-    const onSuccessLoadFont = (json: any) => {
-        let font = new THREE.Font(json)
-        const texts = [
-            { label: t(`HOME`), route: Routes.HOME},
-            { label: t(`RESUME`), route: Routes.RESUME},
-            { label: t(`SKYBOX`), route: Routes.SKYBOX},
-            { label: t(`RAIN`), route: Routes.RAIN}
-        ]
+    // const onTextDragStart = (event: any) => history.push(event.object.route)
+    // const onSuccessLoadFont = (json: any) => {
+    //     const font = new THREE.Font(json)
+    //     const texts = [
+    //         { label: t(`HOME`), route: Routes.HOME },
+    //         { label: t(`RESUME`), route: Routes.RESUME },
+    //         { label: t(`SKYBOX`), route: Routes.SKYBOX },
+    //         { label: t(`RAIN`), route: Routes.RAIN }
+    //     ]
 
-        texts.forEach((text: any, index: number) => {
-            let textGeometry = new THREE.TextGeometry(text.label, {
-                font,
-                size: 20,
-                height: 10,
-                curveSegments: 5,
-            })
-            textGeometry.computeBoundingBox();
-            textGeometry.computeVertexNormals();
-            let textMesh: any = new THREE.Mesh(textGeometry, material.meshBasic)
-            textMesh.position.set(-(window.innerWidth / 2) + 800, (index - 5) * -50, -500)
-            scene.add(textMesh)
-            const textDrag = new DragControls([
-                textMesh
-            ], camera.perspective, renderer.domElement)
-            textMesh.route = text.route
-            textMeshes.push(textMesh)
-            textDrag.addEventListener('dragstart', onTextDragStart)
-        })
-    }
+    //     texts.forEach((text: any, index: number) => {
+    //         let textGeometry = new THREE.TextGeometry(text.label, {
+    //             font,
+    //             size: 20,
+    //             height: 10,
+    //             curveSegments: 5,
+    //         })
+    //         textGeometry.computeBoundingBox();
+    //         textGeometry.computeVertexNormals();
+    //         let textMesh: any = new THREE.Mesh(textGeometry, material.meshBasic)
+    //         textMesh.position.set(-(window.innerWidth / 2) + 800, (index - 5) * -50, -500)
+    //         const textDrag = new DragControls([
+    //             textMesh
+    //         ], camera.perspective, renderer.domElement)
+    //         textMesh.route = text.route
+    //         textMeshes.push(textMesh)
+    //         group.text.add(textMesh)
+    //         textDrag.addEventListener('dragstart', onTextDragStart)
+    //     })
+    //     scene.add(group.text)
+    // }
 
     /* Load Background GLTF */
     // const onSuccessLoadGLTF = (gltfImage: any) => {
@@ -269,7 +276,7 @@ export const AnimeThreeJSHome = ({
 
         /* Loader Settings */
         loader.texture.load('Circle/circle.png', onSuccessLoadTexture)
-        loader.ttf.load('Font/FiraSans-ExtraLight.ttf', onSuccessLoadFont)
+        // loader.ttf.load('Font/FiraSans-ExtraLight.ttf', onSuccessLoadFont)
 
         /* Composer Settings */
         composer.setSize(window.innerWidth, window.innerHeight)
@@ -302,12 +309,6 @@ export const AnimeThreeJSHome = ({
             control.drag.removeEventListener('dragstart', onObjectDragStart)
             control.drag.removeEventListener('hoveron', onObjectHoverOn)
             control.drag.removeEventListener('hoveroff', onObjectHoverOff)
-            textMeshes.forEach((textMesh) => {
-                const textDrag = new DragControls([
-                    textMesh
-                ], camera.perspective, renderer.domElement)
-                textDrag.removeEventListener('dragstart', onTextDragStart)
-            })
         }
     }, [theme])
 

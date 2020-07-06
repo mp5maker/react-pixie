@@ -16,6 +16,7 @@ import * as Pages from './Pages'
 import { Footer } from './Components/Footer'
 import { ThemePicker } from './Components/ThemePicker'
 import { LanguagePicker } from './Components/LanguagePicker'
+import { Navigation } from './Components/Navigation'
 import { Colors } from './Constants/Colors'
 import * as Routes from './Constants/Routes'
 import { StorageGet, StorageSet } from './Utilities/Storage'
@@ -79,6 +80,7 @@ export const App = () => {
               )
             }}
           />
+          <Navigation history={history} />
         </Router>
       </div>
       <Footer
