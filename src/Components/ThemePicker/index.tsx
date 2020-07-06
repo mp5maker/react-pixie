@@ -4,7 +4,8 @@ import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 
 import { AppContext } from '../../AppContext'
 import { Colors } from '../../Constants/Colors'
-import { LIGHT, DARK } from '../../Constants/Settings'
+import { LIGHT, DARK, THEME } from '../../Constants/Settings'
+import { StorageSet } from '../../Utilities/Storage'
 
 import "./styles.scss"
 
@@ -28,7 +29,10 @@ export const ThemePicker = () => {
                                 border: `1px solid transparent`
                             })
                         }}
-                        onClick={() => setTheme(LIGHT)}>
+                        onClick={() => {
+                            setTheme(LIGHT)
+                            StorageSet({ key: THEME, value: LIGHT })
+                        }}>
                         <FontAwesomeIcon icon={faSun} />
                     </button>
                     <button
@@ -44,7 +48,10 @@ export const ThemePicker = () => {
                                     border: `1px solid transparent`
                                 })
                         }}
-                        onClick={() => setTheme(DARK)}>
+                        onClick={() => {
+                            setTheme(DARK)
+                            StorageSet({ key: THEME, value: DARK })
+                        }}>
                         <FontAwesomeIcon icon={faMoon} />
                     </button>
                 </div>

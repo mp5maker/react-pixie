@@ -11,12 +11,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 
 import { AppContext } from './AppContext'
-import { DARK, LIGHT } from './Constants/Settings'
+import { DARK, LIGHT, THEME, LANGUAGE, EN } from './Constants/Settings'
 import * as Pages from './Pages'
 import { Footer } from './Components/Footer'
 import { ThemePicker } from './Components/ThemePicker'
 import { Colors } from './Constants/Colors'
 import * as Routes from './Constants/Routes'
+import { StorageGet, StorageSet } from './Utilities/Storage'
 
 /* CSS */
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -27,7 +28,28 @@ export const history = createBrowserHistory()
 
 export const App = () => {
   const [theme, setTheme] = React.useState(DARK)
+  const [isLoading, setLoading] = React.useState(true)
   const { t, i18n } = useTranslation()
+
+  React.useEffect(() => {
+    const onSuccess = ([currentTheme, currentLanguage]: any) => {
+      /* Theme Set */
+      if (currentTheme) setTheme(currentTheme)
+      else StorageSet({ key: THEME, value: theme })
+
+      /* Language Set */
+      if (currentLanguage) i18n.changeLanguage(currentLanguage)
+      else StorageSet({ key: LANGUAGE, value: EN })
+
+      /* Set Loading */
+      setLoading(false)
+    }
+
+    Promise.all([
+      StorageGet({ key: THEME }),
+      StorageGet({ key: LANGUAGE }),
+    ]).then(onSuccess)
+  }, [])
 
   return (
     <AppContext.Provider
