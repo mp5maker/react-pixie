@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { I18nextProvider } from 'react-i18next';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.scss';
 
 import i18n from './Locales/i18n'
 
