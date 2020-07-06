@@ -1,12 +1,16 @@
 import * as React from 'react'
 import * as THREE from 'three'
-import get from 'lodash/get'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { DragControls } from 'three/examples/jsm/controls/DragControls'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass'
+import get from 'lodash/get'
 
 import * as Routes from '../../../../Constants/Routes'
 
+let glitch = false
 export const AnimeThreeJSHome = ({
     colors,
     theme,
@@ -91,6 +95,13 @@ export const AnimeThreeJSHome = ({
         ], camera.perspective, renderer.domElement)
     }).current
 
+    /* Composer */
+    const composer = React.useRef(new EffectComposer(renderer)).current
+
+    /* Pass */
+    const renderPass = React.useRef(new RenderPass(scene, camera.perspective)).current
+    const glitchPass = React.useRef(new GlitchPass(0)).current
+
     /* Load Texture */
     const onSuccessLoadTexture = (texture: any) => {
         for (let i = 0; i < 6000; i++) {
@@ -136,22 +147,36 @@ export const AnimeThreeJSHome = ({
                 star.velocity = 0
             }
         })
-
         geometry.stars.verticesNeedUpdate = true
-        renderer.render(scene, camera.perspective)
+
+        /* Effects */
+        if (glitch) composer.render()
+        else renderer.render(scene, camera.perspective)
+
+        /* Orbit Update */
         control.orbit.update()
+
+        /* Loop */
         requestAnimationFrame(animate)
     }
 
     /* Control Listener */
-    const onObjectHoverOn = (event: any) => event.object.geometry = geometry.sphere
-    const onObjectHoverOff = (event: any) => event.object.geometry = geometry.box
+    const onObjectHoverOn = (event: any) => {
+        glitch = true
+        event.object.geometry = geometry.sphere
+    }
+    const onObjectHoverOff = (event: any) => {
+        glitch = false
+        event.object.geometry = geometry.box
+    }
     const onObjectDragStart = (event: any) => history.push(Routes.RESUME)
 
     /* On Window Resize */
     const onWindowResize = () => {
         /* Renderer Settings */
         renderer.setSize(window.innerWidth, window.innerHeight)
+        /* Composer Settings */
+        composer.setSize(window.innerWidth, window.innerHeight)
         /* Camera Settings */
         camera.perspective.aspect = window.innerWidth / window.innerHeight
         camera.perspective.updateProjectionMatrix();
@@ -186,7 +211,7 @@ export const AnimeThreeJSHome = ({
         scene.add(light.spot)
         scene.add(mesh.box)
 
-        /* Orbit Controls */
+        /* Control Settings */
         control.orbit.keys = {
             RIGHT: 37, //left arrow
             BOTTOM: 38, // up arrow
@@ -199,6 +224,12 @@ export const AnimeThreeJSHome = ({
 
         /* Load Texture */
         loader.texture.load('Circle/circle.png', onSuccessLoadTexture)
+
+        /* Composer Settings */
+        composer.setSize(window.innerWidth, window.innerHeight)
+        composer.addPass(renderPass)
+        composer.addPass(glitchPass)
+        renderPass.renderToScreen = true
 
         /* Start Animation */
         requestAnimationFrame(animate)
