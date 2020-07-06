@@ -1,5 +1,9 @@
 {
     "PAGE_NOT_FOUND": "Page Not Found",
     "EN": "EN",
-    "BN": "বাং"
+    "BN": "বাং",
+    "HOME": "Home",
+    "RESUME": "Resume",
+    "SKYBOX": "Skybox",
+    "RAIN": "Rain"
 }

@@ -107,7 +107,7 @@ export const AnimeThreeJSHome = ({
 
     /* Pass */
     const renderPass = React.useRef(new RenderPass(scene, camera.perspective)).current
-    const glitchPass = React.useRef(new GlitchPass(0)).current
+    const glitchPass = React.useRef(new GlitchPass()).current
 
     /* Load Texture */
     const onSuccessLoadTexture = (texture: any) => {
@@ -202,12 +202,12 @@ export const AnimeThreeJSHome = ({
 
     /* Control Listener */
     const onObjectHoverOn = (event: any) => {
-        glitch = true
-        event.object.geometry = geometry.sphere
+        if (!glitch) glitch = true
+        if (event.object.geometry.type == 'BoxGeometry') event.object.geometry = geometry.sphere
     }
     const onObjectHoverOff = (event: any) => {
-        glitch = false
-        event.object.geometry = geometry.box
+        if (glitch) glitch = false
+        if (event.object.geometry.type == 'SphereGeometry') event.object.geometry = geometry.box
     }
     const onObjectDragStart = (event: any) => history.push(Routes.RESUME)
 

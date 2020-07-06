@@ -103,7 +103,7 @@ export const AnimeThreeJSResume = ({
 
     /* Pass */
     const renderPass = React.useRef(new RenderPass(scene, camera.perspective)).current
-    const glitchPass = React.useRef(new GlitchPass(0)).current
+    const glitchPass = React.useRef(new GlitchPass()).current
 
     /* Load Texture */
     const onSuccessLoadTexture = (texture: any) => {
