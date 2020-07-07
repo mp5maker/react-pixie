@@ -66,7 +66,7 @@ export const LanguagePicker = ({ history }: any) => {
                             // @ts-ignore
                             color: Colors[theme].primaryColor,
                         }}
-                        onClick={() => history.push(Routes.HOME)}>
+                        onClick={() => history.push(Routes.ROOT)}>
                         <FontAwesomeIcon icon={faHome} />
                     </button>
                 </div>
