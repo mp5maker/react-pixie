@@ -2,9 +2,12 @@ import * as React from 'react'
 import { useFrame } from 'react-three-fiber'
 
 import { Glitch } from '../Glitch'
+// @ts-ignore
+import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
 
 export const Box = ({ colors, history, wireframe = false, redirectURL, ...props }: any) => {
     const mesh: any = React.useRef()
+    let rotation = React.useRef({ x: 30, y: 30, z: 0 }).current
     const [hovered, setHover] = React.useState(false)
     const [active, setActive] = React.useState(false)
 
@@ -15,9 +18,17 @@ export const Box = ({ colors, history, wireframe = false, redirectURL, ...props 
         if (hovered && active) {
 
         }
-        mesh.current.rotation.x += 0.01
-        mesh.current.rotation.y += 0.01
+        mesh.current.rotation.x += rotation.x * 0.001
+        mesh.current.rotation.y += rotation.y * 0.001
     })
+
+    React.useEffect(() => {
+        let gui = new GUI()
+        gui.add(rotation, 'x', 0, 100).name('Rotation X')
+        gui.add(rotation, 'y', 0, 100).name('Rotation Y')
+        gui.add(rotation, 'z', 0, 100).name('Rotation Z')
+        gui.close()
+    }, [])
 
     return (
         <mesh
