@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 import { Stars } from '../../Stars'
 import { Box } from '../../Box'
-import { OrbitControl } from '../../OrbitControl'
+import { OrbitControls } from 'drei'
 import * as Routes from '../../../../../Constants/Routes'
 
 export const AnimeThreeJSHome = ({
@@ -57,7 +57,9 @@ export const AnimeThreeJSHome = ({
                     far: 1000
                 }}
                 pixelRatio={window.devicePixelRatio || 1}>
-                <OrbitControl />
+                <OrbitControls
+                    minDistance={0}
+                    maxDistance={200}/>
                 <ambientLight
                     color={COLORS.primaryColor}
                     intensity={1}
@@ -82,6 +84,8 @@ export const AnimeThreeJSHome = ({
                     acceleration={0.002}
                     colors={COLORS}
                     history={history} />
+                {/* <axesHelper args={[5]} />
+                <gridHelper args={[10, 20]} /> */}
             </Canvas>
         </div>
     )
