@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import { Canvas } from 'react-three-fiber'
 import { useTranslation } from 'react-i18next'
 
+import { SettingsContext } from '../../../../../SettingsContext'
 import { Stars } from '../../Stars'
 import { Box } from '../../Box'
 import { OrbitControl } from '../../OrbitControl'
@@ -12,9 +13,9 @@ export const AnimeThreeJSResume = ({
     colors,
     theme,
     history,
-    acceleration = 0.002
 }: any) => {
     const { t, i18n } = useTranslation()
+    const { rotationX, rotationY, rotationZ, acceleration }: any = React.useContext(SettingsContext)
     const [dimension, setDimension] = React.useState({ width: 0, height: 0 })
 
     /* Colors */
@@ -73,13 +74,16 @@ export const AnimeThreeJSResume = ({
                     intensity={0.1}
                     position={[0, 0, 0]} />
                 <Box
+                    rotationX={rotationX}
+                    rotationY={rotationY}
+                    rotationZ={rotationZ}
                     redirectURL={Routes.HOME}
                     wireframe={true}
                     colors={COLORS}
                     position={[0, 0, -25]}
                     history={history} />
                 <Stars
-                    acceleration={0.002}
+                    acceleration={acceleration}
                     colors={COLORS}
                     history={history} />
             </Canvas>

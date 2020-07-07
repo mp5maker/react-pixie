@@ -29,7 +29,7 @@ export const Stars = ({ colors, history, acceleration, ...props }: any) => {
 
     useFrame(() => {
         geometry.stars.vertices.forEach((star: any, index) => {
-            star.velocity += acceleration
+            star.velocity += acceleration * 0.01
             star.z += star.velocity
 
             if (star.z > 200) {

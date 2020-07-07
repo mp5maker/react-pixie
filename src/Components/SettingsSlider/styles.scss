@@ -1,0 +1,55 @@
+@mixin settings-slider-button($clip-path) {
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
+    transition: all ease-in-out 0.25s;
+    outline: none;
+    clip-path: $clip-path;
+    opacity: 0.5;
+    &:hover {
+        box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
+        transition: all ease-in-out 0.25s;
+        opacity: 1;
+    }
+}
+
+.settings-slider-container {
+    position: absolute;
+    top: calc((100vh / 2) - 50px);
+    right: 0;
+    .settings-slider-open-button {
+        @include settings-slider-button(polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%))
+    }
+    .slider-container {
+        position: relative;
+        .slider {
+            transform: rotateY(-180deg);
+            margin-right: 25px;
+            -webkit-appearance: none;
+            appearance: none;
+            outline: none;
+            border-radius: 20px;
+            height: 2px;
+            ::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 20px;
+                height: 20px;
+            }
+            ::-moz-range-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 20px;
+                height: 20px;
+            }
+        }
+        .button-container {
+            position: absolute;
+            top: -50px;
+            right: 25px;
+            .button {
+                @include settings-slider-button(polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%))
+            }
+        }
+    }
+}

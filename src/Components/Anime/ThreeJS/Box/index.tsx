@@ -3,9 +3,8 @@ import { useFrame } from 'react-three-fiber'
 
 import { Glitch } from '../Glitch'
 
-export const Box = ({ colors, history, wireframe = false, redirectURL, ...props }: any) => {
+export const Box = ({ colors, history, wireframe = false, redirectURL, rotationX, rotationY, rotationZ, ...props }: any) => {
     const mesh: any = React.useRef()
-    const [ rotation, setRotation] = React.useState({ x: 30, y: 30, z: 0 })
     const [hovered, setHover] = React.useState(false)
     const [active, setActive] = React.useState(false)
 
@@ -13,12 +12,10 @@ export const Box = ({ colors, history, wireframe = false, redirectURL, ...props 
         if (hovered && !active) {
             setActive(true)
         }
-        if (hovered && active) {
-
-        }
-        mesh.current.rotation.x += rotation.x * 0.001
-        mesh.current.rotation.y += rotation.y * 0.001
-        mesh.current.rotation.z += rotation.z * 0.001
+        if (hovered && active) {}
+        mesh.current.rotation.x += rotationX * 0.001
+        mesh.current.rotation.y += rotationY * 0.001
+        mesh.current.rotation.z += rotationZ * 0.001
     })
 
     return (
