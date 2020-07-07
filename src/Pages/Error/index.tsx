@@ -5,7 +5,7 @@ import { Colors } from '../../Constants/Colors'
 import { PageTransition } from '../../Constants/PageTransition'
 import { Styles } from '../../Styles/Pages'
 import { AppContext } from '../../AppContext'
-import { AnimeThreeJSError } from '../../Components/Anime/ThreeJS/Error'
+import { AnimeThreeJSError } from '../../Components/Anime/ThreeJS/Pages/Error'
 import { ErrorMessage } from '../../Components/ErrorMessage'
 
 export const Error = ({ history, location, match }: any) => {

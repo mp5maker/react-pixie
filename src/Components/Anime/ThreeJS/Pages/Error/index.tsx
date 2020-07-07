@@ -1,29 +1,18 @@
 import * as React from 'react'
 import * as THREE from 'three'
-import { useTranslation } from 'react-i18next'
+import get from 'lodash/get'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { DragControls } from 'three/examples/jsm/controls/DragControls'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader'
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
-import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass'
-import get from 'lodash/get'
 
-import * as Routes from '../../../../Constants/Routes'
+import * as Routes from '../../../../../Constants/Routes'
 
-let glitch = false
-let textMeshes: Array<any> = []
-let font: any
-
-export const AnimeThreeJSHome = ({
+export const AnimeThreeJSError = ({
     colors,
     theme,
     history,
     acceleration = 0.002
 }: any) => {
-    const { t, i18n } = useTranslation()
-
     /* Colors */
     const COLORS = {
         primaryColor: new THREE.Color(colors[theme].primaryColor),
@@ -42,11 +31,6 @@ export const AnimeThreeJSHome = ({
 
     /* Scene */
     const scene = React.useRef(new THREE.Scene()).current
-
-    /* Group */
-    const group = React.useRef({
-        text: new THREE.Group()
-    }).current
 
     /* Camera */
     const camera = React.useRef({
@@ -67,20 +51,7 @@ export const AnimeThreeJSHome = ({
 
     /* Geometry */
     const geometry = React.useRef({
-        box: new THREE.BoxGeometry(5, 5, 5),
-        sphere: new THREE.SphereGeometry(5, 32, 32),
         stars: new THREE.Geometry(),
-    }).current
-
-    /* Material */
-    const material = React.useRef({
-        meshLambert: new THREE.MeshLambertMaterial({ color: COLORS.primaryColor }),
-        meshBasic: new THREE.MeshBasicMaterial({ color: COLORS.primaryColor }),
-    }).current
-
-    /* Mesh */
-    const mesh = React.useRef({
-        box: new THREE.Mesh(geometry.box, material.meshLambert),
     }).current
 
     /* Helper */
@@ -96,25 +67,14 @@ export const AnimeThreeJSHome = ({
     /* Loader */
     const loader = React.useRef({
         gltf: new GLTFLoader(),
-        texture: new THREE.TextureLoader(),
-        ttf: new TTFLoader()
+        texture: new THREE.TextureLoader()
     }).current
 
 
     /* Control */
     const control = React.useRef({
         orbit: new OrbitControls(camera.perspective, renderer.domElement),
-        drag: new DragControls([
-            mesh.box
-        ], camera.perspective, renderer.domElement)
     }).current
-
-    /* Composer */
-    const composer = React.useRef(new EffectComposer(renderer)).current
-
-    /* Pass */
-    const renderPass = React.useRef(new RenderPass(scene, camera.perspective)).current
-    const glitchPass = React.useRef(new GlitchPass()).current
 
     /* Load Texture */
     const onSuccessLoadTexture = (texture: any) => {
@@ -136,39 +96,6 @@ export const AnimeThreeJSHome = ({
         scene.add(new THREE.Points(geometry.stars, starMaterial))
     }
 
-    /* Load Font */
-    // const onTextDragStart = (event: any) => history.push(event.object.route)
-    // const onSuccessLoadFont = (json: any) => {
-    //     const font = new THREE.Font(json)
-    //     const texts = [
-    //         { label: t(`HOME`), route: Routes.HOME },
-    //         { label: t(`RESUME`), route: Routes.RESUME },
-    //         { label: t(`SKYBOX`), route: Routes.SKYBOX },
-    //         { label: t(`RAIN`), route: Routes.RAIN }
-    //     ]
-
-    //     texts.forEach((text: any, index: number) => {
-    //         let textGeometry = new THREE.TextGeometry(text.label, {
-    //             font,
-    //             size: 20,
-    //             height: 10,
-    //             curveSegments: 5,
-    //         })
-    //         textGeometry.computeBoundingBox();
-    //         textGeometry.computeVertexNormals();
-    //         let textMesh: any = new THREE.Mesh(textGeometry, material.meshBasic)
-    //         textMesh.position.set(-(window.innerWidth / 2) + 800, (index - 5) * -50, -500)
-    //         const textDrag = new DragControls([
-    //             textMesh
-    //         ], camera.perspective, renderer.domElement)
-    //         textMesh.route = text.route
-    //         textMeshes.push(textMesh)
-    //         group.text.add(textMesh)
-    //         textDrag.addEventListener('dragstart', onTextDragStart)
-    //     })
-    //     scene.add(group.text)
-    // }
-
     /* Load Background GLTF */
     // const onSuccessLoadGLTF = (gltfImage: any) => {
     //     let gltfMesh = get(gltfImage, 'scene', {})
@@ -180,10 +107,6 @@ export const AnimeThreeJSHome = ({
 
     /* Animation */
     const animate = () => {
-        /* Box Animation */
-        mesh.box.rotation.x += 0.01;
-        mesh.box.rotation.y += 0.01;
-
         /* Stars Animation */
         geometry.stars.vertices.forEach((star: any, index) => {
             star.velocity += acceleration
@@ -194,36 +117,17 @@ export const AnimeThreeJSHome = ({
                 star.velocity = 0
             }
         })
+
         geometry.stars.verticesNeedUpdate = true
-
-        /* Effects */
-        if (glitch) composer.render()
-        else renderer.render(scene, camera.perspective)
-
-        /* Orbit Update */
+        renderer.render(scene, camera.perspective)
         control.orbit.update()
-
-        /* Loop */
         requestAnimationFrame(animate)
     }
-
-    /* Control Listener */
-    const onObjectHoverOn = (event: any) => {
-        if (!glitch) glitch = true
-        if (event.object.geometry.type == 'BoxGeometry') event.object.geometry = geometry.sphere
-    }
-    const onObjectHoverOff = (event: any) => {
-        if (glitch) glitch = false
-        if (event.object.geometry.type == 'SphereGeometry') event.object.geometry = geometry.box
-    }
-    const onObjectDragStart = (event: any) => history.push(Routes.RESUME)
 
     /* On Window Resize */
     const onWindowResize = () => {
         /* Renderer Settings */
         renderer.setSize(window.innerWidth, window.innerHeight)
-        /* Composer Settings */
-        composer.setSize(window.innerWidth, window.innerHeight)
         /* Camera Settings */
         camera.perspective.aspect = window.innerWidth / window.innerHeight
         camera.perspective.updateProjectionMatrix();
@@ -248,17 +152,13 @@ export const AnimeThreeJSHome = ({
         light.point.position.set(0, 0, 0)
         light.spot.position.set(0, 0, 0)
 
-        /* Mesh Settings */
-        mesh.box.position.set(0, 0, -25)
-
         /* Scene Settings */
         scene.add(camera.perspective)
         scene.add(light.point)
         scene.add(light.ambient)
         scene.add(light.spot)
-        scene.add(mesh.box)
 
-        /* Control Settings */
+        /* Orbit Controls */
         control.orbit.keys = {
             RIGHT: 37, //left arrow
             BOTTOM: 38, // up arrow
@@ -269,20 +169,8 @@ export const AnimeThreeJSHome = ({
         control.orbit.maxDistance = 200
         control.orbit.update()
 
-        /* Text  */
-        textMeshes.forEach((textMesh) => {
-            textMesh.material.color = COLORS.primaryColor
-        })
-
-        /* Loader Settings */
+        /* Load Texture */
         loader.texture.load('Circle/circle.png', onSuccessLoadTexture)
-        // loader.ttf.load('Font/FiraSans-ExtraLight.ttf', onSuccessLoadFont)
-
-        /* Composer Settings */
-        composer.setSize(window.innerWidth, window.innerHeight)
-        composer.addPass(renderPass)
-        composer.addPass(glitchPass)
-        renderPass.renderToScreen = true
 
         /* Start Animation */
         requestAnimationFrame(animate)
@@ -292,23 +180,14 @@ export const AnimeThreeJSHome = ({
         /* Renderer Settings */
         renderer.setClearColor(COLORS.backgroundColor)
 
-        /* Box Settings */
-        material.meshLambert.color = COLORS.primaryColor
-
         /* Control Settings */
         control.orbit.update()
 
         /* Events */
-        control.drag.addEventListener('dragstart', onObjectDragStart)
-        control.drag.addEventListener('hoveron', onObjectHoverOn)
-        control.drag.addEventListener('hoveroff', onObjectHoverOff)
         window.addEventListener('resize', onWindowResize)
 
         return () => {
             window.removeEventListener('resize', onWindowResize)
-            control.drag.removeEventListener('dragstart', onObjectDragStart)
-            control.drag.removeEventListener('hoveron', onObjectHoverOn)
-            control.drag.removeEventListener('hoveroff', onObjectHoverOff)
         }
     }, [theme])
 

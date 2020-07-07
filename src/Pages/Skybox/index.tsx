@@ -5,7 +5,7 @@ import { Colors } from '../../Constants/Colors'
 import { PageTransition } from '../../Constants/PageTransition'
 import { Styles } from '../../Styles/Pages'
 import { AppContext } from '../../AppContext'
-import { AnimeThreeJSSkybox } from '../../Components/Anime/ThreeJS/Skybox'
+import { AnimeThreeJSSkybox } from '../../Components/Anime/ThreeJS/Pages/Skybox'
 
 export const Resume = ({ history, location, match }: any) => {
     const { theme }: any = React.useContext(AppContext)

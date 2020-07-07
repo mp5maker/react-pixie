@@ -5,7 +5,7 @@ import { Colors } from '../../Constants/Colors'
 import { PageTransition } from '../../Constants/PageTransition'
 import { Styles } from '../../Styles/Pages'
 import { AppContext } from '../../AppContext'
-import { AnimeThreeJSHome } from '../../Components/Anime/ThreeJS/Home'
+import { AnimeThreeJSHome } from '../../Components/Anime/ThreeJS/Pages/Home'
 
 export const Home = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
