@@ -5,6 +5,8 @@ interface SettingsContextInterface {
     rotationY: any,
     rotationZ: any,
     acceleration: any,
+    frequency: any,
+    isPlaying: boolean,
     setSettings: (params: any) => any,
 }
 

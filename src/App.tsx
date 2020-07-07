@@ -33,7 +33,14 @@ export const history = createBrowserHistory()
 
 export const App = () => {
   const [theme, setTheme] = React.useState(DARK)
-  const [settings, setSettings] = React.useState({ rotationX: 30, rotationY: 30, rotationZ: 0, acceleration: 1 })
+  const [settings, setSettings] = React.useState({
+    rotationX: 30,
+    rotationY: 30,
+    rotationZ: 0,
+    acceleration: 1,
+    frequency: 1,
+    isPlaying: false
+  })
   const [isLoading, setLoading] = React.useState(true)
   const { t, i18n } = useTranslation()
 

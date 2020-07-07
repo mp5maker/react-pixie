@@ -3,7 +3,7 @@ import { useFrame } from 'react-three-fiber'
 
 import { Glitch } from '../Glitch'
 
-export const Box = ({ colors, history, wireframe = false, redirectURL, rotationX, rotationY, rotationZ, ...props }: any) => {
+export const Box = ({ colors, history, wireframe = false, redirectURL, rotationX, rotationY, rotationZ, frequency, ...props }: any) => {
     const mesh: any = React.useRef()
     const [hovered, setHover] = React.useState(false)
     const [active, setActive] = React.useState(false)
@@ -17,6 +17,8 @@ export const Box = ({ colors, history, wireframe = false, redirectURL, rotationX
         mesh.current.rotation.y += rotationY * 0.001
         mesh.current.rotation.z += rotationZ * 0.001
     })
+
+    const frequencyParams = frequency == 1 || frequency == 0 ? 1 : (frequency * 0.01)
 
     return (
         <mesh
@@ -35,7 +37,11 @@ export const Box = ({ colors, history, wireframe = false, redirectURL, rotationX
                         <>
                             <sphereGeometry
                                 attach={`geometry`}
-                                args={[5, 32, 32]} />
+                                args={[
+                                    5 * frequencyParams,
+                                    32 * frequencyParams,
+                                    32 * frequencyParams,
+                                ]} />
                             <meshBasicMaterial
                                 attach={'material'}
                                 color={colors.primaryColor}
@@ -46,7 +52,11 @@ export const Box = ({ colors, history, wireframe = false, redirectURL, rotationX
                             <>
                                 <boxGeometry
                                     attach={`geometry`}
-                                    args={[5, 5, 5]} />
+                                    args={[
+                                        5 * frequencyParams,
+                                        5 * frequencyParams,
+                                        5 * frequencyParams]
+                                    }/>
                                 <meshLambertMaterial
                                     wireframe={wireframe}
                                     attach={'material'}

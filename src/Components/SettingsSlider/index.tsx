@@ -28,10 +28,11 @@ const settingsSliderVariant = {
 export const SettingsSlider = ({ onChange }: any) => {
     const [show, setShow] = React.useState(false)
     const { theme }: any  = React.useContext(AppContext)
-    const { rotationX, rotationY, rotationZ, acceleration, setSettings }: any  = React.useContext(SettingsContext)
+    const { rotationX, rotationY, rotationZ, acceleration, setSettings, isPlaying, ...otherSettings }: any  = React.useContext(SettingsContext)
 
     const onSettingsChange = (event: any) => {
         const params = {
+            ...otherSettings,
             rotationX,
             rotationY,
             rotationZ,
@@ -55,7 +56,7 @@ export const SettingsSlider = ({ onChange }: any) => {
         },
     }
 
-    return (
+    return !isPlaying ? (
         <>
             <div className={`settings-slider-container ${show ? `active` : ``}`}>
                 <AnimatePresence initial={false} exitBeforeEnter>
@@ -157,5 +158,5 @@ export const SettingsSlider = ({ onChange }: any) => {
 
             </div>
         </>
-    )
+    ) : <></>
 }

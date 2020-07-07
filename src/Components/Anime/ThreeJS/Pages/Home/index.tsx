@@ -15,7 +15,7 @@ export const AnimeThreeJSHome = ({
     history,
 }: any) => {
     const { t, i18n } = useTranslation()
-    const { rotationX, rotationY, rotationZ, acceleration }: any = React.useContext(SettingsContext)
+    const { rotationX, rotationY, rotationZ, acceleration, frequency }: any = React.useContext(SettingsContext)
     const [ dimension, setDimension ] = React.useState({ width: 0, height: 0 })
 
     /* Colors */
@@ -76,6 +76,7 @@ export const AnimeThreeJSHome = ({
                     intensity={0.1}
                     position={[0, 0, 0]} />
                 <Box
+                    frequency={frequency}
                     rotationX={rotationX}
                     rotationY={rotationY}
                     rotationZ={rotationZ}
