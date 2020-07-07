@@ -1,3 +1,4 @@
+```javascript
 import * as React from 'react'
 import * as THREE from 'three'
 import { useTranslation } from 'react-i18next'
@@ -10,7 +11,7 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass'
 import get from 'lodash/get'
 
-import * as Routes from '../../../../../Constants/Routes'
+import * as Routes from '../../../Constants/Routes'
 
 let glitch = false
 let textMeshes: Array<any> = []
@@ -322,3 +323,4 @@ export const AnimeThreeJSHome = ({
         <div ref={setElement}></div>
     )
 }
+```
