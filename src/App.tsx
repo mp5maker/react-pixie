@@ -20,6 +20,7 @@ import { LanguagePicker } from './Components/LanguagePicker'
 import { Navigation } from './Components/Navigation'
 import { SettingsSlider } from './Components/SettingsSlider'
 import { Colors } from './Constants/Colors'
+import { AudioPlayer } from './Components/Anime/ThreeJS/AudioPlayer'
 import * as Routes from './Constants/Routes'
 import { StorageGet, StorageSet } from './Utilities/Storage'
 
@@ -94,6 +95,7 @@ export const App = () => {
         <ThemePicker />
         <LanguagePicker history={history} />
         <SettingsSlider />
+        <AudioPlayer />
       </SettingsContext.Provider>
     </AppContext.Provider>
   );
