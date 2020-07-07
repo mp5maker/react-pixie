@@ -1,10 +1,11 @@
 import * as React from 'react'
 import * as THREE from 'three'
-import { Canvas, useFrame } from 'react-three-fiber'
+import { Canvas } from 'react-three-fiber'
 import { useTranslation } from 'react-i18next'
 
 import { Stars } from '../../Stars'
 import { Box } from '../../Box'
+import { OrbitControl } from '../../OrbitControl'
 import * as Routes from '../../../../../Constants/Routes'
 
 export const AnimeThreeJSHome = ({
@@ -56,6 +57,7 @@ export const AnimeThreeJSHome = ({
                     far: 1000
                 }}
                 pixelRatio={window.devicePixelRatio || 1}>
+                <OrbitControl />
                 <ambientLight
                     color={COLORS.primaryColor}
                     intensity={1}
