@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { useFrame } from 'react-three-fiber'
-import { GodRaysFakeSunShader } from 'three/examples/jsm/shaders/GodRaysShader'
 
 import { Glitch } from '../Glitch'
 

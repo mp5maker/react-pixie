@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { SettingsContext } from '../../../../../SettingsContext'
 import { Stars } from '../../Stars'
 import { Box } from '../../Box'
-import { OrbitControls } from 'drei'
+import { OrbitControl } from '../../OrbitControl'
 import * as Routes from '../../../../../Constants/Routes'
 
 export const AnimeThreeJSHome = ({
@@ -58,7 +58,7 @@ export const AnimeThreeJSHome = ({
                     far: 1000
                 }}
                 pixelRatio={window.devicePixelRatio || 1}>
-                <OrbitControls
+                <OrbitControl
                     minDistance={0}
                     maxDistance={200}/>
                 <ambientLight
