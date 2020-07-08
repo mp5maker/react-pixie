@@ -116,7 +116,7 @@ export const AudioPlayer = ({ }: any) => {
                         </motion.button>
                     )
                 }
-                {
+                {/* {
                     (playAudio == AUDIO_PLAYING) && (
                         <motion.button
                             variants={buttonVariants}
@@ -136,7 +136,7 @@ export const AudioPlayer = ({ }: any) => {
                             <FontAwesomeIcon icon={faPause} />
                         </motion.button>
                     )
-                }
+                } */}
                 {
                     (playAudio == AUDIO_PAUSE) && (
                         <motion.button
