@@ -15,7 +15,7 @@ export const AnimeThreeJSResume = ({
     history,
 }: any) => {
     const { t, i18n } = useTranslation()
-    const { rotationX, rotationY, rotationZ, acceleration }: any = React.useContext(SettingsContext)
+    const { rotationX, rotationY, rotationZ, acceleration, frequency }: any = React.useContext(SettingsContext)
     const [dimension, setDimension] = React.useState({ width: 0, height: 0 })
 
     /* Colors */
@@ -77,6 +77,7 @@ export const AnimeThreeJSResume = ({
                     rotationX={rotationX}
                     rotationY={rotationY}
                     rotationZ={rotationZ}
+                    frequency={frequency}
                     redirectURL={Routes.HOME}
                     wireframe={true}
                     colors={COLORS}
