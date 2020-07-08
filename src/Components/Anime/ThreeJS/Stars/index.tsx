@@ -45,14 +45,16 @@ export const Stars = ({ colors, history, acceleration, ...props }: any) => {
     }, [])
 
     return texture ? (
-        <points
-            ref={points}
-            geometry={geometry.stars}
-            material={new THREE.PointsMaterial({
-                color: colors.primaryColor,
-                size: 0.5,
-                map: texture,
-                transparent: true
-            })} />
+        <group>
+            <points
+                ref={points}
+                geometry={geometry.stars}
+                material={new THREE.PointsMaterial({
+                    color: colors.primaryColor,
+                    size: 0.5,
+                    map: texture,
+                    transparent: true
+                })} />
+        </group>
     ) : <></>
 }

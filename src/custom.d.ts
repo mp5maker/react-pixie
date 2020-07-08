@@ -3,5 +3,6 @@ declare module JSX {
         "effectComposer": any,
         "renderPass": any,
         "glitchPass": any,
+        "shaderPass": any,
     }
 }
