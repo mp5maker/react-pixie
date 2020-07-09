@@ -18,6 +18,21 @@ export const Box = ({ colors, history, wireframe = false, redirectURL, rotationX
         mesh.current.rotation.z += rotationZ * 0.001
     })
 
+    const onClick = React.useCallback((event) => {
+        setActive(!active)
+        history.push(redirectURL)
+    }, [setActive])
+
+    const onPointerOver = React.useCallback((event, value) => {
+        event.stopPropagation()
+        setHover(true)
+    }, [setHover])
+
+    const onPointerOut = React.useCallback((event, value) => {
+        event.stopPropagation()
+        setHover(false)
+    }, [setHover])
+
     const frequencyParams = frequency == 1 || frequency == 0 ? 1 : (frequency * 0.01)
 
     return (
@@ -25,13 +40,11 @@ export const Box = ({ colors, history, wireframe = false, redirectURL, rotationX
             <mesh
                 ref={mesh}
                 scale={active ? [1.5, 1.5, 1.5] : [1, 1, 1]}
-                onClick={(event) => {
-                    setActive(!active)
-                    history.push(redirectURL)
-                }}
+                onClick={onClick}
                 receiveShadow={true}
-                onPointerOver={(event) => setHover(true)}
-                onPointerOut={(event) => setHover(false)}
+                castShadow={true}
+                onPointerOver={onPointerOver}
+                onPointerOut={onPointerOut}
                 {...props}>
                 <>
                     {

@@ -4,17 +4,19 @@ import { Canvas } from 'react-three-fiber'
 import { useTranslation } from 'react-i18next'
 
 import { SettingsContext } from '../../../../../SettingsContext'
-import { Stars } from '../../Stars'
 import { OrbitControl } from '../../OrbitControl'
 import * as Routes from '../../../../../Constants/Routes'
+import { RectangleLight } from '../../RectangleLight'
 
-export const AnimeThreeJSError = ({
+
+
+export const AnimeThreeJSRain = ({
     colors,
     theme,
     history,
 }: any) => {
     const { t, i18n } = useTranslation()
-    const { acceleration }: any = React.useContext(SettingsContext)
+    const { rotationX, rotationY, rotationZ, acceleration, frequency }: any = React.useContext(SettingsContext)
     const [dimension, setDimension] = React.useState({ width: 0, height: 0 })
 
     /* Colors */
@@ -37,12 +39,10 @@ export const AnimeThreeJSError = ({
 
     React.useEffect(() => {
         window.addEventListener('resize', onWindowResize)
-
         return () => {
             window.removeEventListener('resize', onWindowResize)
         }
     }, [])
-
 
     return (
         <div
@@ -51,31 +51,20 @@ export const AnimeThreeJSError = ({
                 height: dimension.height ? dimension.height : window.innerHeight
             }}>
             <Canvas
+                shadowMap={true}
+                colorManagement={true}
                 camera={{
-                    fov: 75,
+                    fov: 45,
                     near: 1,
-                    far: 1000
+                    far: 1000,
+                    position: [30, 30, 60]
                 }}
                 pixelRatio={window.devicePixelRatio || 1}>
+                <ambientLight
+                    color={COLORS.primaryColor}
+                    intensity={0.1} />
+                <RectangleLight colors={COLORS} />
                 <OrbitControl />
-                <ambientLight
-                    color={COLORS.primaryColor}
-                    intensity={1}
-                    position={[0, 0, 0]} />
-                <pointLight
-                    color={COLORS.primaryColor}
-                    intensity={10}
-                    position={[0, 0, 0]}
-                    distance={5000}
-                    decay={500} />
-                <ambientLight
-                    color={COLORS.primaryColor}
-                    intensity={0.1}
-                    position={[0, 0, 0]} />
-                <Stars
-                    acceleration={acceleration}
-                    colors={COLORS}
-                    history={history} />
             </Canvas>
         </div>
     )

@@ -21,10 +21,10 @@ export const Navigation = ({ history }: any) => {
             label: t(`RESUME`),
             route: Routes.RESUME
         },
-        {
-            label: t(`SKYBOX`),
-            route: Routes.SKYBOX
-        },
+        // {
+        //     label: t(`SKYBOX`),
+        //     route: Routes.SKYBOX
+        // },
         {
             label: t(`RAIN`),
             route: Routes.RAIN
