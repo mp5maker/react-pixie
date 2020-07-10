@@ -18,8 +18,8 @@ export const Navigation = ({ history }: any) => {
             route: Routes.ROOT
         },
         {
-            label: t(`RESUME`),
-            route: Routes.RESUME
+            label: t(`EXPERIENCE`),
+            route: Routes.EXPERIENCE
         },
         // {
         //     label: t(`SKYBOX`),

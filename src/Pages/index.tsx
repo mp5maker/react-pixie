@@ -1,12 +1,12 @@
 import Home from './Home'
-import Resume from './Resume'
+import Experience from './Experience'
 import Skybox from './Skybox'
 import Error from './Error'
 import Rain from './Rain'
 
 export {
     Home,
-    Resume,
+    Experience,
     Skybox,
     Error,
     Rain

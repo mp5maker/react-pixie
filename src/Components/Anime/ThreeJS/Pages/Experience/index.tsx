@@ -9,7 +9,7 @@ import { Box } from '../../Box'
 import { OrbitControl } from '../../OrbitControl'
 import * as Routes from '../../../../../Constants/Routes'
 
-export const AnimeThreeJSResume = ({
+export const AnimeThreeJSExperience = ({
     colors,
     theme,
     history,
@@ -78,7 +78,7 @@ export const AnimeThreeJSResume = ({
                     rotationY={rotationY}
                     rotationZ={rotationZ}
                     frequency={frequency}
-                    redirectURL={Routes.HOME}
+                    redirectURL={Routes.ROOT}
                     wireframe={true}
                     colors={COLORS}
                     position={[0, 0, -25]}

@@ -85,7 +85,7 @@ export const App = () => {
                     <Switch location={location}  key={location.pathname}>
                       <Route exact path={Routes.ROOT} component={Pages.Home} />
                       <Route exact path={Routes.HOME} component={Pages.Home} />
-                      <Route exact path={Routes.RESUME} component={Pages.Resume} />
+                      <Route exact path={Routes.EXPERIENCE} component={Pages.Experience} />
                       <Route exact path={Routes.SKYBOX} component={Pages.Skybox} />
                       <Route exact path={Routes.RAIN} component={Pages.Rain} />
                       <Route path={Routes.OTHERS} component={Pages.Error} />

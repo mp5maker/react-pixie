@@ -5,9 +5,9 @@ import { Colors } from '../../Constants/Colors'
 import { PageTransition } from '../../Constants/PageTransition'
 import { Styles } from '../../Styles/Pages'
 import { AppContext } from '../../AppContext'
-import { AnimeThreeJSResume } from '../../Components/Anime/ThreeJS/Pages/Resume'
+import { AnimeThreeJSExperience } from '../../Components/Anime/ThreeJS/Pages/Experience'
 
-export const Resume = ({ history, location, match }: any) => {
+export const Experience = ({ history, location, match }: any) => {
     const { theme }: any = React.useContext(AppContext)
 
     return (
@@ -24,7 +24,7 @@ export const Resume = ({ history, location, match }: any) => {
             className="pages-resume-container">
             <div className="row">
                 <div className="col p-0">
-                    <AnimeThreeJSResume
+                    <AnimeThreeJSExperience
                         history={history}
                         colors={Colors}
                         theme={theme} />
@@ -34,4 +34,4 @@ export const Resume = ({ history, location, match }: any) => {
     )
 }
 
-export default Resume
+export default Experience
