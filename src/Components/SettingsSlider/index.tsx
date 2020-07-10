@@ -2,6 +2,13 @@ import * as React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { useTranslation } from 'react-i18next'
+
+import Slider from '@material-ui/core/Slider'
+import Switch from '@material-ui/core/Switch';
+import FormGroup from '@material-ui/core/FormGroup';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 import { Colors } from '../../Constants/Colors'
 import { AppContext } from '../../AppContext'
@@ -11,7 +18,7 @@ import "./styles.scss"
 
 const settingsSliderVariant = {
     initial: {
-        x: 200,
+        x: 500,
     },
     animate: {
         x: 0,
@@ -20,24 +27,27 @@ const settingsSliderVariant = {
         }
     },
     exit: {
-        x: 200,
+        x: 500,
         duration: 0.1
     }
 }
 
+
 export const SettingsSlider = ({ onChange }: any) => {
     const [show, setShow] = React.useState(false)
     const { theme }: any  = React.useContext(AppContext)
-    const { rotationX, rotationY, rotationZ, acceleration, setSettings, isPlaying, ...otherSettings }: any  = React.useContext(SettingsContext)
+    const { t, i18n } = useTranslation()
+    const { rotationX, rotationY, rotationZ, acceleration, setSettings, isPlaying, fire, ...otherSettings }: any  = React.useContext(SettingsContext)
 
-    const onSettingsChange = (event: any) => {
+    const onSettingsChange = ({ newValue, name }: any) => {
         const params = {
             ...otherSettings,
             rotationX,
             rotationY,
             rotationZ,
             acceleration,
-            [event.target.name]: parseInt(event.target.value)
+            fire,
+            [name]: newValue
         }
         setSettings(params)
         if (onChange) onChange(params)
@@ -45,15 +55,7 @@ export const SettingsSlider = ({ onChange }: any) => {
 
     const sliderStyle = {
         // @ts-ignore
-        background: Colors[theme].primaryColor,
-        '::WebkitSliderThumb': {
-            // @ts-ignore
-            backgroundColor: Colors[theme].backgroundColor
-        },
-        '::MozRangeThumb': {
-            // @ts-ignore
-            backgroundColor: Colors[theme].backgroundColor
-        },
+        color: Colors[theme].primaryColor,
     }
 
     return !isPlaying ? (
@@ -92,48 +94,90 @@ export const SettingsSlider = ({ onChange }: any) => {
                                 exit="exit"
                                 key={`i-am-open`}>
                                 <motion.div>
-                                    <input
-                                        style={sliderStyle}
-                                        name="rotationX"
-                                        type="range"
-                                        min={1}
-                                        max={100}
-                                        onChange={onSettingsChange}
-                                        value={rotationX}
-                                        className={`slider`} />
+                                    <Grid container spacing={2} alignItems="center">
+                                        <Grid item className={`width-150`}>
+                                            { t(`ROTATION_X`)}
+                                        </Grid>
+                                        <Grid item xs>
+                                            <Slider
+                                                step={1}
+                                                min={1}
+                                                max={100}
+                                                style={sliderStyle}
+                                                onChange={(event, newValue) => onSettingsChange({ newValue, name: `rotationX` })}
+                                                value={rotationX} />
+                                        </Grid>
+                                    </Grid>
                                 </motion.div>
                                 <motion.div>
-                                    <input
-                                        style={sliderStyle}
-                                        name="rotationY"
-                                        type="range"
-                                        min={1}
-                                        max={100}
-                                        onChange={onSettingsChange}
-                                        value={rotationY}
-                                        className={`slider`} />
+                                    <Grid container spacing={2} alignItems="center">
+                                        <Grid item className={`width-150`}>
+                                            {t(`ROTATION_Y`)}
+                                        </Grid>
+                                        <Grid item xs>
+                                            <Slider
+                                                step={1}
+                                                min={1}
+                                                max={100}
+                                                style={sliderStyle}
+                                                onChange={(event, newValue) => onSettingsChange({ newValue, name: `rotationY` })}
+                                                value={rotationY} />
+                                        </Grid>
+                                    </Grid>
                                 </motion.div>
                                 <motion.div>
-                                    <input
-                                        style={sliderStyle}
-                                        name="rotationZ"
-                                        type="range"
-                                        min={1}
-                                        max={100}
-                                        onChange={onSettingsChange}
-                                        value={rotationZ}
-                                        className={`slider`} />
+                                    <Grid container spacing={2} alignItems="center">
+                                        <Grid item className={`width-150`}>
+                                            {t(`ROTATION_Z`)}
+                                        </Grid>
+                                        <Grid item xs>
+                                            <Slider
+                                                step={1}
+                                                min={1}
+                                                max={100}
+                                                style={sliderStyle}
+                                                onChange={(event, newValue) => onSettingsChange({ newValue, name: `rotationZ` })}
+                                                value={rotationZ} />
+                                        </Grid>
+                                    </Grid>
                                 </motion.div>
                                 <motion.div>
-                                    <input
-                                        style={sliderStyle}
-                                        name="acceleration"
-                                        type="range"
-                                        min={1}
-                                        max={100}
-                                        onChange={onSettingsChange}
-                                        value={acceleration}
-                                        className={`slider`} />
+                                    <Grid container spacing={2} alignItems="center">
+                                        <Grid item className={`width-150`}>
+                                            {t(`ACCELERATION`)}
+                                        </Grid>
+                                        <Grid item xs>
+                                            <Slider
+                                                step={1}
+                                                min={1}
+                                                max={100}
+                                                style={sliderStyle}
+                                                onChange={(event, newValue) => onSettingsChange({ newValue, name: `acceleration` })}
+                                                value={acceleration} />
+                                        </Grid>
+                                    </Grid>
+                                </motion.div>
+                                <motion.div>
+                                    <Typography component="div">
+                                        <Grid component="label" container alignItems="center" spacing={1} className={`fire-switch`}>
+                                            <Grid item className={`width-150`}>
+                                                { t(`FIRE`) }
+                                            </Grid>
+                                            <Grid item>
+                                                <Switch
+                                                    style={{
+                                                        // @ts-ignore
+                                                        color: Colors[theme].primaryColor,
+                                                    }}
+                                                    checked={fire}
+                                                    defaultValue={fire}
+                                                    onChange={(event) => onSettingsChange({ newValue: event.target.checked, name: event.target.name })}
+                                                    name="fire"
+                                                    inputProps={{ 'aria-label': 'Fire On' }}
+                                                />
+                                            </Grid>
+                                        </Grid>
+                                    </Typography>
                                 </motion.div>
                                 <motion.div
                                     className={`button-container`}>

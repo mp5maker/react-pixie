@@ -15,6 +15,7 @@ export const Moon = ({ colors }: any) => {
                     attach="geometry"
                     args={[5, 32]} />
                 <meshBasicMaterial
+                    side={THREE.DoubleSide}
                     color={colors.primaryColor}
                     attach="material" />
             </mesh>

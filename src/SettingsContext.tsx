@@ -7,6 +7,7 @@ interface SettingsContextInterface {
     acceleration: any,
     frequency: any,
     isPlaying: boolean,
+    fire: boolean,
     setSettings: (params: any) => any,
 }
 

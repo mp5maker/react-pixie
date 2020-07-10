@@ -6,5 +6,10 @@
     "RESUME": "Resume",
     "SKYBOX": "Skybox",
     "RAIN": "Rain",
-    "EXPERIENCE": "Experience"
+    "EXPERIENCE": "Experience",
+    "ROTATION_X": "Rotation X",
+    "ROTATION_Y": "Rotation Y",
+    "ROTATION_Z": "Rotation Z",
+    "ACCELERATION": "Acceleration",
+    "FIRE": "Fire"
 }

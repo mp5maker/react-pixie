@@ -22,26 +22,9 @@
     }
     .slider-container {
         position: relative;
-        .slider {
-            transform: rotateY(-180deg);
+        .MuiSlider-root {
+            width: 150px;
             margin-right: 25px;
-            -webkit-appearance: none;
-            appearance: none;
-            outline: none;
-            border-radius: 20px;
-            height: 2px;
-            ::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                appearance: none;
-                width: 20px;
-                height: 20px;
-            }
-            ::-moz-range-thumb {
-                -webkit-appearance: none;
-                appearance: none;
-                width: 20px;
-                height: 20px;
-            }
         }
         .button-container {
             position: absolute;
@@ -50,6 +33,19 @@
             .button {
                 @include settings-slider-button(polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%))
             }
+        }
+        .fire-switch {
+            justify-content: space-between;
+            padding-right: 16px;
+        }
+        .width-150 {
+            width: 150px;
+        }
+        .MuiSwitch-track {
+            background-color: #343434;
+        }
+        .MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
+            background-color: #8491A3;
         }
     }
 }

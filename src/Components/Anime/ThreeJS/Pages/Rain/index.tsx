@@ -11,6 +11,7 @@ import { InteriorGround } from '../../InteriorGround'
 import { ShinySphere } from '../../ShinySphere'
 import { Moon } from '../../Moon'
 import { RainDroplets } from '../../RainDroplets'
+import { BonFire } from '../../BonFire'
 
 export const AnimeThreeJSRain = ({
     colors,
@@ -18,7 +19,7 @@ export const AnimeThreeJSRain = ({
     history,
 }: any) => {
     const { t, i18n } = useTranslation()
-    const { rotationX, rotationY, rotationZ, acceleration, frequency }: any = React.useContext(SettingsContext)
+    const { rotationX, rotationY, rotationZ, acceleration, frequency, fire }: any = React.useContext(SettingsContext)
     const [dimension, setDimension] = React.useState({ width: 0, height: 0 })
 
     /* Colors */
@@ -72,11 +73,21 @@ export const AnimeThreeJSRain = ({
                 <ShinySphere
                     frequency={frequency}
                     colors={COLORS} />
-                <RainDroplets
-                    acceleration={acceleration}
-                    colors={COLORS} />
-                <Moon
-                    colors={COLORS} />
+                {
+                    fire ? (
+                    <BonFire
+                        frequency={frequency}
+                        colors={COLORS} />
+                    ) : (
+                        <>
+                            <RainDroplets
+                                acceleration={acceleration}
+                                colors={COLORS} />
+                            <Moon
+                                colors={COLORS} />
+                        </>
+                    )
+                }
                 <OrbitControl />
             </Canvas>
         </div>

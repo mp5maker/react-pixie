@@ -1,9 +1,8 @@
 import * as React from 'react'
 import * as THREE from 'three'
 import { useThree, useFrame, extend, useResource } from 'react-three-fiber'
-import { Face3 } from 'three'
+import { RandomRange } from '../../../../Utilities/RandomRange'
 
-const randomRange = ({min, max}: any) => (Math.random() * (max - min + 1)) + min
 
 export const RainDroplets = ({ colors, acceleration }: any) => {
     const loader = React.useRef(new THREE.TextureLoader()).current
@@ -16,9 +15,9 @@ export const RainDroplets = ({ colors, acceleration }: any) => {
         setTexture(texture)
         for (let i = 0; i < 30000; i++) {
             let droplet: any = new THREE.Vector3(
-                randomRange({ min: -(window.innerWidth / 2), max: (window.innerWidth / 2)}),
-                randomRange({ min: 0, max: window.innerHeight}),
-                randomRange({ min: -5000, max: 5000 }),
+                RandomRange({ min: -(window.innerWidth / 2), max: (window.innerWidth / 2)}),
+                RandomRange({ min: 0, max: window.innerHeight}),
+                RandomRange({ min: -5000, max: 5000 }),
             )
             droplet.velocity = 0
             geometry.vertices.push(droplet)
@@ -32,9 +31,9 @@ export const RainDroplets = ({ colors, acceleration }: any) => {
             item.z += item.velocity
 
             if (item.y <= 0) {
-                item.x = randomRange({ min: -(window.innerWidth / 2), max: (window.innerWidth / 2) })
-                item.y = randomRange({ min: 0, max: window.innerHeight })
-                item.z = randomRange({ min: -5000, max: 5000 })
+                item.x = RandomRange({ min: -(window.innerWidth / 2), max: (window.innerWidth / 2) })
+                item.y = RandomRange({ min: 0, max: window.innerHeight })
+                item.z = RandomRange({ min: -5000, max: 5000 })
                 item.velocity = 0
             }
         })

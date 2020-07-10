@@ -39,7 +39,8 @@ export const App = () => {
     rotationZ: 0,
     acceleration: 1,
     frequency: 1,
-    isPlaying: false
+    isPlaying: false,
+    fire: false
   })
   const [isLoading, setLoading] = React.useState(true)
   const { t, i18n } = useTranslation()

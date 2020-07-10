@@ -6,5 +6,10 @@
     "RESUME": "রেসুমে",
     "SKYBOX": "আকাশের বাক্স",
     "RAIN": "বৃষ্টি",
-    "EXPERIENCE": "অভিজ্ঞতা"
+    "EXPERIENCE": "অভিজ্ঞতা",
+    "ROTATION_X": "রোটেশন ক্স-এক্সিস",
+    "ROTATION_Y": "রোটেশন ই-এক্সিস",
+    "ROTATION_Z": "রোটেশন জ-এক্সিস",
+    "ACCELERATION": "ত্বরণ",
+    "FIRE": "আগুন"
 }
