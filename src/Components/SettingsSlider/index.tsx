@@ -95,7 +95,9 @@ export const SettingsSlider = ({ onChange }: any) => {
                                 key={`i-am-open`}>
                                 <motion.div>
                                     <Grid container spacing={2} alignItems="center">
-                                        <Grid item className={`width-150`}>
+                                        <Grid item
+                                            style={sliderStyle}
+                                            className={`width-150`}>
                                             { t(`ROTATION_X`)}
                                         </Grid>
                                         <Grid item xs>
@@ -111,7 +113,9 @@ export const SettingsSlider = ({ onChange }: any) => {
                                 </motion.div>
                                 <motion.div>
                                     <Grid container spacing={2} alignItems="center">
-                                        <Grid item className={`width-150`}>
+                                        <Grid item
+                                            style={sliderStyle}
+                                            className={`width-150`}>
                                             {t(`ROTATION_Y`)}
                                         </Grid>
                                         <Grid item xs>
@@ -127,7 +131,9 @@ export const SettingsSlider = ({ onChange }: any) => {
                                 </motion.div>
                                 <motion.div>
                                     <Grid container spacing={2} alignItems="center">
-                                        <Grid item className={`width-150`}>
+                                        <Grid item
+                                            style={sliderStyle}
+                                            className={`width-150`}>
                                             {t(`ROTATION_Z`)}
                                         </Grid>
                                         <Grid item xs>
@@ -143,7 +149,9 @@ export const SettingsSlider = ({ onChange }: any) => {
                                 </motion.div>
                                 <motion.div>
                                     <Grid container spacing={2} alignItems="center">
-                                        <Grid item className={`width-150`}>
+                                        <Grid item
+                                            style={sliderStyle}
+                                            className={`width-150`}>
                                             {t(`ACCELERATION`)}
                                         </Grid>
                                         <Grid item xs>
@@ -160,7 +168,9 @@ export const SettingsSlider = ({ onChange }: any) => {
                                 <motion.div>
                                     <Typography component="div">
                                         <Grid component="label" container alignItems="center" spacing={1} className={`fire-switch`}>
-                                            <Grid item className={`width-150`}>
+                                            <Grid item
+                                                style={sliderStyle}
+                                                className={`width-150`}>
                                                 { t(`FIRE`) }
                                             </Grid>
                                             <Grid item>
