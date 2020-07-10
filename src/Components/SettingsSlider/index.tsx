@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { Colors } from '../../Constants/Colors'
 import { AppContext } from '../../AppContext'
 import { SettingsContext } from '../../SettingsContext'
+import { MusicContext } from '../../MusicContext'
 
 import "./styles.scss"
 
@@ -46,7 +47,7 @@ export const SettingsSlider = ({
     const [show, setShow] = React.useState(false)
     const { theme }: any  = React.useContext(AppContext)
     const { t, i18n } = useTranslation()
-    const { rotationX, rotationY, rotationZ, acceleration, setSettings, isPlaying, fire, ...otherSettings }: any  = React.useContext(SettingsContext)
+    const { rotationX, rotationY, rotationZ, acceleration, setSettings, fire, ...otherSettings }: any  = React.useContext(SettingsContext)
 
     const onSettingsChange = ({ newValue, name }: any) => {
         const params = {
@@ -67,7 +68,7 @@ export const SettingsSlider = ({
         color: Colors[theme].primaryColor,
     }
 
-    return !isPlaying ? (
+    return (
         <>
             <div className={`settings-slider-container ${show ? `active` : ``}`}>
                 <AnimatePresence initial={false} exitBeforeEnter>
@@ -241,5 +242,5 @@ export const SettingsSlider = ({
 
             </div>
         </>
-    ) : <></>
+    )
 }

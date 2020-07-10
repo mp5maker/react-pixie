@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 import { Colors } from '../../../../Constants/Colors'
 import { AppContext } from '../../../../AppContext'
-import { SettingsContext } from '../../../../SettingsContext'
+import { MusicContext } from '../../../../MusicContext'
 
 import "./styles.scss"
 
@@ -35,8 +35,8 @@ const buttonVariants = {
 
 export const AudioPlayer = ({ }: any) => {
     const { theme }: any = React.useContext(AppContext)
-    const { setSettings, ...otherSettingsProps }: any = React.useContext(SettingsContext)
-    const [playAudio, setPlayAudio] = React.useState(AUDIO_NOT_PLAYING)
+    const { setMusicSettings, ...otherSettingsProps }: any = React.useContext(MusicContext)
+    const [ playAudio, setPlayAudio ] = React.useState(AUDIO_NOT_PLAYING)
     let analyser: any = React.useRef().current
     let animationFrame: any = React.useRef().current
 
@@ -47,7 +47,7 @@ export const AudioPlayer = ({ }: any) => {
     const animate = () => {
         if (sound.isPlaying) {
             const frequency = analyser.getAverageFrequency()
-            setSettings({
+            setMusicSettings({
                 ...otherSettingsProps,
                 frequency,
                 isPlaying: true
@@ -57,7 +57,7 @@ export const AudioPlayer = ({ }: any) => {
 
         if (!sound.isPlaying) {
             cancelAnimationFrame(animationFrame)
-            setSettings({
+            setMusicSettings({
                 ...otherSettingsProps,
                 isPlaying: false
             })
@@ -116,7 +116,7 @@ export const AudioPlayer = ({ }: any) => {
                         </motion.button>
                     )
                 }
-                {/* {
+                {
                     (playAudio == AUDIO_PLAYING) && (
                         <motion.button
                             variants={buttonVariants}
@@ -136,7 +136,7 @@ export const AudioPlayer = ({ }: any) => {
                             <FontAwesomeIcon icon={faPause} />
                         </motion.button>
                     )
-                } */}
+                }
                 {
                     (playAudio == AUDIO_PAUSE) && (
                         <motion.button

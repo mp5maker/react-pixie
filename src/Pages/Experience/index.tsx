@@ -10,22 +10,19 @@ import { AnimeThreeJSExperience } from '../../Components/Anime/ThreeJS/Pages/Exp
 
 export const Experience = ({ history, location, match }: any) => {
     const { theme }: any = React.useContext(AppContext)
-    const { setSettings, isPlaying, ...settings }: any = React.useContext(SettingsContext)
+    const { setSettings, ...settings }: any = React.useContext(SettingsContext)
 
     React.useEffect(() => {
-        if (!isPlaying) {
-            setSettings({
-                ...settings,
-                isPlaying,
-                settingsList: [
-                    'rotationX',
-                    'rotationY',
-                    'rotationZ',
-                    'acceleration',
-                ]
-            })
-        }
-    }, [isPlaying])
+        setSettings({
+            ...settings,
+            settingsList: [
+                'rotationX',
+                'rotationY',
+                'rotationZ',
+                'acceleration',
+            ]
+        })
+    }, [])
 
     return (
         <motion.div

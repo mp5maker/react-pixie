@@ -13,19 +13,17 @@ import { SettingsContext } from '../../SettingsContext'
 
 export const Rain = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
-    const { setSettings, isPlaying, ...settings }: any = React.useContext(SettingsContext)
+    const { setSettings, ...settings }: any = React.useContext(SettingsContext)
 
     React.useEffect(() => {
-        if (!isPlaying) {
-            setSettings({
-                ...settings,
-                settingsList: [
-                    'acceleration',
-                    'fire'
-                ]
-            })
-        }
-    }, [isPlaying])
+        setSettings({
+            ...settings,
+            settingsList: [
+                'acceleration',
+                'fire'
+            ]
+        })
+    }, [])
 
     return (
         <motion.div

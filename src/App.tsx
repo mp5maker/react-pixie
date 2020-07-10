@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next'
 
 import { AppContext } from './AppContext'
 import { SettingsContext } from './SettingsContext'
+import { MusicContext } from './MusicContext'
 import { DARK, LIGHT, THEME, LANGUAGE, EN } from './Constants/Settings'
 import * as Pages from './Pages'
 import { Footer } from './Components/Footer'
@@ -38,8 +39,6 @@ export const App = () => {
     rotationY: 30,
     rotationZ: 0,
     acceleration: 1,
-    frequency: 1,
-    isPlaying: false,
     fire: false,
     settingsList: [
       'rotationX',
@@ -49,6 +48,7 @@ export const App = () => {
       'fire',
     ]
   })
+  const [musicSettings, setMusicSettings] = React.useState({ isPlaying: false, frequency: 1 })
   const [isLoading, setLoading] = React.useState(true)
   const { t, i18n } = useTranslation()
 
@@ -77,41 +77,44 @@ export const App = () => {
       value={{ theme, setTheme }}>
       <SettingsContext.Provider
         value={{ setSettings, ...settings }}>
-        <div
-          style={{
-            // @ts-ignore
-            backgroundColor: Colors[theme].backgroundColor,
-            // @ts-ignore
-            color: Colors[theme].primaryColor
-          }}
-          className="container-fluid">
-          <Router history={history}>
-            <Route
-              render={({ location }) => {
-                return (
-                  <AnimatePresence exitBeforeEnter initial={false}>
-                    <Switch location={location}  key={location.pathname}>
-                      <Route exact path={Routes.ROOT} component={Pages.Home} />
-                      <Route exact path={Routes.HOME} component={Pages.Home} />
-                      <Route exact path={Routes.EXPERIENCE} component={Pages.Experience} />
-                      <Route exact path={Routes.SKYBOX} component={Pages.Skybox} />
-                      <Route exact path={Routes.RAIN} component={Pages.Rain} />
-                      <Route path={Routes.OTHERS} component={Pages.Error} />
-                    </Switch>
-                  </AnimatePresence>
-                )
-              }}
-            />
-            <Navigation history={history} />
-          </Router>
-        </div>
-        <Footer
-          colors={Colors}
-          theme={theme} />
-        <ThemePicker />
-        <LanguagePicker history={history} />
-        <SettingsSlider list={settings.settingsList} />
-        <AudioPlayer />
+        <MusicContext.Provider
+          value={{ setMusicSettings, ...musicSettings }}>
+          <div
+            style={{
+              // @ts-ignore
+              backgroundColor: Colors[theme].backgroundColor,
+              // @ts-ignore
+              color: Colors[theme].primaryColor
+            }}
+            className="container-fluid">
+            <Router history={history}>
+              <Route
+                render={({ location }) => {
+                  return (
+                    <AnimatePresence exitBeforeEnter initial={false}>
+                      <Switch location={location}  key={location.pathname}>
+                        <Route exact path={Routes.ROOT} component={Pages.Home} />
+                        <Route exact path={Routes.HOME} component={Pages.Home} />
+                        <Route exact path={Routes.EXPERIENCE} component={Pages.Experience} />
+                        <Route exact path={Routes.SKYBOX} component={Pages.Skybox} />
+                        <Route exact path={Routes.RAIN} component={Pages.Rain} />
+                        <Route path={Routes.OTHERS} component={Pages.Error} />
+                      </Switch>
+                    </AnimatePresence>
+                  )
+                }}
+              />
+              <Navigation history={history} />
+            </Router>
+          </div>
+          <Footer
+            colors={Colors}
+            theme={theme} />
+          <ThemePicker />
+          <LanguagePicker history={history} />
+          <SettingsSlider list={settings.settingsList} />
+          <AudioPlayer />
+        </MusicContext.Provider>
       </SettingsContext.Provider>
     </AppContext.Provider>
   );

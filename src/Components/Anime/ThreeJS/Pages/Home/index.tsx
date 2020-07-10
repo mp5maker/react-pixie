@@ -4,6 +4,7 @@ import { Canvas } from 'react-three-fiber'
 import { useTranslation } from 'react-i18next'
 
 import { SettingsContext } from '../../../../../SettingsContext'
+import { MusicContext } from '../../../../../MusicContext'
 import { Stars } from '../../Stars'
 import { Box } from '../../Box'
 import { OrbitControl } from '../../OrbitControl'
@@ -15,7 +16,8 @@ export const AnimeThreeJSHome = ({
     history,
 }: any) => {
     const { t, i18n } = useTranslation()
-    const { rotationX, rotationY, rotationZ, acceleration, frequency }: any = React.useContext(SettingsContext)
+    const { rotationX, rotationY, rotationZ, acceleration }: any = React.useContext(SettingsContext)
+    const { frequency }: any = React.useContext(MusicContext)
     const [ dimension, setDimension ] = React.useState({ width: 0, height: 0 })
 
     /* Colors */

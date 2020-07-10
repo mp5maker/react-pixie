@@ -4,6 +4,7 @@ import { Canvas } from 'react-three-fiber'
 import { useTranslation } from 'react-i18next'
 
 import { SettingsContext } from '../../../../../SettingsContext'
+import { MusicContext } from '../../../../../MusicContext'
 import { OrbitControl } from '../../OrbitControl'
 import * as Routes from '../../../../../Constants/Routes'
 import { RectangleLight } from '../../RectangleLight'
@@ -19,7 +20,8 @@ export const AnimeThreeJSRain = ({
     history,
 }: any) => {
     const { t, i18n } = useTranslation()
-    const { rotationX, rotationY, rotationZ, acceleration, frequency, fire }: any = React.useContext(SettingsContext)
+    const { rotationX, rotationY, rotationZ, acceleration, fire }: any = React.useContext(SettingsContext)
+    const { frequency }: any = React.useContext(MusicContext)
     const [dimension, setDimension] = React.useState({ width: 0, height: 0 })
 
     /* Colors */
