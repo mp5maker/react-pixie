@@ -64,10 +64,15 @@ export const AnimeThreeJSRain = ({
                 <ambientLight
                     color={COLORS.primaryColor}
                     intensity={0.1} />
-                <RectangleLight colors={COLORS} />
-                <InteriorGround colors={COLORS} />
-                <ShinySphere colors={COLORS} />
-                <Moon colors={COLORS} />
+                <RectangleLight
+                    colors={COLORS} />
+                <InteriorGround
+                    colors={COLORS} />
+                <ShinySphere
+                    frequency={frequency}
+                    colors={COLORS} />
+                <Moon
+                    colors={COLORS} />
                 <OrbitControl />
             </Canvas>
         </div>
