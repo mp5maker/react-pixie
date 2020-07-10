@@ -7,8 +7,9 @@ import { SettingsContext } from '../../../../../SettingsContext'
 import { OrbitControl } from '../../OrbitControl'
 import * as Routes from '../../../../../Constants/Routes'
 import { RectangleLight } from '../../RectangleLight'
-
-
+import { InteriorGround } from '../../InteriorGround'
+import { ShinySphere } from '../../ShinySphere'
+import { Moon } from '../../Moon'
 
 export const AnimeThreeJSRain = ({
     colors,
@@ -57,13 +58,16 @@ export const AnimeThreeJSRain = ({
                     fov: 45,
                     near: 1,
                     far: 1000,
-                    position: [30, 30, 60]
+                    position: [60, 30, 100]
                 }}
                 pixelRatio={window.devicePixelRatio || 1}>
                 <ambientLight
                     color={COLORS.primaryColor}
                     intensity={0.1} />
                 <RectangleLight colors={COLORS} />
+                <InteriorGround colors={COLORS} />
+                <ShinySphere colors={COLORS} />
+                <Moon colors={COLORS} />
                 <OrbitControl />
             </Canvas>
         </div>
