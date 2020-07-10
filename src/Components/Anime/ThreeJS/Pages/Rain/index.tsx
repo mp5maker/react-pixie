@@ -10,6 +10,7 @@ import { RectangleLight } from '../../RectangleLight'
 import { InteriorGround } from '../../InteriorGround'
 import { ShinySphere } from '../../ShinySphere'
 import { Moon } from '../../Moon'
+import { RainDroplets } from '../../RainDroplets'
 
 export const AnimeThreeJSRain = ({
     colors,
@@ -70,6 +71,9 @@ export const AnimeThreeJSRain = ({
                     colors={COLORS} />
                 <ShinySphere
                     frequency={frequency}
+                    colors={COLORS} />
+                <RainDroplets
+                    acceleration={acceleration}
                     colors={COLORS} />
                 <Moon
                     colors={COLORS} />

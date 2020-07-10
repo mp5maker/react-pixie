@@ -5,7 +5,6 @@ import { useFrame } from 'react-three-fiber'
 export const Stars = ({ colors, history, acceleration, ...props }: any) => {
     const [texture, setTexture] = React.useState()
 
-    const points: any = React.useRef()
     const geometry = React.useRef({
         stars: new THREE.Geometry()
     }).current
@@ -47,7 +46,6 @@ export const Stars = ({ colors, history, acceleration, ...props }: any) => {
     return texture ? (
         <group>
             <points
-                ref={points}
                 geometry={geometry.stars}
                 material={new THREE.PointsMaterial({
                     color: colors.primaryColor,
