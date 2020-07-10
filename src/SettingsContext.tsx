@@ -9,6 +9,7 @@ interface SettingsContextInterface {
     isPlaying: boolean,
     fire: boolean,
     setSettings: (params: any) => any,
+    settingsList: Array<string>
 }
 
 export const SettingsContext = React.createContext<Partial<SettingsContextInterface>>({})

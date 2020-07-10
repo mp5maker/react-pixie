@@ -33,7 +33,16 @@ const settingsSliderVariant = {
 }
 
 
-export const SettingsSlider = ({ onChange }: any) => {
+export const SettingsSlider = ({
+    onChange,
+    list = [
+        'rotationX',
+        'rotationY',
+        'rotationZ',
+        'acceleration',
+        'fire',
+    ]
+}: any) => {
     const [show, setShow] = React.useState(false)
     const { theme }: any  = React.useContext(AppContext)
     const { t, i18n } = useTranslation()
@@ -93,102 +102,122 @@ export const SettingsSlider = ({ onChange }: any) => {
                                 animate="animate"
                                 exit="exit"
                                 key={`i-am-open`}>
-                                <motion.div>
-                                    <Grid container spacing={2} alignItems="center">
-                                        <Grid item
-                                            style={sliderStyle}
-                                            className={`width-150`}>
-                                            { t(`ROTATION_X`)}
-                                        </Grid>
-                                        <Grid item xs>
-                                            <Slider
-                                                step={1}
-                                                min={1}
-                                                max={100}
-                                                style={sliderStyle}
-                                                onChange={(event, newValue) => onSettingsChange({ newValue, name: `rotationX` })}
-                                                value={rotationX} />
-                                        </Grid>
-                                    </Grid>
-                                </motion.div>
-                                <motion.div>
-                                    <Grid container spacing={2} alignItems="center">
-                                        <Grid item
-                                            style={sliderStyle}
-                                            className={`width-150`}>
-                                            {t(`ROTATION_Y`)}
-                                        </Grid>
-                                        <Grid item xs>
-                                            <Slider
-                                                step={1}
-                                                min={1}
-                                                max={100}
-                                                style={sliderStyle}
-                                                onChange={(event, newValue) => onSettingsChange({ newValue, name: `rotationY` })}
-                                                value={rotationY} />
-                                        </Grid>
-                                    </Grid>
-                                </motion.div>
-                                <motion.div>
-                                    <Grid container spacing={2} alignItems="center">
-                                        <Grid item
-                                            style={sliderStyle}
-                                            className={`width-150`}>
-                                            {t(`ROTATION_Z`)}
-                                        </Grid>
-                                        <Grid item xs>
-                                            <Slider
-                                                step={1}
-                                                min={1}
-                                                max={100}
-                                                style={sliderStyle}
-                                                onChange={(event, newValue) => onSettingsChange({ newValue, name: `rotationZ` })}
-                                                value={rotationZ} />
-                                        </Grid>
-                                    </Grid>
-                                </motion.div>
-                                <motion.div>
-                                    <Grid container spacing={2} alignItems="center">
-                                        <Grid item
-                                            style={sliderStyle}
-                                            className={`width-150`}>
-                                            {t(`ACCELERATION`)}
-                                        </Grid>
-                                        <Grid item xs>
-                                            <Slider
-                                                step={1}
-                                                min={1}
-                                                max={100}
-                                                style={sliderStyle}
-                                                onChange={(event, newValue) => onSettingsChange({ newValue, name: `acceleration` })}
-                                                value={acceleration} />
-                                        </Grid>
-                                    </Grid>
-                                </motion.div>
-                                <motion.div>
-                                    <Typography component="div">
-                                        <Grid component="label" container alignItems="center" spacing={1} className={`fire-switch`}>
-                                            <Grid item
-                                                style={sliderStyle}
-                                                className={`width-150`}>
-                                                { t(`FIRE`) }
+                                {
+                                    list.includes('rotationX') && (
+                                        <motion.div>
+                                            <Grid container spacing={2} alignItems="center">
+                                                <Grid item
+                                                    style={sliderStyle}
+                                                    className={`width-150`}>
+                                                    { t(`ROTATION_X`)}
+                                                </Grid>
+                                                <Grid item xs>
+                                                    <Slider
+                                                        step={1}
+                                                        min={1}
+                                                        max={100}
+                                                        style={sliderStyle}
+                                                        onChange={(event, newValue) => onSettingsChange({ newValue, name: `rotationX` })}
+                                                        value={rotationX} />
+                                                </Grid>
                                             </Grid>
-                                            <Grid item>
-                                                <Switch
-                                                    style={{
-                                                        // @ts-ignore
-                                                        color: Colors[theme].primaryColor,
-                                                    }}
-                                                    checked={fire}
-                                                    defaultValue={fire}
-                                                    onChange={(event) => onSettingsChange({ newValue: event.target.checked, name: event.target.name })}
-                                                    name="fire"
-                                                    inputProps={{ 'aria-label': 'Fire On' }}
-                                                />
+                                        </motion.div>
+                                    )
+                                }
+                                {
+                                    list.includes('rotationY') && (
+                                        <motion.div>
+                                            <Grid container spacing={2} alignItems="center">
+                                                <Grid item
+                                                    style={sliderStyle}
+                                                    className={`width-150`}>
+                                                    {t(`ROTATION_Y`)}
+                                                </Grid>
+                                                <Grid item xs>
+                                                    <Slider
+                                                        step={1}
+                                                        min={1}
+                                                        max={100}
+                                                        style={sliderStyle}
+                                                        onChange={(event, newValue) => onSettingsChange({ newValue, name: `rotationY` })}
+                                                        value={rotationY} />
+                                                </Grid>
                                             </Grid>
-                                        </Grid>
-                                    </Typography>
-                                </motion.div>
+                                        </motion.div>
+                                    )
+                                }
+                                {
+                                    list.includes('rotationZ') && (
+                                        <motion.div>
+                                            <Grid container spacing={2} alignItems="center">
+                                                <Grid item
+                                                    style={sliderStyle}
+                                                    className={`width-150`}>
+                                                    {t(`ROTATION_Z`)}
+                                                </Grid>
+                                                <Grid item xs>
+                                                    <Slider
+                                                        step={1}
+                                                        min={1}
+                                                        max={100}
+                                                        style={sliderStyle}
+                                                        onChange={(event, newValue) => onSettingsChange({ newValue, name: `rotationZ` })}
+                                                        value={rotationZ} />
+                                                </Grid>
+                                            </Grid>
+                                        </motion.div>
+                                    )
+                                }
+                                {
+                                    list.includes('acceleration') && (
+                                        <motion.div>
+                                            <Grid container spacing={2} alignItems="center">
+                                                <Grid item
+                                                    style={sliderStyle}
+                                                    className={`width-150`}>
+                                                    {t(`ACCELERATION`)}
+                                                </Grid>
+                                                <Grid item xs>
+                                                    <Slider
+                                                        step={1}
+                                                        min={1}
+                                                        max={100}
+                                                        style={sliderStyle}
+                                                        onChange={(event, newValue) => onSettingsChange({ newValue, name: `acceleration` })}
+                                                        value={acceleration} />
+                                                </Grid>
+                                            </Grid>
+                                        </motion.div>
+                                    )
+                                }
+                                {
+                                    list.includes('fire') && (
+                                        <motion.div>
+                                            <Typography component="div">
+                                                <Grid component="label" container alignItems="center" spacing={1} className={`fire-switch`}>
+                                                    <Grid item
+                                                        style={sliderStyle}
+                                                        className={`width-150`}>
+                                                        { t(`FIRE`) }
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Switch
+                                                            style={{
+                                                                // @ts-ignore
+                                                                color: Colors[theme].primaryColor,
+                                                            }}
+                                                            checked={fire}
+                                                            defaultValue={fire}
+                                                            onChange={(event) => onSettingsChange({ newValue: event.target.checked, name: event.target.name })}
+                                                            name="fire"
+                                                            inputProps={{ 'aria-label': 'Fire On' }}
+                                                        />
+                                                    </Grid>
+                                                </Grid>
+                                            </Typography>
+                                        </motion.div>
+                                    )
+                                }
                                 <motion.div
                                     className={`button-container`}>
                                     <motion.button

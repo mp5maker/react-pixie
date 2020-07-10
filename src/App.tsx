@@ -40,7 +40,14 @@ export const App = () => {
     acceleration: 1,
     frequency: 1,
     isPlaying: false,
-    fire: false
+    fire: false,
+    settingsList: [
+      'rotationX',
+      'rotationY',
+      'rotationZ',
+      'acceleration',
+      'fire',
+    ]
   })
   const [isLoading, setLoading] = React.useState(true)
   const { t, i18n } = useTranslation()
@@ -103,7 +110,7 @@ export const App = () => {
           theme={theme} />
         <ThemePicker />
         <LanguagePicker history={history} />
-        <SettingsSlider />
+        <SettingsSlider list={settings.settingsList} />
         <AudioPlayer />
       </SettingsContext.Provider>
     </AppContext.Provider>

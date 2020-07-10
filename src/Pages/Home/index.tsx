@@ -5,10 +5,27 @@ import { Colors } from '../../Constants/Colors'
 import { PageTransition } from '../../Constants/PageTransition'
 import { Styles } from '../../Styles/Pages'
 import { AppContext } from '../../AppContext'
+import { SettingsContext } from '../../SettingsContext'
 import { AnimeThreeJSHome } from '../../Components/Anime/ThreeJS/Pages/Home'
 
 export const Home = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
+    const { setSettings, isPlaying, ...settings }: any = React.useContext(SettingsContext)
+
+    React.useEffect(() => {
+        if (!isPlaying) {
+            setSettings({
+                ...settings,
+                isPlaying,
+                settingsList: [
+                    'rotationX',
+                    'rotationY',
+                    'rotationZ',
+                    'acceleration',
+                ]
+            })
+        }
+    }, [isPlaying])
 
     return (
         <motion.div

@@ -9,9 +9,23 @@ import { Styles } from '../../Styles/Pages'
 import { Colors } from '../../Constants/Colors'
 import { PageTransition } from '../../Constants/PageTransition'
 import { AppContext } from '../../AppContext'
+import { SettingsContext } from '../../SettingsContext'
 
 export const Rain = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
+    const { setSettings, isPlaying, ...settings }: any = React.useContext(SettingsContext)
+
+    React.useEffect(() => {
+        if (!isPlaying) {
+            setSettings({
+                ...settings,
+                settingsList: [
+                    'acceleration',
+                    'fire'
+                ]
+            })
+        }
+    }, [isPlaying])
 
     return (
         <motion.div
