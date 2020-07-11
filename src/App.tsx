@@ -24,6 +24,7 @@ import { Colors } from './Constants/Colors'
 import { AudioPlayer } from './Components/Anime/ThreeJS/AudioPlayer'
 import * as Routes from './Constants/Routes'
 import { StorageGet, StorageSet } from './Utilities/Storage'
+import { useColors } from './Hooks/UseColors'
 
 /* CSS */
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -51,6 +52,7 @@ export const App = () => {
   const [musicSettings, setMusicSettings] = React.useState({ isPlaying: false, frequency: 1 })
   const [isLoading, setLoading] = React.useState(true)
   const { t, i18n } = useTranslation()
+  useColors({ theme })
 
   React.useEffect(() => {
     const onSuccess = ([currentTheme, currentLanguage]: any) => {
