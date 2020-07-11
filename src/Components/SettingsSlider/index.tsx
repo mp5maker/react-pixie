@@ -199,7 +199,7 @@ export const SettingsSlider = ({
                                                     <Grid item
                                                         style={sliderStyle}
                                                         className={`width-150`}>
-                                                        { t(`FIRE`) }
+                                                        <strong>{ t(`FIRE`) }</strong>
                                                     </Grid>
                                                     <Grid item>
                                                         <Switch

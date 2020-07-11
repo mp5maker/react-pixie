@@ -9,6 +9,7 @@ import { Stars } from '../../Stars'
 import { Box } from '../../Box'
 import { OrbitControl } from '../../OrbitControl'
 import * as Routes from '../../../../../Constants/Routes'
+import { useDimension } from '../../../../../Hooks/UseDimension'
 
 export const AnimeThreeJSExperience = ({
     colors,
@@ -18,7 +19,7 @@ export const AnimeThreeJSExperience = ({
     const { t, i18n } = useTranslation()
     const { rotationX, rotationY, rotationZ, acceleration }: any = React.useContext(SettingsContext)
     const { frequency }: any = React.useContext(MusicContext)
-    const [dimension, setDimension] = React.useState({ width: 0, height: 0 })
+    const { width, height } = useDimension()
 
     /* Colors */
     const COLORS = {
@@ -31,28 +32,8 @@ export const AnimeThreeJSExperience = ({
         successColor: new THREE.Color(colors[theme].successColor),
     }
 
-    const onWindowResize = () => {
-        setDimension({
-            width: window.innerWidth,
-            height: window.innerHeight
-        })
-    }
-
-    React.useEffect(() => {
-        window.addEventListener('resize', onWindowResize)
-
-        return () => {
-            window.removeEventListener('resize', onWindowResize)
-        }
-    }, [])
-
-
     return (
-        <div
-            style={{
-                width: dimension.width ? dimension.width : window.innerWidth,
-                height: dimension.height ? dimension.height : window.innerHeight
-            }}>
+        <div style={{ width, height }}>
             <Canvas
                 camera={{
                     fov: 75,
