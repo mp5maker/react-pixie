@@ -84,6 +84,8 @@ export const AudioPlayer = ({ }: any) => {
 
     const resume = () => {
         setPlayAudio(AUDIO_PLAYING)
+        analyser = new THREE.AudioAnalyser(sound, 32)
+        requestAnimationFrame(animate)
         sound.play()
     }
 
