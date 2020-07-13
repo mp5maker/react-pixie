@@ -14,6 +14,7 @@ import { Moon } from '../../Moon'
 import { RainDroplets } from '../../RainDroplets'
 import { BonFire } from '../../BonFire'
 import { Wall } from '../../House/Wall'
+import { MyName } from '../../MyName'
 import { useDimension } from '../../../../../Hooks/UseDimension'
 
 export const AnimeThreeJSRain = ({
@@ -56,6 +57,8 @@ export const AnimeThreeJSRain = ({
                     colors={COLORS} />
                 <InteriorGround
                     colors={COLORS} />
+                <MyName
+                    colors={COLORS}/>
                 <ShinySphere
                     frequency={frequency}
                     colors={COLORS} />

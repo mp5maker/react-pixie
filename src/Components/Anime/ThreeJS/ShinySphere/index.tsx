@@ -11,7 +11,7 @@ export const ShinySphere = ({ colors, frequency }: any) => {
             <mesh
                 ref={shinySphereRef}
                 castShadow={true}
-                position={[2.5, 10, 15]}
+                position={[5, 10, 20]}
                 scale={[0.5, 0.5, 0.5]}>
                 <sphereGeometry
                     attach="geometry"
