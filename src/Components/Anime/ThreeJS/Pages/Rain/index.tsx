@@ -13,6 +13,7 @@ import { ShinySphere } from '../../ShinySphere'
 import { Moon } from '../../Moon'
 import { RainDroplets } from '../../RainDroplets'
 import { BonFire } from '../../BonFire'
+import { Wall } from '../../House/Wall'
 import { useDimension } from '../../../../../Hooks/UseDimension'
 
 export const AnimeThreeJSRain = ({
@@ -45,7 +46,7 @@ export const AnimeThreeJSRain = ({
                     fov: 45,
                     near: 1,
                     far: 1000,
-                    position: [60, 30, 100]
+                    position: [100, 40, 120]
                 }}
                 pixelRatio={window.devicePixelRatio || 1}>
                 <ambientLight
@@ -58,6 +59,7 @@ export const AnimeThreeJSRain = ({
                 <ShinySphere
                     frequency={frequency}
                     colors={COLORS} />
+                <Wall colors={COLORS} />
                 {
                     fire ? (
                     <BonFire
