@@ -1,0 +1,13 @@
+.music-credit-container {
+    position: absolute;
+    bottom: 25px;
+    padding: 12px;
+    border-radius: 5px;
+    * {
+        font-size: 12px;
+    }
+    @media only screen and (max-width: 400px) {
+        bottom: -55px;
+        padding: 0;
+    }
+}
