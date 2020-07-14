@@ -15,6 +15,7 @@ import { RainDroplets } from '../../RainDroplets'
 import { BonFire } from '../../BonFire'
 import { Wall } from '../../House/Wall'
 import { MyName } from '../../MyName'
+import { Cloud } from '../../Cloud'
 import { useDimension } from '../../../../../Hooks/UseDimension'
 
 export const AnimeThreeJSRain = ({
@@ -46,7 +47,7 @@ export const AnimeThreeJSRain = ({
                 camera={{
                     fov: 45,
                     near: 1,
-                    far: 1000,
+                    far: 5000,
                     position: [100, 40, 120]
                 }}
                 pixelRatio={window.devicePixelRatio || 1}>
@@ -63,6 +64,10 @@ export const AnimeThreeJSRain = ({
                     frequency={frequency}
                     colors={COLORS} />
                 <Wall colors={COLORS} />
+                <Cloud
+                    frequency={frequency}
+                    colors={COLORS}
+                    noOfClouds={25} />
                 {
                     fire ? (
                     <BonFire
@@ -78,7 +83,7 @@ export const AnimeThreeJSRain = ({
                         </>
                     )
                 }
-                <OrbitControl />
+                <OrbitControl enableRotate={false} />
             </Canvas>
         </div>
     )
