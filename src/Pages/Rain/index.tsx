@@ -18,12 +18,13 @@ export const Rain = ({ history, location, match }: any) => {
     React.useEffect(() => {
         setSettings({
             ...settings,
-            settingsList: [
-                'acceleration',
-                'fire'
-            ]
+            ...(settings.fire ? {
+                settingsList: ['fire']
+            }: {
+                settingsList: ['acceleration', 'fire']
+            })
         })
-    }, [])
+    }, [settings.fire])
 
     return (
         <motion.div

@@ -14,7 +14,7 @@ export const BonFire = ({ colors }: any) => {
 
     React.useEffect(() => {
         const position ={
-            x: -100,
+            x: -400,
             y: 0,
             z: -700
         }
