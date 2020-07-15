@@ -125,7 +125,15 @@ export const WorkExperience = ({ colors, theme }: any) => {
                 </span>
                 <span>
                     Worked on Canvases, 3Ds using Blender and THREE.js
-                        </span>
+                </span>
+            </ListItem>
+            <ListItem>
+                <span className={`mr-2`}>
+                    <FontAwesomeIcon icon={faLightbulb} />
+                </span>
+                <span>
+                    Prototyped with Figma
+                </span>
             </ListItem>
         </>
     )

@@ -7,6 +7,7 @@ import { SettingsContext } from '../../../../../SettingsContext'
 import { MusicContext } from '../../../../../MusicContext'
 import { Stars } from '../../Stars'
 import { Box } from '../../Box'
+import { Skills } from '../../Skills'
 import { OrbitControl } from '../../OrbitControl'
 import * as Routes from '../../../../../Constants/Routes'
 import { useDimension } from '../../../../../Hooks/UseDimension'
@@ -70,6 +71,7 @@ export const AnimeThreeJSExperience = ({
                     acceleration={acceleration}
                     colors={COLORS}
                     history={history} />
+                <Skills colors={COLORS} />
             </Canvas>
         </div>
     )
