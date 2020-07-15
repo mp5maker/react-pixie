@@ -44,20 +44,24 @@ export const RainDroplets = ({ colors, acceleration }: any) => {
         loader.load('Circle/circle.png', onSuccessLoad)
     }, [])
 
-    return (
-        <>
-            {
-                texture && (
-                    <points
-                        material={new THREE.PointsMaterial({
-                            color: colors.primaryColor,
-                            size: 1.5,
-                            map: texture,
-                            transparent: true
-                        })}
-                        geometry={geometry} />
-                )
-            }
-        </>
-    )
+    const rainDroplets = React.useMemo(() => {
+        return (
+            <>
+                {
+                    texture && (
+                        <points
+                            material={new THREE.PointsMaterial({
+                                color: colors.primaryColor,
+                                size: 1.5,
+                                map: texture,
+                                transparent: true
+                            })}
+                            geometry={geometry} />
+                    )
+                }
+            </>
+        )
+    }, [texture, colors])
+
+    return rainDroplets
 }

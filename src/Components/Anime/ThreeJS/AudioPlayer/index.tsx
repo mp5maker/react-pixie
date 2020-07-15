@@ -9,7 +9,6 @@ import { AppContext } from '../../../../AppContext'
 import { MusicContext } from '../../../../MusicContext'
 
 import "./styles.scss"
-import Resume from '../../../../Pages/Skybox'
 
 const AUDIO_NOT_PLAYING = 'not-playing'
 const AUDIO_PLAYING = 'playing'
