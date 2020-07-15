@@ -16,6 +16,7 @@ import { BonFire } from '../../BonFire'
 import { Wall } from '../../House/Wall'
 import { MyName } from '../../MyName'
 import { Cloud } from '../../Cloud'
+import { Statistics } from '../../Statistics'
 import { useDimension } from '../../../../../Hooks/UseDimension'
 
 export const AnimeThreeJSRain = ({
@@ -84,6 +85,8 @@ export const AnimeThreeJSRain = ({
                     )
                 }
                 <OrbitControl enableRotate={false} />
+                <Statistics
+                    colors={COLORS} />
             </Canvas>
         </div>
     )
