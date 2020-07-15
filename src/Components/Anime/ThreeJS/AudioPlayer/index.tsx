@@ -9,6 +9,7 @@ import { AppContext } from '../../../../AppContext'
 import { MusicContext } from '../../../../MusicContext'
 
 import "./styles.scss"
+import Resume from '../../../../Pages/Skybox'
 
 const AUDIO_NOT_PLAYING = 'not-playing'
 const AUDIO_PLAYING = 'playing'
@@ -37,6 +38,7 @@ export const AudioPlayer = ({ }: any) => {
     const { theme }: any = React.useContext(AppContext)
     const { setMusicSettings, ...otherSettingsProps }: any = React.useContext(MusicContext)
     const [ playAudio, setPlayAudio ] = React.useState(AUDIO_NOT_PLAYING)
+    const [ loaded, setLoaded ]: any = React.useState(0)
     let analyser: any = React.useRef().current
     let animationFrame: any = React.useRef().current
 
@@ -65,6 +67,10 @@ export const AudioPlayer = ({ }: any) => {
     }
 
     const play = () => {
+        const onProgressLoad = (response: any) => {
+            setLoaded((response.loaded / response.total) * 100)
+        }
+
         const onSuccessLoad = (buffer: any) => {
             sound.setBuffer(buffer)
             sound.setLoop(true)
@@ -74,7 +80,7 @@ export const AudioPlayer = ({ }: any) => {
             setPlayAudio(AUDIO_PLAYING)
             requestAnimationFrame(animate)
         }
-        loader.load('/Audio/sample.mp3', onSuccessLoad)
+        loader.load('/Audio/sample.mp3', onSuccessLoad, onProgressLoad)
     }
 
     const pause = () => {
@@ -94,93 +100,143 @@ export const AudioPlayer = ({ }: any) => {
         sound.stop()
     }
 
+    const PlayButton = (
+        <>
+            {
+                playAudio == AUDIO_NOT_PLAYING && (
+                    <motion.button
+                        variants={buttonVariants}
+                        initial={`initial`}
+                        animate={`animate`}
+                        exit={`exit`}
+                        key={`play-audio`}
+                        style={{
+                            // @ts-ignore
+                            backgroundColor: Colors[theme].backgroundColor,
+                            // @ts-ignore
+                            color: Colors[theme].secondaryColor,
+                            // @ts-ignore
+                            border: `1px solid ${Colors[theme].backgroundColor}`
+                        }}
+                        onClick={() => play()}>
+                        <FontAwesomeIcon icon={faMusic} />
+                    </motion.button>
+                )
+            }
+        </>
+    )
+
+    const PauseButton = (
+        <>
+            {
+                (playAudio == AUDIO_PLAYING) && (
+                    <motion.button
+                        variants={buttonVariants}
+                        initial={`initial`}
+                        animate={`animate`}
+                        exit={`exit`}
+                        key={`pause-audio`}
+                        style={{
+                            // @ts-ignore
+                            backgroundColor: Colors[theme].backgroundColor,
+                            // @ts-ignore
+                            color: Colors[theme].secondaryColor,
+                            // @ts-ignore
+                            border: `1px solid ${Colors[theme].backgroundColor}`
+                        }}
+                        onClick={() => pause()}>
+                        <FontAwesomeIcon icon={faPause} />
+                    </motion.button>
+                )
+            }
+        </>
+    )
+
+    const ResumeButton = (
+        <>
+            {
+                (playAudio == AUDIO_PAUSE) && (
+                    <motion.button
+                        variants={buttonVariants}
+                        initial={`initial`}
+                        animate={`animate`}
+                        exit={`exit`}
+                        key={`resume-audio`}
+                        style={{
+                            // @ts-ignore
+                            backgroundColor: Colors[theme].backgroundColor,
+                            // @ts-ignore
+                            color: Colors[theme].secondaryColor,
+                            // @ts-ignore
+                            border: `1px solid ${Colors[theme].backgroundColor}`
+                        }}
+                        onClick={() => resume()}>
+                        <FontAwesomeIcon icon={faPlay} />
+                    </motion.button>
+                )
+            }
+        </>
+    )
+
+    const StopButton = (
+        <>
+            {
+                (playAudio == AUDIO_PLAYING || playAudio == AUDIO_PAUSE) && (
+                    <motion.button
+                        variants={buttonVariants}
+                        initial={`initial`}
+                        animate={`animate`}
+                        exit={`exit`}
+                        key={`stop-audio`}
+                        style={{
+                            // @ts-ignore
+                            backgroundColor: Colors[theme].backgroundColor,
+                            // @ts-ignore
+                            color: Colors[theme].secondaryColor,
+                            // @ts-ignore
+                            border: `1px solid ${Colors[theme].backgroundColor}`
+                        }}
+                        onClick={() => stop()}>
+                        <FontAwesomeIcon icon={faStop} />
+                    </motion.button>
+                )
+            }
+        </>
+    )
+
+    const Loading = (
+        <>
+            {
+                loaded !== 0 && loaded !== 100 && (
+                    <motion.button
+                        variants={buttonVariants}
+                        initial={`initial`}
+                        animate={`animate`}
+                        exit={`exit`}
+                        key={`loaded-audio`}
+                        style={{
+                            // @ts-ignore
+                            backgroundColor: Colors[theme].backgroundColor,
+                            // @ts-ignore
+                            color: Colors[theme].secondaryColor,
+                            // @ts-ignore
+                            border: `1px solid ${Colors[theme].backgroundColor}`
+                        }}>
+                        { parseInt(loaded) }%
+                    </motion.button>
+                )
+            }
+        </>
+    )
+
     return (
         <>
             <motion.div className={`audio-player-container`}>
-                {
-                    playAudio == AUDIO_NOT_PLAYING && (
-                        <motion.button
-                            variants={buttonVariants}
-                            initial={`initial`}
-                            animate={`animate`}
-                            exit={`exit`}
-                            key={`play-audio`}
-                            style={{
-                                // @ts-ignore
-                                backgroundColor: Colors[theme].backgroundColor,
-                                // @ts-ignore
-                                color: Colors[theme].secondaryColor,
-                                // @ts-ignore
-                                border: `1px solid ${Colors[theme].backgroundColor}`
-                            }}
-                            onClick={() => play()}>
-                            <FontAwesomeIcon icon={faMusic} />
-                        </motion.button>
-                    )
-                }
-                {
-                    (playAudio == AUDIO_PLAYING) && (
-                        <motion.button
-                            variants={buttonVariants}
-                            initial={`initial`}
-                            animate={`animate`}
-                            exit={`exit`}
-                            key={`pause-audio`}
-                            style={{
-                                // @ts-ignore
-                                backgroundColor: Colors[theme].backgroundColor,
-                                // @ts-ignore
-                                color: Colors[theme].secondaryColor,
-                                // @ts-ignore
-                                border: `1px solid ${Colors[theme].backgroundColor}`
-                            }}
-                            onClick={() => pause()}>
-                            <FontAwesomeIcon icon={faPause} />
-                        </motion.button>
-                    )
-                }
-                {
-                    (playAudio == AUDIO_PAUSE) && (
-                        <motion.button
-                            variants={buttonVariants}
-                            initial={`initial`}
-                            animate={`animate`}
-                            exit={`exit`}
-                            key={`resume-audio`}
-                            style={{
-                                // @ts-ignore
-                                backgroundColor: Colors[theme].backgroundColor,
-                                // @ts-ignore
-                                color: Colors[theme].secondaryColor,
-                                // @ts-ignore
-                                border: `1px solid ${Colors[theme].backgroundColor}`
-                            }}
-                            onClick={() => resume()}>
-                            <FontAwesomeIcon icon={faPlay} />
-                        </motion.button>
-                    )
-                }
-                {
-                    (playAudio == AUDIO_PLAYING || playAudio == AUDIO_PAUSE) && (
-                        <motion.button
-                            variants={buttonVariants}
-                            initial={`initial`}
-                            animate={`animate`}
-                            exit={`exit`}
-                            key={`stop-audio`}
-                            style={{
-                                // @ts-ignore
-                                backgroundColor: Colors[theme].backgroundColor,
-                                // @ts-ignore
-                                color: Colors[theme].secondaryColor,
-                                // @ts-ignore
-                                border: `1px solid ${Colors[theme].backgroundColor}`
-                            }}
-                            onClick={() => stop()}>
-                            <FontAwesomeIcon icon={faStop} />
-                        </motion.button>
-                    )
-                }
+                { Loading }
+                { PlayButton }
+                { PauseButton }
+                { ResumeButton }
+                { StopButton }
             </motion.div>
         </>
     )
