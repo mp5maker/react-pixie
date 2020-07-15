@@ -11,5 +11,7 @@
     "ROTATION_Y": "Rotation Y",
     "ROTATION_Z": "Rotation Z",
     "ACCELERATION": "Acceleration",
-    "FIRE": "Fire"
+    "FIRE": "Fire",
+    "WORK_EXPERIENCE": "Work Experience",
+    "CURRENT": "Current"
 }

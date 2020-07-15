@@ -6,6 +6,7 @@ import { PageTransition } from '../../Constants/PageTransition'
 import { Styles } from '../../Styles/Pages'
 import { AppContext } from '../../AppContext'
 import { SettingsContext } from '../../SettingsContext'
+import { WorkExperience } from '../../Components/WorkExperience'
 import { AnimeThreeJSExperience } from '../../Components/Anime/ThreeJS/Pages/Experience'
 
 export const Experience = ({ history, location, match }: any) => {
@@ -44,6 +45,7 @@ export const Experience = ({ history, location, match }: any) => {
                         theme={theme} />
                 </div>
             </div>
+            <WorkExperience colors={Colors} theme={theme} />
         </motion.div>
     )
 }

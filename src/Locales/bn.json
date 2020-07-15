@@ -11,5 +11,7 @@
     "ROTATION_Y": "রোটেশন ই-এক্সিস",
     "ROTATION_Z": "রোটেশন জ-এক্সিস",
     "ACCELERATION": "ত্বরণ",
-    "FIRE": "আগুন"
+    "FIRE": "আগুন",
+    "WORK_EXPERIENCE": "কর্মদক্ষতা",
+    "CURRENT": "বর্তমান"
 }
