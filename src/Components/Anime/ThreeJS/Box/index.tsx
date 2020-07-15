@@ -9,19 +9,12 @@ export const Box = ({ colors, history, wireframe = false, redirectURL, rotationX
     const [active, setActive] = React.useState(false)
 
     useFrame(() => {
-        if (hovered && !active) {
-            setActive(true)
-        }
-        if (hovered && active) {}
         mesh.current.rotation.x += rotationX * 0.001
         mesh.current.rotation.y += rotationY * 0.001
         mesh.current.rotation.z += rotationZ * 0.001
     })
 
-    const onClick = React.useCallback((event) => {
-        setActive(!active)
-        history.push(redirectURL)
-    }, [setActive])
+    const onClick = React.useCallback((event) => history.push(redirectURL), [])
 
     const onPointerOver = React.useCallback((event, value) => {
         event.stopPropagation()
@@ -39,7 +32,6 @@ export const Box = ({ colors, history, wireframe = false, redirectURL, rotationX
         <group>
             <mesh
                 ref={mesh}
-                scale={active ? [1.5, 1.5, 1.5] : [1, 1, 1]}
                 onClick={onClick}
                 receiveShadow={true}
                 castShadow={true}

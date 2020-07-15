@@ -65,13 +65,13 @@ export const AudioPlayer = ({ }: any) => {
     }
 
     const play = () => {
-        setPlayAudio(AUDIO_PLAYING)
         const onSuccessLoad = (buffer: any) => {
             sound.setBuffer(buffer)
             sound.setLoop(true)
             sound.setVolume(0.5)
             sound.play()
             analyser = new THREE.AudioAnalyser(sound, 32)
+            setPlayAudio(AUDIO_PLAYING)
             requestAnimationFrame(animate)
         }
         loader.load('/Audio/sample.mp3', onSuccessLoad)

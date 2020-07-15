@@ -43,16 +43,20 @@ export const Stars = ({ colors, history, acceleration, ...props }: any) => {
         loader.texture.load('Circle/circle.png', onSuccessTextureLoad)
     }, [])
 
-    return texture ? (
-        <group>
-            <points
-                geometry={geometry.stars}
-                material={new THREE.PointsMaterial({
-                    color: colors.primaryColor,
-                    size: 0.5,
-                    map: texture,
-                    transparent: true
-                })} />
-        </group>
-    ) : <></>
+    const points = React.useMemo(() => {
+        return texture ? (
+            <group>
+                <points
+                    geometry={geometry.stars}
+                    material={new THREE.PointsMaterial({
+                        color: colors.primaryColor,
+                        size: 0.5,
+                        map: texture,
+                        transparent: true
+                    })} />
+            </group>
+        ) : <></>
+    }, [texture, colors])
+
+    return points
 }
