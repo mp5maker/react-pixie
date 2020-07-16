@@ -2,6 +2,7 @@ import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
 
+import { DARK, LIGHT } from '../../Constants/Settings'
 import { Drawer } from '../Drawer'
 import './styles.scss'
 
@@ -37,14 +38,23 @@ export const SocialPicker = ({ colors, theme }: any) => {
                         buttonDisplay={(
                             <FontAwesomeIcon icon={faGithub} />
                         )}>
-                        <iframe
+                        <a
                             style={{
-                                width: `100%`,
-                                height: `500px`
+                                color: colors[theme].primaryColor
                             }}
-                            name="github"
-                            src="https://github.com/mp5maker"
-                            title="Github Link" />
+                            href="https://github.com/mp5maker"
+                            target="_blank">
+                            {
+                                theme == LIGHT && (
+                                    <img src="/Socials/github-light.png" />
+                                )
+                            }
+                            {
+                                theme == DARK && (
+                                    <img src="/Socials/github-dark.png" />
+                                )
+                            }
+                        </a>
                     </Drawer>
                     <Drawer
                         colors={colors}
@@ -55,14 +65,23 @@ export const SocialPicker = ({ colors, theme }: any) => {
                         buttonDisplay={(
                             <FontAwesomeIcon icon={faLinkedin} />
                         )}>
-                        <iframe
+                        <a
                             style={{
-                                width: `100%`,
-                                height: `500px`
+                                color: colors[theme].primaryColor
                             }}
-                            name="linkedin"
-                            src="https://www.linkedin.com/in/shabuktaginkhan/"
-                            title="Linkedin Link" />
+                            href="https://www.linkedin.com/in/shabuktaginkhan/"
+                            target="_blank">
+                            {
+                                theme == LIGHT && (
+                                    <img src="/Socials/linked-light.png" />
+                                )
+                            }
+                            {
+                                theme == DARK && (
+                                    <img src="/Socials/linked-dark.png" />
+                                )
+                            }
+                        </a>
                     </Drawer>
                 </div>
             </div>
