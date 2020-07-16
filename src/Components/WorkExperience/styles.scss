@@ -2,29 +2,4 @@
     position: absolute;
     top: 150px;
     left: 25px;
-    button {
-        &.MuiButtonBase-root {
-            box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
-        }
-    }
-}
-
-.drawer-container {
-    overflow-y: hidden;
-    &.top {
-        position: fixed;
-        width: 100%;
-        left: 0;
-        top: 0;
-        opacity: 0.9;
-        .drawer-content {
-            padding-left: 12px;
-            padding-right: 12px;
-            max-height: 100vh;
-            overflow-y: auto;
-            .MuiTypography-colorTextSecondary {
-                color: var(--secondary-color) !important;
-            }
-        }
-    }
 }

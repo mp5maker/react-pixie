@@ -1,18 +1,16 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next'
-import { AnimatePresence, motion } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSortUp, faTimes, faCalendar, faArrowRight, faLightbulb } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faCalendar, faArrowRight, faLightbulb } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment'
 
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+
+import { Drawer } from '../Drawer'
 
 import './styles.scss'
 
@@ -36,20 +34,6 @@ const drawerVariants = {
 
 export const WorkExperience = ({ colors, theme }: any) => {
     const { t, i18n } = useTranslation()
-    const [show, setShow] = React.useState(false)
-    const drawer: any = React.useRef(document.getElementById('drawer')).current
-
-    const toggleDrawer = (status: boolean) => (event: any) => {
-        if (event.type == 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) return;
-        if (status) {
-            document.body.style.position = 'fixed';
-            document.body.style.top = `-${window.scrollY}px`;
-        } else {
-            document.body.style.position = '';
-            document.body.style.top = ``;
-        }
-        setShow(status)
-    }
 
     const PresentJob = (
         <>
@@ -470,69 +454,27 @@ export const WorkExperience = ({ colors, theme }: any) => {
         </>
     )
 
-    const Content = (
-        <motion.div
-            key={`I am open`}
-            variants={drawerVariants}
-            initial={`initial`}
-            animate={`animate`}
-            exit={`exit`}
-            style={{
-                color: colors[theme].primaryColor,
-                backgroundColor: colors[theme].backgroundColor
-            }}
-            className={`top drawer-container`}
-            role="presentation"
-            onClick={toggleDrawer(false)}
-            onKeyDown={toggleDrawer(false)}>
-            <motion.div
-                className={`drawer-content`}>
-                <List>
-                    { PresentJob }
-                    <Divider style={{ backgroundColor: colors[theme].secondaryColor }} />
-                    { InterconnectionJob }
-                    <Divider style={{ backgroundColor: colors[theme].secondaryColor }} />
-                    { InterconnectionJuniorJob }
-                    <Divider style={{ backgroundColor: colors[theme].secondaryColor }} />
-                    { EicraSoftJob }
-                    <Divider style={{ backgroundColor: colors[theme].secondaryColor }} />
-                    { Internship }
-                    <Divider style={{ backgroundColor: colors[theme].secondaryColor }} />
-                    <ListItem button className={`d-flex justify-content-center`}>
-                        <FontAwesomeIcon icon={faSortUp} />
-                    </ListItem>
-                </List>
-            </motion.div>
-        </motion.div>
-    )
-
-    const AnimatedContent = (
-        <AnimatePresence
-            exitBeforeEnter
-            initial={false}>
-            {show && Content}
-        </AnimatePresence>
-    )
-
     return (
         <>
             <div
                 style={{ color: colors[theme].primaryColor }}
                 className="work-experience-container">
-                <Button
-                    style={{
-                        backgroundColor: colors[theme].backgroundColor,
-                        color: colors[theme].primaryColor,
-                    }}
-                    onClick={toggleDrawer(true)}>
-                    { t(`WORK_EXPERIENCE`) }
-                </Button>
-                {
-                    ReactDOM.createPortal(
-                        AnimatedContent,
-                        drawer
-                    )
-                }
+                <Drawer
+                    colors={colors}
+                    theme={theme}
+                    drawerVariants={drawerVariants}
+                    direction={`top`}
+                    buttonDisplay={t(`WORK_EXPERIENCE`)}>
+                    { PresentJob }
+                    <Divider />
+                    { InterconnectionJob }
+                    <Divider />
+                    { InterconnectionJuniorJob }
+                    <Divider />
+                    { EicraSoftJob }
+                    <Divider />
+                    { Internship }
+                </Drawer>
             </div>
         </>
     )
