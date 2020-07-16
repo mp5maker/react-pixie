@@ -29,6 +29,10 @@ export const Navigation = ({ history }: any) => {
             label: t(`RAIN`),
             route: Routes.RAIN
         },
+        {
+            label: t(`BIRD`),
+            route: Routes.BIRD
+        },
     ]
 
     return (

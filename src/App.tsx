@@ -102,6 +102,7 @@ export const App = () => {
                         <Route exact path={Routes.EXPERIENCE} component={Pages.Experience} />
                         <Route exact path={Routes.SKYBOX} component={Pages.Skybox} />
                         <Route exact path={Routes.RAIN} component={Pages.Rain} />
+                        <Route exact path={Routes.BIRD} component={Pages.Bird} />
                         <Route path={Routes.OTHERS} component={Pages.Error} />
                       </Switch>
                     </AnimatePresence>

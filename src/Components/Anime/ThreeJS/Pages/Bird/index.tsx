@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { SettingsContext } from '../../../../../SettingsContext'
 import { MusicContext } from '../../../../../MusicContext'
 import { OrbitControl } from '../../OrbitControl'
+import { Bird } from '../../Bird'
 import { useDimension } from '../../../../../Hooks/UseDimension'
 import * as Routes from '../../../../../Constants/Routes'
 
@@ -36,7 +37,8 @@ export const AnimeThreeJSBird = ({
                 camera={{
                     fov: 75,
                     near: 1,
-                    far: 1000
+                    far: 5000,
+                    position: [100, 40, 120]
                 }}
                 pixelRatio={window.devicePixelRatio || 1}>
                 <OrbitControl
@@ -56,6 +58,7 @@ export const AnimeThreeJSBird = ({
                     color={COLORS.primaryColor}
                     intensity={0.1}
                     position={[0, 0, 0]} />
+                <Bird colors={COLORS} />
             </Canvas>
         </div>
     )
