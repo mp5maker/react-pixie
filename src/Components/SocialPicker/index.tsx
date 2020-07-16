@@ -46,12 +46,22 @@ export const SocialPicker = ({ colors, theme }: any) => {
                             target="_blank">
                             {
                                 theme == LIGHT && (
-                                    <img src="/Socials/github-light.png" />
+                                    <img
+                                        style={{
+                                            width: `100%`,
+                                            maxWidth: `1900px`,
+                                        }}
+                                        src="/Socials/github-light.png" />
                                 )
                             }
                             {
                                 theme == DARK && (
-                                    <img src="/Socials/github-dark.png" />
+                                    <img
+                                        style={{
+                                            width: `100%`,
+                                            maxWidth: `1900px`,
+                                        }}
+                                        src="/Socials/github-dark.png" />
                                 )
                             }
                         </a>
@@ -73,12 +83,22 @@ export const SocialPicker = ({ colors, theme }: any) => {
                             target="_blank">
                             {
                                 theme == LIGHT && (
-                                    <img src="/Socials/linked-light.png" />
+                                    <img
+                                        style={{
+                                            width: `100%`,
+                                            maxWidth: `740px`,
+                                        }}
+                                        src="/Socials/linked-light.png" />
                                 )
                             }
                             {
                                 theme == DARK && (
-                                    <img src="/Socials/linked-dark.png" />
+                                    <img
+                                        style={{
+                                            width: `100%`,
+                                            maxWidth: `740px`,
+                                        }}
+                                        src="/Socials/linked-dark.png" />
                                 )
                             }
                         </a>

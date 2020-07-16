@@ -62,7 +62,10 @@ export const WorkExperience = ({ colors, theme }: any) => {
                 <ListItemSecondaryAction>
                     <IconButton
                         style={{
-                            color: colors[theme].primaryColor
+                            borderRadius: `50%`,
+                            color: colors[theme].primaryColor,
+                            width: `40px`,
+                            height: `40px`,
                         }}
                         edge="end"
                         aria-label="times">
