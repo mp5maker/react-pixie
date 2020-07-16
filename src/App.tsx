@@ -21,6 +21,7 @@ import { LanguagePicker } from './Components/LanguagePicker'
 import { Navigation } from './Components/Navigation'
 import { SettingsSlider } from './Components/SettingsSlider'
 import { MusicCredit } from './Components/MusicCredit'
+import { SocialPicker } from './Components/SocialPicker'
 import { Colors } from './Constants/Colors'
 import { AudioPlayer } from './Components/Anime/ThreeJS/AudioPlayer'
 import * as Routes from './Constants/Routes'
@@ -121,6 +122,9 @@ export const App = () => {
             isPlaying={musicSettings.isPlaying}
             theme={theme}
             colors={Colors} />
+          <SocialPicker
+            colors={Colors}
+            theme={theme} />
         </MusicContext.Provider>
       </SettingsContext.Provider>
     </AppContext.Provider>

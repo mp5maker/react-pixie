@@ -10,7 +10,7 @@ import ListItem from '@material-ui/core/ListItem';
 
 import './styles.scss'
 
-export const Drawer = ({ colors, theme, drawerVariants, children, direction = 'top', buttonDisplay }: any) => {
+export const Drawer = ({ colors, theme, drawerVariants, children, direction = 'top', buttonDisplay, buttonsShape = '' }: any) => {
     const [show, setShow] = React.useState(false)
     const drawer: any = React.useRef(document.getElementById('drawer')).current
 
@@ -37,6 +37,8 @@ export const Drawer = ({ colors, theme, drawerVariants, children, direction = 't
                 color: colors[theme].primaryColor,
                 backgroundColor: colors[theme].backgroundColor
             }}
+            onClick={toggleDrawer(false)}
+            onKeyDown={toggleDrawer(false)}
             className={`${direction} drawer-container`}
             role="presentation">
             <div className="drawer-content">
@@ -44,8 +46,6 @@ export const Drawer = ({ colors, theme, drawerVariants, children, direction = 't
                     { children }
                     <ListItem
                         className={`d-flex justify-content-center`}
-                        onClick={toggleDrawer(false)}
-                        onKeyDown={toggleDrawer(false)}
                         button>
                         <FontAwesomeIcon icon={faSortUp} />
                     </ListItem>
