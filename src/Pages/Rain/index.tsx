@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 
 import { AnimeThreeJSRain } from '../../Components/Anime/ThreeJS/Pages/Rain'
-import { Styles } from '../../Styles/Pages'
 import { Colors } from '../../Constants/Colors'
 import { PageTransition } from '../../Constants/PageTransition'
 import { AppContext } from '../../AppContext'
@@ -33,7 +32,7 @@ export const Rain = ({ history, location, match }: any) => {
             animate="animate"
             exit="exit"
             style={{
-                ...Styles.container,
+                height: `100%`,
                 // @ts-ignore
                 backgroundColor: Colors[theme].backgroundColor
             }}

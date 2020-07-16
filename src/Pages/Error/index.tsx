@@ -3,7 +3,6 @@ import { motion } from 'framer-motion'
 
 import { Colors } from '../../Constants/Colors'
 import { PageTransition } from '../../Constants/PageTransition'
-import { Styles } from '../../Styles/Pages'
 import { AppContext } from '../../AppContext'
 import { SettingsContext } from '../../SettingsContext'
 import { AnimeThreeJSError } from '../../Components/Anime/ThreeJS/Pages/Error'
@@ -29,7 +28,7 @@ export const Error = ({ history, location, match }: any) => {
             animate="animate"
             exit="exit"
             style={{
-                ...Styles.container,
+                height: `100%`,
                 // @ts-ignore
                 backgroundColor: Colors[theme].backgroundColor
             }}

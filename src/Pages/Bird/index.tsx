@@ -5,9 +5,9 @@ import { Colors } from '../../Constants/Colors'
 import { PageTransition } from '../../Constants/PageTransition'
 import { AppContext } from '../../AppContext'
 import { SettingsContext } from '../../SettingsContext'
-import { AnimeThreeJSHome } from '../../Components/Anime/ThreeJS/Pages/Home'
+import { AnimeThreeJSBird } from '../../Components/Anime/ThreeJS/Pages/Bird'
 
-export const Home = ({ history, location, match }: any) => {
+export const Bird = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
     const { setSettings, ...settings }: any = React.useContext(SettingsContext)
 
@@ -37,14 +37,14 @@ export const Home = ({ history, location, match }: any) => {
             className="pages-home-container">
             <div className="row">
                 <div className="col p-0">
-                    <AnimeThreeJSHome
+                    <AnimeThreeJSBird
                         history={history}
                         theme={theme}
-                        colors={Colors}/>
+                        colors={Colors} />
                 </div>
             </div>
         </motion.div>
     )
 }
 
-export default Home
+export default Bird
