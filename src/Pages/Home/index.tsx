@@ -6,6 +6,7 @@ import { PageTransition } from '../../Constants/PageTransition'
 import { AppContext } from '../../AppContext'
 import { SettingsContext } from '../../SettingsContext'
 import { AnimeThreeJSHome } from '../../Components/Anime/ThreeJS/Pages/Home'
+import { MyNameSvg } from '../../Components/MyNameSvg'
 
 export const Home = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
@@ -43,6 +44,7 @@ export const Home = ({ history, location, match }: any) => {
                         colors={Colors}/>
                 </div>
             </div>
+            <MyNameSvg colors={Colors} theme={theme} />
         </motion.div>
     )
 }
