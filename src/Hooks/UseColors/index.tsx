@@ -15,7 +15,7 @@ export const useColors = ({ theme }: any) => {
         // @ts-ignore
         root.style.setProperty('--info-color', Colors[theme].infoColor)
         // @ts-ignore
-        root.style.setProperty('--warning-color', Colors[theme].warningcolor)
+        root.style.setProperty('--warning-color', Colors[theme].warningColor)
         // @ts-ignore
         root.style.setProperty('--success-color', Colors[theme].successColor)
         // @ts-ignore

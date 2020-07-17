@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.buorg {
+  border-bottom: 1px solid var(--background-color) !important;
+  box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
+  .buorg-pad {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    .buorg-buttons {
+      #buorgul {
+        background-color: var(--background-color);
+        border: 1px solid var(--success-color);
+        color: var(--success-color);
+      }
+      #buorgig {
+        background-color: var(--background-color);
+        border: 1px solid var(--warning-color);
+        color: var(--warning-color);
+      }
+    }
+  }
+}
