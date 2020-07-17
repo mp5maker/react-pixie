@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
+import { faGithub, faLinkedin, faWeebly } from "@fortawesome/free-brands-svg-icons"
 
 import { DARK, LIGHT } from '../../Constants/Settings'
 import { Drawer } from '../Drawer'
@@ -101,6 +101,31 @@ export const SocialPicker = ({ colors, theme }: any) => {
                                         src="/Socials/linked-dark.png" />
                                 )
                             }
+                        </a>
+                    </Drawer>
+                </div>
+                <div className="social-picker-content mt-3">
+                    <Drawer
+                        colors={colors}
+                        theme={theme}
+                        drawerVariants={drawerVariants}
+                        direction={`bottom`}
+                        buttonShape={`round`}
+                        buttonDisplay={(
+                            <FontAwesomeIcon icon={faWeebly} />
+                        )}>
+                        <a
+                            style={{
+                                color: colors[theme].primaryColor
+                            }}
+                            href="https://photonkhan.weebly.com/"
+                            target="_blank">
+                            <iframe
+                                style={{
+                                    height: `100vh`,
+                                    width: `100%`
+                                }}
+                                src={`https://photonkhan.weebly.com/`} />
                         </a>
                     </Drawer>
                 </div>
