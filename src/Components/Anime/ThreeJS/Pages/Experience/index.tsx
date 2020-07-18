@@ -51,9 +51,12 @@ export const AnimeThreeJSExperience = ({
                 pixelRatio={window.devicePixelRatio || 1}>
                 {
                     isMediaGreaterThan771px && (
-                        <OrbitControl
-                            minDistance={0}
-                            maxDistance={200} />
+                        <>
+                            <OrbitControl
+                                minDistance={0}
+                                maxDistance={200} />
+                            <Skills colors={COLORS} />
+                        </>
                     )
                 }
                 <ambientLight
@@ -84,7 +87,6 @@ export const AnimeThreeJSExperience = ({
                     acceleration={acceleration}
                     colors={COLORS}
                     history={history} />
-                <Skills colors={COLORS} />
             </Canvas>
         </div>
     )

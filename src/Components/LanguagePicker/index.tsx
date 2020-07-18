@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 import { AppContext } from '../../AppContext'
 import { Colors } from '../../Constants/Colors'
@@ -67,7 +67,7 @@ export const LanguagePicker = ({ history }: any) => {
                             color: Colors[theme].primaryColor,
                         }}
                         onClick={() => history.push(Routes.ROOT)}>
-                        <FontAwesomeIcon icon={faHome} />
+                        <FontAwesomeIcon icon={faUser} />
                     </button>
                 </div>
             </div>

@@ -14,7 +14,7 @@ export const Navigation = ({ history }: any) => {
 
     const list = [
         {
-            label: t(`HOME`),
+            label: t(`ABOUT_ME`),
             route: Routes.ROOT
         },
         {

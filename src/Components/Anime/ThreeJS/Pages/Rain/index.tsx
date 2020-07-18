@@ -18,6 +18,7 @@ import { MyName } from '../../MyName'
 import { Cloud } from '../../Cloud'
 import { Statistics } from '../../Statistics'
 import { useDimension } from '../../../../../Hooks/UseDimension'
+import { useMedia } from '../../../../../Hooks/UseMedia'
 
 export const AnimeThreeJSRain = ({
     colors,
@@ -28,6 +29,12 @@ export const AnimeThreeJSRain = ({
     const { rotationX, rotationY, rotationZ, acceleration, fire }: any = React.useContext(SettingsContext)
     const { frequency }: any = React.useContext(MusicContext)
     const { width, height } = useDimension()
+    const isMediaGreaterThan771px = useMedia({ query: `(min-width: 771px)` })
+
+    React.useEffect(() => {
+        if (!isMediaGreaterThan771px) document.body.style.position = 'fixed'
+        if (isMediaGreaterThan771px) document.body.style.position = ''
+    }, [isMediaGreaterThan771px])
 
     /* Colors */
     const COLORS = {
@@ -84,7 +91,12 @@ export const AnimeThreeJSRain = ({
                         </>
                     )
                 }
-                <OrbitControl enableRotate={false} />
+                {
+                    isMediaGreaterThan771px && (
+                        <OrbitControl
+                            enableRotate={false} />
+                    )
+                }
                 <Statistics
                     colors={COLORS} />
             </Canvas>
