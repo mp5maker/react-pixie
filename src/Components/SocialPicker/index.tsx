@@ -191,21 +191,37 @@ export const SocialPicker = ({ colors, theme }: any) => {
                             ({ toggleDrawer }: any) => {
                                 return (
                                     <React.Fragment>
-                                        <iframe
-                                            style={{
-                                                height: `100vh`,
-                                                width: `100%`
-                                            }}
-                                            src={`/Resume/resume.pdf`} />
-                                        <div className={`times-container`}>
+                                        <div className={`text-center`}>
+                                            {
+                                                theme == LIGHT && (
+                                                    <img
+                                                        style={{
+                                                            width: `100%`,
+                                                            maxWidth: `825px`,
+                                                        }}
+                                                        src="/Resume/resume-light.png" />
+                                                )
+                                            }
+                                            {
+                                                theme == DARK && (
+                                                    <img
+                                                        style={{
+                                                            width: `100%`,
+                                                            maxWidth: `825px`,
+                                                        }}
+                                                        src="/Resume/resume-dark.png" />
+                                                )
+                                            }
                                             <div className={`times-container`}>
-                                                <button
-                                                    onClick={(event) => {
-                                                        event.preventDefault();
-                                                        toggleDrawer(false)
-                                                    }}>
-                                                    <FontAwesomeIcon icon={faTimes} />
-                                                </button>
+                                                <div className={`times-container`}>
+                                                    <button
+                                                        onClick={(event) => {
+                                                            event.preventDefault();
+                                                            toggleDrawer(false)
+                                                        }}>
+                                                        <FontAwesomeIcon icon={faTimes} />
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </React.Fragment>
