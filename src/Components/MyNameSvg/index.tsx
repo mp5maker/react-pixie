@@ -22,18 +22,46 @@ export const MyNameSvg = ({ colors, theme }: any) => {
                 isWidthGreaterThan991 && (
                     <div className={`my-name-svg-container`}>
                         <div className={`svg-section`}>
-                            <AnimatePresence exitBeforeEnter initial={true}>
-                                {
-                                    isEnglish && (
-                                        <MyNameSvgEnglish colors={colors} theme={theme} />
-                                    )
-                                }
-                                {
-                                    isBengali && (
-                                        <MyNameSvgBengali colors={colors} theme={theme} />
-                                    )
-                                }
-                            </AnimatePresence>
+                            <div>
+                                <span className={`mr-2`}>
+                                    {t(`HI_I_AM`)}
+                                </span>
+                                <span>
+                                    <AnimatePresence exitBeforeEnter initial={true}>
+                                        {
+                                            isEnglish && (
+                                                <MyNameSvgEnglish colors={colors} theme={theme} />
+                                            )
+                                        }
+                                        {
+                                            isBengali && (
+                                                <MyNameSvgBengali colors={colors} theme={theme} />
+                                            )
+                                        }
+                                    </AnimatePresence>
+                                </span>
+                            </div>
+                        </div>
+                        <div className={`details-section`}>
+                            <div>
+                                <img src="/ok.png" width={140} height={222} />
+                            </div>
+                            <div>
+                                <div>
+                                    {t(`I_AM_A`)} <strong>{ t(`SENIOR_SOFTWARE_ENGINEER`)}</strong>
+                                </div>
+                                <div>
+                                    {t(`I_HAVE_PASSION_FOR_UI_UX_ANIMATIONS_AND_LOVE_TO_CREATE`) }
+                                </div>
+                                <div>
+                                    {t(`WEBSITES_TO_RUN_ACROSS_MULTIPLE_DEVICES_WITH`) }
+                                </div>
+                                <div>
+                                    <strong>
+                                        { t(`DYNAMIC_USER_EXPERIENCES`) }
+                                    </strong>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )

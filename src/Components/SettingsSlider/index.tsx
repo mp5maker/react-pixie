@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { Colors } from '../../Constants/Colors'
 import { AppContext } from '../../AppContext'
 import { SettingsContext } from '../../SettingsContext'
-import { MusicContext } from '../../MusicContext'
+import { useMedia } from '../../Hooks/UseMedia'
 
 import "./styles.scss"
 
@@ -48,6 +48,7 @@ export const SettingsSlider = ({
     const { theme }: any  = React.useContext(AppContext)
     const { t, i18n } = useTranslation()
     const { rotationX, rotationY, rotationZ, acceleration, setSettings, fire, ...otherSettings }: any  = React.useContext(SettingsContext)
+    const isWidthGreaterThan771px = useMedia({ query: '(min-width: 771px)' })
 
     const onSettingsChange = ({ newValue, name }: any) => {
         const params = {
@@ -68,34 +69,33 @@ export const SettingsSlider = ({
         color: Colors[theme].primaryColor,
     }
 
-    return (
-        <>
-            <div className={`settings-slider-container ${show ? `active` : ``}`}>
-                <AnimatePresence initial={false} exitBeforeEnter>
-                    {
-                        !show ? (
-                            <motion.button
-                                variants={settingsSliderVariant}
-                                initial="initial"
-                                animate="animate"
-                                exit="exit"
-                                className={`settings-slider-open-button`}
-                                onClick={() => setShow(true)}
-                                whileHover={{ scale: 0.98 }}
-                                whileTap={{ scale: 0.98 }}
-                                style={{
-                                    // @ts-ignore
-                                    border: `1px solid ${Colors[theme].backgroundColor}`,
-                                    // @ts-ignore
-                                    backgroundColor: Colors[theme].primaryColor,
-                                    // @ts-ignore
-                                    color: Colors[theme].backgroundColor
-                                }}
-                                key={`click-me`}>
-                                <FontAwesomeIcon icon={faAngleLeft} />
-                            </motion.button>
+    const content = (
+        <div className={`settings-slider-container ${show ? `active` : ``}`}>
+            <AnimatePresence initial={false} exitBeforeEnter>
+                {
+                    !show ? (
+                        <motion.button
+                            variants={settingsSliderVariant}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                            className={`settings-slider-open-button`}
+                            onClick={() => setShow(true)}
+                            whileHover={{ scale: 0.98 }}
+                            whileTap={{ scale: 0.98 }}
+                            style={{
+                                // @ts-ignore
+                                border: `1px solid ${Colors[theme].backgroundColor}`,
+                                // @ts-ignore
+                                backgroundColor: Colors[theme].primaryColor,
+                                // @ts-ignore
+                                color: Colors[theme].backgroundColor
+                            }}
+                            key={`click-me`}>
+                            <FontAwesomeIcon icon={faAngleLeft} />
+                        </motion.button>
 
-                        ) : (
+                    ) : (
                             <motion.div
                                 className={`slider-container`}
                                 variants={settingsSliderVariant}
@@ -110,7 +110,7 @@ export const SettingsSlider = ({
                                                 <Grid item
                                                     style={sliderStyle}
                                                     className={`width-150`}>
-                                                    { t(`ROTATION_X`)}
+                                                    {t(`ROTATION_X`)}
                                                 </Grid>
                                                 <Grid item xs>
                                                     <Slider
@@ -199,7 +199,7 @@ export const SettingsSlider = ({
                                                     <Grid item
                                                         style={sliderStyle}
                                                         className={`width-150`}>
-                                                        <strong>{ t(`FIRE`) }</strong>
+                                                        <strong>{t(`FIRE`)}</strong>
                                                     </Grid>
                                                     <Grid item>
                                                         <Switch
@@ -237,10 +237,14 @@ export const SettingsSlider = ({
                                 </motion.div>
                             </motion.div>
                         )
-                    }
-                </AnimatePresence>
+                }
+            </AnimatePresence>
+        </div>
+    )
 
-            </div>
+    return (
+        <>
+            { isWidthGreaterThan771px && content }
         </>
     )
 }

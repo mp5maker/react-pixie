@@ -10,6 +10,7 @@ import { Box } from '../../Box'
 import { OrbitControl } from '../../OrbitControl'
 import { useDimension } from '../../../../../Hooks/UseDimension'
 import * as Routes from '../../../../../Constants/Routes'
+import { useMedia } from '../../../../../Hooks/UseMedia'
 
 export const AnimeThreeJSHome = ({
     colors,
@@ -20,6 +21,12 @@ export const AnimeThreeJSHome = ({
     const { rotationX, rotationY, rotationZ, acceleration }: any = React.useContext(SettingsContext)
     const { frequency }: any = React.useContext(MusicContext)
     const { width, height } = useDimension()
+    const isMediaGreaterThan771px = useMedia({ query: `(min-width: 771px)`})
+
+    React.useEffect(() => {
+        if (!isMediaGreaterThan771px) document.body.style.position = 'fixed'
+        if (isMediaGreaterThan771px) document.body.style.position = ''
+    }, [isMediaGreaterThan771px])
 
     /* Colors */
     const COLORS = {
@@ -32,6 +39,7 @@ export const AnimeThreeJSHome = ({
         successColor: new THREE.Color(colors[theme].successColor),
     }
 
+
     return (
         <div style={{ width, height }}>
             <Canvas
@@ -41,9 +49,13 @@ export const AnimeThreeJSHome = ({
                     far: 1000
                 }}
                 pixelRatio={window.devicePixelRatio || 1}>
-                <OrbitControl
-                    minDistance={0}
-                    maxDistance={200}/>
+                {
+                    isMediaGreaterThan771px && (
+                        <OrbitControl
+                            minDistance={0}
+                            maxDistance={200}/>
+                    )
+                }
                 <ambientLight
                     color={COLORS.primaryColor}
                     intensity={1}
@@ -72,8 +84,6 @@ export const AnimeThreeJSHome = ({
                     acceleration={acceleration}
                     colors={COLORS}
                     history={history} />
-                {/* <axesHelper args={[5]} />
-                <gridHelper args={[10, 20]} /> */}
             </Canvas>
         </div>
     )

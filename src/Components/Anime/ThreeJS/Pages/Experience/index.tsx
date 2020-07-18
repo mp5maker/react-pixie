@@ -11,6 +11,7 @@ import { Skills } from '../../Skills'
 import { OrbitControl } from '../../OrbitControl'
 import * as Routes from '../../../../../Constants/Routes'
 import { useDimension } from '../../../../../Hooks/UseDimension'
+import { useMedia } from '../../../../../Hooks/UseMedia'
 
 export const AnimeThreeJSExperience = ({
     colors,
@@ -21,6 +22,12 @@ export const AnimeThreeJSExperience = ({
     const { rotationX, rotationY, rotationZ, acceleration }: any = React.useContext(SettingsContext)
     const { frequency }: any = React.useContext(MusicContext)
     const { width, height } = useDimension()
+    const isMediaGreaterThan771px = useMedia({ query: `(min-width: 771px)` })
+
+    React.useEffect(() => {
+        if (!isMediaGreaterThan771px) document.body.style.position = 'fixed'
+        if (isMediaGreaterThan771px) document.body.style.position = ''
+    }, [isMediaGreaterThan771px])
 
     /* Colors */
     const COLORS = {
@@ -42,7 +49,13 @@ export const AnimeThreeJSExperience = ({
                     far: 1000
                 }}
                 pixelRatio={window.devicePixelRatio || 1}>
-                <OrbitControl />
+                {
+                    isMediaGreaterThan771px && (
+                        <OrbitControl
+                            minDistance={0}
+                            maxDistance={200} />
+                    )
+                }
                 <ambientLight
                     color={COLORS.primaryColor}
                     intensity={1}

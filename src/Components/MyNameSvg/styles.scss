@@ -3,4 +3,18 @@
     top: 25px;
     left: 50%;
     transform: translateX(-50%);
+    .details-section {
+        box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
+        padding: 12px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 3rem;
+        border-radius: 10px;
+        div {
+            &:first-child {
+                margin-right: 1rem;
+            }
+        }
+    }
 }
