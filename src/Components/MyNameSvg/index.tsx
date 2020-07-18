@@ -7,7 +7,66 @@ import { MyNameSvgEnglish } from './English'
 import { useMedia } from '../../Hooks/UseMedia'
 
 import "./styles.scss"
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
+
+const myNameSvgIntroVariants = {
+    initial: {
+        y: -1000,
+        opacity: 0,
+    },
+    animate: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 1
+        }
+    },
+    exit: {
+        y: -1000,
+        opacity: 0,
+        transition: {
+            duration: 1
+        }
+    }
+}
+
+const myNameSvgDescriptionMainVariants = {
+    initial: {
+        x: -10,
+        opacity: 0,
+    },
+    animate: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            duration: 1
+        }
+    },
+    exit: {
+        opacity: 0,
+    }
+}
+
+const myNameSvgDescriptionVariants = {
+    initial: {
+        x: -10,
+        opacity: 0,
+    },
+    animate: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            duration: 1
+        }
+    },
+    exit: {
+        x: 10,
+        opacity: 0,
+        transition: {
+            duration: 1
+        }
+    }
+}
 
 export const MyNameSvg = ({ colors, theme }: any) => {
     const { t, i18n } = useTranslation()
@@ -23,9 +82,17 @@ export const MyNameSvg = ({ colors, theme }: any) => {
                     <div className={`my-name-svg-container`}>
                         <div className={`svg-section`}>
                             <div>
-                                <span className={`mr-2`}>
-                                    {t(`HI_I_AM`)}
-                                </span>
+                                <AnimatePresence exitBeforeEnter initial={true}>
+                                    <motion.div
+                                        className={`d-inline-block mr-2`}
+                                        key={i18n.language}
+                                        variants={myNameSvgIntroVariants}
+                                        initial={`initial`}
+                                        animate={`animate`}
+                                        exit={`exit`}>
+                                        {t(`HI_I_AM`)}
+                                    </motion.div>
+                                </AnimatePresence>
                                 <span>
                                     <AnimatePresence exitBeforeEnter initial={true}>
                                         {
@@ -42,27 +109,57 @@ export const MyNameSvg = ({ colors, theme }: any) => {
                                 </span>
                             </div>
                         </div>
-                        <div className={`details-section`}>
-                            <div>
-                                <img src="/ok.png" width={140} height={222} />
-                            </div>
-                            <div>
-                                <div>
-                                    {t(`I_AM_A`)} <strong>{ t(`SENIOR_SOFTWARE_ENGINEER`)}</strong>
-                                </div>
-                                <div>
-                                    {t(`I_HAVE_PASSION_FOR_UI_UX_ANIMATIONS_AND_LOVE_TO_CREATE`) }
-                                </div>
-                                <div>
-                                    {t(`WEBSITES_TO_RUN_ACROSS_MULTIPLE_DEVICES_WITH`) }
-                                </div>
-                                <div>
-                                    <strong>
-                                        { t(`DYNAMIC_USER_EXPERIENCES`) }
-                                    </strong>
-                                </div>
-                            </div>
-                        </div>
+                        <AnimatePresence exitBeforeEnter initial={false}>
+                            <motion.div
+                                key={`${i18n.language}-main`}
+                                variants={myNameSvgDescriptionMainVariants}
+                                initial={`initial`}
+                                animate={`animate`}
+                                exit={`exit`}
+                                className={`details-section`}>
+                                <motion.div>
+                                    <img src="/ok.png" width={140} height={222} />
+                                </motion.div>
+                                <motion.div>
+                                    <AnimatePresence exitBeforeEnter initial={false}>
+                                        <motion.div
+                                            key={`${i18n.language}-1`}
+                                            variants={myNameSvgDescriptionVariants}
+                                            initial={`initial`}
+                                            animate={`animate`}
+                                            exit={`exit`}>
+                                            {t(`I_AM_A`)} <strong>{ t(`SENIOR_SOFTWARE_ENGINEER`)}</strong>
+                                        </motion.div>
+                                        <motion.div
+                                            key={`${i18n.language}-2`}
+                                            variants={myNameSvgDescriptionVariants}
+                                            initial={`initial`}
+                                            animate={`animate`}
+                                            exit={`exit`}>
+                                            {t(`I_HAVE_PASSION_FOR_UI_UX_ANIMATIONS_AND_LOVE_TO_CREATE`) }
+                                        </motion.div>
+                                        <motion.div
+                                            key={`${i18n.language}-3`}
+                                            variants={myNameSvgDescriptionVariants}
+                                            initial={`initial`}
+                                            animate={`animate`}
+                                            exit={`exit`}>
+                                            {t(`WEBSITES_TO_RUN_ACROSS_MULTIPLE_DEVICES_WITH`) }
+                                        </motion.div>
+                                        <motion.div
+                                            key={`${i18n.language}-4`}
+                                            variants={myNameSvgDescriptionVariants}
+                                            initial={`initial`}
+                                            animate={`animate`}
+                                            exit={`exit`}>
+                                            <strong>
+                                                { t(`DYNAMIC_USER_EXPERIENCES`) }
+                                            </strong>
+                                        </motion.div>
+                                    </AnimatePresence>
+                                </motion.div>
+                            </motion.div>
+                        </AnimatePresence>
                     </div>
                 )
             }

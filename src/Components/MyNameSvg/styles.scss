@@ -3,6 +3,10 @@
     top: 25px;
     left: 50%;
     transform: translateX(-50%);
+    .svg-section {
+        width: 620px;
+        height: 50px;
+    }
     .details-section {
         box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
         padding: 12px;
@@ -11,6 +15,8 @@
         align-items: center;
         margin-top: 3rem;
         border-radius: 10px;
+        height: 250px;
+        width: 620px;
         div {
             &:first-child {
                 margin-right: 1rem;
