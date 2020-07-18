@@ -75,6 +75,14 @@ export const MyNameSvg = ({ colors, theme }: any) => {
     const isEnglish = i18n.language == EN
     const isBengali = i18n.language == BN
 
+    React.useEffect(() => {
+        const body: any = document.querySelector('body')
+        body.style.overflow = 'hidden'
+        return () => {
+            body.style.overflow = ''
+        }
+    })
+
     return (
         <>
             {
@@ -121,7 +129,7 @@ export const MyNameSvg = ({ colors, theme }: any) => {
                                     <img src="/ok.png" width={140} height={222} />
                                 </motion.div>
                                 <motion.div>
-                                    <AnimatePresence exitBeforeEnter initial={false}>
+                                    <AnimatePresence initial={false}>
                                         <motion.div
                                             key={`${i18n.language}-1`}
                                             variants={myNameSvgDescriptionVariants}
