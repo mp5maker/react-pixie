@@ -59,19 +59,6 @@ export const WorkExperience = ({ colors, theme }: any) => {
                         HealthOSBD (Senior Software Engineer) &nbsp;
                     </strong>
                 </ListItemText>
-                <ListItemSecondaryAction>
-                    <IconButton
-                        style={{
-                            borderRadius: `50%`,
-                            color: colors[theme].primaryColor,
-                            width: `40px`,
-                            height: `40px`,
-                        }}
-                        edge="end"
-                        aria-label="times">
-                        <FontAwesomeIcon icon={faTimes} />
-                    </IconButton>
-                </ListItemSecondaryAction>
             </ListItem>
             <Divider />
             <ListItem>
@@ -468,15 +455,32 @@ export const WorkExperience = ({ colors, theme }: any) => {
                     drawerVariants={drawerVariants}
                     direction={`top`}
                     buttonDisplay={t(`WORK_EXPERIENCE`)}>
-                    { PresentJob }
-                    <Divider />
-                    { InterconnectionJob }
-                    <Divider />
-                    { InterconnectionJuniorJob }
-                    <Divider />
-                    { EicraSoftJob }
-                    <Divider />
-                    { Internship }
+                    {
+                        ({ toggleDrawer }: any) => {
+                            return (
+                                <React.Fragment>
+                                    { PresentJob }
+                                    < Divider />
+                                    { InterconnectionJob }
+                                    < Divider />
+                                    { InterconnectionJuniorJob }
+                                    < Divider />
+                                    { EicraSoftJob }
+                                    < Divider />
+                                    { Internship }
+                                    <div className={`times-container`}>
+                                        <button
+                                            onClick={(event) => {
+                                                event.preventDefault();
+                                                toggleDrawer(false)
+                                            }}>
+                                            <FontAwesomeIcon icon={faTimes} />
+                                        </button>
+                                    </div>
+                                </React.Fragment>
+                            )
+                        }
+                    }
                 </Drawer>
             </div>
         </>

@@ -43,7 +43,11 @@ export const Drawer = ({ colors, theme, drawerVariants, children, direction = 't
             role="presentation">
             <div className="drawer-content">
                 <List>
-                    { children }
+                    {
+                        children ? children({
+                            toggleDrawer
+                        }) : children
+                    }
                     <ListItem
                         className={`d-flex justify-content-center`}
                         button>

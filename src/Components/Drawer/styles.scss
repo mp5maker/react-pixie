@@ -39,3 +39,25 @@ button {
         box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
     }
 }
+
+.times-container {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    button {
+        background-color: var(--background-color);
+        color: var(--primary-color);
+        border: none;
+        box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        &:active {
+            outline: none;
+        }
+    }
+}
