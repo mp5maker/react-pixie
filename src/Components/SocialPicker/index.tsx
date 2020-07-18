@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub, faLinkedin, faWeebly } from "@fortawesome/free-brands-svg-icons"
+import { faGithub, faLinkedin, faWeebly, faReadme } from "@fortawesome/free-brands-svg-icons"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
 
 import { DARK, LIGHT } from '../../Constants/Settings'
@@ -174,6 +174,41 @@ export const SocialPicker = ({ colors, theme }: any) => {
                                             </div>
                                         </div>
                                     </a>
+                                )
+                            }
+                        }
+                    </Drawer>
+                    <Drawer
+                        colors={colors}
+                        theme={theme}
+                        drawerVariants={drawerVariants}
+                        direction={`bottom`}
+                        buttonShape={`round`}
+                        buttonDisplay={(
+                            <FontAwesomeIcon icon={faReadme} />
+                        )}>
+                        {
+                            ({ toggleDrawer }: any) => {
+                                return (
+                                    <React.Fragment>
+                                        <iframe
+                                            style={{
+                                                height: `100vh`,
+                                                width: `100%`
+                                            }}
+                                            src={`/Resume/resume.pdf`} />
+                                        <div className={`times-container`}>
+                                            <div className={`times-container`}>
+                                                <button
+                                                    onClick={(event) => {
+                                                        event.preventDefault();
+                                                        toggleDrawer(false)
+                                                    }}>
+                                                    <FontAwesomeIcon icon={faTimes} />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </React.Fragment>
                                 )
                             }
                         }
