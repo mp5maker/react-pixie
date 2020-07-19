@@ -244,7 +244,7 @@ export const SettingsSlider = ({
 
     return (
         <>
-            { isWidthGreaterThan771px && content }
+            { Array.isArray(list) && list.length > 0 && isWidthGreaterThan771px && content }
         </>
     )
 }

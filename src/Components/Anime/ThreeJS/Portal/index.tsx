@@ -71,7 +71,7 @@ export const Portal = ({ colors, frequency, position = { x: 200, y: 50, z: -100 
                 )
             }
             <group
-                position={[200, 100, -100]}
+                position={[200, 120, -100]}
                 ref={bulbRef}>
                 <mesh
                     castShadow={true}

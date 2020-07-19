@@ -19,6 +19,7 @@
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
     "bootstrap": "^4.5.0",
+    "cannon": "^0.6.2",
     "express": "^4.17.1",
     "framer-motion": "^1.11.1",
     "i18next": "^19.5.4",
@@ -34,7 +35,8 @@
     "react-three-fiber": "^4.2.12",
     "sass": "^1.26.9",
     "three": "^0.118.3",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "use-cannon": "^0.5.0"
   },
   "scripts": {
     "dev": "react-scripts start",

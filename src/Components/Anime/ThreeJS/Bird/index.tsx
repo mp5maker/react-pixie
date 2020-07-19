@@ -27,7 +27,7 @@ export const Bird = ({ colors }: any) => {
                 mesh.position.z -= RandomRange({ min: 0.1, max: 0.5 })
                 mesh.position.x += RandomRange({ min: 0.1, max: 0.2 })
                 if (mesh.position.y > ((height / 2) + 300) || mesh.position.x > ((width / 2) + 300)) {
-                    mesh.position.y = RandomRange({ min: -(height / 2) - 900, max: -(height / 2) - 500 })
+                    mesh.position.y = RandomRange({ min: -200, max: 100 })
                     mesh.position.x = RandomRange({ min: -(width / 2) - 800, max: -(width / 2) })
                     mesh.position.z = RandomRange({ min: -5, max: 5 })
                 }
@@ -39,7 +39,7 @@ export const Bird = ({ colors }: any) => {
         const mesh = gltf.scene
         mesh.castShadow = true
         mesh.rotation.set(0, -Math.PI, 0)
-        mesh.position.y = RandomRange({ min: -(height / 2) - 900, max: -(height / 2) - 500})
+        mesh.position.y = RandomRange({ min: -200, max: 100})
         mesh.position.x = RandomRange({ min: -(width / 2) - 800, max: -(width / 2) })
         mesh.position.z = RandomRange({ min: -5, max: 5 })
         mesh.name = name

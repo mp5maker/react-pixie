@@ -14,12 +14,7 @@ export const Bird = ({ history, location, match }: any) => {
     React.useEffect(() => {
         setSettings({
             ...settings,
-            settingsList: [
-                'rotationX',
-                'rotationY',
-                'rotationZ',
-                'acceleration',
-            ]
+            settingsList: []
         })
     }, [])
 

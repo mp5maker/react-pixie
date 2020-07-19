@@ -8,6 +8,7 @@ import { MusicContext } from '../../../../../MusicContext'
 import { OrbitControl } from '../../OrbitControl'
 import { Bird } from '../../Bird'
 import { Portal } from '../../Portal'
+import { Ocean } from '../../Ocean'
 import { useDimension } from '../../../../../Hooks/UseDimension'
 import * as Routes from '../../../../../Constants/Routes'
 import { useMedia } from '../../../../../Hooks/UseMedia'
@@ -52,7 +53,8 @@ export const AnimeThreeJSBird = ({
                 {
                     isMediaGreaterThan771px && (
                         <OrbitControl
-                            minDistance={0}
+                            enableRotate={false}
+                            minDistance={100}
                             maxDistance={200} />
                     )
                 }
@@ -71,10 +73,11 @@ export const AnimeThreeJSBird = ({
                     intensity={0.1}
                     position={[0, 0, 0]} />
                 <Bird colors={COLORS} />
+                <Ocean colors={COLORS} />
                 <Portal
                     colors={COLORS}
                     frequency={frequency}
-                    position={{x: 100, y: 50, z: -50 }}/>
+                    position={{x: 100, y: 80, z: -50 }}/>
             </Canvas>
         </div>
     )
