@@ -9,6 +9,7 @@ import { AppContext } from '../../AppContext'
 import { Dog } from '../../Svg/Dog'
 import { Book } from '../../Svg/Book'
 import { Rain } from '../../Svg/Rain'
+import { Bird } from '../../Svg/Bird'
 
 import "./styles.scss"
 
@@ -43,7 +44,8 @@ export const Navigation = ({ history }: any) => {
         {
             label: t(`BIRD`),
             route: Routes.BIRD,
-            key: `bird`
+            key: `bird`,
+            Svg: Bird
         },
     ]
 
