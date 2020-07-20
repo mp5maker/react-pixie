@@ -1,11 +1,14 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
+import get from 'lodash/get'
 
 import * as Routes from '../../Constants/Routes'
 import { Colors } from '../../Constants/Colors'
 import { AppContext } from '../../AppContext'
-import { Dog } from '../Dog'
+import { Dog } from '../../Svg/Dog'
+import { Book } from '../../Svg/Book'
+import { Rain } from '../../Svg/Rain'
 
 import "./styles.scss"
 
@@ -17,12 +20,14 @@ export const Navigation = ({ history }: any) => {
         {
             label: t(`ABOUT_ME`),
             route: Routes.ROOT,
-            key: `about-me`
+            key: `about-me`,
+            Svg: Dog
         },
         {
             label: t(`EXPERIENCE`),
             route: Routes.EXPERIENCE,
-            key: `experience`
+            key: `experience`,
+            Svg: Book
         },
         // {
         //     label: t(`SKYBOX`),
@@ -32,7 +37,8 @@ export const Navigation = ({ history }: any) => {
         {
             label: t(`RAIN`),
             route: Routes.RAIN,
-            key: `rain`
+            key: `rain`,
+            Svg: Rain
         },
         {
             label: t(`BIRD`),
@@ -48,6 +54,7 @@ export const Navigation = ({ history }: any) => {
                     <ul className="navigation-list">
                         {
                             list.map((item, key) => {
+                                const Svg = get(item, 'Svg', '')
                                 return (
                                     <React.Fragment key={key}>
                                         <NavLink
@@ -65,12 +72,16 @@ export const Navigation = ({ history }: any) => {
                                                 color: Colors[theme].primaryColor
                                             }}>
                                             <span className={`mr-2`}>{ item.label }</span>
-                                            <Dog
-                                                key={item.key}
-                                                width={40}
-                                                height={37.3}
-                                                colors={Colors}
-                                                theme={theme} />
+                                            {
+                                                Svg ? (
+                                                    <Svg
+                                                        key={item.key}
+                                                        width={40}
+                                                        height={37.3}
+                                                        colors={Colors}
+                                                        theme={theme} />
+                                                ) : <React.Fragment></React.Fragment>
+                                            }
                                         </NavLink>
                                     </React.Fragment>
 
