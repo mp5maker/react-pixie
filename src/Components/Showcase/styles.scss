@@ -8,7 +8,7 @@
     display: grid !important;
     grid-template-columns: repeat(auto-fit, 1fr);
     grid-template-rows: repeat(auto-fit, 1fr);
-    grid-gap: 0 0;
+    grid-gap: 0;
     max-width: 100%;
     @media only screen and (max-width: 767px) {
         display: block !important;

@@ -221,7 +221,7 @@ export const AudioPlayer = ({ }: any) => {
                             // @ts-ignore
                             border: `1px solid ${Colors[theme].backgroundColor}`
                         }}>
-                        { parseInt(loaded) }%
+                        { parseInt(loaded, 10) }%
                     </motion.button>
                 )
             }
