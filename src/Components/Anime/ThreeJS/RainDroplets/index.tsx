@@ -9,7 +9,6 @@ export const RainDroplets = ({ colors, acceleration }: any) => {
     const geometry = React.useRef(new THREE.Geometry()).current
     const [texture, setTexture] = React.useState()
     const { gl, camera, scene } = useThree()
-    scene.fog = new THREE.FogExp2(colors.backgroundColor, 0.0009)
 
     const onSuccessLoad = (texture: any) => {
         setTexture(texture)
@@ -42,6 +41,7 @@ export const RainDroplets = ({ colors, acceleration }: any) => {
 
     React.useEffect(() => {
         loader.load('Circle/circle.png', onSuccessLoad)
+        scene.fog = new THREE.FogExp2(colors.backgroundColor, 0.0009)
     }, [])
 
     const rainDroplets = React.useMemo(() => {
