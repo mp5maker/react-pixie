@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 
 import { SettingsContext } from '../../../../../SettingsContext'
 import { MusicContext } from '../../../../../MusicContext'
-import { OrbitControl } from '../../OrbitControl'
 import * as Routes from '../../../../../Constants/Routes'
 import { RectangleLight } from '../../RectangleLight'
 import { InteriorGround } from '../../InteriorGround'
@@ -16,7 +15,7 @@ import { BonFire } from '../../BonFire'
 import { Wall } from '../../House/Wall'
 import { MyName } from '../../MyName'
 import { Cloud } from '../../Cloud'
-import { Statistics } from '../../Statistics'
+import { Awesome } from '../../Awesome'
 import { useDimension } from '../../../../../Hooks/UseDimension'
 import { useMedia } from '../../../../../Hooks/UseMedia'
 
@@ -91,7 +90,7 @@ export const AnimeThreeJSRain = ({
                         </>
                     )
                 }
-                <Statistics
+                <Awesome
                     colors={COLORS} />
             </Canvas>
         </div>

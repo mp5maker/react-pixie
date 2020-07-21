@@ -88,13 +88,13 @@ const eyeVariants = {
     }
 }
 
-export const Dog = ({ colors, theme, width = 450, height = 420, strokeWidth = 10, key = '' }: any) => {
+export const Dog = ({ colors, theme, width = 450, height = 420, strokeWidth = 10, svgKey = '' }: any) => {
     return (
         <AnimatePresence
             initial={true}
             exitBeforeEnter>
             <motion.svg
-                key={`dog-svg-${key}`}
+                key={`dog-svg-${svgKey}`}
                 variants={svgVariants}
                 initial={`initial`}
                 animate={`animate`}

@@ -77,7 +77,7 @@ export const Navigation = ({ history }: any) => {
                                             {
                                                 Svg ? (
                                                     <Svg
-                                                        key={item.key}
+                                                        svgKey={item.key}
                                                         width={40}
                                                         height={37.3}
                                                         colors={Colors}

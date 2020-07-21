@@ -34,11 +34,11 @@ const pathVariants = {
     }
 }
 
-export const Bird = ({ colors, theme, width = 488, height = 526, strokeWidth = 10, key = '' }: any) => {
+export const Bird = ({ colors, theme, width = 488, height = 526, strokeWidth = 10, svgKey = '' }: any) => {
     return (
         <AnimatePresence initial={true} exitBeforeEnter>
             <motion.svg
-                key={`bird-svg-${key}`}
+                key={`bird-svg-${svgKey}`}
                 variants={svgVariants}
                 initial={`initial`}
                 animate={`animate`}

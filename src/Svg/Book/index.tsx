@@ -57,11 +57,11 @@ const eyeVariants = {
 }
 
 
-export const Book = ({ colors, theme, width = 576, height = 733,  strokeWidth = 10, key= '' }: any) => {
+export const Book = ({ colors, theme, width = 576, height = 733, strokeWidth = 10, svgKey= '' }: any) => {
     return (
         <AnimatePresence initial={true} exitBeforeEnter>
             <motion.svg
-                key={`book-svg-${key}`}
+                key={`book-svg-${svgKey}`}
                 variants={svgVariants}
                 initial={`initial`}
                 animate={`animate`}

@@ -44,11 +44,11 @@ const rainVariants = {
     }
 }
 
-export const Rain = ({ colors, theme, width = 353, height = 426, strokeWidth = 10, key = ''}: any) => {
+export const Rain = ({ colors, theme, width = 353, height = 426, strokeWidth = 10, svgKey = ''}: any) => {
     return (
         <AnimatePresence initial={true} exitBeforeEnter>
             <motion.svg
-                key={`rain-svg-${key}`}
+                key={`rain-svg-${svgKey}`}
                 variants={svgVariants}
                 initial={`initial`}
                 animate={`animate`}
