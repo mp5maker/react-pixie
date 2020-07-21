@@ -9,6 +9,7 @@ html, body {
 
 body {
   height: 100%;
+  overflow-y: hidden;
   .container-fluid {
     min-height: calc(100vh - 60px);
     & ~ footer {

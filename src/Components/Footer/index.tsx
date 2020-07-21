@@ -6,7 +6,7 @@ export const Footer = ({ colors, theme }: any) => {
         <footer
             style={{
                 backgroundColor: colors[theme].backgroundColor,
-                color: colors[theme].backgroundColor,
+                color: colors[theme].primaryColor,
             }}>
             { moment().format('YYYY') } &copy; All Rights Reserved, Photon Enterprise
         </footer>

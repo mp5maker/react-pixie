@@ -91,12 +91,6 @@ export const AnimeThreeJSRain = ({
                         </>
                     )
                 }
-                {
-                    isMediaGreaterThan771px && (
-                        <OrbitControl
-                            enableRotate={false} />
-                    )
-                }
                 <Statistics
                     colors={COLORS} />
             </Canvas>
