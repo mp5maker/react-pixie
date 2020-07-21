@@ -1,6 +1,5 @@
 import * as React from 'react'
 import * as THREE from 'three'
-import { useFrame } from 'react-three-fiber'
 
 // @ts-ignore
 import { RandomRange } from '../../../../Utilities/RandomRange'
@@ -46,6 +45,10 @@ export const Cloud = ({ noOfClouds = 100, colors, frequency }: any) => {
         setClouds(preparedTexture)
     }, [texture])
 
+    const memoClouds = React.useMemo(() => {
+        return clouds
+    }, [clouds])
+
 
     return (
         <>
@@ -53,7 +56,7 @@ export const Cloud = ({ noOfClouds = 100, colors, frequency }: any) => {
                 power={frequency !== 0 && Math.random() > 0.95 ? frequency * 0.07 : 1 }
                 position={[-100, 0, -1000]}
                 args={[colors.primaryColor, 1, 5000, 1.7]} />
-            { clouds }
+            { memoClouds }
         </>
     )
 }

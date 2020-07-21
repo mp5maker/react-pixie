@@ -19,20 +19,24 @@ export const StarField = ({ colors, particles = 10000, position = {x: 0, y: 50, 
         setGeometry(prepareGeometry)
     }, [])
 
-    return (
-        <>
-            {
-                geometry && (
-                    <points
-                        castShadow={false}
-                        position={[position.x, position.y, position.z]}
-                        geometry={geometry}>
-                        <pointsMaterial
-                            size={20}
-                            color={colors.primaryColor} />
-                    </points>
-                )
-            }
-        </>
-    )
+    const memoStarField = React.useMemo(() => {
+        return (
+            <>
+                {
+                    geometry && (
+                        <points
+                            castShadow={false}
+                            position={[position.x, position.y, position.z]}
+                            geometry={geometry}>
+                            <pointsMaterial
+                                size={20}
+                                color={colors.primaryColor} />
+                        </points>
+                    )
+                }
+            </>
+        )
+    }, [geometry, colors, position])
+
+    return memoStarField
 }

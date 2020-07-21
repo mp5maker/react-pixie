@@ -41,61 +41,65 @@ export const Portal = ({ colors, frequency, position = { x: 200, y: 50, z: -100 
         scene.fog = new THREE.FogExp2(colors.backgroundColor, 0.0009)
     }, [])
 
-    return (
-        <>
-            <sphereBufferGeometry
-                // @ts-ignore
-                ref={sphereRef}
-                attach={`geometry`}
-                args={[
-                    frequencyParam * 12,
-                    frequencyParam * 25,
-                    frequencyParam * 25,
-                ]} />
-            {
-                sphereGeometry && (
-                    <group>
+    const memoPortal = React.useMemo(() => {
+        return (
+            <>
+                <sphereBufferGeometry
+                    // @ts-ignore
+                    ref={sphereRef}
+                    attach={`geometry`}
+                    args={[
+                        frequencyParam * 12,
+                        frequencyParam * 25,
+                        frequencyParam * 25,
+                    ]} />
+                {
+                    sphereGeometry && (
+                        <group>
+                            <pointLight
+                                position={[200, 100, -100]}
+                                ref={pointLightRef} />
+                            <lineSegments
+                                ref={lineRef}
+                                geometry={sphereGeometry}
+                                position={[position.x, position.y, position.z]}>
+                                <meshLambertMaterial
+                                    attach={`material`}
+                                    wireframe={true}
+                                    color={colors.primaryColor} />
+                            </lineSegments>
+                        </group>
+                    )
+                }
+                <group
+                    position={[200, 120, -100]}
+                    ref={bulbRef}>
+                    <mesh
+                        castShadow={true}
+                        receiveShadow={true}>
+                        <meshLambertMaterial
+                            attach={`material`}
+                            color={colors.dangerColor} />
+                        <sphereGeometry
+                            attach={`geometry`}
+                            args={[2, 16, 16]} />
                         <pointLight
-                            position={[200, 100, -100]}
-                            ref={pointLightRef} />
-                        <lineSegments
-                            ref={lineRef}
-                            geometry={sphereGeometry}
-                            position={[position.x, position.y, position.z]}>
-                            <meshLambertMaterial
-                                attach={`material`}
-                                wireframe={true}
-                                color={colors.primaryColor} />
-                        </lineSegments>
-                    </group>
-                )
-            }
-            <group
-                position={[200, 120, -100]}
-                ref={bulbRef}>
-                <mesh
-                    castShadow={true}
-                    receiveShadow={true}>
-                    <meshLambertMaterial
-                        attach={`material`}
-                        color={colors.dangerColor} />
-                    <sphereGeometry
-                        attach={`geometry`}
-                        args={[2, 16, 16]} />
-                    <pointLight
-                        args={[colors.primaryColor, 2, 800]} />
-                </mesh>
-                <mesh
-                    ref={bulbOuterRef}>
-                    <meshLambertMaterial
-                        attach={`material`}
-                        side={THREE.DoubleSide}
-                        color={colors.primaryColor} />
-                    <circleGeometry
-                        attach={`geometry`}
-                        args={[5, 20]} />
-                </mesh>
-            </group>
-        </>
-    )
+                            args={[colors.primaryColor, 2, 800]} />
+                    </mesh>
+                    <mesh
+                        ref={bulbOuterRef}>
+                        <meshLambertMaterial
+                            attach={`material`}
+                            side={THREE.DoubleSide}
+                            color={colors.primaryColor} />
+                        <circleGeometry
+                            attach={`geometry`}
+                            args={[5, 20]} />
+                    </mesh>
+                </group>
+            </>
+        )
+    }, [sphereGeometry, position, colors])
+
+    return memoPortal
 }

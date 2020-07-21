@@ -34,21 +34,25 @@ export const Ocean = ({ colors }: any) => {
         scene.add(water);
     }, [])
 
-    return (
-        <>
-            <mesh
-                // @ts-ignore
-                ref={meshRef}
-                position={[10, 10, 10]}>
-                <boxBufferGeometry
-                    attach={`geometry`}
-                    args={[30, 30, 30]} />
-                <meshStandardMaterial
-                    attach={`material`}
-                    color={colors.primaryColor}
-                    roughness={0}
-                    metalness={0} />
-            </mesh>
-        </>
-    )
+    const memoOcean = React.useMemo(() => {
+        return (
+            <>
+                <mesh
+                    // @ts-ignore
+                    ref={meshRef}
+                    position={[10, 10, 10]}>
+                    <boxBufferGeometry
+                        attach={`geometry`}
+                        args={[30, 30, 30]} />
+                    <meshStandardMaterial
+                        attach={`material`}
+                        color={colors.primaryColor}
+                        roughness={0}
+                        metalness={0} />
+                </mesh>
+            </>
+        )
+    }, [colors])
+
+    return memoOcean
 }

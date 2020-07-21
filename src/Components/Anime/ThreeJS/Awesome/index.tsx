@@ -1,6 +1,5 @@
 import * as React from 'react'
 import * as THREE from 'three'
-import { useThree, useFrame } from 'react-three-fiber'
 import { useMedia } from '../../../../Hooks/UseMedia'
 
 export const Awesome = ({
@@ -17,33 +16,37 @@ export const Awesome = ({
         loader.load('/Font/FiraSans.json', onSuccessLoad)
     }, [])
 
-    return (
-        <>
-            {
-                font && mediaGreaterThan1024 && (
-                    <mesh
-                        geometry={new THREE.TextGeometry(`Awesome!`, {
-                            font,
-                            size: 60,
-                            height: 3,
-                            curveSegments: 12,
-                            bevelEnabled: true,
-                            bevelThickness: 1,
-                            bevelSize: 8,
-                            bevelOffset: 0,
-                            bevelSegments: 10
-                        })}
-                        rotation={[rotation.x, rotation.y, rotation.z]}
-                        position={[position.x, position.y, position.z]}>
-                        <meshStandardMaterial
-                            attach={`material`}
-                            color={colors.primaryColor}
-                            roughness={0}
-                            metalness={0}
-                            side={THREE.DoubleSide} />
-                    </mesh>
-                )
-            }
-        </>
-    )
+    const memoContent = React.useMemo(() => {
+        return (
+            <>
+                {
+                    font && mediaGreaterThan1024 && (
+                        <mesh
+                            geometry={new THREE.TextGeometry(`Awesome!`, {
+                                font,
+                                size: 60,
+                                height: 3,
+                                curveSegments: 12,
+                                bevelEnabled: true,
+                                bevelThickness: 1,
+                                bevelSize: 8,
+                                bevelOffset: 0,
+                                bevelSegments: 10
+                            })}
+                            rotation={[rotation.x, rotation.y, rotation.z]}
+                            position={[position.x, position.y, position.z]}>
+                            <meshStandardMaterial
+                                attach={`material`}
+                                color={colors.primaryColor}
+                                roughness={0}
+                                metalness={0}
+                                side={THREE.DoubleSide} />
+                        </mesh>
+                    )
+                }
+            </>
+        )
+    }, [font, mediaGreaterThan1024])
+
+    return memoContent
 }

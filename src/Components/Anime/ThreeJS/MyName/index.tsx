@@ -28,20 +28,24 @@ export const MyName = ({ colors }: any) => {
         loader.load('/Font/FiraSans.json', onSuccessload)
     }, [])
 
-    return mediaGreaterThan1024 && geometry ? (
-        <>
-            <mesh
-                rotation={[0, Math.PI / 6, 0]}
-                position={[-800, 0, -200]}
-                geometry={geometry}>
-                <meshStandardMaterial
-                    attach="material"
-                    roughness={0}
-                    metalness={0}
-                    color={colors.backgroundColor}
-                    side={THREE.DoubleSide} />
+    const memoMyName = React.useMemo(() => {
+        return mediaGreaterThan1024 && geometry ? (
+            <>
+                <mesh
+                    rotation={[0, Math.PI / 6, 0]}
+                    position={[-800, 0, -200]}
+                    geometry={geometry}>
+                    <meshStandardMaterial
+                        attach="material"
+                        roughness={0}
+                        metalness={0}
+                        color={colors.backgroundColor}
+                        side={THREE.DoubleSide} />
+                </mesh>
+            </>
+        ) : <></>
 
-            </mesh>
-        </>
-    ) : <></>
+    }, [colors, geometry, mediaGreaterThan1024])
+
+    return memoMyName
 }

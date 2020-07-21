@@ -28,51 +28,55 @@ export const Box = ({ colors, history, wireframe = false, redirectURL, rotationX
 
     const frequencyParams = frequency == 1 || frequency == 0 ? 1 : (frequency * 0.01)
 
-    return (
-        <group>
-            <mesh
-                ref={mesh}
-                onClick={onClick}
-                receiveShadow={true}
-                castShadow={true}
-                onPointerOver={onPointerOver}
-                onPointerOut={onPointerOut}
-                {...props}>
-                <>
-                    {
-                        hovered ? (
-                            <>
-                                <sphereGeometry
-                                    attach={`geometry`}
-                                    args={[
-                                        5 * frequencyParams,
-                                        32 * frequencyParams,
-                                        32 * frequencyParams,
-                                    ]} />
-                                <meshBasicMaterial
-                                    attach={'material'}
-                                    color={colors.primaryColor}
-                                    wireframe={wireframe} />
-                                <Glitch />
-                            </>
-                        ) : (
+    const memoBox = React.useMemo(() => {
+        return (
+            <group>
+                <mesh
+                    ref={mesh}
+                    onClick={onClick}
+                    receiveShadow={true}
+                    castShadow={true}
+                    onPointerOver={onPointerOver}
+                    onPointerOut={onPointerOut}
+                    {...props}>
+                    <>
+                        {
+                            hovered ? (
                                 <>
-                                    <boxGeometry
+                                    <sphereGeometry
                                         attach={`geometry`}
                                         args={[
                                             5 * frequencyParams,
-                                            5 * frequencyParams,
-                                            5 * frequencyParams]
-                                        }/>
-                                    <meshLambertMaterial
-                                        wireframe={wireframe}
+                                            32 * frequencyParams,
+                                            32 * frequencyParams,
+                                        ]} />
+                                    <meshBasicMaterial
                                         attach={'material'}
-                                        color={colors.primaryColor} />
+                                        color={colors.primaryColor}
+                                        wireframe={wireframe} />
+                                    <Glitch />
                                 </>
-                            )
-                    }
-                </>
-            </mesh>
-        </group>
-    )
+                            ) : (
+                                    <>
+                                        <boxGeometry
+                                            attach={`geometry`}
+                                            args={[
+                                                5 * frequencyParams,
+                                                5 * frequencyParams,
+                                                5 * frequencyParams]
+                                            } />
+                                        <meshLambertMaterial
+                                            wireframe={wireframe}
+                                            attach={'material'}
+                                            color={colors.primaryColor} />
+                                    </>
+                                )
+                        }
+                    </>
+                </mesh>
+            </group>
+        )
+    }, [frequencyParams, colors, wireframe, hovered])
+
+    return memoBox
 }
