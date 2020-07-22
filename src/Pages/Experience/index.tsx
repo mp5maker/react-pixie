@@ -8,6 +8,7 @@ import { SettingsContext } from '../../SettingsContext'
 import { WorkExperience } from '../../Components/WorkExperience'
 import { Showcase } from '../../Components/Showcase'
 import { AnimeThreeJSExperience } from '../../Components/Anime/ThreeJS/Pages/Experience'
+import { MouseDetector } from '../../Components/MouseDetector'
 
 export const Experience = ({ history, location, match }: any) => {
     const { theme }: any = React.useContext(AppContext)
@@ -45,8 +46,17 @@ export const Experience = ({ history, location, match }: any) => {
                         theme={theme} />
                 </div>
             </div>
-            <WorkExperience colors={Colors} theme={theme} />
-            <Showcase colors={Colors} theme={theme} />
+            <WorkExperience
+                colors={Colors}
+                theme={theme} />
+            <Showcase
+                colors={Colors}
+                theme={theme} />
+            <MouseDetector
+                width={50}
+                height={71.3}
+                colors={Colors}
+                theme={theme} />
         </motion.div>
     )
 }

@@ -7,6 +7,7 @@ import { AppContext } from '../../AppContext'
 import { SettingsContext } from '../../SettingsContext'
 import { AnimeThreeJSHome } from '../../Components/Anime/ThreeJS/Pages/Home'
 import { MyNameSvg } from '../../Components/MyNameSvg'
+import { MouseDetector } from '../../Components/MouseDetector'
 
 export const Home = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
@@ -44,7 +45,14 @@ export const Home = ({ history, location, match }: any) => {
                         colors={Colors}/>
                 </div>
             </div>
-            <MyNameSvg colors={Colors} theme={theme} />
+            <MyNameSvg
+                colors={Colors}
+                theme={theme} />
+            <MouseDetector
+                width={50}
+                height={71.3}
+                colors={Colors}
+                theme={theme} />
         </motion.div>
     )
 }

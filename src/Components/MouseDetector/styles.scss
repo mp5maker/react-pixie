@@ -1,0 +1,8 @@
+.mouse-detector-container {
+    position: fixed;
+    bottom: 125px;
+    right: 25px;
+    @media only screen and (max-width: 767px) {
+        display: none;
+    }
+}
