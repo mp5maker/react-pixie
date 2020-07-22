@@ -39,8 +39,8 @@
     "CLOSE_SETTINGS": "সেটিংস বন্ধ করুন",
     "THEME_LIGHT_SETTINGS": "থিম আলো",
     "THEME_DARK_SETTINGS": "থিম অন্ধকার",
-    "NAVIGATE ROUTE_UP": "নেভিগেশন রুট আপ",
-    "NAVIGATE ROUTE_DOWN": "নেভিগেশন রুট নিচে",
+    "NAVIGATE_ROUTE_UP": "নেভিগেশন রুট আপ",
+    "NAVIGATE_ROUTE_DOWN": "নেভিগেশন রুট নিচে",
     "ENGLISH_SETTINGS": "ইংরেজি",
     "BENGALI_SETTINGS": "বাংলা"
 }

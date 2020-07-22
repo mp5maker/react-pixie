@@ -30,6 +30,7 @@ import { HotKeyMap } from './Constants/HotKeyMap'
 import { StorageGet, StorageSet } from './Utilities/Storage'
 import { useColors } from './Hooks/UseColors'
 import { HotKeysHelp } from './Components/HotKeysHelp'
+import { ShowKeyCombo } from './Components/ShowKeyCombo'
 
 /* CSS */
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -134,6 +135,9 @@ export const App = () => {
               colors={Colors}
               theme={theme} />
             <HotKeysHelp
+              colors={Colors}
+              theme={theme} />
+            <ShowKeyCombo
               colors={Colors}
               theme={theme} />
           </GlobalHotKeys>

@@ -39,8 +39,8 @@
     "CLOSE_SETTINGS": "Close Settings",
     "THEME_LIGHT_SETTINGS": "Theme Light",
     "THEME_DARK_SETTINGS": "Theme Dark",
-    "NAVIGATE ROUTE_UP": "Navigate Route Up",
-    "NAVIGATE ROUTE_DOWN": "Navigate Route Down",
+    "NAVIGATE_ROUTE_UP": "Navigate Route Up",
+    "NAVIGATE_ROUTE_DOWN": "Navigate Route Down",
     "ENGLISH_SETTINGS": "English Settings",
     "BENGALI_SETTINGS": "Bengali Settings"
 }
