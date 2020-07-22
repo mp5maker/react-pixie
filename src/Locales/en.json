@@ -1,4 +1,12 @@
 {
+    "SETTINGS": "Settings",
+    "THEME": "Theme",
+    "NAVIGATION": "Navigation",
+    "LANGUAGE": "Language",
+    "LIST_OF_KEYBOARD_SHORTCUTS": "List of Keyboard Shortcuts",
+    "NAME": "Name",
+    "Sequence": "Sequence",
+    "SHORTCUTS": "Shortcuts",
     "PAGE_NOT_FOUND": "Page Not Found",
     "EN": "EN",
     "BN": "বাং",
@@ -23,5 +31,14 @@
     "SENIOR_SOFTWARE_ENGINEER": "Senior Software Engineer",
     "I_HAVE_PASSION_FOR_UI_UX_ANIMATIONS_AND_LOVE_TO_CREATE": "I have passion for UI/UX, animations and love to create",
     "WEBSITES_TO_RUN_ACROSS_MULTIPLE_DEVICES_WITH": " websites to run across multiple devices with",
-    "DYNAMIC_USER_EXPERIENCES": "dynamic user experiences"
+    "DYNAMIC_USER_EXPERIENCES": "dynamic user experiences",
+
+    "OPEN SETTINGS": "Open Settings",
+    "CLOSE SETTINGS": "Close Settings",
+    "THEME LIGHT SETTINGS": "Theme Light",
+    "THEME DARK SETTINGS": "Theme Dark",
+    "NAVIGATE ROUTE UP": "Navigate Route Up",
+    "NAVIGATE ROUTE DOWN": "Navigate Route Down",
+    "ENGLISH SETTINGS": "English Settings",
+    "BENGALI SETTINGS": "Bengali Settings"
 }

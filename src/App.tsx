@@ -29,6 +29,7 @@ import * as Routes from './Constants/Routes'
 import { HotKeyMap } from './Constants/HotKeyMap'
 import { StorageGet, StorageSet } from './Utilities/Storage'
 import { useColors } from './Hooks/UseColors'
+import { HotKeysHelp } from './Components/HotKeysHelp'
 
 /* CSS */
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -85,7 +86,10 @@ export const App = () => {
         value={{ setSettings, ...settings }}>
         <MusicContext.Provider
           value={{ setMusicSettings, ...musicSettings }}>
-          <GlobalHotKeys keyMap={HotKeyMap}>
+          {/* // @ts-ignore */}
+          <GlobalHotKeys
+            allowChanges={true}
+            keyMap={HotKeyMap}>
             <div
               style={{
                 // @ts-ignore
@@ -127,6 +131,9 @@ export const App = () => {
               theme={theme}
               colors={Colors} />
             <SocialPicker
+              colors={Colors}
+              theme={theme} />
+            <HotKeysHelp
               colors={Colors}
               theme={theme} />
           </GlobalHotKeys>

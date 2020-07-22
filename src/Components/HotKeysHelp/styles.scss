@@ -1,0 +1,54 @@
+.hot-keys-help-container {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 25px;
+    button {
+        box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
+        transition: all ease-in-out 0.25s;
+        width: 40px;
+        height: 40px;
+        margin-left: 12px;
+        outline: none;
+        transform: scale(1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+            transform: scale(0.95);
+            transition: all ease-in-out 0.25s;
+            box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.4);
+        }
+    }
+}
+
+.hot-keys-help-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    table {
+        thead {
+            border-bottom: 1px solid var(--primary-color);
+        }
+        thead,
+        tbody {
+            tr {
+                td,
+                th {
+                    padding: 6px;
+                    min-width: 120px;
+                }
+            }
+        }
+        tbody {
+            &.group-item {
+                border: 1px solid var(--secondary-color);
+                .group-header-item {
+                    background-color: var(--primary-color);
+                    color: var(--background-color);
+                }
+            }
+        }
+    }
+}

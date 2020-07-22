@@ -1,4 +1,12 @@
 {
+    "SETTINGS": "সেটিংস",
+    "THEME": "ওয়েব থিম",
+    "NAVIGATION": "ন্যাভিগেশন",
+    "LANGUAGE": "ভাষা",
+    "LIST_OF_KEYBOARD_SHORTCUTS": "কীবোর্ড শর্টকাটগুলির তালিকা",
+    "NAME": "নাম",
+    "SEQUENCE": "ক্রম",
+    "SHORTCUTS": "শর্টকাট",
     "PAGE_NOT_FOUND": "পৃষ্ঠা খুঁজে পাওয়া যায়নি",
     "EN": "EN",
     "BN": "বাং",
@@ -23,5 +31,14 @@
     "SENIOR_SOFTWARE_ENGINEER": "সিনিয়র সফটওয়্যার ইঞ্জিনিয়ার",
     "I_HAVE_PASSION_FOR_UI_UX_ANIMATIONS_AND_LOVE_TO_CREATE": "আমি ইউআই / ইউএক্স, অ্যানিমেশন এবং একাধিক",
     "WEBSITES_TO_RUN_ACROSS_MULTIPLE_DEVICES_WITH": "ডিভাইস জুড়ে চালানোর জন্য ওয়েবসাইট তৈরি করতে আগ্রহী",
-    "DYNAMIC_USER_EXPERIENCES": ""
+    "DYNAMIC_USER_EXPERIENCES": "",
+
+    "OPEN SETTINGS": "ওপেন সেটিংস",
+    "CLOSE SETTINGS": "সেটিংস বন্ধ করুন",
+    "THEME LIGHT SETTINGS": "থিম আলো",
+    "THEME DARK SETTINGS": "থিম অন্ধকার",
+    "NAVIGATE ROUTE UP": "নেভিগেশন রুট আপ",
+    "NAVIGATE ROUTE DOWN": "নেভিগেশন রুট নিচে",
+    "ENGLISH SETTINGS": "ইংরেজি",
+    "BENGALI SETTINGS": "বাংলা"
 }
