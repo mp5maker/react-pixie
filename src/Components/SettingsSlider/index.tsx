@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next'
+import { GlobalHotKeys } from 'react-hotkeys'
 
 import Slider from '@material-ui/core/Slider'
 import Switch from '@material-ui/core/Switch';
@@ -64,6 +65,11 @@ export const SettingsSlider = ({
         if (onChange) onChange(params)
     }
 
+    const handlers = {
+        OPEN_SETTINGS: () => setShow(true),
+        CLOSE_SETTINGS: () => setShow(false)
+    }
+
     const sliderStyle = {
         // @ts-ignore
         color: Colors[theme].primaryColor,
@@ -94,7 +100,6 @@ export const SettingsSlider = ({
                             key={`click-me`}>
                             <FontAwesomeIcon icon={faAngleLeft} />
                         </motion.button>
-
                     ) : (
                             <motion.div
                                 className={`slider-container`}
@@ -244,7 +249,9 @@ export const SettingsSlider = ({
 
     return (
         <>
-            { Array.isArray(list) && list.length > 0 && isWidthGreaterThan771px && content }
+            <GlobalHotKeys handlers={handlers}>
+                { Array.isArray(list) && list.length > 0 && isWidthGreaterThan771px && content }
+            </GlobalHotKeys>
         </>
     )
 }

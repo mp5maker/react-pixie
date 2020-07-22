@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
 import get from 'lodash/get'
+import { GlobalHotKeys } from 'react-hotkeys'
 
 import * as Routes from '../../Constants/Routes'
 import { Colors } from '../../Constants/Colors'
@@ -10,6 +11,7 @@ import { Dog } from '../../Svg/Dog'
 import { Book } from '../../Svg/Book'
 import { Rain } from '../../Svg/Rain'
 import { Bird } from '../../Svg/Bird'
+
 
 import "./styles.scss"
 
@@ -49,50 +51,72 @@ export const Navigation = ({ history }: any) => {
         },
     ]
 
+    const currentIndex = () => {
+        const currentLocation = get(history, 'location.pathname', '')
+        const findIndex = list.findIndex((item) => {
+            return currentLocation == get(item, 'route', '')
+        })
+        return findIndex
+    }
+
+    const handlers = {
+        NAVIGATE_ROUTE_UP: () => {
+            const presentIndex = currentIndex()
+            if (presentIndex == 0) history.push(list[list.length - 1].route)
+            else history.push(list[presentIndex - 1].route)
+        },
+        NAVIGATE_ROUTE_DOWN: () => {
+            const presentIndex = currentIndex()
+            if (presentIndex == (list.length - 1)) history.push(list[0].route)
+            else history.push(list[presentIndex + 1].route)
+        }
+    }
+
     return (
         <React.Fragment>
-            <div className="navigation-container">
-                <div className="navigation-content">
-                    <ul className="navigation-list">
-                        {
-                            list.map((item, key) => {
-                                const Svg = get(item, 'Svg', '')
-                                return (
-                                    <React.Fragment key={key}>
-                                        <NavLink
-                                            className={`navigation-item`}
-                                            exact
-                                            to={item.route}
-                                            activeClassName={`active`}
-                                            style={{
-                                                // @ts-ignore
-                                                color: Colors[theme].secondaryColor
-                                            }}
-                                            activeStyle={{
-                                                fontWeight: "bold",
-                                                // @ts-ignore
-                                                color: Colors[theme].primaryColor
-                                            }}>
-                                            <span className={`mr-2`}>{ item.label }</span>
-                                            {
-                                                Svg ? (
-                                                    <Svg
-                                                        svgKey={item.key}
-                                                        width={40}
-                                                        height={37.3}
-                                                        colors={Colors}
-                                                        theme={theme} />
-                                                ) : <React.Fragment></React.Fragment>
-                                            }
-                                        </NavLink>
-                                    </React.Fragment>
-
-                                )
-                            })
-                        }
-                    </ul>
+            <GlobalHotKeys handlers={handlers}>
+                <div className="navigation-container">
+                    <div className="navigation-content">
+                        <ul className="navigation-list">
+                            {
+                                list.map((item, key) => {
+                                    const Svg = get(item, 'Svg', '')
+                                    return (
+                                        <React.Fragment key={key}>
+                                            <NavLink
+                                                className={`navigation-item`}
+                                                exact
+                                                to={item.route}
+                                                activeClassName={`active`}
+                                                style={{
+                                                    // @ts-ignore
+                                                    color: Colors[theme].secondaryColor
+                                                }}
+                                                activeStyle={{
+                                                    fontWeight: "bold",
+                                                    // @ts-ignore
+                                                    color: Colors[theme].primaryColor
+                                                }}>
+                                                <span className={`mr-2`}>{ item.label }</span>
+                                                {
+                                                    Svg ? (
+                                                        <Svg
+                                                            svgKey={item.key}
+                                                            width={40}
+                                                            height={37.3}
+                                                            colors={Colors}
+                                                            theme={theme} />
+                                                    ) : <React.Fragment></React.Fragment>
+                                                }
+                                            </NavLink>
+                                        </React.Fragment>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </GlobalHotKeys>
         </React.Fragment>
     )
 }

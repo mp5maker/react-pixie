@@ -7,8 +7,9 @@ import {
   Redirect
 } from 'react-router'
 import { createBrowserHistory } from 'history'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { GlobalHotKeys } from 'react-hotkeys'
 
 import { AppContext } from './AppContext'
 import { SettingsContext } from './SettingsContext'
@@ -25,6 +26,7 @@ import { SocialPicker } from './Components/SocialPicker'
 import { Colors } from './Constants/Colors'
 import { AudioPlayer } from './Components/Anime/ThreeJS/AudioPlayer'
 import * as Routes from './Constants/Routes'
+import { HotKeyMap } from './Constants/HotKeyMap'
 import { StorageGet, StorageSet } from './Utilities/Storage'
 import { useColors } from './Hooks/UseColors'
 
@@ -83,49 +85,51 @@ export const App = () => {
         value={{ setSettings, ...settings }}>
         <MusicContext.Provider
           value={{ setMusicSettings, ...musicSettings }}>
-          <div
-            style={{
-              // @ts-ignore
-              backgroundColor: Colors[theme].backgroundColor,
-              // @ts-ignore
-              color: Colors[theme].primaryColor
-            }}
-            className="container-fluid">
-            <Router history={history}>
-              <Route
-                render={({ location }) => {
-                  return (
-                    <AnimatePresence exitBeforeEnter initial={false}>
-                      <Switch location={location}  key={location.pathname}>
-                        <Route exact path={Routes.ROOT} component={Pages.Home} />
-                        <Route exact path={Routes.HOME} component={Pages.Home} />
-                        <Route exact path={Routes.EXPERIENCE} component={Pages.Experience} />
-                        <Route exact path={Routes.SKYBOX} component={Pages.Skybox} />
-                        <Route exact path={Routes.RAIN} component={Pages.Rain} />
-                        <Route exact path={Routes.BIRD} component={Pages.Bird} />
-                        <Route path={Routes.OTHERS} component={Pages.Error} />
-                      </Switch>
-                    </AnimatePresence>
-                  )
-                }}
-              />
-              <Navigation history={history} />
-            </Router>
-          </div>
-          <Footer
-            colors={Colors}
-            theme={theme} />
-          <ThemePicker />
-          <LanguagePicker history={history} />
-          <SettingsSlider list={settings.settingsList} />
-          <AudioPlayer />
-          <MusicCredit
-            isPlaying={musicSettings.isPlaying}
-            theme={theme}
-            colors={Colors} />
-          <SocialPicker
-            colors={Colors}
-            theme={theme} />
+          <GlobalHotKeys keyMap={HotKeyMap}>
+            <div
+              style={{
+                // @ts-ignore
+                backgroundColor: Colors[theme].backgroundColor,
+                // @ts-ignore
+                color: Colors[theme].primaryColor
+              }}
+              className="container-fluid">
+              <Router history={history}>
+                <Route
+                  render={({ location }) => {
+                    return (
+                      <AnimatePresence exitBeforeEnter initial={false}>
+                        <Switch location={location}  key={location.pathname}>
+                          <Route exact path={Routes.ROOT} component={Pages.Home} />
+                          <Route exact path={Routes.HOME} component={Pages.Home} />
+                          <Route exact path={Routes.EXPERIENCE} component={Pages.Experience} />
+                          <Route exact path={Routes.SKYBOX} component={Pages.Skybox} />
+                          <Route exact path={Routes.RAIN} component={Pages.Rain} />
+                          <Route exact path={Routes.BIRD} component={Pages.Bird} />
+                          <Route path={Routes.OTHERS} component={Pages.Error} />
+                        </Switch>
+                      </AnimatePresence>
+                    )
+                  }}
+                />
+                <Navigation history={history} />
+              </Router>
+            </div>
+            <Footer
+              colors={Colors}
+              theme={theme} />
+            <ThemePicker />
+            <LanguagePicker history={history} />
+            <SettingsSlider list={settings.settingsList} />
+            <AudioPlayer />
+            <MusicCredit
+              isPlaying={musicSettings.isPlaying}
+              theme={theme}
+              colors={Colors} />
+            <SocialPicker
+              colors={Colors}
+              theme={theme} />
+          </GlobalHotKeys>
         </MusicContext.Provider>
       </SettingsContext.Provider>
     </AppContext.Provider>

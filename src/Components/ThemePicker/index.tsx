@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
+import { GlobalHotKeys } from 'react-hotkeys'
 
 import { AppContext } from '../../AppContext'
 import { Colors } from '../../Constants/Colors'
@@ -12,50 +13,71 @@ import "./styles.scss"
 export const ThemePicker = () => {
     const { theme, setTheme }: any = React.useContext(AppContext)
 
+    const LightButton = (
+        <button
+            style={{
+                // @ts-ignore
+                backgroundColor: Colors[theme].backgroundColor,
+                // @ts-ignore
+                color: Colors[theme].secondaryColor,
+                ...(theme == LIGHT ? {
+                    // @ts-ignore
+                    border: `1px solid ${Colors[theme].primaryColor}`
+                } : {
+                        border: `1px solid transparent`
+                    })
+            }}
+            onClick={() => {
+                setTheme(LIGHT)
+                StorageSet({ key: THEME, value: LIGHT })
+            }}>
+            <FontAwesomeIcon icon={faSun} />
+        </button>
+    )
+
+    const DarkButton = (
+        <button
+            style={{
+                // @ts-ignore
+                backgroundColor: Colors[theme].backgroundColor,
+                // @ts-ignore
+                color: Colors[theme].secondaryColor,
+                ...(theme == DARK ? {
+                    // @ts-ignore
+                    border: `1px solid ${Colors[theme].primaryColor}`
+                } : {
+                        border: `1px solid transparent`
+                    })
+            }}
+            onClick={() => {
+                setTheme(DARK)
+                StorageSet({ key: THEME, value: DARK })
+            }}>
+            <FontAwesomeIcon icon={faMoon} />
+        </button>
+    )
+
+    const handlers = {
+        THEME_LIGHT_SETTINGS: () => {
+            setTheme(LIGHT)
+            StorageSet({ key: THEME, value: LIGHT })
+        },
+        THEME_DARK_SETTINGS: () => {
+            setTheme(DARK)
+            StorageSet({ key: THEME, value: DARK })
+        }
+    }
+
     return (
         <>
-            <div className="theme-picker-container">
-                <div className="theme-picker-content">
-                    <button
-                        style={{
-                            // @ts-ignore
-                            backgroundColor: Colors[theme].backgroundColor,
-                            // @ts-ignore
-                            color: Colors[theme].secondaryColor,
-                            ...(theme == LIGHT ? {
-                                // @ts-ignore
-                                border: `1px solid ${Colors[theme].primaryColor}`
-                            }: {
-                                border: `1px solid transparent`
-                            })
-                        }}
-                        onClick={() => {
-                            setTheme(LIGHT)
-                            StorageSet({ key: THEME, value: LIGHT })
-                        }}>
-                        <FontAwesomeIcon icon={faSun} />
-                    </button>
-                    <button
-                        style={{
-                            // @ts-ignore
-                            backgroundColor: Colors[theme].backgroundColor,
-                            // @ts-ignore
-                            color: Colors[theme].secondaryColor,
-                            ...(theme == DARK ? {
-                                // @ts-ignore
-                                border: `1px solid ${Colors[theme].primaryColor}`
-                            } : {
-                                    border: `1px solid transparent`
-                                })
-                        }}
-                        onClick={() => {
-                            setTheme(DARK)
-                            StorageSet({ key: THEME, value: DARK })
-                        }}>
-                        <FontAwesomeIcon icon={faMoon} />
-                    </button>
+            <GlobalHotKeys handlers={handlers}>
+                <div className="theme-picker-container">
+                    <div className="theme-picker-content">
+                        { LightButton }
+                        { DarkButton }
+                    </div>
                 </div>
-            </div>
+            </GlobalHotKeys>
         </>
     )
 }
