@@ -79,7 +79,9 @@ export const HotKeysHelp = ({ colors, theme }: any) => {
                                                             { t(name) }
                                                         </td>
                                                         <td className={`text-right`}>
-                                                            { sequence }
+                                                            <kbd>
+                                                                { sequence }
+                                                            </kbd>
                                                         </td>
                                                     </tr>
                                                 </React.Fragment>

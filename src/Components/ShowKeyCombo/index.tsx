@@ -17,7 +17,7 @@ export const ShowKeyCombo = ({ colors, theme }: any) => {
     currentIcon = isArrowLeft ? faArrowLeft : currentIcon
     currentIcon = isArrowRight ? faArrowRight : currentIcon
 
-    return (
+    return keyValue ? (
         <div
             style={{
                 color: colors[theme].primaryColor
@@ -26,15 +26,19 @@ export const ShowKeyCombo = ({ colors, theme }: any) => {
             {
                 (isArrowUp || isArrowDown || isArrowLeft || isArrowRight) ? (
                     <React.Fragment>
-                        <FontAwesomeIcon
-                            icon={currentIcon} />
+                        <kbd>
+                            <FontAwesomeIcon
+                                icon={currentIcon} />
+                        </kbd>
                     </React.Fragment>
                 ) : (
                         <React.Fragment>
-                            {keyValue}
+                            <kbd>
+                                { keyValue }
+                            </kbd>
                         </React.Fragment>
                     )
             }
         </div>
-    )
+    ) : <></>
 }
