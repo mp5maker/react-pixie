@@ -104,6 +104,7 @@ export const HotKeysHelp = ({ colors, theme }: any) => {
                     drawerVariants={drawerVariants}
                     direction={`top`}
                     buttonShape={`round`}
+                    hotKeyHandler={`OPEN_HELP`}
                     buttonDisplay={(
                         <FontAwesomeIcon icon={faKeyboard} />
                     )}>

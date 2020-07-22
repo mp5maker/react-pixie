@@ -1,4 +1,7 @@
 {
+    "HELP": "Help",
+    "DRAWER": "Drawer",
+    "CLOSE_DRAWER": "Close Drawer",
     "SETTINGS": "Settings",
     "THEME": "Theme",
     "NAVIGATION": "Navigation",
@@ -32,13 +35,12 @@
     "I_HAVE_PASSION_FOR_UI_UX_ANIMATIONS_AND_LOVE_TO_CREATE": "I have passion for UI/UX, animations and love to create",
     "WEBSITES_TO_RUN_ACROSS_MULTIPLE_DEVICES_WITH": " websites to run across multiple devices with",
     "DYNAMIC_USER_EXPERIENCES": "dynamic user experiences",
-
-    "OPEN SETTINGS": "Open Settings",
-    "CLOSE SETTINGS": "Close Settings",
-    "THEME LIGHT SETTINGS": "Theme Light",
-    "THEME DARK SETTINGS": "Theme Dark",
-    "NAVIGATE ROUTE UP": "Navigate Route Up",
-    "NAVIGATE ROUTE DOWN": "Navigate Route Down",
-    "ENGLISH SETTINGS": "English Settings",
-    "BENGALI SETTINGS": "Bengali Settings"
+    "OPEN_SETTINGS": "Open Settings",
+    "CLOSE_SETTINGS": "Close Settings",
+    "THEME_LIGHT_SETTINGS": "Theme Light",
+    "THEME_DARK_SETTINGS": "Theme Dark",
+    "NAVIGATE ROUTE_UP": "Navigate Route Up",
+    "NAVIGATE ROUTE_DOWN": "Navigate Route Down",
+    "ENGLISH_SETTINGS": "English Settings",
+    "BENGALI_SETTINGS": "Bengali Settings"
 }

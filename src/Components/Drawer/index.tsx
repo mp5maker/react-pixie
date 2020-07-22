@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import * as ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSortUp } from '@fortawesome/free-solid-svg-icons'
+import { GlobalHotKeys } from 'react-hotkeys';
 
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
@@ -10,7 +11,16 @@ import ListItem from '@material-ui/core/ListItem';
 
 import './styles.scss'
 
-export const Drawer = ({ colors, theme, drawerVariants, children, direction = 'top', buttonDisplay, buttonsShape = '' }: any) => {
+export const Drawer = ({
+    colors,
+    theme,
+    drawerVariants,
+    children,
+    direction = 'top',
+    buttonDisplay,
+    buttonsShape = '',
+    hotKeyHandler = ''
+}: any) => {
     const [show, setShow] = React.useState(false)
     const drawer: any = React.useRef(document.getElementById('drawer')).current
 
@@ -66,7 +76,7 @@ export const Drawer = ({ colors, theme, drawerVariants, children, direction = 't
         </AnimatePresence>
     )
 
-    return (
+    const content = (
         <>
             <Button
                 style={{
@@ -84,4 +94,15 @@ export const Drawer = ({ colors, theme, drawerVariants, children, direction = 't
             }
         </>
     )
+
+    const handlers: any = hotKeyHandler ? {
+        [hotKeyHandler]: () => setShow(true),
+    } : {}
+
+    return hotKeyHandler ? (
+        <GlobalHotKeys
+            handlers={handlers}>
+            { content }
+        </GlobalHotKeys>
+    ) : content
 }

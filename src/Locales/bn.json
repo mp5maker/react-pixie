@@ -1,4 +1,7 @@
 {
+    "HELP": "সাহায্য",
+    "DRAWER": "Drawer",
+    "CLOSE_DRAWER": "Close Drawer",
     "SETTINGS": "সেটিংস",
     "THEME": "ওয়েব থিম",
     "NAVIGATION": "ন্যাভিগেশন",
@@ -32,13 +35,12 @@
     "I_HAVE_PASSION_FOR_UI_UX_ANIMATIONS_AND_LOVE_TO_CREATE": "আমি ইউআই / ইউএক্স, অ্যানিমেশন এবং একাধিক",
     "WEBSITES_TO_RUN_ACROSS_MULTIPLE_DEVICES_WITH": "ডিভাইস জুড়ে চালানোর জন্য ওয়েবসাইট তৈরি করতে আগ্রহী",
     "DYNAMIC_USER_EXPERIENCES": "",
-
-    "OPEN SETTINGS": "ওপেন সেটিংস",
-    "CLOSE SETTINGS": "সেটিংস বন্ধ করুন",
-    "THEME LIGHT SETTINGS": "থিম আলো",
-    "THEME DARK SETTINGS": "থিম অন্ধকার",
-    "NAVIGATE ROUTE UP": "নেভিগেশন রুট আপ",
-    "NAVIGATE ROUTE DOWN": "নেভিগেশন রুট নিচে",
-    "ENGLISH SETTINGS": "ইংরেজি",
-    "BENGALI SETTINGS": "বাংলা"
+    "OPEN_SETTINGS": "ওপেন সেটিংস",
+    "CLOSE_SETTINGS": "সেটিংস বন্ধ করুন",
+    "THEME_LIGHT_SETTINGS": "থিম আলো",
+    "THEME_DARK_SETTINGS": "থিম অন্ধকার",
+    "NAVIGATE ROUTE_UP": "নেভিগেশন রুট আপ",
+    "NAVIGATE ROUTE_DOWN": "নেভিগেশন রুট নিচে",
+    "ENGLISH_SETTINGS": "ইংরেজি",
+    "BENGALI_SETTINGS": "বাংলা"
 }
