@@ -13,9 +13,8 @@ import { Moon } from '../../Moon'
 import { RainDroplets } from '../../RainDroplets'
 import { BonFire } from '../../BonFire'
 import { Wall } from '../../House/Wall'
-import { MyName } from '../../MyName'
+import { Text } from '../../Text'
 import { Cloud } from '../../Cloud'
-import { Awesome } from '../../Awesome'
 import { useDimension } from '../../../../../Hooks/UseDimension'
 import { useMedia } from '../../../../../Hooks/UseMedia'
 
@@ -65,8 +64,14 @@ export const AnimeThreeJSRain = ({
                     colors={COLORS} />
                 <InteriorGround
                     colors={COLORS} />
-                <MyName
-                    colors={COLORS}/>
+                <Text
+                    position={{ x: -800, y: 0, z: -200 }}
+                    text={`S. Photon Khan`}
+                    meshColor={COLORS.backgroundColor}/>
+                <Text
+                    position={{ x: -250, y: 0, z: -500 }}
+                    text={`Awesome!`}
+                    meshColor={COLORS.primaryColor}/>
                 <ShinySphere
                     frequency={frequency}
                     colors={COLORS} />
@@ -90,8 +95,6 @@ export const AnimeThreeJSRain = ({
                         </>
                     )
                 }
-                <Awesome
-                    colors={COLORS} />
             </Canvas>
         </div>
     )
