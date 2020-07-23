@@ -3,19 +3,63 @@
     top: 25px;
     left: 25px;
     .navigation-content {
+        position: relative;
+        .navigation-circle {
+            position: absolute;
+            top: -70px;
+            left: -70px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: block;
+            width: 100px;
+            height: 100px;
+            transition: transform 0.25s ease-in-out;
+            opacity: 0.3;
+            transform: scale(4);
+        }
+        &:focus-within {
+            .navigation-circle {
+                transform: scale(5);
+                transition: transform 0.25s ease-in-out;
+            }
+        }
         .navigation-list {
             list-style-type: none;
             padding-left: 0;
+            position: relative;
+            &::before {
+                content: "";
+                position: absolute;
+                display: block;
+                top: 0;
+                left: -12px;
+                width: 1px;
+                background-color: var(--primary-color);
+                height: 100%;
+            }
             .navigation-item {
+                position: relative;
                 display: block;
                 font-size: 24px;
+                font-weight: normal;
                 text-decoration: none;
                 transition: all ease-in-out 0.25s;
                 transform: scale(1);
                 text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+                &.active {
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        display: block;
+                        top: 0;
+                        left: -12px;
+                        width: 1px;
+                        background-color: var(--background-color);
+                        height: 40px;
+                    }
+                }
                 &:hover {
                     transition: all ease-in-out 0.25s;
-                    transform: scale(0.98);
                     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
                 }
                 svg {

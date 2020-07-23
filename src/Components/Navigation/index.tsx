@@ -77,6 +77,7 @@ export const Navigation = ({ history }: any) => {
             <GlobalHotKeys handlers={handlers}>
                 <div className="navigation-container">
                     <div className="navigation-content">
+                        <div className="navigation-circle"></div>
                         <ul className="navigation-list">
                             {
                                 list.map((item, key) => {
@@ -90,7 +91,7 @@ export const Navigation = ({ history }: any) => {
                                                 activeClassName={`active`}
                                                 style={{
                                                     // @ts-ignore
-                                                    color: Colors[theme].secondaryColor
+                                                    color: Colors[theme].backgroundColor
                                                 }}
                                                 activeStyle={{
                                                     fontWeight: "bold",
