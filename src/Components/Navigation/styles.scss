@@ -59,6 +59,7 @@
                     }
                 }
                 &:hover {
+                    color: var(--secondary-color) !important;
                     transition: all ease-in-out 0.25s;
                     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
                 }

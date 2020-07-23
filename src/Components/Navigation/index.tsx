@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import get from 'lodash/get'
 import { GlobalHotKeys } from 'react-hotkeys'
 
+import { useSVG } from '../../Hooks/UseSVG'
 import * as Routes from '../../Constants/Routes'
 import { Colors } from '../../Constants/Colors'
 import { AppContext } from '../../AppContext'
@@ -11,6 +12,7 @@ import { Dog } from '../../Svg/Dog'
 import { Book } from '../../Svg/Book'
 import { Rain } from '../../Svg/Rain'
 import { Bird } from '../../Svg/Bird'
+import { Cursor } from '../../Svg/Cursor'
 
 
 import "./styles.scss"
@@ -18,6 +20,8 @@ import "./styles.scss"
 export const Navigation = ({ history }: any) => {
     const { t, i18n } = useTranslation()
     const { theme }: any = React.useContext(AppContext)
+    useSVG({ selector: '.navigation-container', svg: Cursor({ colors: Colors, theme: theme }) })
+    useSVG({ selector: '.navigation-container .navigation-item', svg: Cursor({ colors: Colors, theme: theme }) })
 
     const list = [
         {
