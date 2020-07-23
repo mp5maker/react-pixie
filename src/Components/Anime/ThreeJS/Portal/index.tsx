@@ -1,10 +1,9 @@
 import * as THREE from 'three'
 import * as React from 'react'
-import { useThree, useFrame, useResource, extend } from 'react-three-fiber'
+import { useFrame, useResource } from 'react-three-fiber'
 
 let delta = 0
 export const Portal = ({ colors, frequency, position = { x: 200, y: 50, z: -100 } }: any) => {
-    const { gl, scene, camera } = useThree()
     const [sphereRef, sphereGeometry]: any = useResource()
     const [lineRef, line]: any = useResource()
     const [pointLightRef, pointLight]: any = useResource()
@@ -36,10 +35,6 @@ export const Portal = ({ colors, frequency, position = { x: 200, y: 50, z: -100 
             pointLight.power = 1
         }
     })
-
-    React.useEffect(() => {
-        scene.fog = new THREE.FogExp2(colors.backgroundColor, 0.0009)
-    }, [])
 
     const memoPortal = React.useMemo(() => {
         return (

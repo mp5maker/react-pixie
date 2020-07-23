@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as THREE from 'three'
-import { useThree, useFrame, extend, useResource } from 'react-three-fiber'
+import { useThree, useFrame } from 'react-three-fiber'
 import { RandomRange } from '../../../../Utilities/RandomRange'
 
 
@@ -8,7 +8,6 @@ export const RainDroplets = ({ colors, acceleration }: any) => {
     const loader = React.useRef(new THREE.TextureLoader()).current
     const geometry = React.useRef(new THREE.Geometry()).current
     const [texture, setTexture] = React.useState()
-    const { gl, camera, scene } = useThree()
 
     const onSuccessLoad = (texture: any) => {
         setTexture(texture)
@@ -41,7 +40,6 @@ export const RainDroplets = ({ colors, acceleration }: any) => {
 
     React.useEffect(() => {
         loader.load('Circle/circle.png', onSuccessLoad)
-        scene.fog = new THREE.FogExp2(colors.backgroundColor, 0.0009)
     }, [])
 
     const rainDroplets = React.useMemo(() => {

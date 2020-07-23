@@ -9,7 +9,7 @@ import { OrbitControl } from '../../OrbitControl'
 import { Bird } from '../../Bird'
 import { Portal } from '../../Portal'
 import { Ocean } from '../../Ocean'
-import { StarField } from '../../StarField'
+import { RainDroplets } from '../../RainDroplets'
 import { useDimension } from '../../../../../Hooks/UseDimension'
 import * as Routes from '../../../../../Constants/Routes'
 import { useMedia } from '../../../../../Hooks/UseMedia'
@@ -67,9 +67,6 @@ export const AnimeThreeJSBird = ({
                     position={[0, 0, 0]} />
                 <Bird colors={COLORS} />
                 <Ocean colors={COLORS} />
-                <StarField
-                    position={{ x: 0, y: 50, z: -50 }}
-                    colors={COLORS} />
                 <Portal
                     colors={COLORS}
                     frequency={frequency}
