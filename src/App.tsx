@@ -14,7 +14,7 @@ import { GlobalHotKeys } from 'react-hotkeys'
 import { AppContext } from './AppContext'
 import { SettingsContext } from './SettingsContext'
 import { MusicContext } from './MusicContext'
-import { DARK, LIGHT, THEME, LANGUAGE, EN } from './Constants/Settings'
+import { DARK, LIGHT, THEME, LANGUAGE, EN, BN } from './Constants/Settings'
 import * as Pages from './Pages'
 import { Footer } from './Components/Footer'
 import { ThemePicker } from './Components/ThemePicker'
@@ -63,11 +63,11 @@ export const App = () => {
   React.useEffect(() => {
     const onSuccess = ([currentTheme, currentLanguage]: any) => {
       /* Theme Set */
-      if (currentTheme) setTheme(currentTheme)
+      if (currentTheme == LIGHT || currentTheme == DARK) setTheme(currentTheme)
       else StorageSet({ key: THEME, value: theme })
 
       /* Language Set */
-      if (currentLanguage) i18n.changeLanguage(currentLanguage)
+      if (currentLanguage == EN || currentLanguage == BN) i18n.changeLanguage(currentLanguage)
       else StorageSet({ key: LANGUAGE, value: EN })
 
       /* Set Loading */
