@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+import './styles.scss'
+
 export const ButtonRadial = ({ style = {}, onClick = () => {}, children }: any = {}) => {
     return (
         <button

@@ -7,6 +7,7 @@ import { AppContext } from '../../AppContext'
 import { Colors } from '../../Constants/Colors'
 import { LIGHT, DARK, THEME } from '../../Constants/Settings'
 import { StorageSet } from '../../Utilities/Storage'
+import { ButtonRadial } from '../../Components/Button/Radial'
 
 import "./styles.scss"
 
@@ -14,7 +15,7 @@ export const ThemePicker = () => {
     const { theme, setTheme }: any = React.useContext(AppContext)
 
     const LightButton = (
-        <button
+        <ButtonRadial
             style={{
                 // @ts-ignore
                 backgroundColor: Colors[theme].backgroundColor,
@@ -32,11 +33,11 @@ export const ThemePicker = () => {
                 StorageSet({ key: THEME, value: LIGHT })
             }}>
             <FontAwesomeIcon icon={faSun} />
-        </button>
+        </ButtonRadial>
     )
 
     const DarkButton = (
-        <button
+        <ButtonRadial
             style={{
                 // @ts-ignore
                 backgroundColor: Colors[theme].backgroundColor,
@@ -54,7 +55,7 @@ export const ThemePicker = () => {
                 StorageSet({ key: THEME, value: DARK })
             }}>
             <FontAwesomeIcon icon={faMoon} />
-        </button>
+        </ButtonRadial>
     )
 
     const handlers = {

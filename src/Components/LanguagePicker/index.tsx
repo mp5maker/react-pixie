@@ -8,6 +8,7 @@ import { AppContext } from '../../AppContext'
 import { Colors } from '../../Constants/Colors'
 import { LANGUAGE, EN, BN } from '../../Constants/Settings'
 import { StorageSet } from '../../Utilities/Storage'
+import { ButtonRadial } from '../../Components/Button/Radial'
 import * as Routes from '../../Constants/Routes'
 
 import "./styles.scss"
@@ -17,7 +18,7 @@ export const LanguagePicker = ({ history }: any) => {
     const { t, i18n } = useTranslation()
 
     const EnglishButton = (
-        <button
+        <ButtonRadial
             style={{
                 // @ts-ignore
                 backgroundColor: Colors[theme].backgroundColor,
@@ -35,11 +36,11 @@ export const LanguagePicker = ({ history }: any) => {
                 StorageSet({ key: LANGUAGE, value: EN })
             }}>
             {t(`EN`)}
-        </button>
+        </ButtonRadial>
     )
 
     const BengaliButton = (
-        <button
+        <ButtonRadial
             style={{
                 // @ts-ignore
                 backgroundColor: Colors[theme].backgroundColor,
@@ -57,11 +58,11 @@ export const LanguagePicker = ({ history }: any) => {
                 StorageSet({ key: LANGUAGE, value: BN })
             }}>
             {t(`BN`)}
-        </button>
+        </ButtonRadial>
     )
 
     const BackToHomeButton = (
-        <button
+        <ButtonRadial
             style={{
                 // @ts-ignore
                 backgroundColor: Colors[theme].backgroundColor,
@@ -72,7 +73,7 @@ export const LanguagePicker = ({ history }: any) => {
             }}
             onClick={() => history.push(Routes.ROOT)}>
             <FontAwesomeIcon icon={faUser} />
-        </button>
+        </ButtonRadial>
     )
 
     const handlers = {
