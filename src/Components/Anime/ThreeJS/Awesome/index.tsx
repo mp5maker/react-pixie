@@ -46,7 +46,7 @@ export const Awesome = ({
                 }
             </>
         )
-    }, [font, mediaGreaterThan1024])
+    }, [font, mediaGreaterThan1024, colors])
 
     return memoContent
 }
