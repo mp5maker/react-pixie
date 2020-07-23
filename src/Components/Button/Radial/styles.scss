@@ -1,19 +1,19 @@
 .button-radial-container {
     border-radius: 50%;
     box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
-    border: none;
     transition: all ease-in-out 0.25s;
     width: 40px;
     height: 40px;
-    outline: none;
     transform: scale(1);
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
+    outline: none !important;
     &:active {
+        background-color: var(--primary-color) !important;
+        color: var(--background-color) !important;
         outline: none;
-        background-color: var(--primary-color);
-        color: var(--background-color);
     }
     &:hover {
         transform: scale(0.95);
