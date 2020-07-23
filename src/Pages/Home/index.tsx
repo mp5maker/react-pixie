@@ -8,10 +8,12 @@ import { SettingsContext } from '../../SettingsContext'
 import { AnimeThreeJSHome } from '../../Components/Anime/ThreeJS/Pages/Home'
 import { MyNameSvg } from '../../Components/MyNameSvg'
 import { MouseDetector } from '../../Components/MouseDetector'
+import { useDocument } from '../../Hooks/UseDocument'
 
 export const Home = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
     const { setSettings, ...settings }: any = React.useContext(SettingsContext)
+    useDocument({ options: [{ selector: 'title', value: `Photon's Portfoliio: About Me`}]})
 
     React.useEffect(() => {
         setSettings({

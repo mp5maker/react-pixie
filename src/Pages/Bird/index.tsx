@@ -6,10 +6,12 @@ import { PageTransition } from '../../Constants/PageTransition'
 import { AppContext } from '../../AppContext'
 import { SettingsContext } from '../../SettingsContext'
 import { AnimeThreeJSBird } from '../../Components/Anime/ThreeJS/Pages/Bird'
+import { useDocument } from '../../Hooks/UseDocument'
 
 export const Bird = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
     const { setSettings, ...settings }: any = React.useContext(SettingsContext)
+    useDocument({ options: [{ selector: 'title', value: `Photon's Portfoliio: Bird` }] })
 
     React.useEffect(() => {
         setSettings({

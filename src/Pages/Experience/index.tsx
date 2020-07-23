@@ -9,10 +9,12 @@ import { WorkExperience } from '../../Components/WorkExperience'
 import { Showcase } from '../../Components/Showcase'
 import { AnimeThreeJSExperience } from '../../Components/Anime/ThreeJS/Pages/Experience'
 import { MouseDetector } from '../../Components/MouseDetector'
+import { useDocument } from '../../Hooks/UseDocument'
 
 export const Experience = ({ history, location, match }: any) => {
     const { theme }: any = React.useContext(AppContext)
     const { setSettings, ...settings }: any = React.useContext(SettingsContext)
+    useDocument({ options: [{ selector: 'title', value: `Photon's Portfoliio: Experience` }] })
 
     React.useEffect(() => {
         setSettings({

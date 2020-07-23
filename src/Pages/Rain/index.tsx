@@ -1,7 +1,4 @@
 import * as React from 'react'
-import * as THREE from 'react'
-import { Canvas, useFrame, useThree, extend } from 'react-three-fiber'
-import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 
 import { AnimeThreeJSRain } from '../../Components/Anime/ThreeJS/Pages/Rain'
@@ -9,10 +6,12 @@ import { Colors } from '../../Constants/Colors'
 import { PageTransition } from '../../Constants/PageTransition'
 import { AppContext } from '../../AppContext'
 import { SettingsContext } from '../../SettingsContext'
+import { useDocument } from '../../Hooks/UseDocument'
 
 export const Rain = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
     const { setSettings, ...settings }: any = React.useContext(SettingsContext)
+    useDocument({ options: [{ selector: 'title', value: `Photon's Portfoliio: Rain` }] })
 
     React.useEffect(() => {
         setSettings({
