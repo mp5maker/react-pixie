@@ -71,6 +71,7 @@ export const AnimeThreeJSExperience = ({
                     color={COLORS.primaryColor}
                     intensity={0.1}
                     position={[0, 0, 0]} />
+                <Skills colors={COLORS} />
             </>
         )
     }, [theme])
