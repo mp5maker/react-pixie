@@ -122,12 +122,15 @@ export const Drawer = ({
         </>
     )
 
+    const toggleDrawerDisplay = React.useCallback(() => setShow(!show), [show])
+
     const handlers: any = hotKeyHandler ? {
-        [hotKeyHandler]: () => setShow(true),
+        [hotKeyHandler]: () => toggleDrawerDisplay(),
     } : {}
 
     return hotKeyHandler ? (
         <GlobalHotKeys
+            allowChanges={true}
             handlers={handlers}>
             { content }
         </GlobalHotKeys>

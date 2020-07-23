@@ -42,5 +42,10 @@
     "NAVIGATE_ROUTE_UP": "Navigate Route Up",
     "NAVIGATE_ROUTE_DOWN": "Navigate Route Down",
     "ENGLISH_SETTINGS": "English Settings",
-    "BENGALI_SETTINGS": "Bengali Settings"
+    "BENGALI_SETTINGS": "Bengali Settings",
+    "TOGGLE_HELP": "Help",
+    "TOGGLE_GITHUB": "Github",
+    "TOGGLE_LINKEDIN": "Linked In",
+    "TOGGLE_WEEBLY": "Weebly",
+    "TOGGLE_RESUME": "Resume"
 }

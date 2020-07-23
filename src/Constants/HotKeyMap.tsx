@@ -47,10 +47,34 @@ export const HotKeyMap: any = {
         action: 'keydown',
         group: 'LANGUAGE'
     },
-    OPEN_HELP: {
-        name: 'HELP',
+    TOGGLE_HELP: {
+        name: 'TOGGLE_HELP',
         sequence: 'h',
         action: 'keydown',
-        group: 'HELP'
+        group: 'MODAL'
+    },
+    TOGGLE_GITHUB: {
+        name: 'TOGGLE_GITHUB',
+        sequence: 'g',
+        action: 'keydown',
+        group: 'MODAL'
+    },
+    TOGGLE_LINKEDIN: {
+        name: 'TOGGLE_LINKEDIN',
+        sequence: 'z',
+        action: 'keydown',
+        group: 'MODAL'
+    },
+    TOGGLE_WEEBLY: {
+        name: 'TOGGLE_WEEBLY',
+        sequence: 'w',
+        action: 'keydown',
+        group: 'MODAL'
+    },
+    TOGGLE_RESUME: {
+        name: 'TOGGLE_RESUME',
+        sequence: 'r',
+        action: 'keydown',
+        group: 'MODAL'
     },
 }

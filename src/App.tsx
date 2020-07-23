@@ -98,9 +98,6 @@ export const App = () => {
         <SocialPicker
           colors={Colors}
           theme={theme} />
-        <HotKeysHelp
-          colors={Colors}
-          theme={theme} />
         <ShowKeyCombo
           colors={Colors}
           theme={theme} />
@@ -185,6 +182,9 @@ export const App = () => {
             { audioPlayerMemo }
             { musicCreditMemo }
             { themeDependentMemo }
+            <HotKeysHelp
+              colors={Colors}
+              theme={theme} />
           </GlobalHotKeys>
         </MusicContext.Provider>
       </SettingsContext.Provider>

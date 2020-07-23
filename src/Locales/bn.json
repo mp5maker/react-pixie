@@ -42,5 +42,10 @@
     "NAVIGATE_ROUTE_UP": "নেভিগেশন রুট আপ",
     "NAVIGATE_ROUTE_DOWN": "নেভিগেশন রুট নিচে",
     "ENGLISH_SETTINGS": "ইংরেজি",
-    "BENGALI_SETTINGS": "বাংলা"
+    "BENGALI_SETTINGS": "বাংলা",
+    "TOGGLE_HELP": "সাহায্য",
+    "TOGGLE_GITHUB": "গিটহাব",
+    "TOGGLE_LINKEDIN": "লিংকড ইন",
+    "TOGGLE_WEEBLY": "ওয়েবলি",
+    "TOGGLE_RESUME": "রেসুমে"
 }
