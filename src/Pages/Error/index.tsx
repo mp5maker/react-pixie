@@ -12,7 +12,7 @@ import { useDocument } from '../../Hooks/UseDocument'
 export const Error = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
     const { setSettings, ...settings }: any = React.useContext(SettingsContext)
-    useDocument({ options: [{ selector: 'title', value: `Photon's Portfoliio: Page Do Not Exist` }] })
+    useDocument({ options: [{ selector: 'title', value: `Photon's Portfolio: Page Do Not Exist` }] })
 
     React.useEffect(() => {
         setSettings({

@@ -11,7 +11,7 @@ import { useDocument } from '../../Hooks/UseDocument'
 export const Rain = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
     const { setSettings, ...settings }: any = React.useContext(SettingsContext)
-    useDocument({ options: [{ selector: 'title', value: `Photon's Portfoliio: Rain` }] })
+    useDocument({ options: [{ selector: 'title', value: `Photon's Portfolio: Rain` }] })
 
     React.useEffect(() => {
         setSettings({

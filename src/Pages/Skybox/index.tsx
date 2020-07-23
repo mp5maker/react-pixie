@@ -9,7 +9,7 @@ import { useDocument } from '../../Hooks/UseDocument'
 
 export const Resume = ({ history, location, match }: any) => {
     const { theme }: any = React.useContext(AppContext)
-    useDocument({ options: [{ selector: 'title', value: `Photon's Portfoliio: Skybox` }] })
+    useDocument({ options: [{ selector: 'title', value: `Photon's Portfolio: Skybox` }] })
 
     return (
         <motion.div

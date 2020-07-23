@@ -14,7 +14,7 @@ import { useDocument } from '../../Hooks/UseDocument'
 export const Experience = ({ history, location, match }: any) => {
     const { theme }: any = React.useContext(AppContext)
     const { setSettings, ...settings }: any = React.useContext(SettingsContext)
-    useDocument({ options: [{ selector: 'title', value: `Photon's Portfoliio: Experience` }] })
+    useDocument({ options: [{ selector: 'title', value: `Photon's Portfolio: Experience` }] })
 
     React.useEffect(() => {
         setSettings({
