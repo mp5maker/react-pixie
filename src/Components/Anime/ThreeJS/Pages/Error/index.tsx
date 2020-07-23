@@ -1,12 +1,10 @@
 import * as React from 'react'
 import * as THREE from 'three'
 import { Canvas } from 'react-three-fiber'
-import { useTranslation } from 'react-i18next'
 
 import { SettingsContext } from '../../../../../SettingsContext'
 import { Stars } from '../../Stars'
 import { OrbitControl } from '../../OrbitControl'
-import * as Routes from '../../../../../Constants/Routes'
 import { useDimension } from '../../../../../Hooks/UseDimension'
 
 export const AnimeThreeJSError = ({
@@ -14,7 +12,6 @@ export const AnimeThreeJSError = ({
     theme,
     history,
 }: any) => {
-    const { t, i18n } = useTranslation()
     const { acceleration }: any = React.useContext(SettingsContext)
     const { width, height } = useDimension()
 
@@ -48,7 +45,7 @@ export const AnimeThreeJSError = ({
                     position={[0, 0, 0]} />
             </>
         )
-    }, [COLORS])
+    }, [theme])
 
     const memoStars = React.useMemo(() => {
         return (
@@ -59,7 +56,7 @@ export const AnimeThreeJSError = ({
                     history={history} />
             </>
         )
-    }, [acceleration, COLORS, history])
+    }, [acceleration, theme, history])
 
     return (
         <div style={{ width, height }}>

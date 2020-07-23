@@ -1,11 +1,9 @@
 import * as React from 'react'
 import * as THREE from 'three'
 import { Canvas } from 'react-three-fiber'
-import { useTranslation } from 'react-i18next'
 
 import { SettingsContext } from '../../../../../SettingsContext'
 import { MusicContext } from '../../../../../MusicContext'
-import * as Routes from '../../../../../Constants/Routes'
 import { RectangleLight } from '../../RectangleLight'
 import { InteriorGround } from '../../InteriorGround'
 import { ShinySphere } from '../../ShinySphere'
@@ -23,8 +21,7 @@ export const AnimeThreeJSRain = ({
     theme,
     history,
 }: any) => {
-    const { t, i18n } = useTranslation()
-    const { rotationX, rotationY, rotationZ, acceleration, fire }: any = React.useContext(SettingsContext)
+    const { acceleration, fire }: any = React.useContext(SettingsContext)
     const { frequency }: any = React.useContext(MusicContext)
     const { width, height } = useDimension()
     const isMediaGreaterThan771px = useMedia({ query: `(min-width: 771px)` })
@@ -45,6 +42,63 @@ export const AnimeThreeJSRain = ({
         successColor: new THREE.Color(colors[theme].successColor),
     }
 
+    const themeDependentMemo = React.useMemo(() => {
+        return (
+            <>
+                <ambientLight
+                    color={COLORS.primaryColor}
+                    intensity={0.1} />
+                <RectangleLight
+                    colors={COLORS} />
+                <InteriorGround
+                    colors={COLORS} />
+                <Text
+                    position={{ x: -800, y: 0, z: -200 }}
+                    text={`S. Photon Khan`}
+                    meshColor={COLORS.backgroundColor} />
+                <Text
+                    position={{ x: -250, y: 0, z: -500 }}
+                    text={`Awesome!`}
+                    meshColor={COLORS.primaryColor} />
+                <Wall colors={COLORS} />
+            </>
+        )
+    }, [theme])
+
+    const frequencyAndColorDependentMemo = React.useMemo(() => {
+        return (
+            <>
+                <ShinySphere
+                    frequency={frequency}
+                    colors={COLORS} />
+                <Cloud
+                    frequency={frequency}
+                    colors={COLORS}
+                    noOfClouds={25} />
+            </>
+        )
+    }, [theme, frequency])
+
+    const fireThemeAccelerationDependentMemo = React.useMemo(() => {
+        return (
+            <>
+                {
+                    fire ? (
+                        <BonFire />
+                    ) : (
+                            <>
+                                <RainDroplets
+                                    acceleration={acceleration}
+                                    colors={COLORS} />
+                                <Moon
+                                    colors={COLORS} />
+                            </>
+                        )
+                }
+            </>
+        )
+    }, [theme, acceleration, fire])
+
     return (
         <div style={{ width, height }}>
             <Canvas
@@ -57,44 +111,9 @@ export const AnimeThreeJSRain = ({
                     position: [100, 40, 120]
                 }}
                 pixelRatio={window.devicePixelRatio || 1}>
-                <ambientLight
-                    color={COLORS.primaryColor}
-                    intensity={0.1} />
-                <RectangleLight
-                    colors={COLORS} />
-                <InteriorGround
-                    colors={COLORS} />
-                <Text
-                    position={{ x: -800, y: 0, z: -200 }}
-                    text={`S. Photon Khan`}
-                    meshColor={COLORS.backgroundColor}/>
-                <Text
-                    position={{ x: -250, y: 0, z: -500 }}
-                    text={`Awesome!`}
-                    meshColor={COLORS.primaryColor}/>
-                <ShinySphere
-                    frequency={frequency}
-                    colors={COLORS} />
-                <Wall colors={COLORS} />
-                <Cloud
-                    frequency={frequency}
-                    colors={COLORS}
-                    noOfClouds={25} />
-                {
-                    fire ? (
-                    <BonFire
-                        frequency={frequency}
-                        colors={COLORS} />
-                    ) : (
-                        <>
-                            <RainDroplets
-                                acceleration={acceleration}
-                                colors={COLORS} />
-                            <Moon
-                                colors={COLORS} />
-                        </>
-                    )
-                }
+                { themeDependentMemo }
+                { frequencyAndColorDependentMemo }
+                { fireThemeAccelerationDependentMemo }
             </Canvas>
         </div>
     )

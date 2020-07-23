@@ -1,11 +1,10 @@
 import * as React from 'react'
 import * as THREE from 'three'
-import { useFrame, useResource, useThree } from 'react-three-fiber'
+import { useThree } from 'react-three-fiber'
 import { Fire } from 'three/examples/jsm/objects/Fire'
-import { RandomRange } from '../../../../Utilities/RandomRange'
 
-export const BonFire = ({ colors }: any) => {
-    const { gl, camera, scene } = useThree()
+export const BonFire = () => {
+    const { scene } = useThree()
     const fireColor = React.useRef({
         colorOne: new THREE.Color('#ffffff'),
         colorTwo: new THREE.Color('#ffa000'),

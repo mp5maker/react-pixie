@@ -39,6 +39,64 @@ export const AnimeThreeJSHome = ({
         successColor: new THREE.Color(colors[theme].successColor),
     }
 
+    const deviceSizeDependentMemo = React.useMemo(() => {
+        return (
+            <>
+                {
+                    isMediaGreaterThan771px && (
+                        <OrbitControl
+                            minDistance={0}
+                            maxDistance={200} />
+                    )
+                }
+            </>
+        )
+    }, [isMediaGreaterThan771px])
+
+    const themeDependentMemo = React.useMemo(() => {
+        return (
+            <>
+                <ambientLight
+                    color={COLORS.primaryColor}
+                    intensity={1}
+                    position={[0, 0, 0]} />
+                <pointLight
+                    color={COLORS.primaryColor}
+                    intensity={10}
+                    position={[0, 0, 0]}
+                    distance={5000}
+                    decay={500} />
+                <ambientLight
+                    color={COLORS.primaryColor}
+                    intensity={0.1}
+                    position={[0, 0, 0]} />
+            </>
+        )
+    }, [theme])
+
+    const rotationFrequencyThemeHistoryDependentMemo = React.useMemo(() => {
+        return (
+            <Box
+                frequency={frequency}
+                rotationX={rotationX}
+                rotationY={rotationY}
+                rotationZ={rotationZ}
+                redirectURL={Routes.EXPERIENCE}
+                wireframe={false}
+                colors={COLORS}
+                position={[0, 0, -25]}
+                history={history} />
+        )
+    }, [theme, frequency, history, rotationX, rotationY, rotationZ])
+
+    const accelerationThemeHistoryDependentMemo = React.useMemo(() => {
+        return (
+            <Stars
+                acceleration={acceleration}
+                colors={COLORS}
+                history={history} />
+        )
+    }, [theme, acceleration, history])
 
     return (
         <div style={{ width, height }}>
@@ -49,41 +107,10 @@ export const AnimeThreeJSHome = ({
                     far: 1000
                 }}
                 pixelRatio={window.devicePixelRatio || 1}>
-                {
-                    isMediaGreaterThan771px && (
-                        <OrbitControl
-                            minDistance={0}
-                            maxDistance={200}/>
-                    )
-                }
-                <ambientLight
-                    color={COLORS.primaryColor}
-                    intensity={1}
-                    position={[0, 0, 0]} />
-                <pointLight
-                    color={COLORS.primaryColor}
-                    intensity={10}
-                    position={[0, 0, 0]}
-                    distance={5000}
-                    decay={500}/>
-                <ambientLight
-                    color={COLORS.primaryColor}
-                    intensity={0.1}
-                    position={[0, 0, 0]} />
-                <Box
-                    frequency={frequency}
-                    rotationX={rotationX}
-                    rotationY={rotationY}
-                    rotationZ={rotationZ}
-                    redirectURL={Routes.EXPERIENCE}
-                    wireframe={false}
-                    colors={COLORS}
-                    position={[0, 0, -25]}
-                    history={history} />
-                <Stars
-                    acceleration={acceleration}
-                    colors={COLORS}
-                    history={history} />
+                { deviceSizeDependentMemo }
+                { themeDependentMemo }
+                { rotationFrequencyThemeHistoryDependentMemo }
+                { accelerationThemeHistoryDependentMemo }
             </Canvas>
         </div>
     )

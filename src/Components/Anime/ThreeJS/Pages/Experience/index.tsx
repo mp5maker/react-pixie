@@ -40,25 +40,23 @@ export const AnimeThreeJSExperience = ({
         successColor: new THREE.Color(colors[theme].successColor),
     }
 
-    return (
-        <div style={{ width, height }}>
-            <Canvas
-                camera={{
-                    fov: 75,
-                    near: 1,
-                    far: 1000
-                }}
-                pixelRatio={window.devicePixelRatio || 1}>
+    const deviceSizeDependentMemo = React.useMemo(() => {
+        return (
+            <>
                 {
                     isMediaGreaterThan771px && (
-                        <>
-                            <OrbitControl
-                                minDistance={0}
-                                maxDistance={200} />
-                            <Skills colors={COLORS} />
-                        </>
+                        <OrbitControl
+                            minDistance={0}
+                            maxDistance={200} />
                     )
                 }
+            </>
+        )
+    }, [isMediaGreaterThan771px])
+
+    const themeDependentMemo = React.useMemo(() => {
+        return (
+            <>
                 <ambientLight
                     color={COLORS.primaryColor}
                     intensity={1}
@@ -73,20 +71,47 @@ export const AnimeThreeJSExperience = ({
                     color={COLORS.primaryColor}
                     intensity={0.1}
                     position={[0, 0, 0]} />
-                <Box
-                    rotationX={rotationX}
-                    rotationY={rotationY}
-                    rotationZ={rotationZ}
-                    frequency={frequency}
-                    redirectURL={Routes.ROOT}
-                    wireframe={true}
-                    colors={COLORS}
-                    position={[0, 0, -25]}
-                    history={history} />
-                <Stars
-                    acceleration={acceleration}
-                    colors={COLORS}
-                    history={history} />
+            </>
+        )
+    }, [theme])
+
+    const rotationFrequencyThemeHistoryDependentMemo = React.useMemo(() => {
+        return (
+            <Box
+                frequency={frequency}
+                rotationX={rotationX}
+                rotationY={rotationY}
+                rotationZ={rotationZ}
+                redirectURL={Routes.ROOT}
+                wireframe={true}
+                colors={COLORS}
+                position={[0, 0, -25]}
+                history={history} />
+        )
+    }, [theme, frequency, history, rotationX, rotationY, rotationZ])
+
+    const accelerationThemeHistoryDependentMemo = React.useMemo(() => {
+        return (
+            <Stars
+                acceleration={acceleration}
+                colors={COLORS}
+                history={history} />
+        )
+    }, [theme, acceleration, history])
+
+    return (
+        <div style={{ width, height }}>
+            <Canvas
+                camera={{
+                    fov: 75,
+                    near: 1,
+                    far: 1000
+                }}
+                pixelRatio={window.devicePixelRatio || 1}>
+                { deviceSizeDependentMemo }
+                { themeDependentMemo }
+                { rotationFrequencyThemeHistoryDependentMemo }
+                { accelerationThemeHistoryDependentMemo }
             </Canvas>
         </div>
     )

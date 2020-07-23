@@ -1,17 +1,12 @@
 import * as React from 'react'
 import * as THREE from 'three'
 import { Canvas } from 'react-three-fiber'
-import { useTranslation } from 'react-i18next'
 
-import { SettingsContext } from '../../../../../SettingsContext'
 import { MusicContext } from '../../../../../MusicContext'
-import { OrbitControl } from '../../OrbitControl'
 import { Bird } from '../../Bird'
 import { Portal } from '../../Portal'
 import { Ocean } from '../../Ocean'
-import { RainDroplets } from '../../RainDroplets'
 import { useDimension } from '../../../../../Hooks/UseDimension'
-import * as Routes from '../../../../../Constants/Routes'
 import { useMedia } from '../../../../../Hooks/UseMedia'
 
 export const AnimeThreeJSBird = ({
@@ -19,8 +14,6 @@ export const AnimeThreeJSBird = ({
     theme,
     history,
 }: any) => {
-    const { t, i18n } = useTranslation()
-    const { rotationX, rotationY, rotationZ, acceleration }: any = React.useContext(SettingsContext)
     const { frequency }: any = React.useContext(MusicContext)
     const { width, height } = useDimension()
     const isMediaGreaterThan771px = useMedia({ query: `(min-width: 771px)` })
