@@ -54,6 +54,12 @@ export const AnimeThreeJSExperience = ({
         )
     }, [isMediaGreaterThan771px])
 
+    const themeDeviceSizeDependentMemo = React.useMemo(() => {
+        return isMediaGreaterThan771px ? (
+            <Skills colors={COLORS} />
+        ) : <React.Fragment></React.Fragment>
+    }, [theme, isMediaGreaterThan771px])
+
     const themeDependentMemo = React.useMemo(() => {
         return (
             <>
@@ -71,7 +77,6 @@ export const AnimeThreeJSExperience = ({
                     color={COLORS.primaryColor}
                     intensity={0.1}
                     position={[0, 0, 0]} />
-                <Skills colors={COLORS} />
             </>
         )
     }, [theme])
@@ -111,6 +116,7 @@ export const AnimeThreeJSExperience = ({
                 pixelRatio={window.devicePixelRatio || 1}>
                 { deviceSizeDependentMemo }
                 { themeDependentMemo }
+                { themeDeviceSizeDependentMemo }
                 { rotationFrequencyThemeHistoryDependentMemo }
                 { accelerationThemeHistoryDependentMemo }
             </Canvas>
