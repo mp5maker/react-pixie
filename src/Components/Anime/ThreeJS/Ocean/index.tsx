@@ -17,6 +17,11 @@ export const Ocean = ({ colors }: any) => {
     })
 
     React.useEffect(() => {
+        scene.fog = new THREE.FogExp2(colors.fogColor, 0.0009)
+    }, [colors])
+
+
+    React.useEffect(() => {
         let waterGeometry = new THREE.PlaneBufferGeometry(10000, 10000)
         water = new Water(waterGeometry, {
             textureWidth: 512,
