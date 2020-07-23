@@ -13,7 +13,7 @@ import * as Routes from '../../Constants/Routes'
 
 import "./styles.scss"
 
-export const LanguagePicker = ({ history }: any) => {
+export const LanguagePicker = () => {
     const { theme, setTheme }: any = React.useContext(AppContext)
     const { t, i18n } = useTranslation()
 

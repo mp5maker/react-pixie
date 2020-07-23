@@ -80,6 +80,65 @@ export const App = () => {
     ]).then(onSuccess)
   }, [])
 
+  const themePickerMemo = React.useMemo(() => {
+    return (
+      <ThemePicker />
+    )
+  }, [])
+
+  const audioPlayerMemo = React.useMemo(() => {
+    return (
+      <AudioPlayer />
+    )
+  }, [])
+
+  const themeDependentMemo = React.useMemo(() => {
+    return (
+      <>
+        <SocialPicker
+          colors={Colors}
+          theme={theme} />
+        <HotKeysHelp
+          colors={Colors}
+          theme={theme} />
+        <ShowKeyCombo
+          colors={Colors}
+          theme={theme} />
+        <Footer
+          colors={Colors}
+          theme={theme} />
+      </>
+    )
+  }, [theme])
+
+  const musicCreditMemo = React.useMemo(() => {
+    return (
+      <>
+        <MusicCredit
+          isPlaying={musicSettings.isPlaying}
+          theme={theme}
+          colors={Colors} />
+      </>
+    )
+  }, [musicSettings.isPlaying, theme])
+
+  const settingsSliderMemo = React.useMemo(() => {
+    return (
+      <>
+        <SettingsSlider
+          list={settings.settingsList} />
+      </>
+    )
+  }, [settings.settingsList])
+
+  const languagePickerMemo = React.useMemo(() => {
+    return (
+      <>
+        <LanguagePicker />
+      </>
+    )
+  }, [])
+
   return (
     <AppContext.Provider
       value={{ theme, setTheme }}>
@@ -120,26 +179,12 @@ export const App = () => {
                 <Navigation history={history} />
               </Router>
             </div>
-            <Footer
-              colors={Colors}
-              theme={theme} />
-            <ThemePicker />
-            <LanguagePicker history={history} />
-            <SettingsSlider list={settings.settingsList} />
-            <AudioPlayer />
-            <MusicCredit
-              isPlaying={musicSettings.isPlaying}
-              theme={theme}
-              colors={Colors} />
-            <SocialPicker
-              colors={Colors}
-              theme={theme} />
-            <HotKeysHelp
-              colors={Colors}
-              theme={theme} />
-            <ShowKeyCombo
-              colors={Colors}
-              theme={theme} />
+            { themePickerMemo }
+            { languagePickerMemo }
+            { settingsSliderMemo }
+            { audioPlayerMemo }
+            { musicCreditMemo }
+            { themeDependentMemo }
           </GlobalHotKeys>
         </MusicContext.Provider>
       </SettingsContext.Provider>
