@@ -3,25 +3,7 @@
     bottom: 75px;
     right: 25px;
     button {
-        border-radius: 5px;
-        height: 40px;
-        width: 40px;
-        outline: none;
-        border: 1px solid transparent;
-        box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
-        transform: scale(1);
         margin-left: 12px;
-        transition: all ease-in-out 0.25s;
         display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        &:hover {
-            transform: scale(0.98);
-            transition: all ease-in-out 0.25s;
-            box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.4);
-        }
-        &:active {
-            border: 1px solid transparent;
-        }
     }
 }

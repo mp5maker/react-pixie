@@ -5,6 +5,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import { LIGHT, DARK } from '../../Constants/Settings'
 import { Drawer } from '../Drawer'
+import { ButtonSquare } from '../Button/Square'
 import "./styles.scss"
 
 const drawerVariants = {
@@ -189,6 +190,7 @@ export const Showcase = ({ colors, theme }: any) => {
                 colors={colors}
                 theme={theme}
                 drawerVariants={drawerVariants}
+                buttonShape={`square`}
                 direction={`left`}
                 buttonDisplay={t(`SHOW_CASE`)}>
                 {
@@ -205,15 +207,6 @@ export const Showcase = ({ colors, theme }: any) => {
                                     { memoChip }
                                     { memoTimeline }
                                     { memoImageGrid }
-                                </div>
-                                <div className={`times-container`}>
-                                    <button
-                                        onClick={(event) => {
-                                            event.preventDefault();
-                                            toggleDrawer(false)
-                                        }}>
-                                        <FontAwesomeIcon icon={faTimes} />
-                                    </button>
                                 </div>
                             </React.Fragment>
                         )

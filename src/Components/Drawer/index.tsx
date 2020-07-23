@@ -2,14 +2,19 @@ import * as React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import * as ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSortUp } from '@fortawesome/free-solid-svg-icons'
+import { faSortUp, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { GlobalHotKeys } from 'react-hotkeys';
 
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import { ButtonRadial } from '../Button/Radial'
+import { ButtonSquare } from '../Button/Square'
 
 import './styles.scss'
+
+const BUTTON_SHAPE_SQUARE = 'square'
+const BUTTON_SHAPE_ROUND = 'round'
 
 export const Drawer = ({
     colors,
@@ -18,7 +23,7 @@ export const Drawer = ({
     children,
     direction = 'top',
     buttonDisplay,
-    buttonsShape = '',
+    buttonShape = BUTTON_SHAPE_ROUND,
     hotKeyHandler = ''
 }: any) => {
     const [show, setShow] = React.useState(false)
@@ -64,6 +69,15 @@ export const Drawer = ({
                         <FontAwesomeIcon icon={faSortUp} />
                     </ListItem>
                 </List>
+                <div className={`times-container`}>
+                    <ButtonRadial
+                        onClick={(event: any) => {
+                            event.preventDefault();
+                            toggleDrawer(false)
+                        }}>
+                        <FontAwesomeIcon icon={faTimes} />
+                    </ButtonRadial>
+                </div>
             </div>
         </motion.div>
     )
@@ -78,14 +92,27 @@ export const Drawer = ({
 
     const content = (
         <>
-            <Button
-                style={{
-                    backgroundColor: colors[theme].backgroundColor,
-                    color: colors[theme].primaryColor,
-                }}
-                onClick={toggleDrawer(true)}>
-                { buttonDisplay }
-            </Button>
+            {
+                buttonShape == BUTTON_SHAPE_ROUND ? (
+                    <ButtonRadial
+                        style={{
+                            backgroundColor: colors[theme].backgroundColor,
+                            color: colors[theme].primaryColor,
+                        }}
+                        onClick={toggleDrawer(true)}>
+                        {buttonDisplay}
+                    </ButtonRadial>
+                ) : (
+                    <ButtonSquare
+                        style={{
+                            backgroundColor: colors[theme].backgroundColor,
+                            color: colors[theme].primaryColor,
+                        }}
+                        onClick={toggleDrawer(true)}>
+                        { buttonDisplay }
+                    </ButtonSquare>
+                )
+            }
             {
                 ReactDOM.createPortal(
                     AnimatedContent,

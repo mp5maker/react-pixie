@@ -7,8 +7,6 @@ import moment from 'moment'
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 import { Drawer } from '../Drawer'
 
@@ -454,6 +452,7 @@ export const WorkExperience = ({ colors, theme }: any) => {
                     theme={theme}
                     drawerVariants={drawerVariants}
                     direction={`top`}
+                    buttonShape={`square`}
                     buttonDisplay={t(`WORK_EXPERIENCE`)}>
                     {
                         ({ toggleDrawer }: any) => {
@@ -468,15 +467,6 @@ export const WorkExperience = ({ colors, theme }: any) => {
                                     { EicraSoftJob }
                                     < Divider />
                                     { Internship }
-                                    <div className={`times-container`}>
-                                        <button
-                                            onClick={(event) => {
-                                                event.preventDefault();
-                                                toggleDrawer(false)
-                                            }}>
-                                            <FontAwesomeIcon icon={faTimes} />
-                                        </button>
-                                    </div>
                                 </React.Fragment>
                             )
                         }

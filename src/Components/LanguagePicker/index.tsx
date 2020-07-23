@@ -61,21 +61,6 @@ export const LanguagePicker = ({ history }: any) => {
         </ButtonRadial>
     )
 
-    const BackToHomeButton = (
-        <ButtonRadial
-            style={{
-                // @ts-ignore
-                backgroundColor: Colors[theme].backgroundColor,
-                // @ts-ignore
-                border: `1px solid ${Colors[theme].backgroundColor}`,
-                // @ts-ignore
-                color: Colors[theme].primaryColor,
-            }}
-            onClick={() => history.push(Routes.ROOT)}>
-            <FontAwesomeIcon icon={faUser} />
-        </ButtonRadial>
-    )
-
     const handlers = {
         ENGLISH_SETTINGS: () => {
             i18n.changeLanguage(EN)
@@ -94,7 +79,6 @@ export const LanguagePicker = ({ history }: any) => {
                     <div className="language-picker-content">
                         { EnglishButton }
                         { BengaliButton }
-                        { BackToHomeButton }
                     </div>
                 </div>
             </GlobalHotKeys>

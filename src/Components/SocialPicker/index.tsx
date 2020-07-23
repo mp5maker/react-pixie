@@ -68,17 +68,6 @@ export const SocialPicker = ({ colors, theme }: any) => {
                                                     src="/Socials/github-dark.png" />
                                             )
                                         }
-                                        <div className={`times-container`}>
-                                            <div className={`times-container`}>
-                                                <button
-                                                    onClick={(event) => {
-                                                        event.preventDefault();
-                                                        toggleDrawer(false)
-                                                    }}>
-                                                    <FontAwesomeIcon icon={faTimes} />
-                                                </button>
-                                            </div>
-                                        </div>
                                     </a>
                                 )
                             }
@@ -122,15 +111,6 @@ export const SocialPicker = ({ colors, theme }: any) => {
                                                     src="/Socials/linked-dark.png" />
                                             )
                                         }
-                                        <div className={`times-container`}>
-                                            <button
-                                                onClick={(event) => {
-                                                    event.preventDefault();
-                                                    toggleDrawer(false)
-                                                }}>
-                                                <FontAwesomeIcon icon={faTimes} />
-                                            </button>
-                                        </div>
                                     </a>
                                 )
                             }
@@ -162,17 +142,6 @@ export const SocialPicker = ({ colors, theme }: any) => {
                                                 width: `100%`
                                             }}
                                             src={`https://photonkhan.weebly.com/`} />
-                                        <div className={`times-container`}>
-                                            <div className={`times-container`}>
-                                                <button
-                                                    onClick={(event) => {
-                                                        event.preventDefault();
-                                                        toggleDrawer(false)
-                                                    }}>
-                                                    <FontAwesomeIcon icon={faTimes} />
-                                                </button>
-                                            </div>
-                                        </div>
                                     </a>
                                 )
                             }
@@ -212,17 +181,6 @@ export const SocialPicker = ({ colors, theme }: any) => {
                                                         src="/Resume/resume-dark.png" />
                                                 )
                                             }
-                                            <div className={`times-container`}>
-                                                <div className={`times-container`}>
-                                                    <button
-                                                        onClick={(event) => {
-                                                            event.preventDefault();
-                                                            toggleDrawer(false)
-                                                        }}>
-                                                        <FontAwesomeIcon icon={faTimes} />
-                                                    </button>
-                                                </div>
-                                            </div>
                                         </div>
                                     </React.Fragment>
                                 )

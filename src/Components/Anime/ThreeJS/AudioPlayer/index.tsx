@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Colors } from '../../../../Constants/Colors'
 import { AppContext } from '../../../../AppContext'
 import { MusicContext } from '../../../../MusicContext'
+import { ButtonRadial } from '../../../Button/Radial'
 
 import "./styles.scss"
 
@@ -103,7 +104,7 @@ export const AudioPlayer = ({ }: any) => {
         <>
             {
                 playAudio == AUDIO_NOT_PLAYING && (
-                    <motion.button
+                    <ButtonRadial
                         variants={buttonVariants}
                         initial={`initial`}
                         animate={`animate`}
@@ -119,7 +120,7 @@ export const AudioPlayer = ({ }: any) => {
                         }}
                         onClick={() => play()}>
                         <FontAwesomeIcon icon={faMusic} />
-                    </motion.button>
+                    </ButtonRadial>
                 )
             }
         </>
@@ -129,7 +130,7 @@ export const AudioPlayer = ({ }: any) => {
         <>
             {
                 (playAudio == AUDIO_PLAYING) && (
-                    <motion.button
+                    <ButtonRadial
                         variants={buttonVariants}
                         initial={`initial`}
                         animate={`animate`}
@@ -145,7 +146,7 @@ export const AudioPlayer = ({ }: any) => {
                         }}
                         onClick={() => pause()}>
                         <FontAwesomeIcon icon={faPause} />
-                    </motion.button>
+                    </ButtonRadial>
                 )
             }
         </>
@@ -155,7 +156,7 @@ export const AudioPlayer = ({ }: any) => {
         <>
             {
                 (playAudio == AUDIO_PAUSE) && (
-                    <motion.button
+                    <ButtonRadial
                         variants={buttonVariants}
                         initial={`initial`}
                         animate={`animate`}
@@ -171,7 +172,7 @@ export const AudioPlayer = ({ }: any) => {
                         }}
                         onClick={() => resume()}>
                         <FontAwesomeIcon icon={faPlay} />
-                    </motion.button>
+                    </ButtonRadial>
                 )
             }
         </>
@@ -181,7 +182,7 @@ export const AudioPlayer = ({ }: any) => {
         <>
             {
                 (playAudio == AUDIO_PLAYING || playAudio == AUDIO_PAUSE) && (
-                    <motion.button
+                    <ButtonRadial
                         variants={buttonVariants}
                         initial={`initial`}
                         animate={`animate`}
@@ -197,7 +198,7 @@ export const AudioPlayer = ({ }: any) => {
                         }}
                         onClick={() => stop()}>
                         <FontAwesomeIcon icon={faStop} />
-                    </motion.button>
+                    </ButtonRadial>
                 )
             }
         </>
@@ -207,7 +208,7 @@ export const AudioPlayer = ({ }: any) => {
         <>
             {
                 loaded !== 0 && loaded !== 100 && (
-                    <motion.button
+                    <ButtonRadial
                         variants={buttonVariants}
                         initial={`initial`}
                         animate={`animate`}
@@ -222,7 +223,7 @@ export const AudioPlayer = ({ }: any) => {
                             border: `1px solid ${Colors[theme].backgroundColor}`
                         }}>
                         { parseInt(loaded, 10) }%
-                    </motion.button>
+                    </ButtonRadial>
                 )
             }
         </>

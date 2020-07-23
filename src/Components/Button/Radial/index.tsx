@@ -1,14 +1,16 @@
 import * as React from 'react'
+import { motion } from 'framer-motion'
 
 import './styles.scss'
 
-export const ButtonRadial = ({ style = {}, onClick = () => {}, children }: any = {}) => {
+export const ButtonRadial = ({ style = {}, onClick = () => {}, children, ...otherProps }: any = {}) => {
     return (
-        <button
+        <motion.button
             className={`button-radial-container`}
             style={style}
-            onClick={onClick}>
+            onClick={onClick}
+            {...otherProps}>
             { children }
-        </button>
+        </motion.button>
     )
 }
