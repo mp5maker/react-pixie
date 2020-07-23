@@ -223,6 +223,14 @@ export const AudioPlayer = ({ }: any) => {
                             border: `1px solid ${Colors[theme].backgroundColor}`
                         }}>
                         { parseInt(loaded, 10) }%
+                        <div
+                            style={{
+                                // @ts-ignore
+                                backgroundColor: Colors[theme].primaryColor,
+                                width: `${(parseInt(loaded, 10) / 100) * 40}px`
+                            }}
+                            className={`loader-progress`}>
+                        </div>
                     </ButtonRadial>
                 )
             }
