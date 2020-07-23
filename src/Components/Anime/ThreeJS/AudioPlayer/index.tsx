@@ -65,7 +65,7 @@ export const AudioPlayer = ({ }: any) => {
         }
     }
 
-    const play = () => {
+    const play = React.useCallback(() => {
         const onProgressLoad = (response: any) => {
             setLoaded((response.loaded / response.total) * 100)
         }
@@ -80,24 +80,24 @@ export const AudioPlayer = ({ }: any) => {
             requestAnimationFrame(animate)
         }
         loader.load('/Audio/sample.mp3', onSuccessLoad, onProgressLoad)
-    }
+    }, [playAudio])
 
-    const pause = () => {
+    const pause = React.useCallback(() => {
         setPlayAudio(AUDIO_PAUSE)
         sound.pause()
-    }
+    }, [playAudio])
 
-    const resume = () => {
+    const resume = React.useCallback(() => {
         setPlayAudio(AUDIO_PLAYING)
         analyser = new THREE.AudioAnalyser(sound, 32)
         requestAnimationFrame(animate)
         sound.play()
-    }
+    }, [playAudio])
 
-    const stop = () => {
+    const stop = React.useCallback(() => {
         setPlayAudio(AUDIO_NOT_PLAYING)
         sound.stop()
-    }
+    }, [playAudio])
 
     const PlayButton = (
         <>

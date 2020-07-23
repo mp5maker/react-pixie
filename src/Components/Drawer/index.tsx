@@ -24,7 +24,7 @@ export const Drawer = ({
     const [show, setShow] = React.useState(false)
     const drawer: any = React.useRef(document.getElementById('drawer')).current
 
-    const toggleDrawer = (status: boolean) => (event: any) => {
+    const toggleDrawer = React.useCallback((status: boolean) => (event: any) => {
         if (event.type == 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) return;
         if (status) {
             document.body.style.position = 'fixed';
@@ -34,7 +34,7 @@ export const Drawer = ({
             document.body.style.top = ``;
         }
         setShow(status)
-    }
+    }, [status])
 
     const Content = (
         <motion.div

@@ -35,7 +35,7 @@ export const Bird = ({ colors }: any) => {
         }
     })
 
-    const onSuccessLoad = ({ gltf, name }: any) => {
+    const onSuccessLoad = React.useCallback(({ gltf, name }: any) => {
         const mesh = gltf.scene
         mesh.castShadow = true
         mesh.rotation.set(0, -Math.PI, 0)
@@ -63,7 +63,7 @@ export const Bird = ({ colors }: any) => {
         /* Actions */
         const actions = [flying]
         actions.forEach((action: any) => action.play())
-    }
+    }, [])
 
     React.useEffect(() => {
         loader.load('/AnimationModel/Flamingo.glb', (gltf) => onSuccessLoad({ gltf, name: `flamingo` }))

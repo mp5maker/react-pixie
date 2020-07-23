@@ -49,13 +49,19 @@ export const Cloud = ({ noOfClouds = 100, colors, frequency }: any) => {
         return clouds
     }, [clouds])
 
+    const memoPointLight = React.useMemo(() => {
+        return (
+            <pointLight
+                power={frequency !== 0 && Math.random() > 0.95 ? frequency * 0.07 : 1}
+                position={[-100, 0, -1000]}
+                args={[colors.primaryColor, 1, 5000, 1.7]} />
+        )
+    }, [colors])
+
 
     return (
         <>
-            <pointLight
-                power={frequency !== 0 && Math.random() > 0.95 ? frequency * 0.07 : 1 }
-                position={[-100, 0, -1000]}
-                args={[colors.primaryColor, 1, 5000, 1.7]} />
+            { memoPointLight }
             { memoClouds }
         </>
     )

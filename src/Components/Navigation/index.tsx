@@ -51,13 +51,13 @@ export const Navigation = ({ history }: any) => {
         },
     ]
 
-    const currentIndex = () => {
+    const currentIndex = React.useCallback(() => {
         const currentLocation = get(history, 'location.pathname', '')
         const findIndex = list.findIndex((item) => {
             return currentLocation == get(item, 'route', '')
         })
         return findIndex
-    }
+    }, [history])
 
     const handlers = {
         NAVIGATE_ROUTE_UP: () => {
