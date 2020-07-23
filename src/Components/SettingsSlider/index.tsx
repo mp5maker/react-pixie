@@ -7,14 +7,15 @@ import { GlobalHotKeys } from 'react-hotkeys'
 
 import Slider from '@material-ui/core/Slider'
 import Switch from '@material-ui/core/Switch';
-import FormGroup from '@material-ui/core/FormGroup';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import { Colors } from '../../Constants/Colors'
 import { AppContext } from '../../AppContext'
 import { SettingsContext } from '../../SettingsContext'
+import { MusicContext } from '../../MusicContext'
 import { useMedia } from '../../Hooks/UseMedia'
+
 
 import "./styles.scss"
 
@@ -49,6 +50,7 @@ export const SettingsSlider = ({
     const { theme }: any  = React.useContext(AppContext)
     const { t, i18n } = useTranslation()
     const { rotationX, rotationY, rotationZ, acceleration, setSettings, fire, ...otherSettings }: any  = React.useContext(SettingsContext)
+    const { isPlaying }: any = React.useContext(MusicContext)
     const isWidthGreaterThan771px = useMedia({ query: '(min-width: 771px)' })
 
     const onSettingsChange = ({ newValue, name }: any) => {
@@ -76,7 +78,7 @@ export const SettingsSlider = ({
     }
 
     const content = (
-        <div className={`settings-slider-container ${show ? `active` : ``}`}>
+        <div className={`settings-slider-container ${!isPlaying ? `active` : ``}`}>
             <AnimatePresence initial={false} exitBeforeEnter>
                 {
                     !show ? (

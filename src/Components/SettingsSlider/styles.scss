@@ -17,6 +17,10 @@
     position: absolute;
     top: calc((100vh / 2) - 50px);
     right: 0;
+    display: none;
+    &.active {
+        display: block;
+    }
     .settings-slider-open-button {
         @include settings-slider-button(polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%))
     }
