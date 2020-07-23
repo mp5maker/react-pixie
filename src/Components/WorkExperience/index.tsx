@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faCalendar, faArrowRight, faLightbulb } from '@fortawesome/free-solid-svg-icons'
+import { faBriefcase, faCalendar, faArrowRight, faLightbulb } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment'
 
 import Divider from '@material-ui/core/Divider';
@@ -452,8 +452,10 @@ export const WorkExperience = ({ colors, theme }: any) => {
                     theme={theme}
                     drawerVariants={drawerVariants}
                     direction={`top`}
-                    buttonShape={`square`}
-                    buttonDisplay={t(`WORK_EXPERIENCE`)}>
+                    buttonShape={`round`}
+                    buttonDisplay={(
+                        <FontAwesomeIcon icon={faBriefcase} />
+                    )}>
                     {
                         ({ toggleDrawer }: any) => {
                             return (

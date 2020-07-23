@@ -1,11 +1,10 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faPencilRuler } from '@fortawesome/free-solid-svg-icons'
 
 import { LIGHT, DARK } from '../../Constants/Settings'
 import { Drawer } from '../Drawer'
-import { ButtonSquare } from '../Button/Square'
 import "./styles.scss"
 
 const drawerVariants = {
@@ -190,9 +189,11 @@ export const Showcase = ({ colors, theme }: any) => {
                 colors={colors}
                 theme={theme}
                 drawerVariants={drawerVariants}
-                buttonShape={`square`}
+                buttonShape={`round`}
                 direction={`left`}
-                buttonDisplay={t(`SHOW_CASE`)}>
+                buttonDisplay={(
+                    <FontAwesomeIcon icon={faPencilRuler} />
+                )}>
                 {
                     ({ toggleDrawer }: any) => {
                         return (
