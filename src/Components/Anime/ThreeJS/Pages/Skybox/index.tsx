@@ -16,18 +16,6 @@ export const AnimeThreeJSSkybox = ({
     const { t, i18n } = useTranslation()
     const { width, height } = useDimension()
 
-    /* Colors */
-    const COLORS = {
-        primaryColor: new THREE.Color(colors[theme].primaryColor),
-        backgroundColor: new THREE.Color(colors[theme].backgroundColor),
-        secondaryColor: new THREE.Color(colors[theme].secondaryColor),
-        infoColor: new THREE.Color(colors[theme].infoColor),
-        dangerColor: new THREE.Color(colors[theme].dangerColor),
-        warningColor: new THREE.Color(colors[theme].warningColor),
-        successColor: new THREE.Color(colors[theme].successColor),
-        fogColor: new THREE.Color(colors[theme].fogColor),
-    }
-
     return (
         <div style={{ width, height }}>
             <Canvas

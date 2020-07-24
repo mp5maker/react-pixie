@@ -31,7 +31,7 @@ export const Bird = ({ history, location, match }: any) => {
                 // @ts-ignore
                 backgroundColor: Colors[theme].backgroundColor
             }}
-            className="pages-home-container">
+            className="pages-bird-container">
             <div className="row">
                 <div className="col p-0">
                     <AnimeThreeJSBird

@@ -39,7 +39,7 @@ export const Experience = ({ history, location, match }: any) => {
                 // @ts-ignore
                 backgroundColor: Colors[theme].backgroundColor
             }}
-            className="pages-resume-container">
+            className="pages-experience-container">
             <div className="row">
                 <div className="col p-0">
                     <AnimeThreeJSExperience

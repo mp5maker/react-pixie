@@ -36,11 +36,6 @@ export const Navigation = ({ history }: any) => {
             key: `experience`,
             Svg: Book
         },
-        // {
-        //     label: t(`SKYBOX`),
-        //     route: Routes.SKYBOX,
-        //      key: `skybox`
-        // },
         {
             label: t(`RAIN`),
             route: Routes.RAIN,
@@ -73,12 +68,24 @@ export const Navigation = ({ history }: any) => {
             const presentIndex = currentIndex()
             if (presentIndex == (list.length - 1)) history.push(list[0].route)
             else history.push(list[presentIndex + 1].route)
+        },
+        NAVIGATE_TO_SKYBOX: () => {
+            const currentLocation = get(history, 'location.pathname', '')
+            if (currentLocation == Routes.SKYBOX) history.goBack()
+            else history.push(Routes.SKYBOX)
+        },
+        NAVIGATE_TO_PHYSICS: () => {
+            const currentLocation = get(history, 'location.pathname', '')
+            if (currentLocation == Routes.PHYSICS) history.goBack()
+            else history.push(Routes.PHYSICS)
         }
     }
 
     return (
         <React.Fragment>
-            <GlobalHotKeys handlers={handlers}>
+            <GlobalHotKeys
+                allowChanges={true}
+                handlers={handlers}>
                 <div className="navigation-container">
                     <div className="navigation-content">
                         <div className="navigation-circle"></div>

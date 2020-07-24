@@ -35,6 +35,18 @@ export const HotKeyMap: any = {
         action: 'keydown',
         group: 'NAVIGATION'
     },
+    NAVIGATE_TO_SKYBOX: {
+        name: 'NAVIGATE_TO_SKYBOX',
+        sequence: 'right',
+        action: 'keydown',
+        group: 'NAVIGATION'
+    },
+    NAVIGATE_TO_PHYSICS: {
+        name: 'NAVIGATE_TO_PHYSICS',
+        sequence: 'left',
+        action: 'keydown',
+        group: 'NAVIGATION'
+    },
     ENGLISH_SETTINGS: {
         name: 'ENGLISH_SETTINGS',
         sequence: 'e',
@@ -51,30 +63,30 @@ export const HotKeyMap: any = {
         name: 'TOGGLE_HELP',
         sequence: 'h',
         action: 'keydown',
-        group: 'MODAL'
+        group: 'DRAWER'
     },
     TOGGLE_GITHUB: {
         name: 'TOGGLE_GITHUB',
         sequence: 'g',
         action: 'keydown',
-        group: 'MODAL'
+        group: 'DRAWER'
     },
     TOGGLE_LINKEDIN: {
         name: 'TOGGLE_LINKEDIN',
         sequence: 'z',
         action: 'keydown',
-        group: 'MODAL'
+        group: 'DRAWER'
     },
     TOGGLE_WEEBLY: {
         name: 'TOGGLE_WEEBLY',
         sequence: 'w',
         action: 'keydown',
-        group: 'MODAL'
+        group: 'DRAWER'
     },
     TOGGLE_RESUME: {
         name: 'TOGGLE_RESUME',
         sequence: 'r',
         action: 'keydown',
-        group: 'MODAL'
+        group: 'DRAWER'
     },
 }

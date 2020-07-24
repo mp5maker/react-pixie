@@ -47,5 +47,7 @@
     "TOGGLE_GITHUB": "গিটহাব",
     "TOGGLE_LINKEDIN": "লিংকড ইন",
     "TOGGLE_WEEBLY": "ওয়েবলি",
-    "TOGGLE_RESUME": "রেসুমে"
+    "TOGGLE_RESUME": "রেসুমে",
+    "NAVIGATE_TO_SKYBOX": "স্কাইবক্সে নেভিগেট করুন",
+    "NAVIGATE_TO_PHYSICS": "পদার্থবিজ্ঞানে নেভিগেট করুন"
 }

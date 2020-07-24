@@ -5,13 +5,13 @@ import { Colors } from '../../Constants/Colors'
 import { PageTransition } from '../../Constants/PageTransition'
 import { AppContext } from '../../AppContext'
 import { SettingsContext } from '../../SettingsContext'
-import { AnimeThreeJSSkybox } from '../../Components/Anime/ThreeJS/Pages/Skybox'
+import { AnimeThreeJSPhysics } from '../../Components/Anime/ThreeJS/Pages/Physics'
 import { useDocument } from '../../Hooks/UseDocument'
 
-export const Resume = ({ history, location, match }: any) => {
-    const { theme }: any = React.useContext(AppContext)
+export const Bird = ({ history, location, match }: any) => {
+    const { theme } = React.useContext(AppContext)
     const { setSettings, ...settings }: any = React.useContext(SettingsContext)
-    useDocument({ options: [{ selector: 'title', value: `Photon's Portfolio: Skybox` }] })
+    useDocument({ options: [{ selector: 'title', value: `Photon's Portfolio: Physics` }] })
 
     React.useEffect(() => {
         setSettings({
@@ -31,17 +31,17 @@ export const Resume = ({ history, location, match }: any) => {
                 // @ts-ignore
                 backgroundColor: Colors[theme].backgroundColor
             }}
-            className="pages-skybox-container">
+            className="pages-phsyics-container">
             <div className="row">
                 <div className="col p-0">
-                    <AnimeThreeJSSkybox
+                    <AnimeThreeJSPhysics
                         history={history}
-                        colors={Colors}
-                        theme={theme} />
+                        theme={theme}
+                        colors={Colors} />
                 </div>
             </div>
         </motion.div>
     )
 }
 
-export default Resume
+export default Bird

@@ -4,6 +4,7 @@ import Skybox from './Skybox'
 import Error from './Error'
 import Rain from './Rain'
 import Bird from './Bird'
+import Physics from './Physics'
 
 export {
     Home,
@@ -12,4 +13,5 @@ export {
     Error,
     Rain,
     Bird,
+    Physics
 }
