@@ -15,7 +15,7 @@ const Plane = ({ colors, ...props}: any) => {
             <planeBufferGeometry
                 attach={`geometry`}
                 args={[1000, 1000]} />
-            <shadowMaterial
+            <meshPhongMaterial
                 attach={`material`}
                 color={colors.backgroundColor} />
         </mesh>
@@ -77,18 +77,19 @@ export const AnimeThreeJSPhysics = ({
                     args={[colors[theme].backgroundColor]} />
                 <hemisphereLight
                     color={COLORS.primaryColor}
-                    intensity={0.35} />
+                    intensity={0.1} />
                 <spotLight
                     color={COLORS.primaryColor}
                     position={[10, 10, 10]}
                     angle={0.3}
                     penumbra={1}
-                    intensity={2}
+                    intensity={1}
                     castShadow />
                 <Physics>
                     <Plane
                         colors={COLORS} />
                     <Box
+                        isKinematic={true}
                         colors={COLORS}/>
                     <Box
                         colors={COLORS}
