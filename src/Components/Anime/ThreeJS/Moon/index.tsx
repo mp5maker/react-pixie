@@ -1,7 +1,15 @@
 import * as React from 'react'
 import * as THREE from 'three'
+import { useThree } from 'react-three-fiber'
 
 export const Moon = ({ colors }: any) => {
+    const { scene } = useThree()
+
+    React.useEffect(() => {
+        scene.fog = new THREE.FogExp2(colors.fogColor, 0.0009)
+        return () => { scene.fog = null }
+    }, [colors])
+
     const memoMoon = React.useMemo(() => {
         return (
             <>

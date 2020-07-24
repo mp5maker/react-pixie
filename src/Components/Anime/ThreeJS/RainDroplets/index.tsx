@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as THREE from 'three'
-import { useThree, useFrame } from 'react-three-fiber'
+import { useFrame } from 'react-three-fiber'
 import { RandomRange } from '../../../../Utilities/RandomRange'
 
 

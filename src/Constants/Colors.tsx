@@ -7,6 +7,7 @@ export const Colors = {
         dangerColor: `#C4404B`,
         warningColor: `#B69329`,
         infoColor: `#3995A5`,
+        fogColor: `#343434`
     },
     dark: {
         primaryColor: `#CBC0AD`,
@@ -16,5 +17,6 @@ export const Colors = {
         dangerColor: `#C4404B`,
         warningColor: `#B69329`,
         infoColor: `#3995A5`,
+        fogColor: `#1A191A`
     },
 }

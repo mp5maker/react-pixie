@@ -8,6 +8,11 @@ export const Ocean = ({ colors }: any) => {
     const { scene } = useThree()
     const [meshRef, mesh]: any = useResource()
 
+    React.useEffect(() => {
+        scene.fog = new THREE.FogExp2(colors.fogColor, 0.0009)
+        return () => { scene.fog = null }
+    }, [colors])
+
     useFrame((state, delta) => {
         water.material.uniforms['time'].value += 1.0 / 60.0;
         if (mesh) {

@@ -20,6 +20,8 @@ export const useColors = ({ theme }: any) => {
         root.style.setProperty('--success-color', Colors[theme].successColor)
         // @ts-ignore
         root.style.setProperty('--danger-color', Colors[theme].dangerColor)
+        // @ts-ignore
+        root.style.setProperty('--fog-color', Colors[theme].fogColor)
     }, [theme])
 
     return
