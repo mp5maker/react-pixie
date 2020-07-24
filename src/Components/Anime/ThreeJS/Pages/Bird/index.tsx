@@ -38,6 +38,7 @@ export const AnimeThreeJSBird = ({
     return (
         <div style={{ width, height }}>
             <Canvas
+                shadowMap={true}
                 camera={{
                     fov: 75,
                     near: 1,

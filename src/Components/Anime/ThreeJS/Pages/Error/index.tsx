@@ -62,6 +62,8 @@ export const AnimeThreeJSError = ({
     return (
         <div style={{ width, height }}>
             <Canvas
+                shadowMap={true}
+                sRGB={true}
                 camera={{
                     fov: 75,
                     near: 1,

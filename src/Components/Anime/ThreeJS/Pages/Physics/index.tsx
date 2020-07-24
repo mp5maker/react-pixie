@@ -1,10 +1,42 @@
 import * as React from 'react'
 import * as THREE from 'three'
 import { Canvas } from 'react-three-fiber'
+import { Physics, usePlane, useBox } from 'use-cannon'
 
 import { MusicContext } from '../../../../../MusicContext'
 import { useDimension } from '../../../../../Hooks/UseDimension'
 import { useMedia } from '../../../../../Hooks/UseMedia'
+
+const Plane = ({ colors, ...props}: any) => {
+    const [ ref ] = usePlane(() => ({ rotation: [-Math.PI / 2, 0, 0 ], ...props }))
+
+    return (
+        <mesh ref={ref} receiveShadow>
+            <planeBufferGeometry
+                attach={`geometry`}
+                args={[1000, 1000]} />
+            <shadowMaterial
+                attach={`material`}
+                color={colors.backgroundColor} />
+        </mesh>
+    )
+}
+
+const Box = ({ colors, ...props }: any) => {
+    const [ref] = useBox(() => ({ mass: 1, position: [0, 5, 0], rotation: [0.4, 0.2, 0.5], ...props }))
+    return (
+        <mesh
+            receiveShadow
+            castShadow
+            ref={ref}>
+            <boxBufferGeometry
+                attach={`geometry`} />
+            <meshLambertMaterial
+                attach={`material`}
+                color={colors.primaryColor} />
+        </mesh>
+    )
+}
 
 export const AnimeThreeJSPhysics = ({
     colors,
@@ -35,27 +67,36 @@ export const AnimeThreeJSPhysics = ({
     return (
         <div style={{ width, height }}>
             <Canvas
-                camera={{
-                    fov: 75,
-                    near: 1,
-                    far: 5000,
-                    position: [100, 40, 120]
-                }}
+                shadowMap={true}
+                sRGB={true}
+                camera={{ position: [-1, 2, 5], fov: 50 }}
                 pixelRatio={window.devicePixelRatio || 1}>
-                <ambientLight
+                <color
+                    attach="background"
+                    // @ts-ignore
+                    args={[colors[theme].backgroundColor]} />
+                <hemisphereLight
                     color={COLORS.primaryColor}
-                    intensity={1}
-                    position={[0, 0, 0]} />
-                <pointLight
+                    intensity={0.35} />
+                <spotLight
                     color={COLORS.primaryColor}
-                    intensity={10}
-                    position={[0, 0, 0]}
-                    distance={5000}
-                    decay={500} />
-                <ambientLight
-                    color={COLORS.primaryColor}
-                    intensity={0.1}
-                    position={[0, 0, 0]} />
+                    position={[10, 10, 10]}
+                    angle={0.3}
+                    penumbra={1}
+                    intensity={2}
+                    castShadow />
+                <Physics>
+                    <Plane
+                        colors={COLORS} />
+                    <Box
+                        colors={COLORS}/>
+                    <Box
+                        colors={COLORS}
+                        position={[0, 10, -2]} />
+                    <Box
+                        colors={COLORS}
+                        position={[0, 20, -2]} />
+                </Physics>
             </Canvas>
         </div>
     )

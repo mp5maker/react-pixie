@@ -19,6 +19,7 @@ export const AnimeThreeJSSkybox = ({
     return (
         <div style={{ width, height }}>
             <Canvas
+                shadowMap={true}
                 camera={{
                     fov: 55,
                     near: 45,
