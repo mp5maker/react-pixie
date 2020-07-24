@@ -141,7 +141,7 @@ export const SocialPicker = ({ colors, theme }: any) => {
                                         target="_blank">
                                         <iframe
                                             style={{
-                                                height: `100vh`,
+                                                height: `calc(100vh - 200px)`,
                                                 width: `100%`
                                             }}
                                             src={`https://photonkhan.weebly.com/`} />

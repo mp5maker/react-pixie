@@ -8,7 +8,7 @@ import { SettingsContext } from '../../SettingsContext'
 import { AnimeThreeJSPhysics } from '../../Components/Anime/ThreeJS/Pages/Physics'
 import { useDocument } from '../../Hooks/UseDocument'
 
-export const Bird = ({ history, location, match }: any) => {
+export const Physics = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
     const { setSettings, ...settings }: any = React.useContext(SettingsContext)
     useDocument({ options: [{ selector: 'title', value: `Photon's Portfolio: Physics` }] })
@@ -44,4 +44,4 @@ export const Bird = ({ history, location, match }: any) => {
     )
 }
 
-export default Bird
+export default Physics

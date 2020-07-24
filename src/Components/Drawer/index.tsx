@@ -52,8 +52,6 @@ export const Drawer = ({
                 color: colors[theme].primaryColor,
                 backgroundColor: colors[theme].backgroundColor
             }}
-            onClick={toggleDrawer(false)}
-            onKeyDown={toggleDrawer(false)}
             className={`${direction} drawer-container`}
             role="presentation">
             <div className="drawer-content">
@@ -64,6 +62,7 @@ export const Drawer = ({
                         }) : children
                     }
                     <ListItem
+                        onClick={toggleDrawer(false)}
                         className={`d-flex justify-content-center`}
                         button>
                         <FontAwesomeIcon icon={faSortUp} />
@@ -71,10 +70,7 @@ export const Drawer = ({
                 </List>
                 <div className={`times-container`}>
                     <ButtonRadial
-                        onClick={(event: any) => {
-                            event.preventDefault();
-                            toggleDrawer(false)
-                        }}>
+                        onClick={toggleDrawer(false)}>
                         <FontAwesomeIcon icon={faTimes} />
                     </ButtonRadial>
                 </div>

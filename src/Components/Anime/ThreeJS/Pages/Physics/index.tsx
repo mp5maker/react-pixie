@@ -43,7 +43,6 @@ export const AnimeThreeJSPhysics = ({
     theme,
     history,
 }: any) => {
-    const { frequency }: any = React.useContext(MusicContext)
     const { width, height } = useDimension()
     const isMediaGreaterThan771px = useMedia({ query: `(min-width: 771px)` })
 
@@ -64,13 +63,9 @@ export const AnimeThreeJSPhysics = ({
         fogColor: new THREE.Color(colors[theme].fogColor),
     }
 
-    return (
-        <div style={{ width, height }}>
-            <Canvas
-                shadowMap={true}
-                sRGB={true}
-                camera={{ position: [-1, 2, 5], fov: 50 }}
-                pixelRatio={window.devicePixelRatio || 1}>
+    const memoContent = React.useMemo(() => {
+        return (
+            <>
                 <color
                     attach="background"
                     // @ts-ignore
@@ -89,8 +84,7 @@ export const AnimeThreeJSPhysics = ({
                     <Plane
                         colors={COLORS} />
                     <Box
-                        isKinematic={true}
-                        colors={COLORS}/>
+                        colors={COLORS} />
                     <Box
                         colors={COLORS}
                         position={[0, 10, -2]} />
@@ -98,6 +92,18 @@ export const AnimeThreeJSPhysics = ({
                         colors={COLORS}
                         position={[0, 20, -2]} />
                 </Physics>
+            </>
+        )
+    }, [theme])
+
+    return (
+        <div style={{ width, height }}>
+            <Canvas
+                shadowMap={true}
+                sRGB={true}
+                camera={{ position: [-1, 2, 5], fov: 50 }}
+                pixelRatio={window.devicePixelRatio || 1}>
+                { memoContent }
             </Canvas>
         </div>
     )
