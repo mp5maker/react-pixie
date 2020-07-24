@@ -36,7 +36,7 @@
     "react-three-fiber": "^4.2.12",
     "sass": "^1.26.9",
     "three": "^0.118.3",
-    "typescript": "~3.7.2",
+    "typescript": "~3.8.0",
     "use-cannon": "^0.5.0"
   },
   "scripts": {
