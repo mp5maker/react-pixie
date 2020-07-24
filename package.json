@@ -23,7 +23,6 @@
     "cannon": "^0.6.2",
     "express": "^4.17.1",
     "framer-motion": "^1.11.1",
-    "gh-pages": "^3.1.0",
     "i18next": "^19.5.4",
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
@@ -47,9 +46,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "heroku-postbuild": "yarn && yarn run build",
-    "start": "node index.js",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -b gh-pages -d build"
+    "start": "node index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
