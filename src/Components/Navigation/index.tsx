@@ -62,8 +62,13 @@ export const Navigation = ({ history }: any) => {
 
     const navigationUp = React.useCallback(() => {
         const presentIndex = currentIndex()
-        if (presentIndex == 0) history.push(list[list.length - 1].route)
-        else history.push(list[presentIndex - 1].route)
+        if (presentIndex == 0) {
+            const presentRouteIndex = list[list.length - 1]
+            if (presentRouteIndex) history.push(presentRouteIndex.route)
+        } else {
+            const presentRouteIndex = list[presentIndex - 1]
+            if (presentRouteIndex) history.push(presentRouteIndex.route)
+        }
     }, [history])
 
     const navigationDown = React.useCallback(() => {
@@ -74,13 +79,13 @@ export const Navigation = ({ history }: any) => {
 
     const navigationRight = React.useCallback(() => {
         const currentLocation = get(history, 'location.pathname', '')
-        if (currentLocation == Routes.SKYBOX) history.goBack()
+        if (currentLocation == Routes.SKYBOX || currentLocation == Routes.PHYSICS) history.goBack()
         else history.push(Routes.SKYBOX)
     }, [history])
 
     const navigationLeft = React.useCallback(() => {
         const currentLocation = get(history, 'location.pathname', '')
-        if (currentLocation == Routes.PHYSICS) history.goBack()
+        if (currentLocation == Routes.PHYSICS || currentLocation == Routes.SKYBOX) history.goBack()
         else history.push(Routes.PHYSICS)
     }, [history])
 
