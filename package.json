@@ -2,7 +2,6 @@
   "name": "react-pixie",
   "version": "0.1.0",
   "private": true,
-  "homepage": " https://mp5maker.github.io/react-pixie/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-brands-svg-icons": "^5.14.0",
