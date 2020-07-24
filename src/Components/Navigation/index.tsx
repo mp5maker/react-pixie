@@ -5,6 +5,7 @@ import get from 'lodash/get'
 import { GlobalHotKeys } from 'react-hotkeys'
 
 import { useSVG } from '../../Hooks/UseSVG'
+import { useSwipe } from '../../Hooks/UseSwipe'
 import * as Routes from '../../Constants/Routes'
 import { Colors } from '../../Constants/Colors'
 import { AppContext } from '../../AppContext'
@@ -22,6 +23,7 @@ export const Navigation = ({ history }: any) => {
     const { theme }: any = React.useContext(AppContext)
     useSVG({ selector: '.navigation-container', svg: Cursor({ colors: Colors, theme: theme }) })
     useSVG({ selector: '.navigation-container .navigation-item', svg: Cursor({ colors: Colors, theme: theme }) })
+    const { verticalDirection, horizontalDirection, constants } = useSwipe({ selector: 'body' })
 
     const list = [
         {
@@ -58,27 +60,46 @@ export const Navigation = ({ history }: any) => {
         return findIndex
     }, [history])
 
+    const navigationUp = React.useCallback(() => {
+        const presentIndex = currentIndex()
+        if (presentIndex == 0) history.push(list[list.length - 1].route)
+        else history.push(list[presentIndex - 1].route)
+    }, [history])
+
+    const navigationDown = React.useCallback(() => {
+        const presentIndex = currentIndex()
+        if (presentIndex == (list.length - 1)) history.push(list[0].route)
+        else history.push(list[presentIndex + 1].route)
+    }, [history])
+
+    const navigationRight = React.useCallback(() => {
+        const currentLocation = get(history, 'location.pathname', '')
+        if (currentLocation == Routes.SKYBOX) history.goBack()
+        else history.push(Routes.SKYBOX)
+    }, [history])
+
+    const navigationLeft = React.useCallback(() => {
+        const currentLocation = get(history, 'location.pathname', '')
+        if (currentLocation == Routes.PHYSICS) history.goBack()
+        else history.push(Routes.PHYSICS)
+    }, [history])
+
+    React.useEffect(() => {
+        if (verticalDirection == constants.VERTICAL_DIRECTION_UP) navigationDown()
+        if (verticalDirection == constants.VERTICAL_DIRECTION_DOWN) navigationUp()
+    }, [verticalDirection])
+
+    React.useEffect(() => {
+        if (horizontalDirection == constants.HORIZONTAL_DIRECTION_LEFT) navigationLeft()
+        if (horizontalDirection == constants.HORIZONTAL_DIRECTION_RIGHT) navigationRight()
+
+    }, [horizontalDirection])
+
     const handlers = {
-        NAVIGATE_ROUTE_UP: () => {
-            const presentIndex = currentIndex()
-            if (presentIndex == 0) history.push(list[list.length - 1].route)
-            else history.push(list[presentIndex - 1].route)
-        },
-        NAVIGATE_ROUTE_DOWN: () => {
-            const presentIndex = currentIndex()
-            if (presentIndex == (list.length - 1)) history.push(list[0].route)
-            else history.push(list[presentIndex + 1].route)
-        },
-        NAVIGATE_TO_SKYBOX: () => {
-            const currentLocation = get(history, 'location.pathname', '')
-            if (currentLocation == Routes.SKYBOX) history.goBack()
-            else history.push(Routes.SKYBOX)
-        },
-        NAVIGATE_TO_PHYSICS: () => {
-            const currentLocation = get(history, 'location.pathname', '')
-            if (currentLocation == Routes.PHYSICS) history.goBack()
-            else history.push(Routes.PHYSICS)
-        }
+        NAVIGATE_ROUTE_UP: () => navigationUp(),
+        NAVIGATE_ROUTE_DOWN: () => navigationDown(),
+        NAVIGATE_TO_PHYSICS: () => navigationLeft(),
+        NAVIGATE_TO_SKYBOX: () => navigationRight(),
     }
 
     return (
