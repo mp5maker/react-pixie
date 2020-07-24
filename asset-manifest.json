@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/react-pixie/static/css/main.a8726362.chunk.css",
+    "main.js": "/react-pixie/static/js/main.dc10430f.chunk.js",
+    "main.js.map": "/react-pixie/static/js/main.dc10430f.chunk.js.map",
+    "runtime-main.js": "/react-pixie/static/js/runtime-main.0fa4f835.js",
+    "runtime-main.js.map": "/react-pixie/static/js/runtime-main.0fa4f835.js.map",
+    "static/css/2.af3c1da9.chunk.css": "/react-pixie/static/css/2.af3c1da9.chunk.css",
+    "static/js/2.eb920489.chunk.js": "/react-pixie/static/js/2.eb920489.chunk.js",
+    "static/js/2.eb920489.chunk.js.map": "/react-pixie/static/js/2.eb920489.chunk.js.map",
+    "index.html": "/react-pixie/index.html",
+    "precache-manifest.d8d7994849b7f786870963c327b57d97.js": "/react-pixie/precache-manifest.d8d7994849b7f786870963c327b57d97.js",
+    "service-worker.js": "/react-pixie/service-worker.js",
+    "static/css/2.af3c1da9.chunk.css.map": "/react-pixie/static/css/2.af3c1da9.chunk.css.map",
+    "static/css/main.a8726362.chunk.css.map": "/react-pixie/static/css/main.a8726362.chunk.css.map",
+    "static/js/2.eb920489.chunk.js.LICENSE.txt": "/react-pixie/static/js/2.eb920489.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0fa4f835.js",
+    "static/css/2.af3c1da9.chunk.css",
+    "static/js/2.eb920489.chunk.js",
+    "static/css/main.a8726362.chunk.css",
+    "static/js/main.dc10430f.chunk.js"
+  ]
+}
