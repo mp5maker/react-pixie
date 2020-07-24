@@ -49,7 +49,7 @@
     "heroku-postbuild": "yarn && yarn run build",
     "start": "node index.js",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -b gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
