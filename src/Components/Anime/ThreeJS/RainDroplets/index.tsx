@@ -8,11 +8,6 @@ export const RainDroplets = ({ colors, acceleration }: any) => {
     const loader = React.useRef(new THREE.TextureLoader()).current
     const geometry = React.useRef(new THREE.Geometry()).current
     const [texture, setTexture] = React.useState()
-    const { scene } = useThree()
-
-    React.useEffect(() => {
-        scene.fog = new THREE.FogExp2(colors.fogColor, 0.0009)
-    }, [colors])
 
     const onSuccessLoad = (texture: any) => {
         setTexture(texture)

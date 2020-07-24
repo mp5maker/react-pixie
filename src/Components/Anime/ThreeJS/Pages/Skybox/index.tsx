@@ -25,7 +25,6 @@ export const AnimeThreeJSSkybox = ({
         dangerColor: new THREE.Color(colors[theme].dangerColor),
         warningColor: new THREE.Color(colors[theme].warningColor),
         successColor: new THREE.Color(colors[theme].successColor),
-        fogColor: new THREE.Color(colors[theme].fogColor),
     }
 
     return (
