@@ -5,9 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSortUp, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { GlobalHotKeys } from 'react-hotkeys';
 
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+
+import { SettingsContext } from '../../SettingsContext'
 import { ButtonRadial } from '../Button/Radial'
 import { ButtonSquare } from '../Button/Square'
 
@@ -24,8 +25,10 @@ export const Drawer = ({
     direction = 'top',
     buttonDisplay,
     buttonShape = BUTTON_SHAPE_ROUND,
-    hotKeyHandler = ''
+    hotKeyHandler = '',
+    allowSortUp = true
 }: any) => {
+    const { setSettings, ...otherSettings }: any = React.useContext(SettingsContext)
     const [show, setShow] = React.useState(false)
     const drawer: any = React.useRef(document.getElementById('drawer')).current
 
@@ -38,6 +41,7 @@ export const Drawer = ({
             document.body.style.position = '';
             document.body.style.top = ``;
         }
+        setSettings({ ...otherSettings, allowSwipeNavigation: !status })
         setShow(status)
     }, [status])
 
@@ -61,12 +65,16 @@ export const Drawer = ({
                             toggleDrawer
                         }) : children
                     }
-                    <ListItem
-                        onClick={toggleDrawer(false)}
-                        className={`d-flex justify-content-center`}
-                        button>
-                        <FontAwesomeIcon icon={faSortUp} />
-                    </ListItem>
+                    {
+                        allowSortUp && (
+                            <ListItem
+                                onClick={toggleDrawer(false)}
+                                className={`d-flex justify-content-center alternate-close`}
+                                button>
+                                <FontAwesomeIcon icon={faSortUp} />
+                            </ListItem>
+                        )
+                    }
                 </List>
                 <div className={`times-container`}>
                     <ButtonRadial
@@ -118,7 +126,10 @@ export const Drawer = ({
         </>
     )
 
-    const toggleDrawerDisplay = React.useCallback(() => setShow(!show), [show])
+    const toggleDrawerDisplay = React.useCallback(() => {
+        setShow(!show)
+        setSettings({ ...otherSettings, allowSwipeNavigation: show })
+    }, [show])
 
     const handlers: any = hotKeyHandler ? {
         [hotKeyHandler]: () => toggleDrawerDisplay(),

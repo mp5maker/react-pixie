@@ -10,6 +10,7 @@ import { useMedia } from '../../Hooks/UseMedia'
 import * as Routes from '../../Constants/Routes'
 import { Colors } from '../../Constants/Colors'
 import { AppContext } from '../../AppContext'
+import { SettingsContext } from '../../SettingsContext'
 import { Dog } from '../../Svg/Dog'
 import { Book } from '../../Svg/Book'
 import { Rain } from '../../Svg/Rain'
@@ -22,8 +23,9 @@ import "./styles.scss"
 export const Navigation = ({ history }: any) => {
     const { t, i18n } = useTranslation()
     const { theme }: any = React.useContext(AppContext)
+    const { allowSwipeNavigation }: any = React.useContext(SettingsContext)
     const isOnlyTouchDevice = useMedia({ query: `(pointer: coarse)`})
-    const { verticalDirection, horizontalDirection, constants } = useSwipe({ selector: 'body', allow: isOnlyTouchDevice })
+    const { verticalDirection, horizontalDirection, constants } = useSwipe({ selector: 'body', allow: isOnlyTouchDevice && allowSwipeNavigation })
     useSVG({ selector: '.navigation-container', svg: Cursor({ colors: Colors, theme: theme }) })
     useSVG({ selector: '.navigation-container .navigation-item', svg: Cursor({ colors: Colors, theme: theme }) })
 

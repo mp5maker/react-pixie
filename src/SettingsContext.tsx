@@ -7,7 +7,8 @@ interface SettingsContextInterface {
     acceleration: any,
     fire: boolean,
     setSettings: (params: any) => any,
-    settingsList: Array<string>
+    settingsList: Array<string>,
+    allowSwipeNavigation: boolean,
 }
 
 export const SettingsContext = React.createContext<Partial<SettingsContextInterface>>({})

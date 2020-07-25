@@ -36,6 +36,7 @@ export const SocialPicker = ({ colors, theme }: any) => {
                         drawerVariants={drawerVariants}
                         hotKeyHandler={`TOGGLE_GITHUB`}
                         direction={`bottom`}
+                        allowSortUp={false}
                         buttonShape={`round`}
                         buttonDisplay={(
                             <FontAwesomeIcon icon={faGithub} />
@@ -80,6 +81,7 @@ export const SocialPicker = ({ colors, theme }: any) => {
                         drawerVariants={drawerVariants}
                         hotKeyHandler={`TOGGLE_LINKEDIN`}
                         direction={`bottom`}
+                        allowSortUp={false}
                         buttonShape={`round`}
                         buttonDisplay={(
                             <FontAwesomeIcon icon={faLinkedin} />
@@ -127,6 +129,7 @@ export const SocialPicker = ({ colors, theme }: any) => {
                         hotKeyHandler={`TOGGLE_WEEBLY`}
                         direction={`bottom`}
                         buttonShape={`round`}
+                        allowSortUp={false}
                         buttonDisplay={(
                             <FontAwesomeIcon icon={faWeebly} />
                         )}>
@@ -156,6 +159,7 @@ export const SocialPicker = ({ colors, theme }: any) => {
                         drawerVariants={drawerVariants}
                         direction={`bottom`}
                         buttonShape={`round`}
+                        allowSortUp={false}
                         hotKeyHandler={`TOGGLE_RESUME`}
                         buttonDisplay={(
                             <FontAwesomeIcon icon={faReadme} />

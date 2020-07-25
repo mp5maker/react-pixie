@@ -53,7 +53,8 @@ export const App = () => {
       'rotationZ',
       'acceleration',
       'fire',
-    ]
+    ],
+    allowSwipeNavigation: true,
   })
   const [musicSettings, setMusicSettings] = React.useState({ isPlaying: false, frequency: 1 })
   const [isLoading, setLoading] = React.useState(true)
