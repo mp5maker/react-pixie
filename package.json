@@ -18,6 +18,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
+    "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "cannon": "^0.6.2",
     "express": "^4.17.1",
@@ -66,5 +67,16 @@
     "transformIgnorePatterns": [
       "!<rootDir>/node_modules/"
     ]
+  },
+  "devDependencies": {
+    "@types/enzyme": "^3.10.5",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/enzyme-to-json": "^1.5.3",
+    "@types/sinon": "^9.0.4",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.5.0",
+    "react-test-renderer": "^16.13.1",
+    "sinon": "^9.0.2"
   }
 }

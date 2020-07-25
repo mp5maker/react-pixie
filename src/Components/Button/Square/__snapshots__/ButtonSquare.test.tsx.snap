@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`It should shallow properly 1`] = `
+<WithStyles(ForwardRef(Button))
+  className="button-square-container"
+  onClick={[Function]}
+  style={Object {}}
+>
+  Test Button
+</WithStyles(ForwardRef(Button))>
+`;
