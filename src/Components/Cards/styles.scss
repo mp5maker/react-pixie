@@ -1,0 +1,29 @@
+.cards-container {
+    position: relative;
+    .card-list-container {
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        align-items: center;
+        .card-item-container {
+            margin: 12px;
+            padding: 12px;
+            height: 250px;
+            width: 250px;
+            box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
+            color: var(--primary-color);
+            background-color: var(--background-color);
+            transform: scale(1);
+            transition: transform 0.25s ease-in-out;
+            // background: linear-gradient(to right, var(--background-color), var(--primary-color));
+            &:hover {
+                transform: scale(0.98);
+                transition: transform 0.25s ease-in-out;
+            }
+            .space-more {
+                margin-top: 100px;
+            }
+        }
+    }
+}

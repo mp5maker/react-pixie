@@ -4,7 +4,6 @@ import { Canvas } from 'react-three-fiber'
 
 import { SettingsContext } from 'SettingsContext'
 import { Stars } from 'Components/Anime/ThreeJS/Stars'
-import { OrbitControl } from 'Components/Anime/ThreeJS/OrbitControl'
 import { useDimension } from 'Hooks/UseDimension'
 
 export const AnimeThreeJSError = ({
@@ -14,6 +13,15 @@ export const AnimeThreeJSError = ({
 }: any) => {
     const { acceleration }: any = React.useContext(SettingsContext)
     const { width, height } = useDimension()
+
+    React.useEffect(() => {
+        document.body.style.position = ''
+        document.body.style.overflowY = 'auto'
+
+        return () => {
+            document.body.style.overflowY = 'hidden'
+        }
+    }, [])
 
     /* Colors */
     const COLORS = {
@@ -70,7 +78,6 @@ export const AnimeThreeJSError = ({
                     far: 1000
                 }}
                 pixelRatio={window.devicePixelRatio || 1}>
-                <OrbitControl />
                 { memoLights }
                 { memoStars }
             </Canvas>
