@@ -7,8 +7,8 @@ import { faArrowUp, faArrowDown, faArrowLeft, faArrowRight } from '@fortawesome/
 import './styles.scss'
 
 export const ShowKeyCombo = ({ colors, theme }: any) => {
-    const isTouchDevice = useMedia({ query: `(pointer: coarse)` })
-    const { keyValue } = useKeyboard({ allow: !isTouchDevice })
+    const isOnlyTouchDevice = useMedia({ query: `(pointer: coarse)` })
+    const { keyValue } = useKeyboard({ allow: !isOnlyTouchDevice })
     const isArrowUp = keyValue == 'ArrowUp' ? true : false
     const isArrowDown = keyValue == 'ArrowDown' ? true : false
     const isArrowLeft = keyValue == 'ArrowLeft' ? true : false

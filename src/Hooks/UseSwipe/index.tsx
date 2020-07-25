@@ -17,7 +17,7 @@ let startTime: any = new Date().getTime()
 let verticalTimeout: any = ''
 let horizontalTimeout: any = ''
 
-export const useSwipe = ({ selector, distance = { x: 150, y: 40 }, time = 500 }: any) => {
+export const useSwipe = ({ selector, distance = { x: 150, y: 40 }, time = 500, allow = true }: any) => {
     const [currentEvent, setCurrentEvent]: any = React.useState('')
     const [verticalDirection, setVerticalDirection] = React.useState(NONE)
     const [horizontalDirection, setHorizontalDirection] = React.useState(NONE)
@@ -69,7 +69,7 @@ export const useSwipe = ({ selector, distance = { x: 150, y: 40 }, time = 500 }:
             }
         }
 
-        if (element) {
+        if (element && allow) {
             element.addEventListener('touchstart', onTouchStart)
             element.addEventListener('touchend', onTouchEnd)
 
@@ -80,7 +80,7 @@ export const useSwipe = ({ selector, distance = { x: 150, y: 40 }, time = 500 }:
                 verticalTimeout && clearTimeout(verticalTimeout)
             }
         }
-    }, [])
+    }, [allow])
 
     return {
         currentEvent,
