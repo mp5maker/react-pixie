@@ -99,5 +99,8 @@
     "enzyme-to-json": "^3.5.0",
     "react-test-renderer": "^16.13.1",
     "sinon": "^9.0.2"
+  },
+  "engines": {
+    "node": "10.19.0"
   }
 }
