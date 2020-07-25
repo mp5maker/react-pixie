@@ -25,7 +25,7 @@ export const useKeyboard = ({ allow = true }: any) => {
                 timeout && clearTimeout(timeout)
             }
         }
-    }, [])
+    }, [allow])
 
     return { keyCode, keyValue }
 }

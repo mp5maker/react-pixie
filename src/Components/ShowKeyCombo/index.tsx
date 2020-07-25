@@ -7,8 +7,8 @@ import { faArrowUp, faArrowDown, faArrowLeft, faArrowRight } from '@fortawesome/
 import './styles.scss'
 
 export const ShowKeyCombo = ({ colors, theme }: any) => {
-    const isTouchDevice = useMedia({ query: `(pointer: coarse)`})
-    const { keyValue } = useKeyboard({ allow: isTouchDevice })
+    const isTouchDevice = useMedia({ query: `(pointer: coarse)` })
+    const { keyValue } = useKeyboard({ allow: !isTouchDevice })
     const isArrowUp = keyValue == 'ArrowUp' ? true : false
     const isArrowDown = keyValue == 'ArrowDown' ? true : false
     const isArrowLeft = keyValue == 'ArrowLeft' ? true : false
@@ -36,7 +36,7 @@ export const ShowKeyCombo = ({ colors, theme }: any) => {
                 ) : (
                         <React.Fragment>
                             <kbd>
-                                { keyValue ? keyValue : keyValue }
+                                { keyValue }
                             </kbd>
                         </React.Fragment>
                     )
