@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import get from 'lodash/get'
 import { GlobalHotKeys } from 'react-hotkeys'
 
-import { useSVG } from '../../Hooks/UseSVG'
+import { useCursor } from '../../Hooks/UseCursor'
 import { useSwipe } from '../../Hooks/UseSwipe'
 import { useMedia } from '../../Hooks/UseMedia'
 import * as Routes from '../../Constants/Routes'
@@ -26,8 +26,8 @@ export const Navigation = ({ history }: any) => {
     const { allowSwipeNavigation }: any = React.useContext(SettingsContext)
     const isOnlyTouchDevice = useMedia({ query: `(pointer: coarse)`})
     const { verticalDirection, horizontalDirection, constants } = useSwipe({ selector: 'body', allow: isOnlyTouchDevice && allowSwipeNavigation })
-    useSVG({ selector: '.navigation-container', svg: Cursor({ colors: Colors, theme: theme }) })
-    useSVG({ selector: '.navigation-container .navigation-item', svg: Cursor({ colors: Colors, theme: theme }) })
+    useCursor({ selector: '.navigation-container', svg: Cursor({ colors: Colors, theme: theme }) })
+    useCursor({ selector: '.navigation-container .navigation-item', svg: Cursor({ colors: Colors, theme: theme }) })
 
     const list = [
         {

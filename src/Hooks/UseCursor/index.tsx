@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { EncodeSVG } from '../../Utilities/EncodeSVG'
 
-export const useSVG = ({ selector, svg }: any) => {
+export const useCursor = ({ selector, svg }: any) => {
     const [base64SVG, setBase64SVG ] = React.useState("")
 
     React.useEffect(() => {

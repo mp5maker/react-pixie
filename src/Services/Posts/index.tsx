@@ -1,30 +1,9 @@
-import * as React from 'react'
-import axios from 'axios'
-import get from 'lodash/get'
+import axios from '../Axios'
 
-export const usePosts = () => {
-    const [ loading, setLoading ] = React.useState(false)
-    const [ error, setError ] = React.useState(false)
-    const [ data, setData ] = React.useState(false)
-
-    React.useEffect(() => {
-        const onSuccess = (response: any) => {
-            setLoading(false)
-            const data = get(response, 'data', [])
-            setData(data)
-        }
-
-        const onError = () => {
-            setError(true)
-            setLoading(false)
-        }
-
-        const url = `https://heroku-fake-rest-api.herokuapp.com/posts/`
-        setLoading(true)
-        axios.get(url, { params: { _limit: 20 }})
-            .then(onSuccess)
-            .catch(onError)
-    }, [])
-
-    return { loading, error, data }
+export const Posts = async ({ params = { _limit: 20 } }: any) => {
+    const url = `https://heroku-fake-rest-api.herokuapp.com/posts/`
+    const response = await axios.get(url, { params })
+    return response
 }
+
+export default Posts
