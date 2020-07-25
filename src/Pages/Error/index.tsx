@@ -17,7 +17,6 @@ export const Error = ({ history, location, match }: any) => {
     const { setSettings, ...settings }: any = React.useContext(SettingsContext)
     const { loading, data } = usePosts({ params: { _limit: 20 } })
     useDocument({ options: [{ selector: 'title', value: `Photon's Portfolio: Page Do Not Exist` }] })
-    console.log(data)
 
     React.useEffect(() => {
         setSettings({

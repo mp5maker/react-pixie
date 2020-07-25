@@ -49,6 +49,7 @@ yarn-error.log*
 
 # production
 /build
+/.storybook/build
 
 # misc
 .DS_Store

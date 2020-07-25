@@ -23,4 +23,4 @@ websites to run across multiple devices with **dynamic user experiences**
 > 3. yarn test
 > 4. yarn build
 > 5. yarn eject
-> 6. yarn deploy
+> 6. yarn storybook
