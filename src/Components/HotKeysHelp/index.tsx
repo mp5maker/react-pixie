@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faKeyboard, faTimes } from '@fortawesome/free-solid-svg-icons'
 import get from 'lodash/get'
 
-import { Drawer } from '../Drawer'
-import { useDimension } from '../../Hooks/UseDimension'
+import { Drawer } from 'Components/Drawer'
+import { useDimension } from 'Hooks/UseDimension'
 import "./styles.scss"
 
 const drawerVariants = {

@@ -2,10 +2,10 @@ import * as React from 'react'
 import * as THREE from 'three'
 import { Canvas } from 'react-three-fiber'
 
-import { SettingsContext } from '../../../../../SettingsContext'
-import { Stars } from '../../Stars'
-import { OrbitControl } from '../../OrbitControl'
-import { useDimension } from '../../../../../Hooks/UseDimension'
+import { SettingsContext } from 'SettingsContext'
+import { Stars } from 'Components/Anime/ThreeJS/Stars'
+import { OrbitControl } from 'Components/Anime/ThreeJS/OrbitControl'
+import { useDimension } from 'Hooks/UseDimension'
 
 export const AnimeThreeJSError = ({
     colors,

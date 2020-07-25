@@ -1,4 +1,4 @@
-import { RandomRange } from '../../Utilities/RandomRange'
+import { RandomRange } from 'Utilities/RandomRange'
 
 describe('Generate Random Number within a range', () => {
     it('Generates Properly', () => {

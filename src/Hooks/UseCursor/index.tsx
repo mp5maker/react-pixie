@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { EncodeSVG } from '../../Utilities/EncodeSVG'
+import { EncodeSVG } from 'Utilities/EncodeSVG'
 
 export const useCursor = ({ selector, svg }: any) => {
     const [base64SVG, setBase64SVG ] = React.useState("")

@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow, render, mount } from 'enzyme'
 import sinon from 'sinon'
 
-import { ButtonSquare } from '../../Components/Button/Square'
+import { ButtonSquare } from 'Components/Button/Square'
 
 describe(`Button Square`, () => {
     it('It should shallow properly', () => {

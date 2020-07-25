@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 import { GlobalHotKeys } from 'react-hotkeys'
 
-import { AppContext } from '../../AppContext'
-import { Colors } from '../../Constants/Colors'
-import { LIGHT, DARK, THEME } from '../../Constants/Settings'
-import { StorageSet } from '../../Utilities/Storage'
-import { ButtonRadial } from '../../Components/Button/Radial'
+import { AppContext } from 'AppContext'
+import { Colors } from 'Constants/Colors'
+import { LIGHT, DARK, THEME } from 'Constants/Settings'
+import { StorageSet } from 'Utilities/Storage'
+import { ButtonRadial } from 'Components/Button/Radial'
 
 import "./styles.scss"
 

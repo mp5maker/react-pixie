@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as THREE from 'three'
 import { FontLoader } from 'three'
 
-import { useMedia } from '../../../../Hooks/UseMedia'
+import { useMedia } from 'Hooks/UseMedia'
 
 export const Text = ({
     position = { x: -800, y: 0, z: -200 },

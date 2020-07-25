@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow, render, mount } from 'enzyme'
 import sinon from 'sinon'
 
-import { ButtonRadial } from '../../Components/Button/Radial'
+import { ButtonRadial } from 'Components/Button/Radial'
 
 describe('Button Radial', () => {
     it('it should shallow properly', () => {

@@ -2,12 +2,12 @@ import * as React from 'react'
 import * as THREE from 'three'
 import { Canvas } from 'react-three-fiber'
 
-import { MusicContext } from '../../../../../MusicContext'
-import { Bird } from '../../Bird'
-import { Portal } from '../../Portal'
-import { Ocean } from '../../Ocean'
-import { useDimension } from '../../../../../Hooks/UseDimension'
-import { useMedia } from '../../../../../Hooks/UseMedia'
+import { MusicContext } from 'MusicContext'
+import { Bird } from 'Components/Anime/ThreeJS/Bird'
+import { Portal } from 'Components/Anime/ThreeJS/Portal'
+import { Ocean } from 'Components/Anime/ThreeJS/Ocean'
+import { useDimension } from 'Hooks/UseDimension'
+import { useMedia } from 'Hooks/UseMedia'
 
 export const AnimeThreeJSBird = ({
     colors,

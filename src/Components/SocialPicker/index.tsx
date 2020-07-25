@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin, faWeebly, faReadme } from "@fortawesome/free-brands-svg-icons"
-import { faTimes } from "@fortawesome/free-solid-svg-icons"
 
-import { DARK, LIGHT } from '../../Constants/Settings'
-import { Drawer } from '../Drawer'
+import { DARK, LIGHT } from 'Constants/Settings'
+import { Drawer } from 'Components/Drawer'
 import './styles.scss'
 
 const drawerVariants = {

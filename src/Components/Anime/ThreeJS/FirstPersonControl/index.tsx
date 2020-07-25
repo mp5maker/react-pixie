@@ -2,7 +2,7 @@ import * as React from 'react'
 import { FirstPersonControls } from 'three/examples/jsm/controls/FirstPersonControls'
 import { extend, useFrame, useThree } from 'react-three-fiber'
 
-import { useDimension } from '../../../../Hooks/UseDimension'
+import { useDimension } from 'Hooks/UseDimension'
 
 extend({ FirstPersonControls })
 

@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { useKeyboard } from '../../Hooks/UseKeyboard'
-import { useMedia } from '../../Hooks/UseMedia'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp, faArrowDown, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
+import { useKeyboard } from 'Hooks/UseKeyboard'
+import { useMedia } from 'Hooks/UseMedia'
 import './styles.scss'
 
 export const ShowKeyCombo = ({ colors, theme }: any) => {

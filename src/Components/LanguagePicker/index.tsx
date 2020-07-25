@@ -1,15 +1,13 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { GlobalHotKeys } from 'react-hotkeys'
 
-import { AppContext } from '../../AppContext'
-import { Colors } from '../../Constants/Colors'
-import { LANGUAGE, EN, BN } from '../../Constants/Settings'
-import { StorageSet } from '../../Utilities/Storage'
-import { ButtonRadial } from '../../Components/Button/Radial'
-import * as Routes from '../../Constants/Routes'
+import { AppContext } from 'AppContext'
+import { Colors } from 'Constants/Colors'
+import { LANGUAGE, EN, BN } from 'Constants/Settings'
+import { StorageSet } from 'Utilities/Storage'
+import { ButtonRadial } from 'Components/Button/Radial'
+import * as Routes from 'Constants/Routes'
 
 import "./styles.scss"
 

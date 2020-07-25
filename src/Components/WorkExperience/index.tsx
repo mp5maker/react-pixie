@@ -8,7 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import { Drawer } from '../Drawer'
+import { Drawer } from 'Components/Drawer'
 
 import './styles.scss'
 

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Colors } from '../../Constants/Colors'
+import { Colors } from 'Constants/Colors'
 
 export const useColors = ({ theme }: any) => {
     const root = React.useRef(document.documentElement).current

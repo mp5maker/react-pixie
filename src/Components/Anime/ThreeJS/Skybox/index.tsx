@@ -1,6 +1,5 @@
 import * as React from 'react'
 import * as THREE from 'three'
-import { useFrame } from 'react-three-fiber'
 
 export const Skybox = ({ colors, history, acceleration, ...props }: any) => {
     let materialsArray: any = React.useRef([]).current

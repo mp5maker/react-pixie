@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
 
-import { Colors } from '../../Constants/Colors'
-import { PageTransition } from '../../Constants/PageTransition'
-import { AppContext } from '../../AppContext'
-import { SettingsContext } from '../../SettingsContext'
-import { AnimeThreeJSError } from '../../Components/Anime/ThreeJS/Pages/Error'
-import { ErrorMessage } from '../../Components/ErrorMessage'
-import { useDocument } from '../../Hooks/UseDocument'
+import { Colors } from 'Constants/Colors'
+import { PageTransition } from 'Constants/PageTransition'
+import { AppContext } from 'AppContext'
+import { SettingsContext } from 'SettingsContext'
+import { AnimeThreeJSError } from 'Components/Anime/ThreeJS/Pages/Error'
+import { ErrorMessage } from 'Components/ErrorMessage'
+import { useDocument } from 'Hooks/UseDocument'
 
 export const Error = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)

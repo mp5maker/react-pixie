@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Posts } from '../../../Services/Posts'
+import { Posts } from 'Services/Posts'
 
 describe('Posts', () => {
     it('Calls axios and returns posts', async () => {
@@ -37,5 +37,7 @@ describe('Posts', () => {
             config: {},
             headers: {},
         })
+
+        expect(axios.get).toHaveBeenCalledTimes(1)
     })
 })

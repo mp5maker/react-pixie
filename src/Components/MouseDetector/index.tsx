@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-import { useMouse } from '../../Hooks/UseMouse'
+import { useMouse } from 'Hooks/UseMouse'
 import "./styles.scss"
 
 const svgVariants = {

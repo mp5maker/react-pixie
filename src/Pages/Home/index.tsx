@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
 
-import { Colors } from '../../Constants/Colors'
-import { PageTransition } from '../../Constants/PageTransition'
-import { AppContext } from '../../AppContext'
-import { SettingsContext } from '../../SettingsContext'
-import { AnimeThreeJSHome } from '../../Components/Anime/ThreeJS/Pages/Home'
-import { MyNameSvg } from '../../Components/MyNameSvg'
-import { MouseDetector } from '../../Components/MouseDetector'
-import { useDocument } from '../../Hooks/UseDocument'
+import { Colors } from 'Constants/Colors'
+import { PageTransition } from 'Constants/PageTransition'
+import { AppContext } from 'AppContext'
+import { SettingsContext } from 'SettingsContext'
+import { AnimeThreeJSHome } from 'Components/Anime/ThreeJS/Pages/Home'
+import { MyNameSvg } from 'Components/MyNameSvg'
+import { MouseDetector } from 'Components/MouseDetector'
+import { useDocument } from 'Hooks/UseDocument'
 
 export const Home = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)

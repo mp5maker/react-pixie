@@ -3,9 +3,8 @@ import * as THREE from 'three'
 import { Canvas } from 'react-three-fiber'
 import { Physics, usePlane, useBox } from 'use-cannon'
 
-import { MusicContext } from '../../../../../MusicContext'
-import { useDimension } from '../../../../../Hooks/UseDimension'
-import { useMedia } from '../../../../../Hooks/UseMedia'
+import { useDimension } from 'Hooks/UseDimension'
+import { useMedia } from 'Hooks/UseMedia'
 
 const Plane = ({ colors, ...props}: any) => {
     const [ ref ] = usePlane(() => ({ rotation: [-Math.PI / 2, 0, 0 ], ...props }))

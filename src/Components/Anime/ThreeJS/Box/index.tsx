@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useFrame } from 'react-three-fiber'
 
-import { Glitch } from '../Glitch'
+import { Glitch } from 'Components/Anime/ThreeJS/Glitch'
 
 export const Box = ({ colors, history, wireframe = false, redirectURL, rotationX, rotationY, rotationZ, frequency, ...props }: any) => {
     const mesh: any = React.useRef()

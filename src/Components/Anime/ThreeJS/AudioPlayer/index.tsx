@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMusic, faPause, faPlay, faStop } from '@fortawesome/free-solid-svg-icons'
 import { motion, AnimatePresence } from 'framer-motion'
 
-import { useMedia } from '../../../../Hooks/UseMedia'
-import { Colors } from '../../../../Constants/Colors'
-import { AppContext } from '../../../../AppContext'
-import { MusicContext } from '../../../../MusicContext'
-import { ButtonRadial } from '../../../Button/Radial'
+import { useMedia } from 'Hooks/UseMedia'
+import { Colors } from 'Constants/Colors'
+import { AppContext } from 'AppContext'
+import { MusicContext } from 'MusicContext'
+import { ButtonRadial } from 'Components/Button/Radial'
 
 import "./styles.scss"
 

@@ -1,4 +1,4 @@
-import axios from '../Axios'
+import axios from 'Services/Axios'
 
 export const Posts = async ({ params = { _limit: 20 } }: any) => {
     const url = `https://heroku-fake-rest-api.herokuapp.com/posts/`

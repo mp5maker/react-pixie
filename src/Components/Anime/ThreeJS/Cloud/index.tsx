@@ -1,8 +1,7 @@
 import * as React from 'react'
 import * as THREE from 'three'
 
-// @ts-ignore
-import { RandomRange } from '../../../../Utilities/RandomRange'
+import { RandomRange } from 'Utilities/RandomRange'
 
 export const Cloud = ({ noOfClouds = 100, colors, frequency }: any) => {
     const loader = React.useRef(new THREE.TextureLoader()).current

@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilRuler } from '@fortawesome/free-solid-svg-icons'
 
-import { LIGHT, DARK } from '../../Constants/Settings'
-import { Drawer } from '../Drawer'
+import { LIGHT, DARK } from 'Constants/Settings'
+import { Drawer } from 'Components/Drawer'
 import "./styles.scss"
 
 const drawerVariants = {

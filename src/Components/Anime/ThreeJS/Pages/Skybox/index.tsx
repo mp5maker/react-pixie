@@ -1,12 +1,11 @@
 import * as React from 'react'
-import * as THREE from 'three'
 import { Canvas } from 'react-three-fiber'
 import { useTranslation } from 'react-i18next'
 
-import { Skybox } from '../../Skybox'
-import { OrbitControl } from '../../OrbitControl'
-import * as Routes from '../../../../../Constants/Routes'
-import { useDimension } from '../../../../../Hooks/UseDimension'
+import { Skybox } from 'Components/Anime/ThreeJS/Skybox'
+import { OrbitControl } from 'Components/Anime/ThreeJS/OrbitControl'
+import * as Routes from 'Constants/Routes'
+import { useDimension } from 'Hooks/UseDimension'
 
 export const AnimeThreeJSSkybox = ({
     colors,

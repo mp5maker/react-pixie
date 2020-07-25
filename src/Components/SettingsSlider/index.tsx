@@ -10,11 +10,11 @@ import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import { Colors } from '../../Constants/Colors'
-import { AppContext } from '../../AppContext'
-import { SettingsContext } from '../../SettingsContext'
-import { MusicContext } from '../../MusicContext'
-import { useMedia } from '../../Hooks/UseMedia'
+import { Colors } from 'Constants/Colors'
+import { AppContext } from 'AppContext'
+import { SettingsContext } from 'SettingsContext'
+import { MusicContext } from 'MusicContext'
+import { useMedia } from 'Hooks/UseMedia'
 
 
 import "./styles.scss"

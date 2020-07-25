@@ -8,9 +8,9 @@ import { GlobalHotKeys } from 'react-hotkeys';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
-import { SettingsContext } from '../../SettingsContext'
-import { ButtonRadial } from '../Button/Radial'
-import { ButtonSquare } from '../Button/Square'
+import { SettingsContext } from 'SettingsContext'
+import { ButtonRadial } from 'Components/Button/Radial'
+import { ButtonSquare } from 'Components/Button/Square'
 
 import './styles.scss'
 

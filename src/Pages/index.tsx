@@ -1,10 +1,10 @@
-import Home from './Home'
-import Experience from './Experience'
-import Skybox from './Skybox'
-import Error from './Error'
-import Rain from './Rain'
-import Bird from './Bird'
-import Physics from './Physics'
+import Home from 'Pages/Home'
+import Experience from 'Pages/Experience'
+import Skybox from 'Pages/Skybox'
+import Error from 'Pages/Error'
+import Rain from 'Pages/Rain'
+import Bird from 'Pages/Bird'
+import Physics from 'Pages/Physics'
 
 export {
     Home,

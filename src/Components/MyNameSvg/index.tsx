@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { EN, BN } from '../../Constants/Settings'
-import { MyNameSvgBengali } from './Bengali'
-import { MyNameSvgEnglish } from './English'
-import { useMedia } from '../../Hooks/UseMedia'
+import { EN, BN } from 'Constants/Settings'
+import { MyNameSvgBengali } from 'Components/MyNameSvg/Bengali'
+import { MyNameSvgEnglish } from 'Components/MyNameSvg/English'
+import { useMedia } from 'Hooks/UseMedia'
 
 import "./styles.scss"
 import { AnimatePresence, motion } from 'framer-motion'

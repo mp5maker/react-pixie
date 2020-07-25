@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
 
-import { AnimeThreeJSRain } from '../../Components/Anime/ThreeJS/Pages/Rain'
-import { Colors } from '../../Constants/Colors'
-import { PageTransition } from '../../Constants/PageTransition'
-import { AppContext } from '../../AppContext'
-import { SettingsContext } from '../../SettingsContext'
-import { useDocument } from '../../Hooks/UseDocument'
+import { AnimeThreeJSRain } from 'Components/Anime/ThreeJS/Pages/Rain'
+import { Colors } from 'Constants/Colors'
+import { PageTransition } from 'Constants/PageTransition'
+import { AppContext } from 'AppContext'
+import { SettingsContext } from 'SettingsContext'
+import { useDocument } from 'Hooks/UseDocument'
 
 export const Rain = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)

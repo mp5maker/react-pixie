@@ -3,14 +3,14 @@ import * as THREE from 'three'
 import { Canvas } from 'react-three-fiber'
 import { useTranslation } from 'react-i18next'
 
-import { SettingsContext } from '../../../../../SettingsContext'
-import { MusicContext } from '../../../../../MusicContext'
-import { Stars } from '../../Stars'
-import { Box } from '../../Box'
-import { OrbitControl } from '../../OrbitControl'
-import { useDimension } from '../../../../../Hooks/UseDimension'
-import * as Routes from '../../../../../Constants/Routes'
-import { useMedia } from '../../../../../Hooks/UseMedia'
+import { SettingsContext } from 'SettingsContext'
+import { MusicContext } from 'MusicContext'
+import { Stars } from 'Components/Anime/ThreeJS/Stars'
+import { Box } from 'Components/Anime/ThreeJS/Box'
+import { OrbitControl } from 'Components/Anime/ThreeJS/OrbitControl'
+import { useDimension } from 'Hooks/UseDimension'
+import * as Routes from 'Constants/Routes'
+import { useMedia } from 'Hooks/UseMedia'
 
 export const AnimeThreeJSHome = ({
     colors,

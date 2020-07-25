@@ -4,8 +4,8 @@ import { useThree, useFrame } from 'react-three-fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import head from 'lodash/head'
 
-import { useDimension } from '../../../../Hooks/UseDimension'
-import { RandomRange } from '../../../../Utilities/RandomRange'
+import { useDimension } from 'Hooks/UseDimension'
+import { RandomRange } from 'Utilities/RandomRange'
 
 let mixers: Array<any> = []
 let animations: Array<any> = []
