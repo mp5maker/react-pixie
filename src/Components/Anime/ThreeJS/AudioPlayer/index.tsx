@@ -4,12 +4,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMusic, faPause, faPlay, faStop } from '@fortawesome/free-solid-svg-icons'
 import { motion, AnimatePresence } from 'framer-motion'
 
+import { useMedia } from '../../../../Hooks/UseMedia'
 import { Colors } from '../../../../Constants/Colors'
 import { AppContext } from '../../../../AppContext'
 import { MusicContext } from '../../../../MusicContext'
 import { ButtonRadial } from '../../../Button/Radial'
 
 import "./styles.scss"
+
+const isIOS = /iPhone|iPod|iPad/.test(navigator.platform)
 
 const AUDIO_NOT_PLAYING = 'not-playing'
 const AUDIO_PLAYING = 'playing'
@@ -34,11 +37,14 @@ const buttonVariants = {
     }
 }
 
+let iosAudio: any;
+let startTime: any;
 export const AudioPlayer = ({ }: any) => {
     const { theme }: any = React.useContext(AppContext)
     const { setMusicSettings, ...otherSettingsProps }: any = React.useContext(MusicContext)
     const [ playAudio, setPlayAudio ] = React.useState(AUDIO_NOT_PLAYING)
     const [ loaded, setLoaded ]: any = React.useState(0)
+    const isSmallerTouchDevice = useMedia({ query: `(pointer: coarse) and (max-width: 767px)`})
     let analyser: any = React.useRef().current
     let animationFrame: any = React.useRef().current
 
@@ -46,14 +52,20 @@ export const AudioPlayer = ({ }: any) => {
     const sound = React.useRef(new THREE.Audio(listener)).current
     const loader = React.useRef(new THREE.AudioLoader()).current
 
-    const animate = () => {
+    const animate = (timestamp: any) => {
+        if (startTime == undefined) startTime = timestamp
+        const elapsedTime = timestamp - startTime
+
         if (sound.isPlaying) {
-            const frequency = analyser.getAverageFrequency()
-            setMusicSettings({
-                ...otherSettingsProps,
-                frequency,
-                isPlaying: true
-            })
+            if (elapsedTime > 30) {
+                startTime = timestamp
+                const frequency = analyser.getAverageFrequency()
+                setMusicSettings({
+                    ...otherSettingsProps,
+                    frequency,
+                    isPlaying: true
+                })
+            }
             animationFrame = requestAnimationFrame(animate)
         }
 
@@ -64,7 +76,15 @@ export const AudioPlayer = ({ }: any) => {
                 isPlaying: false
             })
         }
+
     }
+
+    const setIsPlayingForSmallerDevice = React.useCallback((isPlaying) => {
+        setMusicSettings({
+            ...otherSettingsProps,
+            isPlaying
+        })
+    }, [otherSettingsProps.isPlaying])
 
     const play = React.useCallback(() => {
         const onProgressLoad = (response: any) => {
@@ -74,31 +94,60 @@ export const AudioPlayer = ({ }: any) => {
         const onSuccessLoad = (buffer: any) => {
             sound.setBuffer(buffer)
             sound.setLoop(true)
-            sound.setVolume(0.5)
+            sound.setVolume(1)
             sound.play()
-            analyser = new THREE.AudioAnalyser(sound, 32)
             setPlayAudio(AUDIO_PLAYING)
-            requestAnimationFrame(animate)
+
+            /* Detect Smaller Device */
+            if (isSmallerTouchDevice) setIsPlayingForSmallerDevice(true)
+            else {
+                /* Start Animation */
+                analyser = new THREE.AudioAnalyser(sound, 32)
+                requestAnimationFrame(animate)
+            }
         }
-        loader.load('/Audio/sample.mp3', onSuccessLoad, onProgressLoad)
+
+        /* Detect IOS */
+        if (isIOS && !sound.isPlaying) {
+            iosAudio = new Audio('/Audio/sample.mp3')
+            iosAudio.play()
+            iosAudio.loop = true
+            setPlayAudio(AUDIO_PLAYING)
+            setIsPlayingForSmallerDevice(true)
+        } else loader.load('/Audio/sample.mp3', onSuccessLoad, onProgressLoad)
     }, [playAudio])
 
     const pause = React.useCallback(() => {
         setPlayAudio(AUDIO_PAUSE)
-        sound.pause()
-    }, [playAudio])
+        if (isSmallerTouchDevice) setIsPlayingForSmallerDevice(false)
+        /* Detect IOS */
+        if (isIOS && iosAudio) {
+            iosAudio.pause()
+        } else sound.pause()
+    }, [playAudio, iosAudio])
 
     const resume = React.useCallback(() => {
         setPlayAudio(AUDIO_PLAYING)
-        analyser = new THREE.AudioAnalyser(sound, 32)
-        requestAnimationFrame(animate)
-        sound.play()
-    }, [playAudio])
+        /* Detect Smaller Device */
+        if (isSmallerTouchDevice) setIsPlayingForSmallerDevice(true)
+        else {
+            analyser = new THREE.AudioAnalyser(sound, 32)
+            requestAnimationFrame(animate)
+        }
+        /* Detect IOS */
+        if (isIOS && iosAudio) iosAudio.play()
+        else sound.play()
+    }, [playAudio, iosAudio])
 
     const stop = React.useCallback(() => {
         setPlayAudio(AUDIO_NOT_PLAYING)
-        sound.stop()
-    }, [playAudio])
+        if (isSmallerTouchDevice) setIsPlayingForSmallerDevice(false)
+        /* Detect IOS */
+        if (isIOS && iosAudio) {
+            iosAudio.pause()
+            iosAudio.currentTime = 0
+        } else sound.stop()
+    }, [playAudio, iosAudio])
 
     const PlayButton = (
         <>
