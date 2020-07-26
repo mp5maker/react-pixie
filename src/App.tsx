@@ -32,6 +32,7 @@ import { useColors } from 'Hooks/UseColors'
 import { HotKeysHelp } from 'Components/HotKeysHelp'
 import { ShowKeyCombo } from 'Components/ShowKeyCombo'
 import { Loader } from 'Components/Loader'
+import { ScreenCapture } from 'Components/ScreenCapture'
 
 /* CSS */
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -197,6 +198,7 @@ export const App = () => {
             { musicCreditMemo }
             { themeDependentMemo }
             { loaderMemo }
+            <ScreenCapture />
             <HotKeysHelp
               colors={Colors}
               theme={theme} />
