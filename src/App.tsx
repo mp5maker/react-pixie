@@ -11,26 +11,27 @@ import { AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { GlobalHotKeys } from 'react-hotkeys'
 
-import { AppContext } from './AppContext'
-import { SettingsContext } from './SettingsContext'
-import { MusicContext } from './MusicContext'
-import { DARK, LIGHT, THEME, LANGUAGE, EN, BN } from './Constants/Settings'
-import * as Pages from './Pages'
-import { Footer } from './Components/Footer'
-import { ThemePicker } from './Components/ThemePicker'
-import { LanguagePicker } from './Components/LanguagePicker'
-import { Navigation } from './Components/Navigation'
-import { SettingsSlider } from './Components/SettingsSlider'
-import { MusicCredit } from './Components/MusicCredit'
-import { SocialPicker } from './Components/SocialPicker'
-import { Colors } from './Constants/Colors'
-import { AudioPlayer } from './Components/Anime/ThreeJS/AudioPlayer'
-import * as Routes from './Constants/Routes'
-import { HotKeyMap } from './Constants/HotKeyMap'
-import { StorageGet, StorageSet } from './Utilities/Storage'
-import { useColors } from './Hooks/UseColors'
-import { HotKeysHelp } from './Components/HotKeysHelp'
-import { ShowKeyCombo } from './Components/ShowKeyCombo'
+import { AppContext } from 'AppContext'
+import { SettingsContext } from 'SettingsContext'
+import { MusicContext } from 'MusicContext'
+import { DARK, LIGHT, THEME, LANGUAGE, EN, BN } from 'Constants/Settings'
+import * as Pages from 'Pages'
+import { Footer } from 'Components/Footer'
+import { ThemePicker } from 'Components/ThemePicker'
+import { LanguagePicker } from 'Components/LanguagePicker'
+import { Navigation } from 'Components/Navigation'
+import { SettingsSlider } from 'Components/SettingsSlider'
+import { MusicCredit } from 'Components/MusicCredit'
+import { SocialPicker } from 'Components/SocialPicker'
+import { Colors } from 'Constants/Colors'
+import { AudioPlayer } from 'Components/Anime/ThreeJS/AudioPlayer'
+import * as Routes from 'Constants/Routes'
+import { HotKeyMap } from 'Constants/HotKeyMap'
+import { StorageGet, StorageSet } from 'Utilities/Storage'
+import { useColors } from 'Hooks/UseColors'
+import { HotKeysHelp } from 'Components/HotKeysHelp'
+import { ShowKeyCombo } from 'Components/ShowKeyCombo'
+import { Loader } from 'Components/Loader'
 
 /* CSS */
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -137,6 +138,17 @@ export const App = () => {
     )
   }, [])
 
+  const loaderMemo = React.useMemo(() => {
+    return (
+      <>
+        <Loader
+          strokeWidth={15}
+          height={23.5}
+          width={50} />
+      </>
+    )
+  }, [isLoading])
+
   return (
     <AppContext.Provider
       value={{ theme, setTheme }}>
@@ -184,6 +196,7 @@ export const App = () => {
             { audioPlayerMemo }
             { musicCreditMemo }
             { themeDependentMemo }
+            { loaderMemo }
             <HotKeysHelp
               colors={Colors}
               theme={theme} />
