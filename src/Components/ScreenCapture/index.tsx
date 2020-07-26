@@ -1,17 +1,19 @@
 import * as React from 'react'
-import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import { ButtonRadial } from 'Components/Button/Radial'
+import { useDimension } from 'Hooks/UseDimension'
 
 import './styles.scss'
 
-export const ScreenCapture = ({ fileName = 'photon-capture.png' }) => {
-    const body: any = document.querySelector('body')
-    const canvas: any = document.createElement('canvas')
-    const link: any = document.createElement('a');
+var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 
+export const ScreenCapture = ({ fileName = 'photon-capture.png' }) => {
     const onClick = React.useCallback(async () => {
+        const body: any = document.querySelector('body')
+        const canvas: any = document.createElement('canvas')
+        const link: any = document.createElement('a');
+
         try {
             // @ts-ignore
             const stream =await navigator.mediaDevices.getDisplayMedia({
@@ -45,7 +47,7 @@ export const ScreenCapture = ({ fileName = 'photon-capture.png' }) => {
         }
     }, [])
 
-    return (
+    return isChrome ? (
         <React.Fragment>
             <div className="screen-capture-container">
                 <ButtonRadial
@@ -55,5 +57,5 @@ export const ScreenCapture = ({ fileName = 'photon-capture.png' }) => {
                 </ButtonRadial>
             </div>
         </React.Fragment>
-    )
+    ) : <React.Fragment></React.Fragment>
 }
