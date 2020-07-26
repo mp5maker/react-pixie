@@ -143,12 +143,14 @@ export const App = () => {
     return (
       <>
         <Loader
+          colors={Colors}
+          theme={theme}
           strokeWidth={15}
           height={23.5}
           width={50} />
       </>
     )
-  }, [isLoading])
+  }, [isLoading, theme])
 
   return (
     <AppContext.Provider

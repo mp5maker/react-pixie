@@ -2,7 +2,6 @@ import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import { ButtonRadial } from 'Components/Button/Radial'
-import { useDimension } from 'Hooks/UseDimension'
 
 import './styles.scss'
 
