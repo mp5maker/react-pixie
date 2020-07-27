@@ -43,6 +43,7 @@ code {
 
 @media screen and (pointer: fine) {
   .pace {
+    display: var(--allow-pace);
     -webkit-pointer-events: none;
     pointer-events: none;
     -webkit-user-select: none;

@@ -47,6 +47,7 @@ export const AudioPlayer = ({ }: any) => {
     const isSmallerTouchDevice = useMedia({ query: `(pointer: coarse) and (max-width: 767px)`})
     let analyser: any = React.useRef().current
     let animationFrame: any = React.useRef().current
+    const body: any = React.useRef(document.documentElement).current
 
     const listener = React.useRef(new THREE.AudioListener()).current
     const sound = React.useRef(new THREE.Audio(listener)).current
@@ -97,6 +98,7 @@ export const AudioPlayer = ({ }: any) => {
             sound.setVolume(1)
             sound.play()
             setPlayAudio(AUDIO_PLAYING)
+            body.style.setProperty('--allow-pace', 'none')
 
             /* Detect Smaller Device */
             if (isSmallerTouchDevice) setIsPlayingForSmallerDevice(true)
@@ -111,6 +113,7 @@ export const AudioPlayer = ({ }: any) => {
         if (isIOS && !sound.isPlaying) {
             iosAudio = new Audio('/Audio/sample.mp3')
             iosAudio.play()
+            body.style.setProperty('--allow-pace', 'none')
             iosAudio.loop = true
             setPlayAudio(AUDIO_PLAYING)
             setIsPlayingForSmallerDevice(true)
