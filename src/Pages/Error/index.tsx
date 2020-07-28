@@ -18,7 +18,7 @@ import "./styles.scss"
 export const Error = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
     const { setSettings, ...settings }: any = React.useContext(SettingsContext)
-    const { loading, data } = usePosts({ params: { _limit: 20 } })
+    const { loading, data } = usePosts({ params: { _limit: 20, _page: Math.random() * 100 } })
     const { t } = useTranslation()
     useDocument({ options: [{ selector: 'title', value: `Photon's Portfolio: Page Do Not Exist` }] })
 

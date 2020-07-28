@@ -6,17 +6,18 @@
         justify-content: flex-start;
         flex-wrap: wrap;
         align-items: center;
+        perspective: 1000px;
         .card-item-container {
-            margin: 12px;
+            margin: 24px;
             padding: 12px;
-            height: 250px;
-            width: 250px;
-            box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.2);
             color: var(--primary-color);
+            border-radius: 5px;
             background-color: var(--background-color);
             transform: scale(1);
             transition: transform 0.25s ease-in-out;
-            // background: linear-gradient(to right, var(--background-color), var(--primary-color));
+            transform-style: preserve-3d;
+            transform: rotateY(5deg);
             &:hover {
                 transform: scale(0.98);
                 transition: transform 0.25s ease-in-out;

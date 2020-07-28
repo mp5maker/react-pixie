@@ -41,6 +41,14 @@ import './App.scss';
 
 export const history = createBrowserHistory()
 
+const listenToRouteChange = ({ hash, key, pathname, search, state }: any) => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'auto'
+  })
+}
+
 export const App = () => {
   const [theme, setTheme] = React.useState(DARK)
   const [settings, setSettings] = React.useState({
@@ -81,6 +89,11 @@ export const App = () => {
       StorageGet({ key: THEME }),
       StorageGet({ key: LANGUAGE }),
     ]).then(onSuccess)
+  }, [])
+
+  React.useEffect(() => {
+    const unlistenHistory = history.listen(listenToRouteChange)
+    return () => unlistenHistory()
   }, [])
 
   const themePickerMemo = React.useMemo(() => {

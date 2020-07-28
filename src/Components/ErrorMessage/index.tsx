@@ -10,9 +10,14 @@ export const ErrorMessage = ({ history }: any) => {
         <>
             <div className="error-message-container">
                 <div className="error-message-content">
-                    <h3>
-                        { t('PAGE_NOT_FOUND') }
-                    </h3>
+                    <div>
+                        <h3 className={`text-center`}>
+                            { t('PAGE_NOT_FOUND') }
+                        </h3>
+                        <h5>
+                            {t('YOU_MIGHT_FIND_YOUR_LOST_FRIEND_IF_YOU_SCROLL') }
+                        </h5>
+                    </div>
                 </div>
             </div>
         </>
