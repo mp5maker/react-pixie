@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 let timeout: any;
-export const useKeyboard = ({ allow = true }: any) => {
+export const useKeyboard = ({ allow = true, delay = 3000 }: any) => {
     const [keyCode, setKeyCode] = React.useState('')
     const [keyValue, setKeyValue] = React.useState('')
 
@@ -13,7 +13,7 @@ export const useKeyboard = ({ allow = true }: any) => {
             timeout = setTimeout(() => {
                 setKeyValue('')
                 setKeyCode('')
-            }, 3000)
+            }, delay)
         }
     }
 

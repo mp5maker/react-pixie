@@ -64,21 +64,31 @@ export const Navigation = ({ history }: any) => {
         return findIndex
     }, [history])
 
+    const isValidRoute = React.useCallback(() => {
+        const currentLocation = get(history, 'location.pathname', '')
+        const find = list.find((item) => item.route == currentLocation)
+        return find ? true : false
+    }, [history])
+
     const navigationUp = React.useCallback(() => {
-        const presentIndex = currentIndex()
-        if (presentIndex == 0) {
-            const presentRouteIndex = list[list.length - 1]
-            if (presentRouteIndex) history.push(presentRouteIndex.route)
-        } else {
-            const presentRouteIndex = list[presentIndex - 1]
-            if (presentRouteIndex) history.push(presentRouteIndex.route)
+        if (isValidRoute()) {
+            const presentIndex = currentIndex()
+            if (presentIndex == 0) {
+                const presentRouteIndex = list[list.length - 1]
+                if (presentRouteIndex) history.push(presentRouteIndex.route)
+            } else {
+                const presentRouteIndex = list[presentIndex - 1]
+                if (presentRouteIndex) history.push(presentRouteIndex.route)
+            }
         }
     }, [history])
 
     const navigationDown = React.useCallback(() => {
-        const presentIndex = currentIndex()
-        if (presentIndex == (list.length - 1)) history.push(list[0].route)
-        else history.push(list[presentIndex + 1].route)
+        if (isValidRoute()) {
+            const presentIndex = currentIndex()
+            if (presentIndex == (list.length - 1)) history.push(list[0].route)
+            else history.push(list[presentIndex + 1].route)
+        }
     }, [history])
 
     const navigationRight = React.useCallback(() => {

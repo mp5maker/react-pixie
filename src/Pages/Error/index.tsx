@@ -8,6 +8,7 @@ import { PageTransition } from 'Constants/PageTransition'
 import { AppContext } from 'AppContext'
 import { SettingsContext } from 'SettingsContext'
 import { AnimeThreeJSError } from 'Components/Anime/ThreeJS/Pages/Error'
+import { ZombieGame } from 'Components/Anime/ThreeJS/ZombieGame'
 import { ErrorMessage } from 'Components/ErrorMessage'
 import { Cards } from 'Components/Cards'
 import { useDocument } from 'Hooks/UseDocument'
@@ -146,6 +147,14 @@ export const Error = ({ history, location, match }: any) => {
                                 list={data} />
                         )
                     }
+                </div>
+            </div>
+            <div className="row">
+                <div className="col p-0">
+                    <ZombieGame
+                        history={history}
+                        theme={theme}
+                        colors={Colors} />
                 </div>
             </div>
         </motion.div>
