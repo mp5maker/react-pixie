@@ -4,6 +4,9 @@ import { useThree, useResource, useFrame } from 'react-three-fiber'
 import { useKeyboard } from 'Hooks/UseKeyboard'
 
 let startTime: any;
+let jumpStarted: boolean = false;
+let isPlaying: boolean = false;
+let isDead: boolean = false;
 export const Zombie = ({
     colors,
     width
@@ -29,46 +32,56 @@ export const Zombie = ({
         } else object.material = materials[0]
     }
 
-    const detectMotion = () => {
+
+    React.useEffect(() => {
         const KEY_A = 65
         const KEY_S = 83
         const KEY_SHIFT = 16
 
         /* Walk */
         if (keyCode == KEY_A) {
-            /* Zombie Walk */
-            nextSprite({ object: zombie, materials: zombieWalkMaterials})
-            /* Obstacle */
-            if ((zombie.position.x - 3) > obstacle.position.x ) {
-                nextSprite({ object: obstacle, materials: zombieObstacleMaterials })
-                obstacle.position.x = width * (0.65 / 100) + 3
-            }
-            obstacle.position.x -= 1
+            if (zombie.jump && !jumpStarted) zombie.jump()
             return
         }
 
-        /* Attack */
+        /* Start */
         if (keyCode == KEY_S) {
-            /* Zombie Attack */
-            return nextSprite({ object: zombie, materials: zombieAttackMaterials })
+            if (isPlaying) isPlaying = false
+            else {
+                isDead = false
+                isPlaying = true
+                zombie.position.set(-(width * (0.65 / 100)), 0, 0)
+                obstacle.position.set((width * (0.65 / 100) + 3), 0, 0)
+            }
         }
 
-        /* Dead */
-        if (keyCode == KEY_SHIFT) {
-            /* Zombie Dead */
-            return nextSprite({ object: zombie, materials: zombieDeadMaterials })
-        }
-
-        /* Idle */
-        return nextSprite({ object: zombie, materials: zombieIdleMaterials })
-    }
+        /* Attack */
+        // return nextSprite({ object: zombie, materials: zombieAttackMaterials })
+    }, [keyCode])
 
     useFrame((state, delta) => {
         if (zombieIdleMaterials.length > 0) {
             if (startTime == undefined) startTime = state.clock.elapsedTime
-            if (state.clock.elapsedTime - startTime > 0.05 && zombie) {
+            if (state.clock.elapsedTime - startTime > 0.05 && zombie && obstacle) {
                 startTime = state.clock.elapsedTime
-                detectMotion()
+                if (!isPlaying) {
+                    if (!isDead) nextSprite({ object: zombie, materials: zombieIdleMaterials })
+                }
+                else {
+                    const isCollision = obstacle.collision()
+                    if (isCollision) {
+                        if (isPlaying) zombie.dead()
+                        isPlaying = false
+                        isDead = true
+                    } else {
+                        nextSprite({ object: zombie, materials: zombieWalkMaterials })
+                        if ((zombie.position.x - 3) > obstacle.position.x) {
+                            nextSprite({ object: obstacle, materials: zombieObstacleMaterials })
+                            obstacle.position.x = width * (0.65 / 100) + 3
+                        }
+                        obstacle.position.x -= 0.5
+                    }
+                }
             }
         }
     })
@@ -187,8 +200,71 @@ export const Zombie = ({
         })
 
         setZombieObstacleMaterials(obstacleMaterials)
-
     }, [])
+
+    React.useEffect(() => {
+        if (obstacle && zombie && !obstacle.collision) {
+            obstacle.collision = () => {
+                const collisionX = (zombie.position.x) + 0.5 >= obstacle.position.x && zombie.position.x <= obstacle.position.x + 0.5
+                const collisionY = obstacle.position.y + 0.5 >= zombie.position.y
+                if (collisionX && collisionY) return true
+                return false
+            }
+        }
+    }, [obstacle, zombie])
+
+    React.useEffect(() => {
+        if (zombie && !zombie.jump) {
+            const currentYPosition = zombie.position.y
+            zombie.gravity = 0.03;
+            zombie.jump = () => {
+                if (!jumpStarted) {
+                    jumpStarted = true
+                    let counter: number = 0;
+                    let timeout: any;
+                    const smoothJump = () => {
+                        if (counter < 3) {
+                            if (timeout) clearTimeout(timeout)
+                            timeout = setTimeout(() => {
+                                zombie.position.y += 1 - zombie.gravity
+                                smoothJump()
+                            }, 40)
+                            counter++;
+                        } else {
+                            if (zombie.position.y > currentYPosition) {
+                                if (timeout) clearTimeout(timeout)
+                                timeout = setTimeout(() => {
+                                    zombie.position.y -= 1 + zombie.gravity
+                                    smoothJump()
+                                }, 40)
+                            } else {
+                                zombie.position.y = currentYPosition
+                                jumpStarted = false
+                                return;
+                            }
+                        }
+                    }
+                    smoothJump()
+                }
+            }
+            zombie.dead = () => {
+                let counter: any = 0
+                let timeout: any = 0
+                const smoothDead = () => {
+                    timeout = setTimeout(() => {
+                        if (timeout) clearTimeout(timeout)
+                        if (counter < zombieDeadMaterials.length) {
+                            nextSprite({ object: zombie, materials: zombieDeadMaterials })
+                            counter++
+                            smoothDead()
+                        } else return
+                    }, 100)
+                }
+                smoothDead()
+            }
+        }
+
+    }, [zombie])
 
     React.useEffect(() => {
         if (line) {
