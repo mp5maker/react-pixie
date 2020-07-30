@@ -6,6 +6,7 @@ import { Canvas } from 'react-three-fiber'
 import { Zombie } from 'Components/Anime/ThreeJS/Zombie'
 import { useDimension } from 'Hooks/UseDimension'
 import { LocaleNumber } from 'Utilities/LocaleNumber'
+import { Joystick } from 'Svg/Joystick'
 import './styles.scss'
 
 export const ZombieGame = ({
@@ -92,6 +93,13 @@ export const ZombieGame = ({
                         &nbsp;{ t(`JUMP`)}
                     </div>
                 </div>
+            </div>
+            <div className="zombie-game-controller">
+                <Joystick
+                    width="175"
+                    height="175"
+                    theme={theme}
+                    colors={colors} />
             </div>
         </div>
     )

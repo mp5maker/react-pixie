@@ -54,6 +54,164 @@ export const Error = ({ history, location, match }: any) => {
         })
     }, [])
 
+    const memoLoading = React.useMemo(() => {
+        return (
+            <div className="loading-section">
+                <SPK
+                    width={100}
+                    height={46.8}
+                    // @ts-ignore
+                    fillColor={Colors[theme].primaryColor}
+                    svgVariants={{}}
+                    pathVariantsOne={{
+                        initial: {
+                            y: 0
+                        },
+                        animate: {
+                            y: [0, 25, 50, 75, 50, 25],
+                            transition: {
+                                y: {
+                                    duration: 2,
+                                    yoyo: Infinity
+                                },
+                            }
+                        },
+                        exit: {}
+                    }}
+                    pathVariantsTwo={{
+                        initial: {
+                            y: 25
+                        },
+                        animate: {
+                            y: [25, 50, 75, 50, 25, 0],
+                            transition: {
+                                y: {
+                                    duration: 2,
+                                    yoyo: Infinity
+                                },
+                            }
+                        },
+                        exit: {}
+                    }}
+                    pathVariantsThree={{
+                        initial: {
+                            y: 50
+                        },
+                        animate: {
+                            y: [50, 75, 50, 25, 0, 25],
+                            transition: {
+                                y: {
+                                    duration: 2,
+                                    yoyo: Infinity
+                                },
+                            }
+                        },
+                        exit: {}
+                    }}
+                    colors={Colors}
+                    theme={theme} />
+            </div>
+        )
+    }, [theme])
+
+    const memoCards = React.useMemo(() => {
+        return (
+            <Cards
+                prepareItem={({ item }: any) => {
+                    const name = get(item, 'name', '')
+                    const designation = get(item, 'designation', '')
+                    const joining_date = get(item, 'joining_date', '')
+                    const department = get(item, 'department', '')
+
+                    return (
+                        <React.Fragment>
+                            <div>
+                                <div>
+                                    <h5>
+                                        {name}
+                                    </h5>
+                                </div>
+                                <hr />
+                                <div className={`space-more`}>
+                                    {designation}
+                                </div>
+                                <div>
+                                    {department}
+                                </div>
+                                <div>
+                                    {joining_date.substring(0, 10)}
+                                </div>
+                            </div>
+                        </React.Fragment>
+                    )
+                }}
+                list={data} />
+        )
+    }, [data])
+
+    const memoPDF = React.useMemo(() => {
+        return (
+            <div className={`pdf-viewer`}>
+                <Drawer
+                    colors={Colors}
+                    theme={theme}
+                    drawerVariants={drawerVariants}
+                    // hotKeyHandler={`DOWNLOAD_FRIENDS_LIST`}
+                    direction={`bottom`}
+                    allowSortUp={false}
+                    buttonShape={`round`}
+                    buttonDisplay={(
+                        <FontAwesomeIcon icon={faFilePdf} />
+                    )}>
+                    {
+                        ({ toggleDrawer }: any) => {
+                            return (
+                                <PdfViewer
+                                    list={data}
+                                    properties={[
+                                        'name',
+                                        'designation',
+                                        'joining_date',
+                                        'department',
+                                    ]}
+                                    tableWidth={{
+                                        name: 125,
+                                        designation: 125,
+                                        joining_date: 125,
+                                        department: 125
+                                    }}
+                                    header={{
+                                        name: t(`NAME`),
+                                        designation: t(`DESIGNATION`),
+                                        joining_date: t(`JOINING_DATE`),
+                                        department: t(`DEPARTMENT`)
+                                    }}
+                                    body={({ row, column }: any) => {
+                                        if (column == 'name') return get(row, 'name', t(`HYPHEN`))
+                                        if (column == 'designation') return get(row, 'designation', t(`HYPHEN`))
+                                        if (column == 'joining_date') return get(row, 'joining_date', t(`HYPHEN`)).slice(0, 10)
+                                        if (column == 'name') return get(row, 'department', t(`HYPHEN`))
+                                        return row[column]
+                                    }}
+                                    width={`100%`}
+                                    height={`500px`} />
+                            )
+                        }
+                    }
+                </Drawer>
+            </div>
+        )
+    }, [data])
+
+    const zombieGameMemo = React.useMemo(() => {
+        return (
+            <ZombieGame
+                history={history}
+                theme={theme}
+                colors={Colors} />
+        )
+    }, [history, theme])
+
     return (
         <motion.div
             variants={PageTransition}
@@ -80,143 +238,12 @@ export const Error = ({ history, location, match }: any) => {
                     {
                         loading ? (
                             <React.Fragment>
-                                <div className="loading-section">
-                                    <SPK
-                                        width={100}
-                                        height={46.8}
-                                        // @ts-ignore
-                                        fillColor={Colors[theme].primaryColor}
-                                        svgVariants={{}}
-                                        pathVariantsOne={{
-                                            initial: {
-                                                y: 0
-                                            },
-                                            animate: {
-                                                y: [0, 25, 50, 75, 50, 25],
-                                                transition: {
-                                                    y: {
-                                                        duration: 2,
-                                                        yoyo: Infinity
-                                                    },
-                                                }
-                                            },
-                                            exit: {}
-                                        }}
-                                        pathVariantsTwo={{
-                                            initial: {
-                                                y: 25
-                                            },
-                                            animate: {
-                                                y: [25, 50, 75, 50, 25, 0],
-                                                transition: {
-                                                    y: {
-                                                        duration: 2,
-                                                        yoyo: Infinity
-                                                    },
-                                                }
-                                            },
-                                            exit: {}
-                                        }}
-                                        pathVariantsThree={{
-                                            initial: {
-                                                y: 50
-                                            },
-                                            animate: {
-                                                y: [50, 75, 50, 25, 0, 25],
-                                                transition: {
-                                                    y: {
-                                                        duration: 2,
-                                                        yoyo: Infinity
-                                                    },
-                                                }
-                                            },
-                                            exit: {}
-                                        }}
-                                        colors={Colors}
-                                        theme={theme} />
-                                </div>
+                                { memoLoading }
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                <Cards
-                                    prepareItem={({ item }: any) => {
-                                        const name = get(item, 'name', '')
-                                        const designation = get(item, 'designation', '')
-                                        const joining_date = get(item, 'joining_date', '')
-                                        const department = get(item, 'department', '')
-
-                                        return (
-                                            <React.Fragment>
-                                                <div>
-                                                    <div>
-                                                        <h5>
-                                                            { name }
-                                                        </h5>
-                                                    </div>
-                                                    <hr/>
-                                                    <div className={`space-more`}>
-                                                        { designation }
-                                                    </div>
-                                                    <div>
-                                                        { department }
-                                                    </div>
-                                                    <div>
-                                                        { joining_date.substring(0, 10) }
-                                                    </div>
-                                                </div>
-                                            </React.Fragment>
-                                        )
-                                    }}
-                                    list={data} />
-                                <div className={`pdf-viewer`}>
-                                    <Drawer
-                                        colors={Colors}
-                                        theme={theme}
-                                        drawerVariants={drawerVariants}
-                                        // hotKeyHandler={`DOWNLOAD_FRIENDS_LIST`}
-                                        direction={`bottom`}
-                                        allowSortUp={false}
-                                        buttonShape={`round`}
-                                        buttonDisplay={(
-                                            <FontAwesomeIcon icon={faFilePdf} />
-                                        )}>
-                                        {
-                                            ({ toggleDrawer }: any) => {
-                                                return (
-                                                    <PdfViewer
-                                                        list={data}
-                                                        properties={[
-                                                            'name',
-                                                            'designation',
-                                                            'joining_date',
-                                                            'department',
-                                                        ]}
-                                                        tableWidth={{
-                                                            name: 125,
-                                                            designation: 125,
-                                                            joining_date: 125,
-                                                            department: 125
-                                                        }}
-                                                        header={{
-                                                            name: t(`NAME`),
-                                                            designation: t(`DESIGNATION`),
-                                                            joining_date: t(`JOINING_DATE`),
-                                                            department: t(`DEPARTMENT`)
-                                                        }}
-                                                        body={({ row, column }: any) => {
-                                                            if (column == 'name') return get(row, 'name', t(`HYPHEN`))
-                                                            if (column == 'designation') return get(row, 'designation', t(`HYPHEN`))
-                                                            if (column == 'joining_date') return get(row, 'joining_date', t(`HYPHEN`)).slice(0, 10)
-                                                            if (column == 'name') return get(row, 'department', t(`HYPHEN`))
-                                                            return row[column]
-                                                        }}
-                                                        width={`100%`}
-                                                        height={`500px`}/>
-                                                )
-                                            }
-                                        }
-                                    </Drawer>
-                                </div>
+                                { memoCards }
+                                { memoPDF }
                             </React.Fragment>
                         )
                     }
@@ -224,10 +251,7 @@ export const Error = ({ history, location, match }: any) => {
             </div>
             <div className="row">
                 <div className="col p-0">
-                    <ZombieGame
-                        history={history}
-                        theme={theme}
-                        colors={Colors} />
+                    { zombieGameMemo }
                 </div>
             </div>
         </motion.div>
