@@ -1,8 +1,19 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
+import { Howl } from 'howler'
 
 import './styles.scss'
+
+const sound = new Howl({
+    src: ['/Audio/menu.mp3'],
+    preload: true,
+    volume: 1,
+    sprite: {
+        hover: [10000, 250],
+        click: [10000, 1000]
+    }
+})
 
 interface ButtonRadialPropsInterface {
     style?: any,
@@ -14,12 +25,29 @@ interface ButtonRadialPropsInterface {
     exit?: string,
 }
 
-export const ButtonRadial: React.FC<ButtonRadialPropsInterface> = ({ style = {}, onClick = () => {}, children, ...otherProps }: any = {}) => {
+export const ButtonRadial: React.FC<ButtonRadialPropsInterface> = ({
+    style = {},
+    onClick = () => {},
+    onMouseEnter = () => {},
+    children,
+    ...otherProps
+}: any = {}) => {
     return (
         <motion.button
             className={`button-radial-container`}
             style={style}
-            onClick={onClick}
+            onClick={(event) => {
+                sound.stop()
+                sound.fade(1, 0, 1000)
+                sound.play('click')
+                onClick(event)
+            }}
+            onMouseEnter={(event) => {
+                sound.stop()
+                sound.fade(1, 0, 100)
+                sound.play('hover')
+                onMouseEnter(event)
+            }}
             {...otherProps}>
             { children }
         </motion.button>
