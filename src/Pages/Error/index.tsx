@@ -184,6 +184,32 @@ export const Error = ({ history, location, match }: any) => {
                                             ({ toggleDrawer }: any) => {
                                                 return (
                                                     <PdfViewer
+                                                        list={data}
+                                                        properties={[
+                                                            'name',
+                                                            'designation',
+                                                            'joining_date',
+                                                            'department',
+                                                        ]}
+                                                        tableWidth={{
+                                                            name: 125,
+                                                            designation: 125,
+                                                            joining_date: 125,
+                                                            department: 125
+                                                        }}
+                                                        header={{
+                                                            name: t(`NAME`),
+                                                            designation: t(`DESIGNATION`),
+                                                            joining_date: t(`JOINING_DATE`),
+                                                            department: t(`DEPARTMENT`)
+                                                        }}
+                                                        body={({ row, column }: any) => {
+                                                            if (column == 'name') return get(row, 'name', t(`HYPHEN`))
+                                                            if (column == 'designation') return get(row, 'designation', t(`HYPHEN`))
+                                                            if (column == 'joining_date') return get(row, 'joining_date', t(`HYPHEN`)).slice(0, 10)
+                                                            if (column == 'name') return get(row, 'department', t(`HYPHEN`))
+                                                            return row[column]
+                                                        }}
                                                         width={`100%`}
                                                         height={`500px`}/>
                                                 )

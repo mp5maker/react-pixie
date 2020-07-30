@@ -93,8 +93,6 @@ export const ZombieGame = ({
                     </div>
                 </div>
             </div>
-            <div className={`zombie-game-controls`}>
-            </div>
         </div>
     )
 }
