@@ -57,6 +57,10 @@ export const ZombieGame = ({
     return (
         <div style={{ width, height: 500 }}>
             <Canvas
+                style={{
+                    width,
+                    height: 500
+                }}
                 shadowMap={true}
                 camera={{
                     fov: 75,
