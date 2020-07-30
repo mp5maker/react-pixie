@@ -110,7 +110,6 @@ export const Zombie = ({
         const walkMaterials = zombieWalkSprites.map((item, index) => {
             return new THREE.SpriteMaterial({
                 map: item,
-                color: colors.primaryColor,
                 name: `zombie-walk-${index}`
             })
         })
@@ -137,7 +136,6 @@ export const Zombie = ({
         const idleMaterials = zombieIdleSprites.map((item, index) => {
             return new THREE.SpriteMaterial({
                 map: item,
-                color: colors.primaryColor,
                 name: `zombie-idle-${index}`
             })
         })
@@ -158,7 +156,6 @@ export const Zombie = ({
         const attackMaterials = zombieAttackSprites.map((item, index) => {
             return new THREE.SpriteMaterial({
                 map: item,
-                color: colors.primaryColor,
                 name: `zombie-attack-${index}`
             })
         })
@@ -179,7 +176,6 @@ export const Zombie = ({
         const deadMaterials = zombieDeadSprites.map((item, index) => {
             return new THREE.SpriteMaterial({
                 map: item,
-                color: colors.primaryColor,
                 name: `zombie-dead-${index}`
             })
         })
@@ -201,7 +197,6 @@ export const Zombie = ({
         const obstacleMaterials = obstacleSprites.map((item, index) => {
             return new THREE.SpriteMaterial({
                 map: item,
-                color: colors.primaryColor,
                 name: `zombie-obstacles-${index}`
             })
         })

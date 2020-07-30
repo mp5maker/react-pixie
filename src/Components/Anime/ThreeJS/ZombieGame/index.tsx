@@ -78,13 +78,13 @@ export const ZombieGame = ({
                         <kbd>
                             s
                         </kbd>
-                        start
+                        &nbsp;{t(`START`)}
                     </div>
                     <div>
                         <kbd>
                             a
                         </kbd>
-                        jump
+                        &nbsp;{ t(`JUMP`)}
                     </div>
                 </div>
             </div>
