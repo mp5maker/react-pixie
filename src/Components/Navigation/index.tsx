@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
 import get from 'lodash/get'
 import { GlobalHotKeys } from 'react-hotkeys'
+import { Howl } from 'howler'
 
 import { useCursor } from 'Hooks/UseCursor'
 import { useSwipe } from 'Hooks/UseSwipe'
@@ -19,6 +20,16 @@ import { Cursor } from 'Svg/Cursor'
 
 
 import "./styles.scss"
+
+const sound = new Howl({
+    src: ['/Audio/menu.mp3'],
+    preload: true,
+    volume: 1,
+    sprite: {
+        hover: [5500, 500],
+        click: [10200, 1000]
+    }
+})
 
 export const Navigation = ({ history }: any) => {
     const { t, i18n } = useTranslation()
@@ -136,6 +147,14 @@ export const Navigation = ({ history }: any) => {
                                     return (
                                         <React.Fragment key={key}>
                                             <NavLink
+                                                onMouseEnter={() => {
+                                                    sound.fade(1, 0, 100)
+                                                    sound.play('hover')
+                                                }}
+                                                onClick={() => {
+                                                    sound.fade(1, 0, 1000)
+                                                    sound.play('click')
+                                                }}
                                                 className={`navigation-item`}
                                                 exact
                                                 to={item.route}
