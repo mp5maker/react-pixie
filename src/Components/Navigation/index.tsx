@@ -26,8 +26,8 @@ const sound = new Howl({
     preload: true,
     volume: 1,
     sprite: {
-        hover: [5500, 500],
-        click: [10200, 1000]
+        hover: [2000, 250],
+        click: [1000, 1000]
     }
 })
 
@@ -148,6 +148,7 @@ export const Navigation = ({ history }: any) => {
                                         <React.Fragment key={key}>
                                             <NavLink
                                                 onMouseEnter={() => {
+                                                    sound.stop()
                                                     sound.fade(1, 0, 100)
                                                     sound.play('hover')
                                                 }}
