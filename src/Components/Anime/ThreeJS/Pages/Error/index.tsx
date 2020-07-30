@@ -70,6 +70,7 @@ export const AnimeThreeJSError = ({
     return (
         <div style={{ width, height }}>
             <Canvas
+                style={{ width, height }}
                 shadowMap={true}
                 sRGB={true}
                 camera={{

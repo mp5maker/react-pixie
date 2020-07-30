@@ -102,6 +102,7 @@ export const AnimeThreeJSHome = ({
     return (
         <div style={{ width, height }}>
             <Canvas
+                style={{ width, height }}
                 shadowMap={true}
                 camera={{
                     fov: 75,

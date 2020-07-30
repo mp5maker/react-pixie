@@ -2,6 +2,8 @@ import * as React from 'react'
 import { motion } from 'framer-motion'
 import get from 'lodash/get'
 import { useTranslation } from 'react-i18next'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFilePdf } from "@fortawesome/free-solid-svg-icons"
 
 import { Colors } from 'Constants/Colors'
 import { PageTransition } from 'Constants/PageTransition'
@@ -11,10 +13,30 @@ import { AnimeThreeJSError } from 'Components/Anime/ThreeJS/Pages/Error'
 import { ZombieGame } from 'Components/Anime/ThreeJS/ZombieGame'
 import { ErrorMessage } from 'Components/ErrorMessage'
 import { Cards } from 'Components/Cards'
+import { Drawer } from 'Components/Drawer'
 import { useDocument } from 'Hooks/UseDocument'
 import { usePosts } from 'Hooks/UsePosts'
 import { SPK } from 'Svg/SPK'
+import { PdfViewer } from 'Components/Pdf'
 import "./styles.scss"
+
+const drawerVariants = {
+    initial: {
+        opacity: 0,
+        y: 9999
+    },
+    animate: {
+        opacity: 0.9,
+        y: 0,
+        transition: {
+            duration: 0.4
+        }
+    },
+    exit: {
+        y: 9999,
+        opacity: 0
+    }
+}
 
 export const Error = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
@@ -115,36 +137,61 @@ export const Error = ({ history, location, match }: any) => {
                                 </div>
                             </React.Fragment>
                         ) : (
-                            <Cards
-                                prepareItem={({ item }: any) => {
-                                    const name = get(item, 'name', '')
-                                    const designation = get(item, 'designation', '')
-                                    const joining_date = get(item, 'joining_date', '')
-                                    const department = get(item, 'department', '')
+                            <React.Fragment>
+                                <Cards
+                                    prepareItem={({ item }: any) => {
+                                        const name = get(item, 'name', '')
+                                        const designation = get(item, 'designation', '')
+                                        const joining_date = get(item, 'joining_date', '')
+                                        const department = get(item, 'department', '')
 
-                                    return (
-                                        <React.Fragment>
-                                            <div>
+                                        return (
+                                            <React.Fragment>
                                                 <div>
-                                                    <h5>
-                                                        { name }
-                                                    </h5>
+                                                    <div>
+                                                        <h5>
+                                                            { name }
+                                                        </h5>
+                                                    </div>
+                                                    <hr/>
+                                                    <div className={`space-more`}>
+                                                        { designation }
+                                                    </div>
+                                                    <div>
+                                                        { department }
+                                                    </div>
+                                                    <div>
+                                                        { joining_date.substring(0, 10) }
+                                                    </div>
                                                 </div>
-                                                <hr/>
-                                                <div className={`space-more`}>
-                                                    { designation }
-                                                </div>
-                                                <div>
-                                                    { department }
-                                                </div>
-                                                <div>
-                                                    { joining_date.substring(0, 10) }
-                                                </div>
-                                            </div>
-                                        </React.Fragment>
-                                    )
-                                }}
-                                list={data} />
+                                            </React.Fragment>
+                                        )
+                                    }}
+                                    list={data} />
+                                <div className={`pdf-viewer`}>
+                                    <Drawer
+                                        colors={Colors}
+                                        theme={theme}
+                                        drawerVariants={drawerVariants}
+                                        // hotKeyHandler={`DOWNLOAD_FRIENDS_LIST`}
+                                        direction={`bottom`}
+                                        allowSortUp={false}
+                                        buttonShape={`round`}
+                                        buttonDisplay={(
+                                            <FontAwesomeIcon icon={faFilePdf} />
+                                        )}>
+                                        {
+                                            ({ toggleDrawer }: any) => {
+                                                return (
+                                                    <PdfViewer
+                                                        width={`100%`}
+                                                        height={`500px`}/>
+                                                )
+                                            }
+                                        }
+                                    </Drawer>
+                                </div>
+                            </React.Fragment>
                         )
                     }
                 </div>

@@ -98,6 +98,7 @@ export const AnimeThreeJSPhysics = ({
     return (
         <div style={{ width, height }}>
             <Canvas
+                style={{ width, height }}
                 shadowMap={true}
                 sRGB={true}
                 camera={{ position: [-1, 2, 5], fov: 50 }}

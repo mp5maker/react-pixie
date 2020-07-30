@@ -103,6 +103,7 @@ export const AnimeThreeJSRain = ({
     return (
         <div style={{ width, height }}>
             <Canvas
+                style={{ width, height }}
                 shadowMap={true}
                 colorManagement={true}
                 camera={{
