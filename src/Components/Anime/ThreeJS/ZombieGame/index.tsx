@@ -5,6 +5,7 @@ import { Canvas } from 'react-three-fiber'
 
 import { Zombie } from 'Components/Anime/ThreeJS/Zombie'
 import { useDimension } from 'Hooks/UseDimension'
+import { LocaleNumber } from 'Utilities/LocaleNumber'
 import './styles.scss'
 
 export const ZombieGame = ({
@@ -71,7 +72,7 @@ export const ZombieGame = ({
             </Canvas>
             <div className={`zombie-game-summary`}>
                 <div>
-                    { t(`YOUR_SCORE`)}: { score }
+                    {t(`YOUR_SCORE`)}: { LocaleNumber({ t, value: score }) }
                 </div>
                 <div className={`controls`}>
                     <div>
