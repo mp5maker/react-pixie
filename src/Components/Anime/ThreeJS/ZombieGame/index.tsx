@@ -1,9 +1,11 @@
 import * as React from 'react'
 import * as THREE from 'three'
+import { useTranslation } from 'react-i18next'
 import { Canvas } from 'react-three-fiber'
 
 import { Zombie } from 'Components/Anime/ThreeJS/Zombie'
 import { useDimension } from 'Hooks/UseDimension'
+import './styles.scss'
 
 export const ZombieGame = ({
     colors,
@@ -11,6 +13,12 @@ export const ZombieGame = ({
     history,
 }: any) => {
     const { width, height } = useDimension()
+    const [score, setScore] = React.useState(0)
+    const { t, i18n } = useTranslation()
+
+    const getScore = (currentScore: number) => {
+        if (currentScore != score) setScore(currentScore)
+    }
 
     /* Colors */
     const COLORS = {
@@ -57,9 +65,31 @@ export const ZombieGame = ({
                 pixelRatio={window.devicePixelRatio || 1}>
                 {themeDependentMemo}
                 <Zombie
+                    getScore={getScore}
                     width={width}
                     colors={COLORS} />
             </Canvas>
+            <div className={`zombie-game-summary`}>
+                <div>
+                    { t(`YOUR_SCORE`)}: { score }
+                </div>
+                <div className={`controls`}>
+                    <div>
+                        <kbd>
+                            s
+                        </kbd>
+                        start
+                    </div>
+                    <div>
+                        <kbd>
+                            a
+                        </kbd>
+                        jump
+                    </div>
+                </div>
+            </div>
+            <div className={`zombie-game-controls`}>
+            </div>
         </div>
     )
 }

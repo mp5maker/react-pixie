@@ -7,9 +7,12 @@ let startTime: any;
 let jumpStarted: boolean = false;
 let isPlaying: boolean = false;
 let isDead: boolean = false;
+let score: number = 0;
+
 export const Zombie = ({
     colors,
-    width
+    width,
+    getScore
 }: any) => {
     const [zombieWalkMaterials, setZombieWalkMaterials]: any = React.useState([])
     const [zombieIdleMaterials, setZombieIdleMaterials]: any = React.useState([])
@@ -48,6 +51,8 @@ export const Zombie = ({
         if (keyCode == KEY_S) {
             if (isPlaying) isPlaying = false
             else {
+                getScore(0)
+                score = 0
                 isDead = false
                 isPlaying = true
                 zombie.position.set(-(width * (0.65 / 100)), 0, 0)
@@ -74,6 +79,8 @@ export const Zombie = ({
                         isPlaying = false
                         isDead = true
                     } else {
+                        score++;
+                        getScore(score)
                         nextSprite({ object: zombie, materials: zombieWalkMaterials })
                         if ((zombie.position.x - 3) > obstacle.position.x) {
                             nextSprite({ object: obstacle, materials: zombieObstacleMaterials })
@@ -200,6 +207,8 @@ export const Zombie = ({
         })
 
         setZombieObstacleMaterials(obstacleMaterials)
+
+        getScore(0)
     }, [])
 
     React.useEffect(() => {
