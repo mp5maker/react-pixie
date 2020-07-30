@@ -153,6 +153,7 @@ export const Navigation = ({ history }: any) => {
                                                     sound.play('hover')
                                                 }}
                                                 onClick={() => {
+                                                    sound.stop()
                                                     sound.fade(1, 0, 1000)
                                                     sound.play('click')
                                                 }}
