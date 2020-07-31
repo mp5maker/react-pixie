@@ -33,6 +33,7 @@ import { HotKeysHelp } from 'Components/HotKeysHelp'
 import { ShowKeyCombo } from 'Components/ShowKeyCombo'
 import { Loader } from 'Components/Loader'
 import { ScreenCapture } from 'Components/ScreenCapture'
+import { VolumeControl } from 'Components/VolumeControl'
 
 /* CSS */
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -214,6 +215,7 @@ export const App = () => {
             { themeDependentMemo }
             { loaderMemo }
             <ScreenCapture />
+            <VolumeControl />
             <HotKeysHelp
               colors={Colors}
               theme={theme} />
