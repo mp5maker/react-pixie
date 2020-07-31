@@ -78,6 +78,7 @@ export const Drawer = ({
                 </List>
                 <div className={`times-container`}>
                     <ButtonRadial
+                        ariaLabel={`Close`}
                         onClick={toggleDrawer(false)}>
                         <FontAwesomeIcon icon={faTimes} />
                     </ButtonRadial>

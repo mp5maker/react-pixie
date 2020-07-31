@@ -23,6 +23,7 @@ interface ButtonRadialPropsInterface {
     initial?: string,
     animate?: string,
     exit?: string,
+    ariaLabel?: string
 }
 
 export const ButtonRadial: React.FC<ButtonRadialPropsInterface> = ({
@@ -30,12 +31,14 @@ export const ButtonRadial: React.FC<ButtonRadialPropsInterface> = ({
     onClick = () => {},
     onMouseEnter = () => {},
     children,
+    ariaLabel = 'Feature Button',
     ...otherProps
 }: any = {}) => {
     return (
         <motion.button
             className={`button-radial-container`}
             style={style}
+            aria-label={ariaLabel}
             onClick={(event) => {
                 sound.stop()
                 sound.fade(1, 0, 1000)
@@ -63,4 +66,5 @@ ButtonRadial.propTypes = {
     initial: PropTypes.string,
     animate: PropTypes.string,
     exit: PropTypes.string,
+    ariaLabel: PropTypes.string,
 }

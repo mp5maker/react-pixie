@@ -56,6 +56,7 @@ export const SocialPicker = ({ colors, theme }: any) => {
                                                         width: `100%`,
                                                         maxWidth: `1900px`,
                                                     }}
+                                                    alt={`github-light`}
                                                     src="/Socials/github-light.png" />
                                             )
                                         }
@@ -66,6 +67,7 @@ export const SocialPicker = ({ colors, theme }: any) => {
                                                         width: `100%`,
                                                         maxWidth: `1900px`,
                                                     }}
+                                                    alt={`github-dark`}
                                                     src="/Socials/github-dark.png" />
                                             )
                                         }
@@ -175,6 +177,7 @@ export const SocialPicker = ({ colors, theme }: any) => {
                                                             width: `100%`,
                                                             maxWidth: `825px`,
                                                         }}
+                                                        alt={`resume-light`}
                                                         src="/Resume/resume-light.png" />
                                                 )
                                             }
@@ -185,6 +188,7 @@ export const SocialPicker = ({ colors, theme }: any) => {
                                                             width: `100%`,
                                                             maxWidth: `825px`,
                                                         }}
+                                                        alt={`resume-dark`}
                                                         src="/Resume/resume-dark.png" />
                                                 )
                                             }

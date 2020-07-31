@@ -126,7 +126,7 @@ export const MyNameSvg = ({ colors, theme }: any) => {
                                 exit={`exit`}
                                 className={`details-section`}>
                                 <motion.div>
-                                    <img src="/ok.png" width={140} height={222} />
+                                    <img src="/ok.png" alt={`my-photo`} width={140} height={222} />
                                 </motion.div>
                                 <motion.div>
                                     <AnimatePresence initial={false}>

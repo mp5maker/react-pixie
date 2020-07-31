@@ -146,42 +146,44 @@ export const Navigation = ({ history }: any) => {
                                     const Svg = get(item, 'Svg', '')
                                     return (
                                         <React.Fragment key={key}>
-                                            <NavLink
-                                                onMouseEnter={() => {
-                                                    sound.stop()
-                                                    sound.fade(1, 0, 100)
-                                                    sound.play('hover')
-                                                }}
-                                                onClick={() => {
-                                                    sound.stop()
-                                                    sound.fade(1, 0, 1000)
-                                                    sound.play('click')
-                                                }}
-                                                className={`navigation-item`}
-                                                exact
-                                                to={item.route}
-                                                activeClassName={`active`}
-                                                style={{
-                                                    // @ts-ignore
-                                                    color: Colors[theme].backgroundColor
-                                                }}
-                                                activeStyle={{
-                                                    fontWeight: "bold",
-                                                    // @ts-ignore
-                                                    color: Colors[theme].primaryColor
-                                                }}>
-                                                <span className={`mr-2`}>{ item.label }</span>
-                                                {
-                                                    Svg ? (
-                                                        <Svg
-                                                            svgKey={item.key}
-                                                            width={40}
-                                                            height={37.3}
-                                                            colors={Colors}
-                                                            theme={theme} />
-                                                    ) : <React.Fragment></React.Fragment>
-                                                }
-                                            </NavLink>
+                                            <li className="navigation-item">
+                                                <NavLink
+                                                    onMouseEnter={() => {
+                                                        sound.stop()
+                                                        sound.fade(1, 0, 100)
+                                                        sound.play('hover')
+                                                    }}
+                                                    onClick={() => {
+                                                        sound.stop()
+                                                        sound.fade(1, 0, 1000)
+                                                        sound.play('click')
+                                                    }}
+                                                    className={`navigation-item`}
+                                                    exact
+                                                    to={item.route}
+                                                    activeClassName={`active`}
+                                                    style={{
+                                                        // @ts-ignore
+                                                        color: Colors[theme].backgroundColor
+                                                    }}
+                                                    activeStyle={{
+                                                        fontWeight: "bold",
+                                                        // @ts-ignore
+                                                        color: Colors[theme].primaryColor
+                                                    }}>
+                                                    <span className={`mr-2`}>{ item.label }</span>
+                                                    {
+                                                        Svg ? (
+                                                            <Svg
+                                                                svgKey={item.key}
+                                                                width={40}
+                                                                height={37.3}
+                                                                colors={Colors}
+                                                                theme={theme} />
+                                                        ) : <React.Fragment></React.Fragment>
+                                                    }
+                                                </NavLink>
+                                            </li>
                                         </React.Fragment>
                                     )
                                 })

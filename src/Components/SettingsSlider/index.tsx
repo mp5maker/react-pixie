@@ -87,6 +87,7 @@ export const SettingsSlider = ({
                             initial="initial"
                             animate="animate"
                             exit="exit"
+                            aria-label={`Slider Open`}
                             className={`settings-slider-open-button`}
                             onClick={() => setShow(true)}
                             whileHover={{ scale: 0.98 }}
@@ -229,6 +230,7 @@ export const SettingsSlider = ({
                                 <motion.div
                                     className={`button-container`}>
                                     <motion.button
+                                        aria-label={`Button Close`}
                                         onClick={() => setShow(false)}
                                         className={`button`}
                                         style={{

@@ -33,12 +33,12 @@ export const Showcase = ({ colors, theme }: any) => {
             <div>
                 {
                     theme == LIGHT && (
-                        <img src="/Showcase/card-light.png" />
+                        <img src="/Showcase/card-light.png" alt={`card-light`} />
                     )
                 }
                 {
                     theme == DARK && (
-                        <img src="/Showcase/card-dark.png" />
+                        <img src="/Showcase/card-dark.png" alt={`card-dark`} />
                     )
                 }
             </div>
@@ -50,12 +50,12 @@ export const Showcase = ({ colors, theme }: any) => {
             <div>
                 {
                     theme == LIGHT && (
-                        <img src="/Showcase/comparison-light.png" />
+                        <img src="/Showcase/comparison-light.png" alt={`comparison-light`} />
                     )
                 }
                 {
                     theme == DARK && (
-                        <img src="/Showcase/comparison-dark.png" />
+                        <img src="/Showcase/comparison-dark.png" alt={`comparison-dark`} />
                     )
                 }
             </div>
@@ -67,12 +67,12 @@ export const Showcase = ({ colors, theme }: any) => {
             <div>
                 {
                     theme == LIGHT && (
-                        <img src="/Showcase/steppers-light.png" />
+                        <img src="/Showcase/steppers-light.png" alt={`steppers-light`}/>
                     )
                 }
                 {
                     theme == DARK && (
-                        <img src="/Showcase/steppers-dark.png" />
+                        <img src="/Showcase/steppers-dark.png" alt={`steppers-dark`}/>
                     )
                 }
             </div>
@@ -84,12 +84,12 @@ export const Showcase = ({ colors, theme }: any) => {
             <div>
                 {
                     theme == LIGHT && (
-                        <img src="/Showcase/date-light.png" />
+                        <img src="/Showcase/date-light.png" alt={`date-light`} />
                     )
                 }
                 {
                     theme == DARK && (
-                        <img src="/Showcase/date-dark.png" />
+                        <img src="/Showcase/date-dark.png" alt={`date-dark`} />
                     )
                 }
             </div>
@@ -101,12 +101,12 @@ export const Showcase = ({ colors, theme }: any) => {
             <div>
                 {
                     theme == LIGHT && (
-                        <img src="/Showcase/form-light.png" />
+                        <img src="/Showcase/form-light.png" alt={`form-light`} />
                     )
                 }
                 {
                     theme == DARK && (
-                        <img src="/Showcase/form-dark.png" />
+                        <img src="/Showcase/form-dark.png" alt={`form-dark`} />
                     )
                 }
             </div>
@@ -118,12 +118,12 @@ export const Showcase = ({ colors, theme }: any) => {
             <div>
                 {
                     theme == LIGHT && (
-                        <img src="/Showcase/highlight-button-light.png" />
+                        <img src="/Showcase/highlight-button-light.png" alt={`highlight-button-light`}/>
                     )
                 }
                 {
                     theme == DARK && (
-                        <img src="/Showcase/highlight-button-dark.png" />
+                        <img src="/Showcase/highlight-button-dark.png" alt={`highlight-button-dark`} />
                     )
                 }
             </div>
@@ -135,12 +135,12 @@ export const Showcase = ({ colors, theme }: any) => {
             <div>
                 {
                     theme == LIGHT && (
-                        <img src="/Showcase/chip-light.png" />
+                        <img src="/Showcase/chip-light.png" alt={`chip-light`}/>
                     )
                 }
                 {
                     theme == DARK && (
-                        <img src="/Showcase/chip-dark.png" />
+                        <img src="/Showcase/chip-dark.png" alt={`card-dark`}/>
                     )
                 }
             </div>
@@ -152,12 +152,12 @@ export const Showcase = ({ colors, theme }: any) => {
             <div>
                 {
                     theme == LIGHT && (
-                        <img src="/Showcase/timeline-light.png" />
+                        <img src="/Showcase/timeline-light.png" alt={`timeline-light`}/>
                     )
                 }
                 {
                     theme == DARK && (
-                        <img src="/Showcase/timeline-dark.png" />
+                        <img src="/Showcase/timeline-dark.png" alt={`timeline-dark`}/>
                     )
                 }
             </div>
@@ -169,12 +169,12 @@ export const Showcase = ({ colors, theme }: any) => {
             <div>
                 {
                     theme == LIGHT && (
-                        <img src="/Showcase/image-grid-light.png" />
+                        <img src="/Showcase/image-grid-light.png" alt={`image-grid-light`} />
                     )
                 }
                 {
                     theme == DARK && (
-                        <img src="/Showcase/image-grid-dark.png" />
+                        <img src="/Showcase/image-grid-dark.png" alt={`image-grid-dark`}/>
                     )
                 }
             </div>
