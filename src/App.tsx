@@ -4,7 +4,6 @@ import {
   Router,
   Route,
   Switch,
-  Redirect
 } from 'react-router'
 import { createBrowserHistory } from 'history'
 import { AnimatePresence } from 'framer-motion'
@@ -15,7 +14,6 @@ import { AppContext } from 'AppContext'
 import { SettingsContext } from 'SettingsContext'
 import { MusicContext } from 'MusicContext'
 import { DARK, LIGHT, THEME, LANGUAGE, EN, BN } from 'Constants/Settings'
-import * as Pages from 'Pages'
 import { Footer } from 'Components/Footer'
 import { ThemePicker } from 'Components/ThemePicker'
 import { LanguagePicker } from 'Components/LanguagePicker'
@@ -34,6 +32,15 @@ import { ShowKeyCombo } from 'Components/ShowKeyCombo'
 import { Loader } from 'Components/Loader'
 import { ScreenCapture } from 'Components/ScreenCapture'
 import { VolumeControl } from 'Components/VolumeControl'
+
+/* Performance Optimizing Imports */
+const PagesHome = React.lazy(() => import('Pages').then(({ Home }) => ({ default: Home })))
+const PagesExperience = React.lazy(() => import('Pages').then(({ Experience }) => ({ default: Experience })))
+const PagesPhysics = React.lazy(() => import('Pages').then(({ Physics }) => ({ default: Physics })))
+const PagesError = React.lazy(() => import('Pages').then(({ Error }) => ({ default: Error })))
+const PagesSkybox = React.lazy(() => import('Pages').then(({ Skybox }) => ({ default: Skybox })))
+const PagesBird = React.lazy(() => import('Pages').then(({ Bird }) => ({ default: Bird })))
+const PagesRain = React.lazy(() => import('Pages').then(({ Rain }) => ({ default: Rain })))
 
 /* CSS */
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -177,7 +184,7 @@ export const App = () => {
           <GlobalHotKeys
             allowChanges={true}
             keyMap={HotKeyMap}>
-            <div
+            <main
               style={{
                 // @ts-ignore
                 backgroundColor: Colors[theme].backgroundColor,
@@ -186,27 +193,29 @@ export const App = () => {
               }}
               className="container-fluid">
               <Router history={history}>
-                <Route
-                  render={({ location }) => {
-                    return (
-                      <AnimatePresence exitBeforeEnter initial={false}>
-                        <Switch location={location}  key={location.pathname}>
-                          <Route exact path={Routes.ROOT} component={Pages.Home} />
-                          <Route exact path={Routes.HOME} component={Pages.Home} />
-                          <Route exact path={Routes.EXPERIENCE} component={Pages.Experience} />
-                          <Route exact path={Routes.SKYBOX} component={Pages.Skybox} />
-                          <Route exact path={Routes.RAIN} component={Pages.Rain} />
-                          <Route exact path={Routes.BIRD} component={Pages.Bird} />
-                          <Route exact path={Routes.PHYSICS} component={Pages.Physics} />
-                          <Route path={Routes.OTHERS} component={Pages.Error} />
-                        </Switch>
-                      </AnimatePresence>
-                    )
-                  }}
-                />
+                <React.Suspense fallback={<></>}>
+                  <Route
+                    render={({ location }) => {
+                      return (
+                        <AnimatePresence exitBeforeEnter initial={false}>
+                          <Switch location={location} key={location.pathname}>
+                            <Route exact path={Routes.ROOT} component={PagesHome} />
+                            <Route exact path={Routes.HOME} component={PagesHome} />
+                            <Route exact path={Routes.EXPERIENCE} component={PagesExperience} />
+                            <Route exact path={Routes.SKYBOX} component={PagesSkybox} />
+                            <Route exact path={Routes.RAIN} component={PagesRain} />
+                            <Route exact path={Routes.BIRD} component={PagesBird} />
+                            <Route exact path={Routes.PHYSICS} component={PagesPhysics} />
+                            <Route path={Routes.OTHERS} component={PagesError} />
+                          </Switch>
+                        </AnimatePresence>
+                      )
+                    }}
+                  />
+                </React.Suspense>
                 <Navigation history={history} />
               </Router>
-            </div>
+            </main>
             { themePickerMemo }
             { languagePickerMemo }
             { settingsSliderMemo }
