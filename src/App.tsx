@@ -32,6 +32,7 @@ import { ShowKeyCombo } from 'Components/ShowKeyCombo'
 import { Loader } from 'Components/Loader'
 import { ScreenCapture } from 'Components/ScreenCapture'
 import { VolumeControl } from 'Components/VolumeControl'
+import { SPK } from 'Svg/SPK'
 
 /* Performance Optimizing Imports */
 const PagesHome = React.lazy(() => import('Pages').then(({ Home }) => ({ default: Home })))
@@ -173,6 +174,73 @@ export const App = () => {
     )
   }, [isLoading, theme])
 
+  const fallbackMemo = React.useMemo(() => {
+    return (
+      <>
+        <div className="suspense-loading-container">
+          <div>
+            <SPK
+              width={100}
+              height={46.8}
+              // @ts-ignore
+              fillColor={Colors[theme].primaryColor}
+              svgVariants={{}}
+              pathVariantsOne={{
+                initial: {
+                  y: 0
+                },
+                animate: {
+                  y: [0, 25, 50, 75, 50, 25],
+                  transition: {
+                    y: {
+                      duration: 2,
+                      yoyo: Infinity
+                    },
+                  }
+                },
+                exit: {}
+              }}
+              pathVariantsTwo={{
+                initial: {
+                  y: 25
+                },
+                animate: {
+                  y: [25, 50, 75, 50, 25, 0],
+                  transition: {
+                    y: {
+                      duration: 2,
+                      yoyo: Infinity
+                    },
+                  }
+                },
+                exit: {}
+              }}
+              pathVariantsThree={{
+                initial: {
+                  y: 50
+                },
+                animate: {
+                  y: [50, 75, 50, 25, 0, 25],
+                  transition: {
+                    y: {
+                      duration: 2,
+                      yoyo: Infinity
+                    },
+                  }
+                },
+                exit: {}
+              }}
+              colors={Colors}
+              theme={theme} />
+              <div>
+                { t(`LOADING_PLEASE_WAIT`)}
+              </div>
+          </div>
+        </div>
+      </>
+    )
+  }, [theme])
+
   return (
     <AppContext.Provider
       value={{ theme, setTheme }}>
@@ -193,7 +261,8 @@ export const App = () => {
               }}
               className="container-fluid">
               <Router history={history}>
-                <React.Suspense fallback={<></>}>
+                <React.Suspense
+                  fallback={fallbackMemo}>
                   <Route
                     render={({ location }) => {
                       return (
