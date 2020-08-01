@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { Posts } from 'Services/Posts'
+import { Query } from 'Services/Query'
 
-describe('Posts', () => {
+describe('Query', () => {
     it('Calls axios and returns posts', async () => {
         // @ts-ignore
         axios.get.mockImplementationOnce((url, options) => Promise.resolve({
@@ -20,7 +20,7 @@ describe('Posts', () => {
             headers: {},
         }))
 
-        const response = await Posts({ params: { _limit: 20 } })
+        const response = await Query('posts', { params: { _limit: 20 } })
 
         expect(response).toStrictEqual({
             data: [

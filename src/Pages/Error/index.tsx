@@ -16,7 +16,7 @@ import { ErrorMessage } from 'Components/ErrorMessage'
 import { Cards } from 'Components/Cards'
 import { Drawer } from 'Components/Drawer'
 import { useDocument } from 'Hooks/UseDocument'
-import { Posts } from 'Services/Posts'
+import { Query } from 'Services/Query'
 import { SPK } from 'Svg/SPK'
 import { PdfViewer } from 'Components/Pdf'
 import "./styles.scss"
@@ -45,7 +45,7 @@ export const Error = ({ history, location, match }: any) => {
     const { isLoading, error, data: response } = useQuery([
         'posts',
         { params: { _limit: 20, _page: 3 } }
-    ], Posts)
+    ], Query)
     const { t } = useTranslation()
     useDocument({ options: [{ selector: 'title', value: `Photon's Portfolio: Page Do Not Exist` }] })
     const data = get(response, 'data', [])
