@@ -4,6 +4,7 @@ import get from 'lodash/get'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons"
+import { useQuery } from 'react-query'
 
 import { Colors } from 'Constants/Colors'
 import { PageTransition } from 'Constants/PageTransition'
@@ -15,7 +16,7 @@ import { ErrorMessage } from 'Components/ErrorMessage'
 import { Cards } from 'Components/Cards'
 import { Drawer } from 'Components/Drawer'
 import { useDocument } from 'Hooks/UseDocument'
-import { usePosts } from 'Hooks/UsePosts'
+import { Posts } from 'Services/Posts'
 import { SPK } from 'Svg/SPK'
 import { PdfViewer } from 'Components/Pdf'
 import "./styles.scss"
@@ -41,9 +42,13 @@ const drawerVariants = {
 export const Error = ({ history, location, match }: any) => {
     const { theme } = React.useContext(AppContext)
     const { setSettings, ...settings }: any = React.useContext(SettingsContext)
-    const { loading, data } = usePosts({ params: { _limit: 20, _page: Math.random() * 100 } })
+    const { isLoading, error, data: response } = useQuery([
+        'posts',
+        { params: { _limit: 20, _page: 3 } }
+    ], Posts)
     const { t } = useTranslation()
     useDocument({ options: [{ selector: 'title', value: `Photon's Portfolio: Page Do Not Exist` }] })
+    const data = get(response, 'data', [])
 
     React.useEffect(() => {
         setSettings({
@@ -236,7 +241,7 @@ export const Error = ({ history, location, match }: any) => {
             <div className="row">
                 <div className="col p-0">
                     {
-                        loading ? (
+                        isLoading ? (
                             <React.Fragment>
                                 { memoLoading }
                             </React.Fragment>
