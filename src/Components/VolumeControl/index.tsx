@@ -7,13 +7,17 @@ import { ButtonRadial } from 'Components/Button/Radial'
 import './styles.scss'
 
 export const VolumeControl = () => {
-    const [mute, setMute] = React.useState(false)
+    const [mute, setMute] = React.useState(true)
 
     const toggleMute = () => {
         if (mute) Howler.mute(false)
         else Howler.mute(true)
         setMute(!mute)
     }
+
+    React.useEffect(() => {
+        Howler.mute(true)
+    }, [])
 
     return (
         <React.Fragment>
