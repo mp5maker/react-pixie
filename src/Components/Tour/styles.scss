@@ -1,0 +1,41 @@
+.tour-container {
+    position: fixed;
+    right: 25px;
+    top: 190px;
+}
+
+.floater {
+    display: none;
+}
+
+[id|="react-joyride"] {
+    background-color: var(--background-color) !important;
+    .__floater {
+        &.__floater__open {
+            button {
+                background-color: transparent !important;
+                border: 1px solid var(primary-color) !important;
+                color: var(--primary-color) !important;
+                border-radius: 5px !important;
+                transition: all linear 0.25s;
+                svg {
+                    path {
+                        fill: var(--primary-color) !important;
+                    }
+                }
+            }
+            .__floater__arrow {
+                svg {
+                    polygon {
+                        fill: var(--primary-color) !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.react-joyride__tooltip {
+    background-color: var(--background-color) !important;
+    color: var(--primary-color) !important;
+}

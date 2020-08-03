@@ -18,6 +18,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
+    "@types/twemoji": "^12.1.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "cannon": "^0.6.2",
@@ -32,6 +33,7 @@
     "react-dom": "^16.13.1",
     "react-hotkeys": "^2.0.0",
     "react-i18next": "^11.7.0",
+    "react-joyride": "^2.2.1",
     "react-query": "^2.5.7-tsnext.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
@@ -39,6 +41,7 @@
     "react-three-fiber": "^4.2.12",
     "sass": "^1.26.9",
     "three": "^0.118.3",
+    "twemoji": "^13.0.1",
     "typescript": "~3.8.0",
     "use-cannon": "^0.5.0"
   },

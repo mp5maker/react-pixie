@@ -32,6 +32,7 @@ import { ShowKeyCombo } from 'Components/ShowKeyCombo'
 import { Loader } from 'Components/Loader'
 import { ScreenCapture } from 'Components/ScreenCapture'
 import { VolumeControl } from 'Components/VolumeControl'
+import { Tour } from 'Components/Tour'
 import { SPK } from 'Svg/SPK'
 
 /* Performance Optimizing Imports */
@@ -294,6 +295,7 @@ export const App = () => {
             { loaderMemo }
             <ScreenCapture t={t} />
             <VolumeControl t={t} />
+            <Tour t={t} />
             <HotKeysHelp
               colors={Colors}
               theme={theme} />
