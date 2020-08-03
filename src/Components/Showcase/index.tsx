@@ -191,6 +191,8 @@ export const Showcase = ({ colors, theme }: any) => {
                 drawerVariants={drawerVariants}
                 buttonShape={`round`}
                 direction={`left`}
+                openButtonTitle={t(`OPEN_SHOWCASE_DRAWER`)}
+                closeButtonTitle={t(`CLOSE_SHOWCASE_DRAWER`)}
                 buttonDisplay={(
                     <FontAwesomeIcon icon={faPencilRuler} />
                 )}>

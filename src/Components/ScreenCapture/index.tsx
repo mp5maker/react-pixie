@@ -7,7 +7,7 @@ import './styles.scss'
 
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 
-export const ScreenCapture = ({ fileName = 'photon-capture.png' }) => {
+export const ScreenCapture = ({ fileName = 'photon-capture.png', t }: any) => {
     const onClick = React.useCallback(async () => {
         const body: any = document.querySelector('body')
         const canvas: any = document.createElement('canvas')
@@ -50,6 +50,7 @@ export const ScreenCapture = ({ fileName = 'photon-capture.png' }) => {
         <React.Fragment>
             <div className="screen-capture-container">
                 <ButtonRadial
+                    title={t(`SCREEN_CAPTURE`)}
                     onClick={() => onClick()}>
                     <FontAwesomeIcon
                         icon={faCamera} />

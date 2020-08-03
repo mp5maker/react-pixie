@@ -107,7 +107,7 @@ export const App = () => {
 
   const themePickerMemo = React.useMemo(() => {
     return (
-      <ThemePicker />
+      <ThemePicker t={t} />
     )
   }, [])
 
@@ -292,8 +292,8 @@ export const App = () => {
             { musicCreditMemo }
             { themeDependentMemo }
             { loaderMemo }
-            <ScreenCapture />
-            <VolumeControl />
+            <ScreenCapture t={t} />
+            <VolumeControl t={t} />
             <HotKeysHelp
               colors={Colors}
               theme={theme} />

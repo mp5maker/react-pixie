@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin, faWeebly, faReadme } from "@fortawesome/free-brands-svg-icons"
+import { useTranslation } from 'react-i18next'
 
 import { DARK, LIGHT } from 'Constants/Settings'
 import { Drawer } from 'Components/Drawer'
@@ -25,6 +26,8 @@ const drawerVariants = {
 }
 
 export const SocialPicker = ({ colors, theme }: any) => {
+    const { t } = useTranslation()
+
     return (
         <>
             <div className="social-picker-container">
@@ -37,6 +40,8 @@ export const SocialPicker = ({ colors, theme }: any) => {
                         direction={`bottom`}
                         allowSortUp={false}
                         buttonShape={`round`}
+                        openButtonTitle={t(`OPEN_GITHUB_DRAWER`)}
+                        closeButtonTitle={t(`CLOSE_GITHUB_DRAWER`)}
                         buttonDisplay={(
                             <FontAwesomeIcon icon={faGithub} />
                         )}>
@@ -84,6 +89,8 @@ export const SocialPicker = ({ colors, theme }: any) => {
                         direction={`bottom`}
                         allowSortUp={false}
                         buttonShape={`round`}
+                        openButtonTitle={t(`OPEN_LINKEDIN_DRAWER`)}
+                        closeButtonTitle={t(`CLOSE_LINKEDIN_DRAWER`)}
                         buttonDisplay={(
                             <FontAwesomeIcon icon={faLinkedin} />
                         )}>
@@ -131,6 +138,8 @@ export const SocialPicker = ({ colors, theme }: any) => {
                         direction={`bottom`}
                         buttonShape={`round`}
                         allowSortUp={false}
+                        openButtonTitle={t(`OPEN_WEEBLY_DRAWER`)}
+                        closeButtonTitle={t(`CLOSE_WEEBLY_DRAWER`)}
                         buttonDisplay={(
                             <FontAwesomeIcon icon={faWeebly} />
                         )}>
@@ -162,6 +171,8 @@ export const SocialPicker = ({ colors, theme }: any) => {
                         buttonShape={`round`}
                         allowSortUp={false}
                         hotKeyHandler={`TOGGLE_RESUME`}
+                        openButtonTitle={t(`OPEN_RESUME_DRAWER`)}
+                        closeButtonTitle={t(`CLOSE_RESUME_DRAWER`)}
                         buttonDisplay={(
                             <FontAwesomeIcon icon={faReadme} />
                         )}>

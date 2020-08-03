@@ -11,4 +11,12 @@
         bottom: -55px;
         padding: 0;
     }
+    a {
+        text-decoration: none;
+        color: var(--primary-color);
+        &:hover {
+            text-decoration: none;
+            color: var(--danger-color);
+        }
+    }
 }

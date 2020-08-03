@@ -451,6 +451,8 @@ export const WorkExperience = ({ colors, theme }: any) => {
                     colors={colors}
                     theme={theme}
                     drawerVariants={drawerVariants}
+                    openButtonTitle={t(`OPEN_EXPERIENCE_DRAWER`)}
+                    closeButtonTitle={t(`CLOSE_EXPERIENCE_DRAWER`)}
                     direction={`top`}
                     buttonShape={`round`}
                     buttonDisplay={(

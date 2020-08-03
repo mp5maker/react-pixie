@@ -26,7 +26,9 @@ export const Drawer = ({
     buttonDisplay,
     buttonShape = BUTTON_SHAPE_ROUND,
     hotKeyHandler = '',
-    allowSortUp = true
+    allowSortUp = true,
+    openButtonTitle = '',
+    closeButtonTitle = ''
 }: any) => {
     const { setSettings, ...otherSettings }: any = React.useContext(SettingsContext)
     const [show, setShow] = React.useState(false)
@@ -78,6 +80,7 @@ export const Drawer = ({
                 </List>
                 <div className={`times-container`}>
                     <ButtonRadial
+                        title={closeButtonTitle}
                         ariaLabel={`Close`}
                         onClick={toggleDrawer(false)}>
                         <FontAwesomeIcon icon={faTimes} />
@@ -100,6 +103,7 @@ export const Drawer = ({
             {
                 buttonShape == BUTTON_SHAPE_ROUND ? (
                     <ButtonRadial
+                        title={openButtonTitle}
                         style={{
                             backgroundColor: colors[theme].backgroundColor,
                             color: colors[theme].primaryColor,

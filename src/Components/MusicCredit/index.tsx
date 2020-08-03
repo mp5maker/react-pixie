@@ -51,17 +51,29 @@ export const MusicCredit = ({ isPlaying, colors, theme }: any) => {
                             icon={faHeadphones} />
                     </span>
                     <span>
-                        Spektrum & Sara Skinner - Keep You
+                        <a
+                            target="__blank"
+                            href="https://youtu.be/YnmOmNqBWtM">
+                            Spektrum & Sara Skinner - Keep You
+                        </a>
                     </span>
                 </motion.div>
                 <motion.div>
                     Music provided by NoCopyrightSounds.
                 </motion.div>
                 <motion.div>
-                    https://youtu.be/YnmOmNqBWtM
+                    <a
+                        target="__blank"
+                        href="https://youtu.be/YnmOmNqBWtM">
+                        https://youtu.be/YnmOmNqBWtM
+                    </a>
                 </motion.div>
                 <motion.div>
-                    http://ncs.io/KeepYou
+                    <a
+                        target="__blank"
+                        href="http://ncs.io/KeepYou">
+                        http://ncs.io/KeepYou
+                    </a>
                 </motion.div>
             </motion.div>
         ) : <React.Fragment key={`none`}></React.Fragment>

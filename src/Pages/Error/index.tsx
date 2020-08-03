@@ -161,6 +161,8 @@ export const Error = ({ history, location, match }: any) => {
                     colors={Colors}
                     theme={theme}
                     drawerVariants={drawerVariants}
+                    openButtonTitle={t(`OPEN_FRIENDS_LIST_DRAWER`)}
+                    closeButtonTitle={t(`CLOSE_FRIENDS_LIST_DRAWER`)}
                     // hotKeyHandler={`DOWNLOAD_FRIENDS_LIST`}
                     direction={`bottom`}
                     allowSortUp={false}

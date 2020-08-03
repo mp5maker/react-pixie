@@ -112,6 +112,8 @@ export const HotKeysHelp = ({ colors, theme }: any) => {
                     direction={`top`}
                     buttonShape={`round`}
                     hotKeyHandler={`TOGGLE_HELP`}
+                    openButtonTitle={t(`OPEN_KEYBOARD_SHORTCUT_DRAWER`)}
+                    closeButtonTitle={t(`CLOSE_KEYBOARD_SHORTCUT_DRAWER`)}
                     buttonDisplay={(
                         <FontAwesomeIcon icon={faKeyboard} />
                     )}>
@@ -126,15 +128,6 @@ export const HotKeysHelp = ({ colors, theme }: any) => {
                                             </h6>
                                         </header>
                                         { memoPreparedTable }
-                                    </div>
-                                    <div className={`times-container`}>
-                                        <button
-                                            onClick={(event) => {
-                                                event.preventDefault();
-                                                toggleDrawer(false)
-                                            }}>
-                                            <FontAwesomeIcon icon={faTimes} />
-                                        </button>
                                     </div>
                                 </div>
                             )

@@ -25,7 +25,8 @@ interface ButtonRadialPropsInterface {
     initial?: string,
     animate?: string,
     exit?: string,
-    ariaLabel?: string
+    ariaLabel?: string,
+    title?: string,
 }
 
 export const ButtonRadial: React.FC<ButtonRadialPropsInterface> = ({
@@ -65,4 +66,5 @@ ButtonRadial.propTypes = {
     animate: PropTypes.string,
     exit: PropTypes.string,
     ariaLabel: PropTypes.string,
+    title: PropTypes.string,
 }

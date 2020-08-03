@@ -2,7 +2,8 @@ import * as React from 'react'
 import * as THREE from 'three'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMusic, faPause, faPlay, faStop } from '@fortawesome/free-solid-svg-icons'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 import { useMedia } from 'Hooks/UseMedia'
 import { Colors } from 'Constants/Colors'
@@ -40,6 +41,7 @@ const buttonVariants = {
 let iosAudio: any;
 let startTime: any;
 export const AudioPlayer = ({ }: any) => {
+    const { t } = useTranslation()
     const { theme }: any = React.useContext(AppContext)
     const { setMusicSettings, ...otherSettingsProps }: any = React.useContext(MusicContext)
     const [ playAudio, setPlayAudio ] = React.useState(AUDIO_NOT_PLAYING)
@@ -162,6 +164,7 @@ export const AudioPlayer = ({ }: any) => {
                         animate={`animate`}
                         exit={`exit`}
                         key={`play-audio`}
+                        title={t(`PLAY_THE_AUDIO`)}
                         style={{
                             // @ts-ignore
                             backgroundColor: Colors[theme].backgroundColor,
@@ -188,6 +191,7 @@ export const AudioPlayer = ({ }: any) => {
                         animate={`animate`}
                         exit={`exit`}
                         key={`pause-audio`}
+                        title={t(`PAUSE_THE_AUDIO`)}
                         style={{
                             // @ts-ignore
                             backgroundColor: Colors[theme].backgroundColor,
@@ -214,6 +218,7 @@ export const AudioPlayer = ({ }: any) => {
                         animate={`animate`}
                         exit={`exit`}
                         key={`resume-audio`}
+                        title={t(`RESUME_THE_AUDIO`)}
                         style={{
                             // @ts-ignore
                             backgroundColor: Colors[theme].backgroundColor,
@@ -240,6 +245,7 @@ export const AudioPlayer = ({ }: any) => {
                         animate={`animate`}
                         exit={`exit`}
                         key={`stop-audio`}
+                        title={t(`STOP_THE_AUDIO`)}
                         style={{
                             // @ts-ignore
                             backgroundColor: Colors[theme].backgroundColor,
@@ -266,6 +272,7 @@ export const AudioPlayer = ({ }: any) => {
                         animate={`animate`}
                         exit={`exit`}
                         key={`loaded-audio`}
+                        title={t(`DOWNLOADING_AUDIO`)}
                         style={{
                             // @ts-ignore
                             backgroundColor: Colors[theme].backgroundColor,

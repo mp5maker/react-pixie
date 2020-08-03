@@ -11,7 +11,7 @@ import { ButtonRadial } from 'Components/Button/Radial'
 
 import "./styles.scss"
 
-export const ThemePicker = () => {
+export const ThemePicker = ({ t }: any) => {
     const { theme, setTheme }: any = React.useContext(AppContext)
 
     const LightButton = (
@@ -28,6 +28,7 @@ export const ThemePicker = () => {
                         border: `1px solid transparent`
                     })
             }}
+            title={t(`CHANGE_TO_LIGHT_MODE`)}
             onClick={() => {
                 setTheme(LIGHT)
                 StorageSet({ key: THEME, value: LIGHT })
@@ -50,6 +51,7 @@ export const ThemePicker = () => {
                         border: `1px solid transparent`
                     })
             }}
+            title={t(`CHANGE_TO_DARK_MODE`)}
             onClick={() => {
                 setTheme(DARK)
                 StorageSet({ key: THEME, value: DARK })

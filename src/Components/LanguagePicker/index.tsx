@@ -17,6 +17,7 @@ export const LanguagePicker = () => {
 
     const EnglishButton = (
         <ButtonRadial
+            title={t(`CHANGE_TO_ENGLISH_LANGUAGE`)}
             style={{
                 // @ts-ignore
                 backgroundColor: Colors[theme].backgroundColor,
@@ -39,6 +40,7 @@ export const LanguagePicker = () => {
 
     const BengaliButton = (
         <ButtonRadial
+            title={t(`CHANGE_TO_BENGALI_LANGUAGE`)}
             style={{
                 // @ts-ignore
                 backgroundColor: Colors[theme].backgroundColor,
