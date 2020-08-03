@@ -33,6 +33,9 @@ export const VolumeControl = () => {
                     }
                 </ButtonRadial>
             </div>
+            <div className="sound-attributon-container">
+                Sound from Zapsplat.com
+            </div>
         </React.Fragment>
     )
 }

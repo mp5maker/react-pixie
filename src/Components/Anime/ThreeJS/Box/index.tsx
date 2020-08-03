@@ -6,12 +6,9 @@ import { Glitch } from 'Components/Anime/ThreeJS/Glitch'
 
 
 const sound = new Howl({
-    src: ['/Audio/menu.mp3'],
+    src: ['/Audio/glitch.mp3'],
     preload: true,
     volume: 1,
-    sprite: {
-        hover: [60000, 1500],
-    }
 })
 
 export const Box = ({ colors, history, wireframe = false, redirectURL, rotationX, rotationY, rotationZ, frequency, ...props }: any) => {
@@ -29,7 +26,7 @@ export const Box = ({ colors, history, wireframe = false, redirectURL, rotationX
 
     const onPointerOver = React.useCallback((event, value) => {
         event.stopPropagation()
-        sound.play('hover')
+        sound.play()
         setHover(true)
     }, [setHover])
 

@@ -21,14 +21,16 @@ import { Cursor } from 'Svg/Cursor'
 
 import "./styles.scss"
 
-const sound = new Howl({
-    src: ['/Audio/menu.mp3'],
+const soundHover = new Howl({
+    src: ['/Audio/button-hover.mp3'],
     preload: true,
     volume: 1,
-    sprite: {
-        hover: [2000, 250],
-        click: [1000, 1000]
-    }
+})
+
+const soundClick = new Howl({
+    src: ['/Audio/button-click.mp3'],
+    preload: true,
+    volume: 1,
 })
 
 export const Navigation = ({ history }: any) => {
@@ -149,14 +151,12 @@ export const Navigation = ({ history }: any) => {
                                             <li className="navigation-item">
                                                 <NavLink
                                                     onMouseEnter={() => {
-                                                        sound.stop()
-                                                        sound.fade(1, 0, 100)
-                                                        sound.play('hover')
+                                                        soundHover.stop()
+                                                        soundHover.play()
                                                     }}
                                                     onClick={() => {
-                                                        sound.stop()
-                                                        sound.fade(1, 0, 1000)
-                                                        sound.play('click')
+                                                        soundClick.stop()
+                                                        soundClick.play()
                                                     }}
                                                     className={`navigation-item`}
                                                     exact

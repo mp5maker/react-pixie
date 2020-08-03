@@ -5,14 +5,16 @@ import { Howl } from 'howler'
 
 import './styles.scss'
 
-const sound = new Howl({
-    src: ['/Audio/menu.mp3'],
+const soundHover = new Howl({
+    src: ['/Audio/button-hover-alternative.mp3'],
     preload: true,
     volume: 1,
-    sprite: {
-        hover: [10000, 250],
-        click: [10000, 1000]
-    }
+})
+
+const soundClick = new Howl({
+    src: ['/Audio/button-click-alternative.mp3'],
+    preload: true,
+    volume: 1,
 })
 
 interface ButtonRadialPropsInterface {
@@ -40,15 +42,11 @@ export const ButtonRadial: React.FC<ButtonRadialPropsInterface> = ({
             style={style}
             aria-label={ariaLabel}
             onClick={(event) => {
-                sound.stop()
-                sound.fade(1, 0, 1000)
-                sound.play('click')
+                soundClick.play()
                 onClick(event)
             }}
             onMouseEnter={(event) => {
-                sound.stop()
-                sound.fade(1, 0, 100)
-                sound.play('hover')
+                soundHover.play()
                 onMouseEnter(event)
             }}
             {...otherProps}>
