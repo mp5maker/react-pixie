@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Joyride from 'react-joyride'
+import Joyride, { STATUS, ACTIONS } from 'react-joyride'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBus, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { Emoji } from 'Components/Emoji'
@@ -23,12 +23,22 @@ const buttonVariants = {
     }
 }
 
-export const Tour = ({ t }: any) => {
+export const Tour = ({ t, getHelpers = () => {} }: any) => {
     const [ tour, setTour ] = React.useState(false)
     const isMediaGreaterThan767 = useMedia({ query: "(min-width: 767px)" })
 
-    const joyRideCallback = React.useCallback(({ action, controlled, index, lifecycle, size, status, step, type }: any) => {
-        if (status == 'finished') setTour(false)
+    const joyRideCallback = React.useCallback(({
+        action,
+        controlled,
+        index,
+        lifecycle,
+        size,
+        status,
+        step,
+        type
+    }: any) => {
+        if (action == ACTIONS.CLOSE) setTour(false)
+        if (status == STATUS.FINISHED) setTour(false)
     }, [tour])
 
     const navigationStep = {
@@ -38,8 +48,8 @@ export const Tour = ({ t }: any) => {
                 <div className={`text-left`}>
                     <div>
                         <span>
-                            Navigate using &nbsp;
-                            </span>
+                            { t(`NAVIGATE_USING`) } &nbsp;
+                        </span>
                         <span>
                             <Emoji emoji={`🖱️`} /> ? &nbsp;
                             </span>
@@ -51,7 +61,7 @@ export const Tour = ({ t }: any) => {
                     <div>
                         <div>
                             <span>
-                                Instead, you can use arrow keys &nbsp;
+                                {t(`INSTEAD_YOU_CAN_USE_KEYBOARD`) } &nbsp;
                             </span>
                             <kbd>
                                 <FontAwesomeIcon icon={faArrowUp} />
@@ -62,14 +72,20 @@ export const Tour = ({ t }: any) => {
                             </kbd>
                         </div>
                         <div>
-                            or swipe for touch devices
+                            {t(`OR_SWIPE_FOR_TOUCH_DEVICES`) }
                         </div>
                     </div>
                     <div className={`mt-3`}>
                         <span className={`help-block`}>
                             <small>
-                                Let me tell you another secret, there are <strong>3</strong> more routes to explore
-                                </small>
+                                { t(`LET_ME_TELL_YOU_A_SECRET`) } &nbsp;
+                            </small>
+                            <small>
+                                <strong>{t(`3`)}</strong>
+                            </small>
+                            <small>
+                                {t(`MORE_ROUTES_TO_EXPLORE`) }
+                            </small>
                         </span>
                     </div>
                 </div>
@@ -85,8 +101,8 @@ export const Tour = ({ t }: any) => {
                 <div className={`text-left`}>
                     <div>
                         <span>
-                            Change language! &nbsp;
-                            </span>
+                            {t(`CHANGE_LANGUAGE`) }! &nbsp;
+                        </span>
                         <span>
                             <Emoji emoji={`🌐`} />
                         </span>
@@ -229,30 +245,29 @@ export const Tour = ({ t }: any) => {
                             exit={`exit`}
                             key={`resume-audio`}
                             title={t(`GUIDE_USER`)}
-                            // @ts-ignore
-                            locale={{
-                                back: t('BACK'),
-                                close: t('CLOSE'),
-                                last: t('LAST'),
-                                next: t('NEXT'),
-                                skip: t('SKIP'),
-                            }}
                             onClick={() => {
                                 if (!tour) setTour(true)
                             }}>
                             <FontAwesomeIcon icon={faBus} />
                         </ButtonRadial>
-                        {
-                            tour && (
-                                <Joyride
-                                    disableCloseOnEsc={true}
-                                    callback={joyRideCallback}
-                                    showProgress={true}
-                                    continuous={true}
-                                    disableScrolling={true}
-                                    steps={steps} />
-                            )
-                        }
+                        <Joyride
+                            spotlightClicks={true}
+                            disableCloseOnEsc={true}
+                            callback={joyRideCallback}
+                            getHelpers={getHelpers}
+                            run={tour}
+                            locale={{
+                                back: t(`BACK`),
+                                close: t(`CLOSE`),
+                                last: t(`LAST`),
+                                next: t(`NEXT`),
+                                skip: t(`SKIP`),
+                            }}
+                            showSkipButton={true}
+                            showProgress={true}
+                            continuous={true}
+                            disableScrolling={true}
+                            steps={steps} />
                     </div>
                 )
             }
