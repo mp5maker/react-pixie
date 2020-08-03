@@ -92,14 +92,7 @@ export const SettingsSlider = ({
                             onClick={() => setShow(true)}
                             whileHover={{ scale: 0.98 }}
                             whileTap={{ scale: 0.98 }}
-                            style={{
-                                // @ts-ignore
-                                border: `1px solid ${Colors[theme].backgroundColor}`,
-                                // @ts-ignore
-                                backgroundColor: Colors[theme].primaryColor,
-                                // @ts-ignore
-                                color: Colors[theme].backgroundColor
-                            }}
+                            title={t(`OPEN_SETTINGS_SLIDER`)}
                             key={`click-me`}>
                             <FontAwesomeIcon icon={faAngleLeft} />
                         </motion.button>
@@ -230,17 +223,10 @@ export const SettingsSlider = ({
                                 <motion.div
                                     className={`button-container`}>
                                     <motion.button
+                                        title={t(`CLOSE_SETTINGS_SLIDER`)}
                                         aria-label={`Button Close`}
                                         onClick={() => setShow(false)}
-                                        className={`button`}
-                                        style={{
-                                            // @ts-ignore
-                                            border: `1px solid ${Colors[theme].backgroundColor}`,
-                                            // @ts-ignore
-                                            backgroundColor: Colors[theme].primaryColor,
-                                            // @ts-ignore
-                                            color: Colors[theme].backgroundColor
-                                        }}>
+                                        className={`button`}>
                                         <FontAwesomeIcon icon={faAngleRight} />
                                     </motion.button>
                                 </motion.div>
