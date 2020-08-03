@@ -40,7 +40,7 @@ export const Navigation = ({ history }: any) => {
     const isOnlyTouchDevice = useMedia({ query: `(pointer: coarse)`})
     const { verticalDirection, horizontalDirection, constants } = useSwipe({ selector: 'body', allow: isOnlyTouchDevice && allowSwipeNavigation })
     useCursor({ selector: '.navigation-container', svg: Cursor({ colors: Colors, theme: theme }) })
-    useCursor({ selector: '.navigation-container .navigation-item', svg: Cursor({ colors: Colors, theme: theme }) })
+    useCursor({ selector: '.navigation-container .navigation-item', svg: Cursor({ colors: Colors, theme: theme, width: 50, height: 50 }) })
 
     const list = [
         {
