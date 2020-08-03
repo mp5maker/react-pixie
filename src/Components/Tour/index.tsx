@@ -118,12 +118,12 @@ export const Tour = ({ t, getHelpers = () => {} }: any) => {
             <React.Fragment>
                 <div className={`text-left`}>
                     <div>
-                        Go to my other social Sites
-                        </div>
+                        {t(`GO_TO_MY_SOCIAL_WEBSITES`)}
+                    </div>
                     <div>
                         <span>
-                            Don't forget to comeback! &nbsp;
-                            </span>
+                            {t(`DONT_FORGET_TO_COME_BACK`)}! &nbsp;
+                        </span>
                         <span>
                             <Emoji emoji={`😭`} />
                         </span>
@@ -140,8 +140,8 @@ export const Tour = ({ t, getHelpers = () => {} }: any) => {
                 <div className={`text-left`}>
                     <div>
                         <span>
-                            It turns on/off the overall navigation sound not the song player below! &nbsp;
-                            </span>
+                            { t(`TOGGLES_NAVIGATION_SOUND_ONLY`) } ! &nbsp;
+                        </span>
                         <span>
                             <Emoji emoji={`🔊`} />
                         </span>
@@ -159,8 +159,8 @@ export const Tour = ({ t, getHelpers = () => {} }: any) => {
                 <div className={`text-left`}>
                     <div>
                         <span>
-                            Shows all the keyboard shortcuts &nbsp;
-                            </span>
+                            {t(`SHOWS_ALL_THE_KEYBOARD_SHORTCUTS`)} &nbsp;
+                        </span>
                         <span>
                             <Emoji emoji={`⌨️`} />
                         </span>
@@ -177,19 +177,19 @@ export const Tour = ({ t, getHelpers = () => {} }: any) => {
                 <div className={`text-left`}>
                     <div>
                         <span>
-                            Plays the audio &nbsp;
-                                <span>
-                                <Emoji emoji={`🎶`} />
-                            </span>
+                            { t(`PLAY_THE_AUDIO`) } &nbsp;
+                        </span>
+                        <span>
+                            <Emoji emoji={`🎶`} />
                         </span>
                     </div>
                     <div>
-                        Environment reacts to it
-                        </div>
+                        { t(`ENVIRONMENT_REACTS_TO_IT`) }
+                    </div>
                     <div>
                         <span>
-                            If you look closely into it! &nbsp;
-                            </span>
+                            { t(`IF_YOU_LOOK_CLOSELY_INTO_IT`)} &nbsp;
+                        </span>
                         <span>
                             <Emoji emoji={`😉`} />
                         </span>
@@ -206,14 +206,14 @@ export const Tour = ({ t, getHelpers = () => {} }: any) => {
                 <div className={`text-left`}>
                     <div>
                         <span>
-                            Choose your theme &nbsp;
-                            </span>
+                            {t(`CHOOSE_YOUR_THEME`)} &nbsp;
+                        </span>
                         <span>
                             <Emoji emoji={`☀️`} /> &nbsp;
-                            </span>
+                        </span>
                         <span>
-                            or &nbsp;
-                            </span>
+                            {t(`OR`)} &nbsp;
+                        </span>
                         <span>
                             <Emoji emoji={`🌙`} /> &nbsp;
                         </span>
