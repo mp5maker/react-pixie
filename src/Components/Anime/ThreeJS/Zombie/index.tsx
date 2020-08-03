@@ -2,12 +2,34 @@ import * as React from 'react'
 import * as THREE from 'three'
 import { useThree, useResource, useFrame } from 'react-three-fiber'
 import { useKeyboard } from 'Hooks/UseKeyboard'
+import { Howl } from 'howler'
 
 let startTime: any;
 let jumpStarted: boolean = false;
 let isPlaying: boolean = false;
 let isDead: boolean = false;
 let score: number = 0;
+
+const backgroundSound = new Howl({
+    src: ['/Audio/zombie-game-background.mp3'],
+    preload: true,
+    volume: 1,
+    loop: true
+})
+
+const zombieDead = new Howl({
+    src: ['/Audio/zombie-dead.mp3'],
+    preload: true,
+    volume: 1,
+    loop: false
+})
+
+const zombieJump = new Howl({
+    src: ['/Audio/zombie-jump.mp3'],
+    preload: true,
+    volume: 1,
+    loop: false
+})
 
 export const Zombie = ({
     colors,
@@ -43,14 +65,20 @@ export const Zombie = ({
 
         /* Walk */
         if (keyCode == KEY_A) {
-            if (zombie.jump && !jumpStarted) zombie.jump()
+            if (zombie.jump && !jumpStarted) {
+                zombieJump.play()
+                zombie.jump()
+            }
             return
         }
 
         /* Start */
         if (keyCode == KEY_S) {
-            if (isPlaying) isPlaying = false
-            else {
+            if (isPlaying) {
+                isPlaying = false
+                backgroundSound.stop()
+            } else {
+                backgroundSound.play()
                 getScore(0)
                 score = 0
                 isDead = false
@@ -75,7 +103,11 @@ export const Zombie = ({
                 else {
                     const isCollision = obstacle.collision()
                     if (isCollision) {
-                        if (isPlaying) zombie.dead()
+                        if (isPlaying) {
+                            zombie.dead()
+                            backgroundSound.stop()
+                            zombieDead.play()
+                        }
                         isPlaying = false
                         isDead = true
                     } else {
