@@ -263,7 +263,7 @@ export const Tour = ({ t, getHelpers = () => {} }: any) => {
                                 next: t(`NEXT`),
                                 skip: t(`SKIP`),
                             }}
-                            showSkipButton={true}
+                            // showSkipButton={true}
                             showProgress={true}
                             continuous={true}
                             disableScrolling={true}

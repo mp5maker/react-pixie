@@ -15,7 +15,7 @@
 }
 
 .settings-slider-container {
-    position: absolute;
+    position: fixed;
     top: calc((100vh / 2) - 50px);
     right: 0;
     display: none;
