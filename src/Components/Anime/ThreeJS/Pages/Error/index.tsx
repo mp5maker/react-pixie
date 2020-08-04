@@ -15,12 +15,12 @@ export const AnimeThreeJSError = ({
     const { width, height } = useDimension()
 
     React.useEffect(() => {
-        document.body.style.position = ''
-        document.body.style.overflowY = 'auto'
-
+        const body: any = document.querySelector('body')
+        body.style.setProperty('overflow', 'auto', 'important')
+        body.style.setProperty('position', '', 'important')
         return () => {
-            document.body.style.overflowY = 'hidden'
-            document.body.style.position = 'fixed'
+            body.style.setProperty('overflow', 'hidden', '')
+            body.style.setProperty('position', 'fixed', '')
         }
     }, [])
 
