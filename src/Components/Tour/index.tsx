@@ -81,7 +81,7 @@ export const Tour = ({ t, getHelpers = () => {} }: any) => {
                                 { t(`LET_ME_TELL_YOU_A_SECRET`) } &nbsp;
                             </small>
                             <small>
-                                <strong>{t(`3`)}</strong>
+                                <strong>{t(`3`)}</strong> &nbsp;
                             </small>
                             <small>
                                 {t(`MORE_ROUTES_TO_EXPLORE`) }
