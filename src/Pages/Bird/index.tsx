@@ -16,7 +16,9 @@ export const Bird = ({ history, location, match }: any) => {
     React.useEffect(() => {
         setSettings({
             ...settings,
-            settingsList: []
+            settingsList: [
+                'bloom'
+            ]
         })
     }, [])
 

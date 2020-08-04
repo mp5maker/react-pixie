@@ -27,6 +27,7 @@
     }
     .slider-container {
         padding: 5px;
+        min-width: 337px;
         border: 1px solid var(--primary-color);
         background-color: var(--background-color);
         box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
@@ -44,7 +45,7 @@
                 @include settings-slider-button(polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%))
             }
         }
-        .fire-switch {
+        .fire-switch, .bloom-switch {
             justify-content: space-between;
             padding-right: 16px;
         }

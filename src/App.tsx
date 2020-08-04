@@ -75,6 +75,7 @@ export const App = () => {
       'fire',
     ],
     allowSwipeNavigation: true,
+    bloom: false,
   })
   const [musicSettings, setMusicSettings] = React.useState({ isPlaying: false, frequency: 1 })
   const [isLoading, setLoading] = React.useState(true)

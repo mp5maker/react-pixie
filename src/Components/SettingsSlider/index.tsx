@@ -44,12 +44,13 @@ export const SettingsSlider = ({
         'rotationZ',
         'acceleration',
         'fire',
+        'bloom'
     ]
 }: any) => {
     const [show, setShow] = React.useState(false)
     const { theme }: any  = React.useContext(AppContext)
     const { t, i18n } = useTranslation()
-    const { rotationX, rotationY, rotationZ, acceleration, setSettings, fire, ...otherSettings }: any  = React.useContext(SettingsContext)
+    const { rotationX, rotationY, rotationZ, acceleration, setSettings, fire, bloom, ...otherSettings }: any  = React.useContext(SettingsContext)
     const { isPlaying }: any = React.useContext(MusicContext)
     const isWidthGreaterThan771px = useMedia({ query: '(min-width: 771px)' })
 
@@ -61,6 +62,7 @@ export const SettingsSlider = ({
             rotationZ,
             acceleration,
             fire,
+            bloom,
             [name]: newValue
         }
         setSettings(params)
@@ -213,6 +215,34 @@ export const SettingsSlider = ({
                                                             onChange={(event) => onSettingsChange({ newValue: event.target.checked, name: event.target.name })}
                                                             name="fire"
                                                             inputProps={{ 'aria-label': 'Fire On' }}
+                                                        />
+                                                    </Grid>
+                                                </Grid>
+                                            </Typography>
+                                        </motion.div>
+                                    )
+                                }
+                                {
+                                    list.includes('bloom') && (
+                                        <motion.div>
+                                            <Typography component="div">
+                                                <Grid component="label" container alignItems="center" spacing={1} className={`bloom-switch`}>
+                                                    <Grid item
+                                                        style={sliderStyle}
+                                                        className={`width-150`}>
+                                                        <strong>{t(`BLOOM`)}</strong>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Switch
+                                                            style={{
+                                                                // @ts-ignore
+                                                                color: Colors[theme].primaryColor,
+                                                            }}
+                                                            checked={bloom}
+                                                            defaultValue={bloom}
+                                                            onChange={(event) => onSettingsChange({ newValue: event.target.checked, name: event.target.name })}
+                                                            name="bloom"
+                                                            inputProps={{ 'aria-label': 'Bloom On' }}
                                                         />
                                                     </Grid>
                                                 </Grid>
