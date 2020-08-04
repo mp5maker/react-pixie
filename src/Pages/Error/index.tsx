@@ -16,6 +16,7 @@ import { ErrorMessage } from 'Components/ErrorMessage'
 import { Cards } from 'Components/Cards'
 import { Drawer } from 'Components/Drawer'
 import { useDocument } from 'Hooks/UseDocument'
+import { useSmoothScroll } from 'Hooks/UseSmoothScroll'
 import { Query } from 'Services/Query'
 import { SPK } from 'Svg/SPK'
 import { PdfViewer } from 'Components/Pdf'
@@ -48,6 +49,7 @@ export const Error = ({ history, location, match }: any) => {
     ], Query)
     const { t } = useTranslation()
     useDocument({ options: [{ selector: 'title', value: `Photon's Portfolio: Page Do Not Exist` }] })
+    useSmoothScroll({})
     const data = get(response, 'data', [])
 
     React.useEffect(() => {

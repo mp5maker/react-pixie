@@ -20,6 +20,7 @@ export const AnimeThreeJSError = ({
 
         return () => {
             document.body.style.overflowY = 'hidden'
+            document.body.style.position = 'fixed'
         }
     }, [])
 

@@ -46,8 +46,17 @@ export const AnimeThreeJSPhysics = ({
     const isMediaGreaterThan771px = useMedia({ query: `(min-width: 771px)` })
 
     React.useEffect(() => {
-        if (!isMediaGreaterThan771px) document.body.style.position = 'fixed'
-        if (isMediaGreaterThan771px) document.body.style.position = ''
+        const body: any = document.querySelector('body')
+        if (isMediaGreaterThan771px) {
+            body.style.setProperty('overflow', 'hidden', 'important')
+            body.style.setProperty('position', 'fixed', 'important')
+        } else {
+            body.style.setProperty('position', 'fixed', '')
+        }
+        return () => {
+            body.style.setProperty('overflow', 'hidden', '')
+            body.style.setProperty('position', 'fixed', '')
+        }
     }, [isMediaGreaterThan771px])
 
     /* Colors */

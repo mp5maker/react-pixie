@@ -75,14 +75,6 @@ export const MyNameSvg = ({ colors, theme }: any) => {
     const isEnglish = i18n.language == EN
     const isBengali = i18n.language == BN
 
-    React.useEffect(() => {
-        const body: any = document.querySelector('body')
-        body.style.overflow = 'hidden'
-        return () => {
-            body.style.overflow = ''
-        }
-    })
-
     return (
         <>
             {
