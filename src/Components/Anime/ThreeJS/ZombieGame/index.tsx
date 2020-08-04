@@ -55,6 +55,51 @@ export const ZombieGame = ({
         )
     }, [theme])
 
+    const scoreDependentMemo = React.useMemo(() => {
+        return (
+            <div className={`zombie-game-summary`}>
+                <div>
+                    {t(`YOUR_SCORE`)}: {LocaleNumber({ t, value: score })}
+                </div>
+                <div className={`controls`}>
+                    <div>
+                        <kbd>
+                            s
+                        </kbd>
+                        &nbsp;{t(`START`)}
+                    </div>
+                    <div>
+                        <kbd>
+                            a
+                        </kbd>
+                        &nbsp;{t(`JUMP`)}
+                    </div>
+                </div>
+            </div>
+        )
+    }, [i18n.language, score])
+
+    const joystickMemo = React.useMemo(() => {
+        return (
+            <div className="zombie-game-controller">
+                <Joystick
+                    width="175"
+                    height="175"
+                    theme={theme}
+                    colors={colors} />
+            </div>
+        )
+    }, [theme])
+
+    const zombieMemo = React.useMemo(() => {
+        return (
+            <Zombie
+                getScore={getScore}
+                width={width}
+                colors={COLORS} />
+        )
+    }, [width, theme])
+
     return (
         <div style={{ width, height: 500 }}>
             <Canvas
@@ -69,38 +114,11 @@ export const ZombieGame = ({
                     far: 500,
                 }}
                 pixelRatio={window.devicePixelRatio || 1}>
-                {themeDependentMemo}
-                <Zombie
-                    getScore={getScore}
-                    width={width}
-                    colors={COLORS} />
+                { themeDependentMemo }
+                { zombieMemo }
             </Canvas>
-            <div className={`zombie-game-summary`}>
-                <div>
-                    {t(`YOUR_SCORE`)}: { LocaleNumber({ t, value: score }) }
-                </div>
-                <div className={`controls`}>
-                    <div>
-                        <kbd>
-                            s
-                        </kbd>
-                        &nbsp;{t(`START`)}
-                    </div>
-                    <div>
-                        <kbd>
-                            a
-                        </kbd>
-                        &nbsp;{ t(`JUMP`)}
-                    </div>
-                </div>
-            </div>
-            <div className="zombie-game-controller">
-                <Joystick
-                    width="175"
-                    height="175"
-                    theme={theme}
-                    colors={colors} />
-            </div>
+            {scoreDependentMemo }
+            {joystickMemo}
         </div>
     )
 }

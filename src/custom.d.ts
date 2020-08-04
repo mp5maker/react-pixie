@@ -4,5 +4,6 @@ declare module JSX {
         "renderPass": any,
         "glitchPass": any,
         "shaderPass": any,
+        "orbitControls": any
     }
 }
