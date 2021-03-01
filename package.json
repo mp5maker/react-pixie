@@ -40,7 +40,7 @@
     "react-scripts": "3.4.1",
     "react-three-fiber": "^4.2.12",
     "sass": "^1.26.9",
-    "three": "^0.118.3",
+    "three": "^0.125.0",
     "twemoji": "^13.0.1",
     "typescript": "~3.8.0",
     "use-cannon": "^0.5.0"
