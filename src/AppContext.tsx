@@ -1,8 +1,8 @@
-import * as React from 'react'
+import * as React from 'react';
 
 interface AppContextInterface {
-    theme: string,
-    setTheme: (params: any) => any,
+  theme: string;
+  setTheme: (params: any) => any;
 }
 
-export const AppContext = React.createContext<Partial<AppContextInterface>>({})
+export const AppContext = React.createContext<Partial<AppContextInterface>>({});

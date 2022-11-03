@@ -1,0 +1,10 @@
+{
+  "extends": ["react-app", "prettier"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  }
+}

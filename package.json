@@ -53,21 +53,8 @@
     "heroku-postbuild": "yarn run build && yarn run build-storybook",
     "start": "node index.js",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public -o .storybook/build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ],
-    "settings": {
-      "import/resolver": {
-        "node": {
-          "paths": [
-            "src"
-          ]
-        }
-      }
-    }
+    "build-storybook": "build-storybook -s public -o .storybook/build",
+    "lint": "eslint src --ext .tsx"
   },
   "browserslist": {
     "production": [
@@ -79,11 +66,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "jest": {
-    "transformIgnorePatterns": [
-      "!<rootDir>/node_modules/"
     ]
   },
   "devDependencies": {
@@ -105,11 +87,9 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.5.0",
+    "eslint-config-prettier": "^8.5.0",
     "react-docgen-typescript-loader": "^3.7.2",
     "react-test-renderer": "^16.13.1",
     "sinon": "^9.0.2"
-  },
-  "engines": {
-    "node": "10.19.0"
   }
 }

@@ -1,9 +1,11 @@
-import * as React from 'react'
+import * as React from 'react';
 
 interface MusicContextInterface {
-    frequency: any,
-    isPlaying: boolean,
-    setMusicSettings: (params: any) => any,
+  frequency: any;
+  isPlaying: boolean;
+  setMusicSettings: (params: any) => any;
 }
 
-export const MusicContext = React.createContext<Partial<MusicContextInterface>>({})
+export const MusicContext = React.createContext<Partial<MusicContextInterface>>(
+  {},
+);

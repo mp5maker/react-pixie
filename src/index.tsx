@@ -7,7 +7,7 @@ import { I18nextProvider } from 'react-i18next';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.scss';
 
-import i18n from './Locales/i18n'
+import i18n from './Locales/i18n';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,7 +15,7 @@ ReactDOM.render(
       <App />
     </I18nextProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 serviceWorker.unregister();

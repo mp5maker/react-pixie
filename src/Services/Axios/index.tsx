@@ -1,8 +1,8 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_SERVER_URL,
-    timeout: 60000,
-})
+  baseURL: process.env.REACT_APP_SERVER_URL,
+  timeout: 60000,
+});
 
-export default axiosInstance
+export default axiosInstance;
