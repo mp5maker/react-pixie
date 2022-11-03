@@ -1,35 +1,36 @@
 /* Third Party */
-import React from 'react';
-import { Router, Route, Switch } from 'react-router';
-import { createBrowserHistory } from 'history';
 import { AnimatePresence } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
+import { createBrowserHistory } from 'history';
+import React from 'react';
 import { GlobalHotKeys } from 'react-hotkeys';
-
+import { useTranslation } from 'react-i18next';
+import { Route, Router, Switch } from 'react-router';
 import { AppContext } from 'AppContext';
-import { SettingsContext } from 'SettingsContext';
-import { MusicContext } from 'MusicContext';
-import { DARK, LIGHT, THEME, LANGUAGE, EN, BN } from 'Constants/Settings';
-import { Footer } from 'Components/Footer';
-import { ThemePicker } from 'Components/ThemePicker';
-import { LanguagePicker } from 'Components/LanguagePicker';
-import { Navigation } from 'Components/Navigation';
-import { SettingsSlider } from 'Components/SettingsSlider';
-import { MusicCredit } from 'Components/MusicCredit';
-import { SocialPicker } from 'Components/SocialPicker';
-import { Colors } from 'Constants/Colors';
 import { AudioPlayer } from 'Components/Anime/ThreeJS/AudioPlayer';
-import * as Routes from 'Constants/Routes';
-import { HotKeyMap } from 'Constants/HotKeyMap';
-import { StorageGet, StorageSet } from 'Utilities/Storage';
-import { useColors } from 'Hooks/UseColors';
+import { Footer } from 'Components/Footer';
 import { HotKeysHelp } from 'Components/HotKeysHelp';
-import { ShowKeyCombo } from 'Components/ShowKeyCombo';
+import { LanguagePicker } from 'Components/LanguagePicker';
 import { Loader } from 'Components/Loader';
+import { MusicCredit } from 'Components/MusicCredit';
+import { Navigation } from 'Components/Navigation';
 import { ScreenCapture } from 'Components/ScreenCapture';
-import { VolumeControl } from 'Components/VolumeControl';
+import { SettingsSlider } from 'Components/SettingsSlider';
+import { ShowKeyCombo } from 'Components/ShowKeyCombo';
+import { SocialPicker } from 'Components/SocialPicker';
+import { ThemePicker } from 'Components/ThemePicker';
 import { Tour } from 'Components/Tour';
+import { VolumeControl } from 'Components/VolumeControl';
+import { Colors } from 'Constants/Colors';
+import { HotKeyMap } from 'Constants/HotKeyMap';
+import * as Routes from 'Constants/Routes';
+import { BN, DARK, EN, LANGUAGE, LIGHT, THEME } from 'Constants/Settings';
+import { useColors } from 'Hooks/UseColors';
+import { MusicContext } from 'MusicContext';
+import { SettingsContext } from 'SettingsContext';
 import { SPK } from 'Svg/SPK';
+import { StorageGet, StorageSet } from 'Utilities/Storage';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.scss';
 
 /* Performance Optimizing Imports */
 const PagesHome = React.lazy(() =>
@@ -53,10 +54,6 @@ const PagesBird = React.lazy(() =>
 const PagesRain = React.lazy(() =>
   import('Pages').then(({ Rain }) => ({ default: Rain })),
 );
-
-/* CSS */
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.scss';
 
 export const history = createBrowserHistory();
 
