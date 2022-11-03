@@ -53,7 +53,7 @@ export const Drawer = ({
       setSettings({ ...otherSettings, allowSwipeNavigation: !status });
       setShow(status);
     },
-    [status],
+    [],
   );
 
   const Content = (
