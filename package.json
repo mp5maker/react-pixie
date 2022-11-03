@@ -19,7 +19,7 @@
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
     "@types/twemoji": "^12.1.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "bootstrap": "^4.5.0",
     "cannon": "^0.6.2",
     "express": "^4.17.1",
