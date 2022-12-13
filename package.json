@@ -22,7 +22,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "cannon": "^0.6.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "framer-motion": "^1.11.1",
     "howler": "^2.2.0",
     "i18next": "^19.5.4",
