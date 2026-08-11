@@ -64,13 +64,13 @@ export const Navigation = ({ history }: any) => {
       Svg: Book,
     },
     {
-      label: t(`RAIN`),
+      label: t(`FLOW`),
       route: Routes.RAIN,
       key: `rain`,
       Svg: Rain,
     },
     {
-      label: t(`BIRD`),
+      label: t(`ELEVATION`),
       route: Routes.BIRD,
       key: `bird`,
       Svg: Bird,

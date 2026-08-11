@@ -61,7 +61,7 @@ export const AnimeThreeJSRain = ({ colors, theme, history }: any) => {
         />
         <Text
           position={{ x: -250, y: 0, z: -500 }}
-          text={`Awesome!`}
+          text={`Thunder!`}
           meshColor={COLORS.primaryColor}
         />
         <Wall colors={COLORS} />
