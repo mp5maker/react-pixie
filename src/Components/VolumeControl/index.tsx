@@ -4,20 +4,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 
 import { ButtonRadial } from 'Components/Button/Radial';
+import { EVENT_NAME } from 'Services/CustomEvents';
+import { useCustomEvent } from 'Hooks/UseCustomEvent';
+
 import './styles.scss';
 
 export const VolumeControl = ({ t }: any) => {
-  const [mute, setMute] = React.useState(true);
+  const [mute, triggerEvent] = useCustomEvent(EVENT_NAME.HOWLER_MUTE, true);
 
   const toggleMute = () => {
-    if (mute) Howler.mute(false);
-    else Howler.mute(true);
-    setMute(!mute);
+    const nextMute = !mute;
+    triggerEvent(nextMute);
+    Howler.mute(nextMute);
   };
 
   React.useEffect(() => {
-    Howler.mute(true);
-  }, []);
+    Howler.mute(mute);
+  }, [mute]);
 
   return (
     <React.Fragment>

@@ -17,6 +17,8 @@ import { MusicContext } from 'MusicContext';
 import { ButtonRadial } from 'Components/Button/Radial';
 
 import './styles.scss';
+import { useCustomEvent } from 'Hooks/UseCustomEvent';
+import { EVENT_NAME } from 'Services/CustomEvents';
 
 const isIOS = /iPhone|iPod|iPad/.test(navigator.platform);
 
@@ -47,6 +49,7 @@ let iosAudio: any;
 let startTime: any;
 export const AudioPlayer = ({}: any) => {
   const { t } = useTranslation();
+  const [mute] = useCustomEvent(EVENT_NAME.HOWLER_MUTE, true);
   const { theme }: any = React.useContext(AppContext);
   const { setMusicSettings, ...otherSettingsProps }: any = React.useContext(
     MusicContext,
@@ -63,6 +66,12 @@ export const AudioPlayer = ({}: any) => {
   const listener = React.useRef(new THREE.AudioListener()).current;
   const sound = React.useRef(new THREE.Audio(listener)).current;
   const loader = React.useRef(new THREE.AudioLoader()).current;
+  const audioVolume = mute ? 0 : 1;
+
+  React.useEffect(() => {
+    if (iosAudio) iosAudio.volume = audioVolume;
+    sound.setVolume(audioVolume);
+  }, [audioVolume, mute]);
 
   const animate = (timestamp: any) => {
     if (startTime == undefined) startTime = timestamp;
@@ -108,7 +117,7 @@ export const AudioPlayer = ({}: any) => {
     const onSuccessLoad = (buffer: any) => {
       sound.setBuffer(buffer);
       sound.setLoop(true);
-      sound.setVolume(1);
+      sound.setVolume(audioVolume);
       sound.play();
       setPlayAudio(AUDIO_PLAYING);
       body.style.setProperty('--allow-pace', 'none');
@@ -125,13 +134,14 @@ export const AudioPlayer = ({}: any) => {
     /* Detect IOS */
     if (isIOS && !sound.isPlaying) {
       iosAudio = new Audio('/Audio/sample.mp3');
+      iosAudio.volume = audioVolume;
       iosAudio.play();
       body.style.setProperty('--allow-pace', 'none');
       iosAudio.loop = true;
       setPlayAudio(AUDIO_PLAYING);
       setIsPlayingForSmallerDevice(true);
     } else loader.load('/Audio/sample.mp3', onSuccessLoad, onProgressLoad);
-  }, [playAudio]);
+  }, [playAudio, audioVolume]);
 
   const pause = React.useCallback(() => {
     setPlayAudio(AUDIO_PAUSE);
