@@ -1,20 +1,19 @@
-import * as React from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import * as ReactDOM from 'react-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortUp, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AnimatePresence, motion } from 'framer-motion';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import { GlobalHotKeys } from 'react-hotkeys';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
-import { SettingsContext } from 'SettingsContext';
 import { ButtonRadial } from 'Components/Button/Radial';
 import { ButtonSquare } from 'Components/Button/Square';
+import { SettingsContext } from 'SettingsContext';
 
 import './styles.scss';
 
-const BUTTON_SHAPE_SQUARE = 'square';
 const BUTTON_SHAPE_ROUND = 'round';
 
 export const Drawer = ({
@@ -39,7 +38,7 @@ export const Drawer = ({
   const toggleDrawer = React.useCallback(
     (status: boolean) => (event: any) => {
       if (
-        event.type == 'keydown' &&
+        event.type === 'keydown' &&
         (event.key === 'Tab' || event.key === 'Shift')
       )
         return;

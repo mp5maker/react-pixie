@@ -14,7 +14,10 @@ export const Portal = ({
   const [bulbRef, bulb]: any = useResource();
   const [bulbOuterRef, bulbOuter]: any = useResource();
 
-  const hasFrequency = frequency == 0 || frequency == 1 ? true : false;
+  const hasFrequency =
+    String(frequency) === String(0) || String(frequency) === String(1)
+      ? true
+      : false;
   const frequencyParam = hasFrequency ? 1 : 0.01 * frequency;
 
   useFrame(() => {

@@ -123,34 +123,7 @@ export const MyNameSvg = ({ colors, theme }: any) => {
                     initial={`initial`}
                     animate={`animate`}
                     exit={`exit`}>
-                    {t(`I_AM_A`)}{' '}
-                    <strong>{t(`SENIOR_SOFTWARE_ENGINEER`)}</strong>
-                  </motion.div>
-                  <motion.div
-                    key={`${i18n.language}-2`}
-                    variants={myNameSvgDescriptionVariants}
-                    initial={`initial`}
-                    animate={`animate`}
-                    exit={`exit`}>
-                    {t(
-                      `I_HAVE_PASSION_FOR_UI_UX_ANIMATIONS_AND_LOVE_TO_CREATE`,
-                    )}
-                  </motion.div>
-                  <motion.div
-                    key={`${i18n.language}-3`}
-                    variants={myNameSvgDescriptionVariants}
-                    initial={`initial`}
-                    animate={`animate`}
-                    exit={`exit`}>
-                    {t(`WEBSITES_TO_RUN_ACROSS_MULTIPLE_DEVICES_WITH`)}
-                  </motion.div>
-                  <motion.div
-                    key={`${i18n.language}-4`}
-                    variants={myNameSvgDescriptionVariants}
-                    initial={`initial`}
-                    animate={`animate`}
-                    exit={`exit`}>
-                    <strong>{t(`DYNAMIC_USER_EXPERIENCES`)}</strong>
+                    {t(`SENIOR_FULL_STACK_SOFTWARE_ENGINEER_DESCRIPTION`)}
                   </motion.div>
                 </AnimatePresence>
               </motion.div>

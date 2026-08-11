@@ -6,7 +6,7 @@ import { useMedia } from 'Hooks/UseMedia';
 import './styles.scss';
 
 export const ErrorMessage = ({ history }: any) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const isWidthGreaterThan767 = useMedia({ query: `(min-width: 767px)` });
 
   return (

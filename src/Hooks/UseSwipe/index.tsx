@@ -1,5 +1,5 @@
-import * as React from 'react';
 import get from 'lodash/get';
+import * as React from 'react';
 
 const VERTICAL_DIRECTION_UP = 'up';
 const VERTICAL_DIRECTION_DOWN = 'down';
@@ -8,8 +8,6 @@ const HORIZONTAL_DIRECTION_RIGHT = 'right';
 const NONE = '';
 
 const POSITIVE = 1;
-const ZERO = 0;
-const NEGATIVE = -1;
 
 let startX: number = 0;
 let startY: number = 0;

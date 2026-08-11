@@ -1,9 +1,9 @@
+import { faKeyboard } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import get from 'lodash/get';
 import * as React from 'react';
 import { getApplicationKeyMap } from 'react-hotkeys';
 import { useTranslation } from 'react-i18next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faKeyboard, faTimes } from '@fortawesome/free-solid-svg-icons';
-import get from 'lodash/get';
 
 import { Drawer } from 'Components/Drawer';
 import { useDimension } from 'Hooks/UseDimension';
@@ -28,7 +28,7 @@ const drawerVariants = {
 };
 
 export const HotKeysHelp = ({ colors, theme }: any) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const keyMap = getApplicationKeyMap();
   const { width } = useDimension();
   const isWidthGreaterThan767 = width > 767;

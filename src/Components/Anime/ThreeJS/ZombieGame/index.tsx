@@ -10,12 +10,12 @@ import { Joystick } from 'Svg/Joystick';
 import './styles.scss';
 
 export const ZombieGame = ({ colors, theme, history }: any) => {
-  const { width, height } = useDimension();
+  const { width } = useDimension();
   const [score, setScore] = React.useState(0);
   const { t, i18n } = useTranslation();
 
   const getScore = (currentScore: number) => {
-    if (currentScore != score) setScore(currentScore);
+    if (String(currentScore) !== String(score)) setScore(currentScore);
   };
 
   /* Colors */

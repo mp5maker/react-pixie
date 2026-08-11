@@ -14,10 +14,10 @@ import './styles.scss';
 export const ShowKeyCombo = ({ colors, theme }: any) => {
   const isOnlyTouchDevice = useMedia({ query: `(pointer: coarse)` });
   const { keyValue } = useKeyboard({ allow: !isOnlyTouchDevice });
-  const isArrowUp = keyValue == 'ArrowUp' ? true : false;
-  const isArrowDown = keyValue == 'ArrowDown' ? true : false;
-  const isArrowLeft = keyValue == 'ArrowLeft' ? true : false;
-  const isArrowRight = keyValue == 'ArrowRight' ? true : false;
+  const isArrowUp = keyValue === 'ArrowUp' ? true : false;
+  const isArrowDown = keyValue === 'ArrowDown' ? true : false;
+  const isArrowLeft = keyValue === 'ArrowLeft' ? true : false;
+  const isArrowRight = keyValue === 'ArrowRight' ? true : false;
 
   let currentIcon: any = isArrowUp ? faArrowUp : '';
   currentIcon = isArrowDown ? faArrowDown : currentIcon;

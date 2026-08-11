@@ -27,8 +27,8 @@ export const Joystick = ({
   pathVariant = pathVariantOne,
 }: any) => {
   const { keyCode }: any = useKeyboard({ allow: true });
-  const isKeyA = keyCode == KEY_A;
-  const isKeyS = keyCode == KEY_S;
+  const isKeyA = keyCode === KEY_A;
+  const isKeyS = keyCode === KEY_S;
 
   return (
     <AnimatePresence exitBeforeEnter initial={true}>

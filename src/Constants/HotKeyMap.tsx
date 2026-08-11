@@ -65,28 +65,4 @@ export const HotKeyMap: any = {
     action: 'keydown',
     group: 'DRAWER',
   },
-  TOGGLE_GITHUB: {
-    name: 'TOGGLE_GITHUB',
-    sequence: 'g',
-    action: 'keydown',
-    group: 'DRAWER',
-  },
-  TOGGLE_LINKEDIN: {
-    name: 'TOGGLE_LINKEDIN',
-    sequence: 'z',
-    action: 'keydown',
-    group: 'DRAWER',
-  },
-  TOGGLE_WEEBLY: {
-    name: 'TOGGLE_WEEBLY',
-    sequence: 'w',
-    action: 'keydown',
-    group: 'DRAWER',
-  },
-  TOGGLE_RESUME: {
-    name: 'TOGGLE_RESUME',
-    sequence: 'r',
-    action: 'keydown',
-    group: 'DRAWER',
-  },
 };

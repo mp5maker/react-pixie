@@ -33,7 +33,7 @@ const soundClick = new Howl({
 });
 
 export const Navigation = ({ history }: any) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { theme }: any = React.useContext(AppContext);
   const { allowSwipeNavigation }: any = React.useContext(SettingsContext);
   const isOnlyTouchDevice = useMedia({ query: `(pointer: coarse)` });
@@ -80,21 +80,21 @@ export const Navigation = ({ history }: any) => {
   const currentIndex = React.useCallback(() => {
     const currentLocation = get(history, 'location.pathname', '');
     const findIndex = list.findIndex(item => {
-      return currentLocation == get(item, 'route', '');
+      return currentLocation === get(item, 'route', '');
     });
     return findIndex;
   }, [history]);
 
   const isValidRoute = React.useCallback(() => {
     const currentLocation = get(history, 'location.pathname', '');
-    const find = list.find(item => item.route == currentLocation);
+    const find = list.find(item => item.route === currentLocation);
     return find ? true : false;
   }, [history]);
 
   const navigationUp = React.useCallback(() => {
     if (isValidRoute()) {
       const presentIndex = currentIndex();
-      if (presentIndex == 0) {
+      if (presentIndex === 0) {
         const presentRouteIndex = list[list.length - 1];
         if (presentRouteIndex) history.push(presentRouteIndex.route);
       } else {
@@ -107,34 +107,34 @@ export const Navigation = ({ history }: any) => {
   const navigationDown = React.useCallback(() => {
     if (isValidRoute()) {
       const presentIndex = currentIndex();
-      if (presentIndex == list.length - 1) history.push(list[0].route);
+      if (presentIndex === list.length - 1) history.push(list[0].route);
       else history.push(list[presentIndex + 1].route);
     }
   }, [history]);
 
   const navigationRight = React.useCallback(() => {
     const currentLocation = get(history, 'location.pathname', '');
-    if (currentLocation == Routes.SKYBOX || currentLocation == Routes.PHYSICS)
+    if (currentLocation === Routes.SKYBOX || currentLocation === Routes.PHYSICS)
       history.goBack();
     else history.push(Routes.SKYBOX);
   }, [history]);
 
   const navigationLeft = React.useCallback(() => {
     const currentLocation = get(history, 'location.pathname', '');
-    if (currentLocation == Routes.PHYSICS || currentLocation == Routes.SKYBOX)
+    if (currentLocation === Routes.PHYSICS || currentLocation === Routes.SKYBOX)
       history.goBack();
     else history.push(Routes.PHYSICS);
   }, [history]);
 
   React.useEffect(() => {
-    if (verticalDirection == constants.VERTICAL_DIRECTION_UP) navigationDown();
-    if (verticalDirection == constants.VERTICAL_DIRECTION_DOWN) navigationUp();
+    if (verticalDirection === constants.VERTICAL_DIRECTION_UP) navigationDown();
+    if (verticalDirection === constants.VERTICAL_DIRECTION_DOWN) navigationUp();
   }, [verticalDirection]);
 
   React.useEffect(() => {
-    if (horizontalDirection == constants.HORIZONTAL_DIRECTION_LEFT)
+    if (horizontalDirection === constants.HORIZONTAL_DIRECTION_LEFT)
       navigationLeft();
-    if (horizontalDirection == constants.HORIZONTAL_DIRECTION_RIGHT)
+    if (horizontalDirection === constants.HORIZONTAL_DIRECTION_RIGHT)
       navigationRight();
   }, [horizontalDirection]);
 

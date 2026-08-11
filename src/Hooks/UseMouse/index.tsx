@@ -13,7 +13,6 @@ export const MOUSE_SCROLL_DOWN = 'scroll-down';
 /* Scroll */
 const POSITIVE = 1;
 const NEGATIVE = -1;
-const ZERO = 0;
 
 /* Button */
 export const MOUSE_LEFT_BUTTON = 0;
@@ -28,17 +27,17 @@ export const useMouse = ({ query }: any = {}) => {
 
   const onMouseDown = (event: any) => {
     setEvent(event);
-    if (event.button == MOUSE_LEFT_BUTTON) setType(MOUSE_LEFT_CLICK);
-    if (event.button == MOUSE_MIDDLE_BUTTON) setType(MOUSE_MIDDLE_CLICK);
-    if (event.button == MOUSE_RIGHT_BUTTON) setType(MOUSE_RIGHT_CLICK);
+    if (event.button === MOUSE_LEFT_BUTTON) setType(MOUSE_LEFT_CLICK);
+    if (event.button === MOUSE_MIDDLE_BUTTON) setType(MOUSE_MIDDLE_CLICK);
+    if (event.button === MOUSE_RIGHT_BUTTON) setType(MOUSE_RIGHT_CLICK);
   };
 
   const onWindowWheel = (event: any) => {
     setEvent(event);
     setDeltaY(event.deltaY);
     setType(MOUSE_SCROLL);
-    if (Math.sign(event.deltaY) == POSITIVE) setDirection(MOUSE_SCROLL_DOWN);
-    if (Math.sign(event.deltaY) == NEGATIVE) setDirection(MOUSE_SCROLL_UP);
+    if (Math.sign(event.deltaY) === POSITIVE) setDirection(MOUSE_SCROLL_DOWN);
+    if (Math.sign(event.deltaY) === NEGATIVE) setDirection(MOUSE_SCROLL_UP);
   };
 
   const onMouseUp = (event: any) => {

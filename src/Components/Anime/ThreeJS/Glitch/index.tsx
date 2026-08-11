@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { extend, Canvas, useFrame, useThree } from 'react-three-fiber';
+import { extend, useFrame, useThree } from 'react-three-fiber';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 
 extend({ EffectComposer, RenderPass, GlitchPass });
 

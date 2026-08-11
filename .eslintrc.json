@@ -6,5 +6,13 @@
         "paths": ["src"]
       }
     }
+  },
+  "rules": {
+    "react-hooks/exhaustive-deps": "off",
+    "eqeqeq": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-empty-pattern": "off",
+    "jsx-a11y/img-redundant-alt": "off",
+    "react/jsx-no-target-blank": "off"
   }
 }

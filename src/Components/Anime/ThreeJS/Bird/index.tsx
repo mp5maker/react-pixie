@@ -1,8 +1,8 @@
-import * as React from 'react';
-import * as THREE from 'three';
-import { useThree, useFrame } from 'react-three-fiber';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import head from 'lodash/head';
+import * as React from 'react';
+import { useFrame, useThree } from 'react-three-fiber';
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 import { useDimension } from 'Hooks/UseDimension';
 import { RandomRange } from 'Utilities/RandomRange';
@@ -11,7 +11,7 @@ let mixers: Array<any> = [];
 let animations: Array<any> = [];
 let meshes: Array<any> = [];
 export const Bird = ({ colors }: any) => {
-  const { scene, gl, camera } = useThree();
+  const { scene } = useThree();
   const loader = React.useRef(new GLTFLoader()).current;
   const { width, height } = useDimension();
 

@@ -1,5 +1,5 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import * as React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 import { useMouse } from 'Hooks/UseMouse';
 import './styles.scss';
@@ -28,13 +28,11 @@ export const MouseDetector = ({
     MOUSE_LEFT_CLICK,
     MOUSE_RIGHT_CLICK,
     MOUSE_MIDDLE_CLICK,
-    MOUSE_SCROLL_UP,
-    MOUSE_SCROLL_DOWN,
   } = typeConstants;
 
-  const isLeftClick = MOUSE_LEFT_CLICK == type;
-  const isRightClick = MOUSE_RIGHT_CLICK == type;
-  const isMiddleClick = MOUSE_MIDDLE_CLICK == type;
+  const isLeftClick = MOUSE_LEFT_CLICK === type;
+  const isRightClick = MOUSE_RIGHT_CLICK === type;
+  const isMiddleClick = MOUSE_MIDDLE_CLICK === type;
 
   return (
     <React.Fragment>

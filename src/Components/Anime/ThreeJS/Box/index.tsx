@@ -1,6 +1,6 @@
+import { Howl } from 'howler';
 import * as React from 'react';
 import { useFrame } from 'react-three-fiber';
-import { Howl } from 'howler';
 
 import { Glitch } from 'Components/Anime/ThreeJS/Glitch';
 
@@ -23,7 +23,6 @@ export const Box = ({
 }: any) => {
   const mesh: any = React.useRef();
   const [hovered, setHover] = React.useState(false);
-  const [active, setActive] = React.useState(false);
 
   useFrame(() => {
     mesh.current.rotation.x += rotationX * 0.001;

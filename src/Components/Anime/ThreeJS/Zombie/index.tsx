@@ -45,7 +45,6 @@ export const Zombie = ({ colors, width, getScore }: any) => {
   const [zombieRef, zombie]: any = useResource();
   const [obstacleRef, obstacle]: any = useResource();
   const [lineRef, line]: any = useResource();
-  const { gl, scene, camera } = useThree();
   const { keyCode }: any = useKeyboard({ allow: true, delay: 250 });
 
   const nextSprite = ({ object, materials }: any) => {
@@ -61,10 +60,9 @@ export const Zombie = ({ colors, width, getScore }: any) => {
   React.useEffect(() => {
     const KEY_A = 65;
     const KEY_S = 83;
-    const KEY_SHIFT = 16;
 
     /* Walk */
-    if (keyCode == KEY_A) {
+    if (keyCode === KEY_A) {
       if (zombie.jump && !jumpStarted) {
         zombieJump.play();
         zombie.jump();
@@ -73,7 +71,7 @@ export const Zombie = ({ colors, width, getScore }: any) => {
     }
 
     /* Start */
-    if (keyCode == KEY_S) {
+    if (keyCode === KEY_S) {
       if (isPlaying) {
         isPlaying = false;
         backgroundSound.stop();
@@ -94,7 +92,7 @@ export const Zombie = ({ colors, width, getScore }: any) => {
 
   useFrame((state, delta) => {
     if (zombieIdleMaterials.length > 0) {
-      if (startTime == undefined) startTime = state.clock.elapsedTime;
+      if (startTime === undefined) startTime = state.clock.elapsedTime;
       if (state.clock.elapsedTime - startTime > 0.05 && zombie && obstacle) {
         startTime = state.clock.elapsedTime;
         if (!isPlaying) {

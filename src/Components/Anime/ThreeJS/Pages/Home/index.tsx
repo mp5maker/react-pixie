@@ -1,19 +1,17 @@
 import * as React from 'react';
-import * as THREE from 'three';
 import { Canvas } from 'react-three-fiber';
-import { useTranslation } from 'react-i18next';
+import * as THREE from 'three';
 
-import { SettingsContext } from 'SettingsContext';
-import { MusicContext } from 'MusicContext';
-import { Stars } from 'Components/Anime/ThreeJS/Stars';
 import { Box } from 'Components/Anime/ThreeJS/Box';
 import { OrbitControl } from 'Components/Anime/ThreeJS/OrbitControl';
-import { useDimension } from 'Hooks/UseDimension';
+import { Stars } from 'Components/Anime/ThreeJS/Stars';
 import * as Routes from 'Constants/Routes';
+import { useDimension } from 'Hooks/UseDimension';
 import { useMedia } from 'Hooks/UseMedia';
+import { MusicContext } from 'MusicContext';
+import { SettingsContext } from 'SettingsContext';
 
 export const AnimeThreeJSHome = ({ colors, theme, history }: any) => {
-  const { t, i18n } = useTranslation();
   const {
     rotationX,
     rotationY,

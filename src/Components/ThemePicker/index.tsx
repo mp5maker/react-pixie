@@ -21,7 +21,7 @@ export const ThemePicker = ({ t }: any) => {
         backgroundColor: Colors[theme].backgroundColor,
         // @ts-ignore
         color: Colors[theme].secondaryColor,
-        ...(theme == LIGHT
+        ...(theme === LIGHT
           ? {
               // @ts-ignore
               border: `1px solid ${Colors[theme].primaryColor}`,
@@ -46,7 +46,7 @@ export const ThemePicker = ({ t }: any) => {
         backgroundColor: Colors[theme].backgroundColor,
         // @ts-ignore
         color: Colors[theme].secondaryColor,
-        ...(theme == DARK
+        ...(theme === DARK
           ? {
               // @ts-ignore
               border: `1px solid ${Colors[theme].primaryColor}`,
