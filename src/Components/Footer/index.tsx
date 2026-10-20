@@ -1,13 +1,9 @@
 import * as React from 'react';
 import moment from 'moment';
 
-export const Footer = ({ colors, theme }: any) => {
+export const Footer = () => {
   return (
-    <footer
-      style={{
-        backgroundColor: colors[theme].backgroundColor,
-        color: colors[theme].primaryColor,
-      }}>
+    <footer>
       {moment().format('YYYY')} &copy; All Rights Reserved, Photon Enterprise
     </footer>
   );

@@ -56,7 +56,7 @@ export const ZombieGame = ({ colors, theme, history }: any) => {
 
   const scoreDependentMemo = React.useMemo(() => {
     return (
-      <div className={`zombie-game-summary`}>
+      <div className={`zombie-game-summary hud-panel`}>
         <div>
           {t(`YOUR_SCORE`)}: {LocaleNumber({ t, value: score })}
         </div>

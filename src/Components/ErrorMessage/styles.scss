@@ -3,12 +3,48 @@
     top: 0;
     left: 0;
     width: 100%;
-    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    pointer-events: none;
     .error-message-content {
-        height: 300px;
-        width: 100%;
+        width: min(420px, 100%);
+        padding: 24px 28px 28px;
+        pointer-events: auto;
+    }
+    .error-status {
         display: flex;
-        justify-content: center;
         align-items: center;
+        gap: 8px;
+        margin: 0 0 12px;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--magenta);
+        &::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: var(--magenta);
+        }
+    }
+    .error-code {
+        margin: 0;
+        font-size: 120px;
+        color: var(--text);
+    }
+    .error-hint {
+        margin: 16px 0 0;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+        font-size: 15px;
+        text-transform: lowercase;
+    }
+    @media (max-width: 767px) {
+        .error-code {
+            font-size: 80px;
+        }
     }
 }

@@ -1,7 +1,7 @@
 import {
   faGithub,
+  faGitlab,
   faLinkedin,
-  faStackOverflow,
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
@@ -11,7 +11,10 @@ import { faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import { ButtonRadial } from 'Components/Button/Radial';
 import './styles.scss';
 
-export const SocialPicker = ({ colors, theme }: any) => {
+/* noopener makes window.open return null; the old .focus() threw there and when popups are blocked */
+const open = (url: string) => window.open(url, '_blank', 'noopener');
+
+export const SocialPicker = () => {
   const { t } = useTranslation();
 
   return (
@@ -20,58 +23,26 @@ export const SocialPicker = ({ colors, theme }: any) => {
         <div className="social-picker-content">
           <ButtonRadial
             title={t('GITHUB')}
-            ariaLabel={`github`}
-            onClick={() => {
-              if (window) {
-                // @ts-ignore
-                window.open('https://github.com/mp5maker', '_blank').focus();
-              }
-            }}>
+            ariaLabel={t('GITHUB')}
+            onClick={() => open('https://github.com/mp5maker')}>
             <FontAwesomeIcon icon={faGithub} />
           </ButtonRadial>
           <ButtonRadial
             title={t('LINKEDIN')}
-            ariaLabel={`linkedin`}
-            onClick={() => {
-              if (window) {
-                // @ts-ignore
-                window
-                  .open(
-                    'https://www.linkedin.com/in/shabuktaginkhan/',
-                    '_blank',
-                  )
-                  .focus();
-              }
-            }}>
+            ariaLabel={t('LINKEDIN')}
+            onClick={() => open('https://www.linkedin.com/in/shabuktaginkhan/')}>
             <FontAwesomeIcon icon={faLinkedin} />
           </ButtonRadial>
-        </div>
-        <div className="social-picker-content mt-3">
           <ButtonRadial
-            title={t('STACKOVERFLOW')}
-            ariaLabel={`stack-overflow`}
-            onClick={() => {
-              if (window) {
-                // @ts-ignore
-                window
-                  .open(
-                    'https://stackoverflow.com/users/123456/shabuktaginkhan',
-                    '_blank',
-                  )
-                  .focus();
-              }
-            }}>
-            <FontAwesomeIcon icon={faStackOverflow} />
+            title={t('GITLAB')}
+            ariaLabel={t('GITLAB')}
+            onClick={() => open('https://gitlab.com/khan.photon')}>
+            <FontAwesomeIcon icon={faGitlab} />
           </ButtonRadial>
           <ButtonRadial
             title={t('RESUME')}
-            ariaLabel={`resume`}
-            onClick={() => {
-              if (window) {
-                // @ts-ignore
-                window.open('/Resume/resume-zeuz.pdf', '_blank').focus();
-              }
-            }}>
+            ariaLabel={t('RESUME')}
+            onClick={() => open('/Resume/resume-zeuz.pdf')}>
             <FontAwesomeIcon icon={faFilePdf} />
           </ButtonRadial>
         </div>

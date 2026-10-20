@@ -1,14 +1,32 @@
 .pages-error-container {
+    .error-feed {
+        margin: 24px 25px 48px;
+        padding: 24px 28px 28px;
+        @media (max-width: 767px) {
+            margin: 16px 16px 32px;
+            padding: 16px 18px 20px;
+        }
+    }
+    .error-feed-head {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 16px;
+        .hud-rail {
+            flex: 1;
+            margin: 0;
+        }
+    }
+    .error-feed-offline {
+        margin: 0;
+        font-size: 15px;
+        text-transform: lowercase;
+        color: var(--magenta);
+    }
     .loading-section {
-        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 300px;
-    }
-    .pdf-viewer {
-        position: absolute;
-        top: 25px;
-        right: 25px;
+        height: 200px;
     }
 }

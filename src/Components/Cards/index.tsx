@@ -2,12 +2,7 @@ import * as React from 'react';
 
 import './styles.scss';
 
-export const Cards = ({
-  list,
-  prepareItem,
-  width = 250,
-  height = 250,
-}: any) => {
+export const Cards = ({ list, prepareItem }: any) => {
   const memoList = React.useMemo(() => {
     return (
       <React.Fragment>
@@ -16,12 +11,7 @@ export const Cards = ({
           list.map((item: any, index: number) => {
             return (
               <React.Fragment key={index}>
-                <div
-                  style={{
-                    width,
-                    height,
-                  }}
-                  className="card-item-container">
+                <div className="card-item-container">
                   {prepareItem && prepareItem({ item })}
                 </div>
               </React.Fragment>

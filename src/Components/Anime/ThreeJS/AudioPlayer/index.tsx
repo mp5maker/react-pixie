@@ -11,8 +11,6 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
 import { useMedia } from 'Hooks/UseMedia';
-import { Colors } from 'Constants/Colors';
-import { AppContext } from 'AppContext';
 import { MusicContext } from 'MusicContext';
 import { ButtonRadial } from 'Components/Button/Radial';
 
@@ -28,20 +26,23 @@ const AUDIO_PAUSE = 'pause';
 
 const buttonVariants = {
   initial: {
-    x: 300,
+    x: 8,
     opacity: 0,
   },
   animate: {
     x: 0,
     opacity: 1,
     transition: {
-      duration: 0.1,
+      duration: 0.15,
+      ease: [0.23, 1, 0.32, 1],
     },
   },
   exit: {
     opacity: 0,
-    x: 300,
-    duration: 0.1,
+    x: 8,
+    transition: {
+      duration: 0.15,
+    },
   },
 };
 
@@ -49,8 +50,7 @@ let iosAudio: any;
 let startTime: any;
 export const AudioPlayer = ({}: any) => {
   const { t } = useTranslation();
-  const [mute] = useCustomEvent(EVENT_NAME.HOWLER_MUTE, true);
-  const { theme }: any = React.useContext(AppContext);
+  const [mute, triggerMute] = useCustomEvent(EVENT_NAME.HOWLER_MUTE, true);
   const { setMusicSettings, ...otherSettingsProps }: any = React.useContext(
     MusicContext,
   );
@@ -69,9 +69,15 @@ export const AudioPlayer = ({}: any) => {
   const audioVolume = mute ? 0 : 1;
 
   React.useEffect(() => {
-    if (iosAudio) iosAudio.volume = audioVolume;
+    /* iOS ignores HTMLAudioElement.volume, muted works */
+    if (iosAudio) iosAudio.muted = mute;
     sound.setVolume(audioVolume);
   }, [audioVolume, mute]);
+
+  /* sound starts muted; pressing play is an explicit request to hear it */
+  const unmute = () => {
+    if (mute) triggerMute(false);
+  };
 
   const animate = (timestamp: any) => {
     if (startTime == undefined) startTime = timestamp;
@@ -117,7 +123,6 @@ export const AudioPlayer = ({}: any) => {
     const onSuccessLoad = (buffer: any) => {
       sound.setBuffer(buffer);
       sound.setLoop(true);
-      sound.setVolume(audioVolume);
       sound.play();
       setPlayAudio(AUDIO_PLAYING);
       body.style.setProperty('--allow-pace', 'none');
@@ -131,17 +136,17 @@ export const AudioPlayer = ({}: any) => {
       }
     };
 
+    unmute();
     /* Detect IOS */
     if (isIOS && !sound.isPlaying) {
       iosAudio = new Audio('/Audio/sample.mp3');
-      iosAudio.volume = audioVolume;
       iosAudio.play();
       body.style.setProperty('--allow-pace', 'none');
       iosAudio.loop = true;
       setPlayAudio(AUDIO_PLAYING);
       setIsPlayingForSmallerDevice(true);
     } else loader.load('/Audio/sample.mp3', onSuccessLoad, onProgressLoad);
-  }, [playAudio, audioVolume]);
+  }, [playAudio, mute]);
 
   const pause = React.useCallback(() => {
     setPlayAudio(AUDIO_PAUSE);
@@ -153,6 +158,7 @@ export const AudioPlayer = ({}: any) => {
   }, [playAudio, iosAudio]);
 
   const resume = React.useCallback(() => {
+    unmute();
     setPlayAudio(AUDIO_PLAYING);
     /* Detect Smaller Device */
     if (isSmallerTouchDevice) setIsPlayingForSmallerDevice(true);
@@ -163,7 +169,7 @@ export const AudioPlayer = ({}: any) => {
     /* Detect IOS */
     if (isIOS && iosAudio) iosAudio.play();
     else sound.play();
-  }, [playAudio, iosAudio]);
+  }, [playAudio, iosAudio, mute]);
 
   const stop = React.useCallback(() => {
     setPlayAudio(AUDIO_NOT_PLAYING);
@@ -185,14 +191,6 @@ export const AudioPlayer = ({}: any) => {
           exit={`exit`}
           key={`play-audio`}
           title={t(`PLAY_THE_AUDIO`)}
-          style={{
-            // @ts-ignore
-            backgroundColor: Colors[theme].backgroundColor,
-            // @ts-ignore
-            color: Colors[theme].secondaryColor,
-            // @ts-ignore
-            border: `1px solid ${Colors[theme].backgroundColor}`,
-          }}
           onClick={() => play()}>
           <FontAwesomeIcon icon={faMusic} />
         </ButtonRadial>
@@ -210,14 +208,6 @@ export const AudioPlayer = ({}: any) => {
           exit={`exit`}
           key={`pause-audio`}
           title={t(`PAUSE_THE_AUDIO`)}
-          style={{
-            // @ts-ignore
-            backgroundColor: Colors[theme].backgroundColor,
-            // @ts-ignore
-            color: Colors[theme].secondaryColor,
-            // @ts-ignore
-            border: `1px solid ${Colors[theme].backgroundColor}`,
-          }}
           onClick={() => pause()}>
           <FontAwesomeIcon icon={faPause} />
         </ButtonRadial>
@@ -235,14 +225,6 @@ export const AudioPlayer = ({}: any) => {
           exit={`exit`}
           key={`resume-audio`}
           title={t(`RESUME_THE_AUDIO`)}
-          style={{
-            // @ts-ignore
-            backgroundColor: Colors[theme].backgroundColor,
-            // @ts-ignore
-            color: Colors[theme].secondaryColor,
-            // @ts-ignore
-            border: `1px solid ${Colors[theme].backgroundColor}`,
-          }}
           onClick={() => resume()}>
           <FontAwesomeIcon icon={faPlay} />
         </ButtonRadial>
@@ -260,14 +242,6 @@ export const AudioPlayer = ({}: any) => {
           exit={`exit`}
           key={`stop-audio`}
           title={t(`STOP_THE_AUDIO`)}
-          style={{
-            // @ts-ignore
-            backgroundColor: Colors[theme].backgroundColor,
-            // @ts-ignore
-            color: Colors[theme].secondaryColor,
-            // @ts-ignore
-            border: `1px solid ${Colors[theme].backgroundColor}`,
-          }}
           onClick={() => stop()}>
           <FontAwesomeIcon icon={faStop} />
         </ButtonRadial>
@@ -284,20 +258,11 @@ export const AudioPlayer = ({}: any) => {
           animate={`animate`}
           exit={`exit`}
           key={`loaded-audio`}
-          title={t(`DOWNLOADING_AUDIO`)}
-          style={{
-            // @ts-ignore
-            backgroundColor: Colors[theme].backgroundColor,
-            // @ts-ignore
-            color: Colors[theme].secondaryColor,
-            // @ts-ignore
-            border: `1px solid ${Colors[theme].backgroundColor}`,
-          }}>
+          title={t(`DOWNLOADING_AUDIO`)}>
           {parseInt(loaded, 10)}%
           <div
             style={{
-              // @ts-ignore
-              backgroundColor: Colors[theme].primaryColor,
+              backgroundColor: `var(--cyan)`,
               width: `${(parseInt(loaded, 10) / 100) * 40}px`,
             }}
             className={`loader-progress`}></div>

@@ -8,23 +8,23 @@ import './styles.scss';
 const musicCreditVariants = {
   initial: {
     opacity: 0,
-    x: -1000,
+    y: 16,
   },
   animate: {
     opacity: 1,
-    x: 25,
+    y: 0,
     transition: {
-      duration: 0.25,
-      ease: `easeInOut`,
+      duration: 0.2,
+      ease: [0.23, 1, 0.32, 1],
     },
   },
   exit: {
     opacity: 0,
-    x: -1000,
+    y: 16,
   },
 };
 
-export const MusicCredit = ({ isPlaying, colors, theme }: any) => {
+export const MusicCredit = ({ isPlaying }: any) => {
   const [show, setShow] = React.useState(isPlaying);
 
   React.useEffect(() => {
@@ -34,34 +34,30 @@ export const MusicCredit = ({ isPlaying, colors, theme }: any) => {
   const content = React.useMemo(() => {
     return show ? (
       <motion.div
-        style={{
-          backgroundColor: colors[theme].backgroundColor,
-          color: colors[theme].primaryColor,
-        }}
         variants={musicCreditVariants}
         initial={`initial`}
         animate={`animate`}
         exit={`exit`}
         key={`music-credit`}
-        className={`music-credit-container`}>
+        className={`music-credit-container hud-panel`}>
         <motion.div>
           <span className={`mr-1`}>
             <FontAwesomeIcon size={`sm`} icon={faHeadphones} />
           </span>
           <span>
-            <a target="__blank" href="https://youtu.be/YnmOmNqBWtM">
+            <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/YnmOmNqBWtM">
               Spektrum & Sara Skinner - Keep You
             </a>
           </span>
         </motion.div>
         <motion.div>Music provided by NoCopyrightSounds.</motion.div>
         <motion.div>
-          <a target="__blank" href="https://youtu.be/YnmOmNqBWtM">
+          <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/YnmOmNqBWtM">
             https://youtu.be/YnmOmNqBWtM
           </a>
         </motion.div>
         <motion.div>
-          <a target="__blank" href="http://ncs.io/KeepYou">
+          <a target="_blank" rel="noopener noreferrer" href="http://ncs.io/KeepYou">
             http://ncs.io/KeepYou
           </a>
         </motion.div>
@@ -69,7 +65,7 @@ export const MusicCredit = ({ isPlaying, colors, theme }: any) => {
     ) : (
       <React.Fragment key={`none`}></React.Fragment>
     );
-  }, [show, theme]);
+  }, [show]);
 
   return <>{content}</>;
 };

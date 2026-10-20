@@ -2,15 +2,22 @@
     position: absolute;
     top: 25px;
     left: 25px;
+    padding: 14px 18px 16px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     .controls {
         display: flex;
-        justify-content: flex-start;
-        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
         > div {
-            margin-right: 12px;
-            padding: 4px 8px;
-            border-radius: 20px;
-            border: 1px solid var(--primary-color);
+            padding: 4px 8px 4px 4px;
+            border: 1px solid var(--line);
+        }
+        kbd {
+            min-width: 22px;
+            padding: 0 6px;
+            font-size: 12px;
         }
     }
 }
@@ -18,5 +25,5 @@
 .zombie-game-controller {
     position: absolute;
     top: 300px;
-    right: 0;
+    right: 25px;
 }

@@ -7,21 +7,12 @@ export const useColors = ({ theme }: any) => {
 
   React.useEffect(() => {
     // @ts-ignore
-    root.style.setProperty('--background-color', Colors[theme].backgroundColor);
-    // @ts-ignore
-    root.style.setProperty('--primary-color', Colors[theme].primaryColor);
-    // @ts-ignore
-    root.style.setProperty('--secondary-color', Colors[theme].secondaryColor);
-    // @ts-ignore
-    root.style.setProperty('--info-color', Colors[theme].infoColor);
-    // @ts-ignore
-    root.style.setProperty('--warning-color', Colors[theme].warningColor);
-    // @ts-ignore
-    root.style.setProperty('--success-color', Colors[theme].successColor);
-    // @ts-ignore
-    root.style.setProperty('--danger-color', Colors[theme].dangerColor);
-    // @ts-ignore
-    root.style.setProperty('--fog-color', Colors[theme].fogColor);
+    Object.entries(Colors[theme]).forEach(([key, value]: any) => {
+      /* primaryColor -> --primary-color */
+      const name = key.replace(/[A-Z]/g, (char: string) => `-${char.toLowerCase()}`);
+      root.style.setProperty(`--${name}`, value);
+    });
+    root.dataset.theme = theme;
   }, [theme]);
 
   return;

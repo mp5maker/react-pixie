@@ -12,18 +12,22 @@ import './styles.scss';
 const drawerVariants = {
   initial: {
     opacity: 0,
-    y: -9999,
+    y: -16,
   },
   animate: {
-    opacity: 0.9,
+    opacity: 1,
     y: 0,
     transition: {
-      duration: 0.4,
+      duration: 0.2,
+      ease: [0.23, 1, 0.32, 1],
     },
   },
   exit: {
-    y: -9999,
+    y: -16,
     opacity: 0,
+    transition: {
+      duration: 0.15,
+    },
   },
 };
 
@@ -115,9 +119,7 @@ export const HotKeysHelp = ({ colors, theme }: any) => {
             return (
               <div className={`hot-keys-help-section`}>
                 <div>
-                  <header>
-                    <h6>{t(`LIST_OF_KEYBOARD_SHORTCUTS`)}</h6>
-                  </header>
+                  <h2 className={`hud-rail`}>{t(`SHORTCUTS`)}</h2>
                   {memoPreparedTable}
                 </div>
               </div>

@@ -1,19 +1,15 @@
 .audio-player-container {
-    position: fixed;
-    bottom: 75px;
-    right: 25px;
+    display: flex;
+    gap: 8px;
     button {
         position: relative;
-        margin-left: 12px;
-        display: inline-flex;
         overflow: hidden;
         .loader-progress {
             position: absolute;
-            top: 0;
             left: 0;
-            height: 40px;
-            opacity: 0.5;
-            transition: width 0.25s ease-in-out;
+            bottom: 0;
+            height: 2px;
+            transition: width 0.25s ease-out;
         }
     }
 }

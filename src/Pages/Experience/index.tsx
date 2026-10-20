@@ -3,6 +3,7 @@ import * as React from 'react';
 
 import { AppContext } from 'AppContext';
 import { AnimeThreeJSExperience } from 'Components/Anime/ThreeJS/Pages/Experience';
+import { Loadout } from 'Components/Loadout';
 import { MouseDetector } from 'Components/MouseDetector';
 import { Colors } from 'Constants/Colors';
 import { PageTransition } from 'Constants/PageTransition';
@@ -44,6 +45,7 @@ export const Experience = ({ history, location, match }: any) => {
           />
         </div>
       </div>
+      <Loadout />
       <MouseDetector width={50} height={71.3} colors={Colors} theme={theme} />
     </motion.div>
   );

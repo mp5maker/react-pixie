@@ -1,22 +1,19 @@
 .music-credit-container {
-    position: absolute;
+    position: fixed;
+    left: 25px;
     bottom: 25px;
-    padding: 12px;
-    border-radius: 5px;
-    box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
-    * {
-        font-size: 12px;
-    }
-    @media only screen and (max-width: 400px) {
-        bottom: -55px;
-        padding: 0;
-    }
+    z-index: 2;
+    padding: 12px 16px;
+    font-size: 12px;
+    line-height: 1.6;
     a {
         text-decoration: none;
-        color: var(--primary-color);
-        &:hover {
-            text-decoration: none;
-            color: var(--danger-color);
-        }
+    }
+    /* NCS attribution must stay visible: sit above the bottom dock on phones */
+    @media only screen and (max-width: 767px) {
+        left: 16px;
+        right: 16px;
+        bottom: 84px;
+        font-size: 11px;
     }
 }

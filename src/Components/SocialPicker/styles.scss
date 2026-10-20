@@ -1,13 +1,3 @@
 .social-picker-container {
-    position: fixed;
-    top: 80px;
-    right: 25px;
-    .social-picker-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        button {
-            margin-left: 12px;
-        }
-    }
+    display: block;
 }

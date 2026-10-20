@@ -25,27 +25,33 @@ import './styles.scss';
 const drawerVariants = {
   initial: {
     opacity: 0,
-    y: 9999,
+    y: 16,
   },
   animate: {
-    opacity: 0.9,
+    opacity: 1,
     y: 0,
     transition: {
-      duration: 0.4,
+      duration: 0.2,
+      ease: [0.23, 1, 0.32, 1],
     },
   },
   exit: {
-    y: 9999,
+    y: 16,
     opacity: 0,
+    transition: {
+      duration: 0.15,
+    },
   },
 };
 
 export const Error = ({ history, location, match }: any) => {
   const { theme } = React.useContext(AppContext);
   const { setSettings, ...settings }: any = React.useContext(SettingsContext);
-  const { isLoading, error, data: response } = useQuery(
+  /* the demo feed api is gone; fail once and say so instead of retrying */
+  const { isLoading, data: response } = useQuery(
     ['posts', { params: { _limit: 20, _page: 3 } }],
     Query,
+    { retry: false },
   );
   const { t } = useTranslation();
   useDocument({
@@ -55,6 +61,7 @@ export const Error = ({ history, location, match }: any) => {
   });
   useSmoothScroll({});
   const data = get(response, 'data', []);
+  const hasData = Array.isArray(data) && data.length > 0;
 
   React.useEffect(() => {
     setSettings({
@@ -194,7 +201,7 @@ export const Error = ({ history, location, match }: any) => {
                     return get(row, 'designation', t(`HYPHEN`));
                   if (column == 'joining_date')
                     return get(row, 'joining_date', t(`HYPHEN`)).slice(0, 10);
-                  if (column == 'name')
+                  if (column == 'department')
                     return get(row, 'department', t(`HYPHEN`));
                   return row[column];
                 }}
@@ -232,14 +239,19 @@ export const Error = ({ history, location, match }: any) => {
       </div>
       <div className="row">
         <div className="col p-0">
-          {isLoading ? (
-            <React.Fragment>{memoLoading}</React.Fragment>
-          ) : (
-            <React.Fragment>
-              {memoCards}
-              {memoPDF}
-            </React.Fragment>
-          )}
+          <section className={`error-feed hud-panel`}>
+            <div className={`error-feed-head`}>
+              <h2 className={`hud-rail`}>{t(`HUD_FRIENDS`)}</h2>
+              {hasData && memoPDF}
+            </div>
+            {isLoading ? (
+              memoLoading
+            ) : hasData ? (
+              memoCards
+            ) : (
+              <p className={`error-feed-offline`}>{t(`HUD_FEED_OFFLINE`)}</p>
+            )}
+          </section>
         </div>
       </div>
       <div className="row">

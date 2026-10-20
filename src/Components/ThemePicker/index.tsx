@@ -4,7 +4,6 @@ import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import { GlobalHotKeys } from 'react-hotkeys';
 
 import { AppContext } from 'AppContext';
-import { Colors } from 'Constants/Colors';
 import { LIGHT, DARK, THEME } from 'Constants/Settings';
 import { StorageSet } from 'Utilities/Storage';
 import { ButtonRadial } from 'Components/Button/Radial';
@@ -16,20 +15,7 @@ export const ThemePicker = ({ t }: any) => {
 
   const LightButton = (
     <ButtonRadial
-      style={{
-        // @ts-ignore
-        backgroundColor: Colors[theme].backgroundColor,
-        // @ts-ignore
-        color: Colors[theme].secondaryColor,
-        ...(theme === LIGHT
-          ? {
-              // @ts-ignore
-              border: `1px solid ${Colors[theme].primaryColor}`,
-            }
-          : {
-              border: `1px solid transparent`,
-            }),
-      }}
+      aria-pressed={theme === LIGHT}
       title={t(`CHANGE_TO_LIGHT_MODE`)}
       onClick={() => {
         setTheme(LIGHT);
@@ -41,20 +27,7 @@ export const ThemePicker = ({ t }: any) => {
 
   const DarkButton = (
     <ButtonRadial
-      style={{
-        // @ts-ignore
-        backgroundColor: Colors[theme].backgroundColor,
-        // @ts-ignore
-        color: Colors[theme].secondaryColor,
-        ...(theme === DARK
-          ? {
-              // @ts-ignore
-              border: `1px solid ${Colors[theme].primaryColor}`,
-            }
-          : {
-              border: `1px solid transparent`,
-            }),
-      }}
+      aria-pressed={theme === DARK}
       title={t(`CHANGE_TO_DARK_MODE`)}
       onClick={() => {
         setTheme(DARK);

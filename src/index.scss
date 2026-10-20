@@ -1,34 +1,241 @@
+/* Fonts: self-hosted, OFL (Chakra Petch, Share Tech Mono) */
+@font-face {
+  font-family: 'Chakra Petch';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./Fonts/chakra-petch-latin-700-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Share Tech Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./Fonts/share-tech-mono-latin-400-normal.woff2') format('woff2');
+}
+
+/* Dark tokens before React mounts; useColors overwrites per theme */
+:root {
+  --background-color: #07040f;
+  --primary-color: #c8d3f5;
+  --secondary-color: #6b7399;
+  --info-color: #00f0ff;
+  --success-color: #00f0ff;
+  --danger-color: #ff2bd6;
+  --warning-color: #f5ff3d;
+  --fog-color: #07040f;
+  --panel: #0e0a1f;
+  --line: #241a45;
+  --dot: #2a2050;
+  --cyan: #00f0ff;
+  --magenta: #ff2bd6;
+  --volt: #f5ff3d;
+  --violet: #7a1fff;
+  --text: #c8d3f5;
+  --muted: #6b7399;
+  --stripe: transparent;
+
+  --font-display: 'Chakra Petch', sans-serif;
+  --font-mono: 'Share Tech Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --cut: 18px;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --scan: rgba(0, 0, 0, 0.15);
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --scan: rgba(7, 4, 15, 0.05);
+  color-scheme: light;
+}
+
 body {
   margin: 0;
-  font-family: 'Fira Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-mono);
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+code,
+kbd {
+  font-family: var(--font-mono);
+}
+
+kbd {
+  display: inline-block;
+  min-width: 28px;
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background-color: var(--panel);
+  color: var(--cyan);
+  box-shadow: none;
+  font-size: 14px;
+  text-align: center;
+}
+
+a {
+  color: var(--cyan);
+  &:hover {
+    color: var(--magenta);
+    text-decoration: none;
+  }
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+/* HUD panel: chamfer top-right + bottom-left, 1px stroke, cyan ticks top-left + bottom-right,
+   dot grid under content, scanlines over it */
+@mixin chamfer($cut) {
+  clip-path: polygon(
+    0 0,
+    calc(100% - #{$cut}) 0,
+    100% $cut,
+    100% 100%,
+    $cut 100%,
+    0 calc(100% - #{$cut})
+  );
+}
+
+/* The chamfer is drawn on pseudo-elements, never clipped on the panel itself:
+   clipping the element would also clip focus rings and fixed/portal children. */
+/* zero specificity: a component's own position (fixed docks, nav) must win */
+:where(.hud-panel) {
+  position: relative;
+}
+
+.hud-panel,
+.react-joyride__tooltip {
+  isolation: isolate;
+  color: var(--text);
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+  }
+  &::before {
+    inset: 0;
+    background-color: var(--line);
+    @include chamfer(var(--cut));
+  }
+  &::after {
+    inset: 1px;
+    background: linear-gradient(var(--cyan), var(--cyan)) 0 0 / 12px 2px no-repeat,
+      linear-gradient(var(--cyan), var(--cyan)) 0 0 / 2px 12px no-repeat,
+      linear-gradient(var(--cyan), var(--cyan)) 100% 100% / 12px 2px no-repeat,
+      linear-gradient(var(--cyan), var(--cyan)) 100% 100% / 2px 12px no-repeat,
+      repeating-linear-gradient(to bottom, var(--scan) 0 2px, transparent 2px 4px),
+      radial-gradient(var(--dot) 1px, transparent 1.5px) 0 0 / 24px 24px,
+      var(--panel);
+    @include chamfer(calc(var(--cut) - 0.6px));
+  }
+}
+
+/* Section rail: cyan bar, // label, hairline, magenta square */
+.hud-rail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 16px;
+  padding-left: 14px;
+  border-left: 4px solid var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  &::before {
+    content: '// ';
+    white-space: pre;
+    margin-right: -12px;
+    color: var(--cyan);
+  }
+  &::after {
+    content: '';
+    flex: 1;
+    height: 6px;
+    min-width: 24px;
+    background: linear-gradient(var(--magenta), var(--magenta)) 100% 50% / 6px 6px no-repeat,
+      linear-gradient(var(--line), var(--line)) 0 50% / calc(100% - 6px) 1px no-repeat;
+  }
+}
+
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.hud-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 0.9;
+}
+
+/* The one volt element per screen: hazard band on the bottom edge */
+.hud-hazard {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  z-index: 1;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--volt) 0 7px,
+    var(--stripe) 7px 14px
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Browser Update */
 .buorg {
-  border-bottom: 1px solid var(--background-color) !important;
-  box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid var(--line) !important;
+  box-shadow: none;
   .buorg-pad {
-    background-color: var(--background-color);
-    color: var(--primary-color);
+    background-color: var(--panel);
+    color: var(--text);
+    font-family: var(--font-mono);
     .buorg-buttons {
+      #buorgul,
+      #buorgig {
+        background-color: var(--panel);
+        border-radius: 0;
+        box-shadow: none;
+      }
       #buorgul {
-        background-color: var(--background-color);
-        border: 1px solid var(--success-color);
-        color: var(--success-color);
+        border: 1px solid var(--cyan);
+        color: var(--cyan);
       }
       #buorgig {
-        background-color: var(--background-color);
-        border: 1px solid var(--warning-color);
-        color: var(--warning-color);
+        border: 1px solid var(--line);
+        color: var(--text);
       }
     }
   }
@@ -56,7 +263,7 @@ code {
   }
 
   .pace .pace-progress {
-    background: var(--primary-color);
+    background: var(--cyan);
     position: fixed;
     z-index: 2000;
     top: 0;
@@ -65,58 +272,26 @@ code {
     height: 2px;
   }
 
-  .pace .pace-progress-inner {
-    display: block;
-    position: absolute;
-    right: 0px;
-    width: 100px;
-    height: 100%;
-    box-shadow: 0 0 10px var(--primary-color), 0 0 5px var(--primary-color);
-    opacity: 1.0;
-    -webkit-transform: rotate(3deg) translate(0px, -4px);
-    -moz-transform: rotate(3deg) translate(0px, -4px);
-    -ms-transform: rotate(3deg) translate(0px, -4px);
-    -o-transform: rotate(3deg) translate(0px, -4px);
-    transform: rotate(3deg) translate(0px, -4px);
-  }
-
   .pace .pace-activity {
     display: block;
     position: fixed;
     z-index: 2000;
     top: 15px;
     right: 15px;
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     border: solid 2px transparent;
-    border-top-color: var(--primary-color);
-    border-left-color: var(--primary-color);
-    border-radius: 10px;
-    -webkit-animation: pace-spinner 400ms linear infinite;
-    -moz-animation: pace-spinner 400ms linear infinite;
-    -ms-animation: pace-spinner 400ms linear infinite;
-    -o-animation: pace-spinner 400ms linear infinite;
-    animation: pace-spinner 400ms linear infinite;
+    border-top-color: var(--cyan);
+    border-left-color: var(--cyan);
+    animation: pace-spinner 600ms steps(4) infinite;
   }
 
-  @-webkit-keyframes pace-spinner {
-    0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
-  }
-  @-moz-keyframes pace-spinner {
-    0% { -moz-transform: rotate(0deg); transform: rotate(0deg); }
-    100% { -moz-transform: rotate(360deg); transform: rotate(360deg); }
-  }
-  @-o-keyframes pace-spinner {
-    0% { -o-transform: rotate(0deg); transform: rotate(0deg); }
-    100% { -o-transform: rotate(360deg); transform: rotate(360deg); }
-  }
-  @-ms-keyframes pace-spinner {
-    0% { -ms-transform: rotate(0deg); transform: rotate(0deg); }
-    100% { -ms-transform: rotate(360deg); transform: rotate(360deg); }
-  }
   @keyframes pace-spinner {
-    0% { transform: rotate(0deg); transform: rotate(0deg); }
-    100% { transform: rotate(360deg); transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }

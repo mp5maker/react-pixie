@@ -1,0 +1,120 @@
+.loadout {
+  position: absolute;
+  left: 25px;
+  bottom: 32px;
+  z-index: 1;
+  width: 420px;
+  padding: 20px 24px 22px;
+  @media (max-width: 767px) {
+    left: 16px;
+    right: 16px;
+    bottom: 88px;
+    width: auto;
+    padding: 16px 18px 18px;
+  }
+}
+
+/* Flow: packet takes 4s to cross, rests 1s; node i is hit at i seconds */
+.loadout-flow {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 18px;
+  overflow: visible;
+  text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--text);
+  }
+}
+
+.loadout-flow-line {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.loadout-flow-node {
+  fill: var(--panel);
+  stroke: var(--cyan);
+  stroke-width: 1;
+}
+
+.loadout-flow-hit {
+  fill: var(--magenta);
+  opacity: 0;
+  animation: loadout-hit 5s linear calc(var(--i) * 1s) infinite;
+}
+
+.loadout-flow-packet {
+  fill: var(--cyan);
+  animation: loadout-packet 5s linear infinite;
+}
+
+@keyframes loadout-packet {
+  80%,
+  100% {
+    transform: translateX(388px);
+  }
+}
+
+@keyframes loadout-hit {
+  0% {
+    opacity: 1;
+  }
+  14%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Stack: bars grow once on arrival, staggered */
+.loadout-stack {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    display: grid;
+    grid-template-columns: 84px minmax(0, 1fr) 28px;
+    align-items: center;
+    gap: 12px;
+    min-height: 24px;
+  }
+}
+
+.loadout-stack-name {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.loadout-stack-bar {
+  height: 6px;
+  background-color: var(--line);
+  span {
+    display: block;
+    height: 100%;
+    background-color: var(--cyan);
+    transform-origin: left center;
+    animation: loadout-grow 600ms var(--ease-out) calc(200ms + var(--i) * 80ms) both;
+  }
+}
+
+@keyframes loadout-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.loadout-stack-count {
+  font-size: 13px;
+  text-align: right;
+  color: var(--magenta);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loadout-flow-hit,
+  .loadout-flow-packet,
+  .loadout-stack-bar span {
+    animation: none;
+  }
+}

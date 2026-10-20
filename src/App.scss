@@ -17,6 +17,10 @@ body {
       height: 60px;
       line-height: 60px;
       text-align: center;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-top: 1px solid var(--line);
     }
   }
 }
@@ -57,5 +61,60 @@ canvas {
   padding-top: 100px;
   > div {
     text-align: center;
+    > div:last-child {
+      margin-top: 16px;
+      font-size: 14px;
+      text-transform: lowercase;
+    }
+  }
+}
+
+/* Corner docks: icon walls in a HUD panel */
+.hud-dock {
+  position: fixed;
+  right: 25px;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+  padding: 14px;
+  > div {
+    display: flex;
+    gap: 8px;
+  }
+  button {
+    margin: 0 !important;
+  }
+}
+
+.hud-dock-top {
+  top: 25px;
+  flex-direction: column;
+  .social-picker-content {
+    display: grid;
+    grid-template-columns: repeat(2, 40px);
+    gap: 8px;
+  }
+  .hud-dock-row:empty {
+    display: none;
+  }
+}
+
+.hud-dock-bottom {
+  bottom: 25px;
+  flex-direction: row;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .hud-dock {
+    right: 16px;
+    padding: 10px;
+    gap: 6px;
+  }
+  .hud-dock-top {
+    top: 16px;
+  }
+  .hud-dock-bottom {
+    bottom: 16px;
   }
 }

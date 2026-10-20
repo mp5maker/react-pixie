@@ -148,15 +148,14 @@ export const Navigation = ({ history }: any) => {
   return (
     <React.Fragment>
       <GlobalHotKeys allowChanges={true} handlers={handlers}>
-        <div className="navigation-container">
+        <nav className="navigation-container hud-panel">
           <div className="navigation-content">
-            <div className="navigation-circle"></div>
             <ul className="navigation-list">
               {list.map((item, key) => {
                 const Svg = get(item, 'Svg', '');
                 return (
                   <React.Fragment key={key}>
-                    <li className="navigation-item">
+                    <li>
                       <NavLink
                         onMouseEnter={() => {
                           soundHover.stop();
@@ -169,22 +168,13 @@ export const Navigation = ({ history }: any) => {
                         className={`navigation-item`}
                         exact
                         to={item.route}
-                        activeClassName={`active`}
-                        style={{
-                          // @ts-ignore
-                          color: Colors[theme].backgroundColor,
-                        }}
-                        activeStyle={{
-                          fontWeight: 'bold',
-                          // @ts-ignore
-                          color: Colors[theme].primaryColor,
-                        }}>
-                        <span className={`mr-2`}>{item.label}</span>
+                        activeClassName={`active`}>
+                        <span>{item.label}</span>
                         {Svg ? (
                           <Svg
                             svgKey={item.key}
-                            width={40}
-                            height={37.3}
+                            width={24}
+                            height={22.4}
                             colors={Colors}
                             theme={theme}
                           />
@@ -198,7 +188,7 @@ export const Navigation = ({ history }: any) => {
               })}
             </ul>
           </div>
-        </div>
+        </nav>
       </GlobalHotKeys>
     </React.Fragment>
   );

@@ -1,21 +1,18 @@
 .button-square-container {
-    box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
-    transition: all ease-in-out 0.25s;
     height: 40px;
     margin-left: 12px;
-    outline: none;
-    transform: scale(1);
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid var(--line) !important;
+    border-radius: 0 !important;
+    background-color: var(--panel) !important;
+    color: var(--text) !important;
+    box-shadow: none !important;
+    font-family: var(--font-mono) !important;
+    transition: color 150ms var(--ease-out), border-color 150ms var(--ease-out) !important;
     &:hover {
-        transform: scale(0.95);
-        transition: all ease-in-out 0.25s;
-        box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.4);
-    }
-    &:active {
-        outline: none;
-        background-color: var(--primary-color);
-        color: var(--background-color);
+        color: var(--cyan) !important;
+        border-color: var(--cyan) !important;
     }
 }

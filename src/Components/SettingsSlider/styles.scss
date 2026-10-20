@@ -1,62 +1,120 @@
-@mixin settings-slider-button($clip-path) {
+@mixin settings-slider-button {
     width: 40px;
     height: 40px;
-    transition: all ease-in-out 0.25s;
-    background-color: var(--primary-color);
-    color: var(--background-color);
-    border: none;
-    outline: none;
-    clip-path: $clip-path;
-    opacity: 0.8;
-    &:hover {
-        transition: all ease-in-out 0.25s;
-        opacity: 1;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    background-color: var(--panel);
+    color: var(--text);
+    font-size: 18px;
+    transition: color 150ms var(--ease-out), border-color 150ms var(--ease-out);
+    @media (hover: hover) {
+        &:hover {
+            color: var(--cyan);
+            border-color: var(--cyan);
+        }
     }
 }
 
 .settings-slider-container {
     position: fixed;
     top: calc((100vh / 2) - 50px);
-    right: 0;
+    right: 25px;
+    z-index: 2;
     display: none;
     &.active {
         display: block;
     }
     .settings-slider-open-button {
-        @include settings-slider-button(polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%))
+        @include settings-slider-button;
     }
     .slider-container {
-        padding: 5px;
-        min-width: 337px;
-        border: 1px solid var(--primary-color);
-        background-color: var(--background-color);
-        box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.3);
-        position: relative;
-        border-radius: 5px;
+        min-width: 360px;
+        padding: 16px 20px 12px;
+        .slider-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+            .hud-rail {
+                flex: 1;
+                margin: 0;
+            }
+            .button {
+                @include settings-slider-button;
+            }
+        }
+        .MuiGrid-item {
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            strong {
+                font-weight: 400;
+            }
+        }
         .MuiSlider-root {
             width: 150px;
-            margin-right: 25px;
+            margin-right: 8px;
+            color: var(--cyan);
         }
-        .button-container {
-            position: absolute;
-            top: -50px;
-            right: 5px;
-            .button {
-                @include settings-slider-button(polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%))
+        .MuiSlider-rail {
+            background-color: var(--line);
+            opacity: 1;
+        }
+        .MuiSlider-thumb {
+            width: 10px;
+            height: 14px;
+            margin-top: -6px;
+            margin-left: -5px;
+            border-radius: 0;
+            &:hover,
+            &.Mui-focusVisible,
+            &.MuiSlider-active {
+                box-shadow: none;
+            }
+            &.Mui-focusVisible {
+                outline: 2px solid var(--cyan);
+                outline-offset: 2px;
             }
         }
         .fire-switch, .bloom-switch {
             justify-content: space-between;
-            padding-right: 16px;
+            padding-right: 8px;
         }
         .width-150 {
             width: 150px;
         }
-        .MuiSwitch-track {
-            background-color: #343434;
-        }
-        .MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
-            background-color: #8491A3;
+        .MuiSwitch-root {
+            .MuiSwitch-thumb {
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .MuiSwitch-track {
+                border-radius: 0;
+                background-color: var(--line);
+                opacity: 1;
+            }
+            .MuiTouchRipple-root {
+                display: none;
+            }
+            .MuiSwitch-switchBase {
+                border-radius: 0;
+                color: var(--muted);
+                &:hover {
+                    background-color: transparent;
+                }
+                &.Mui-checked {
+                    color: var(--cyan);
+                    + .MuiSwitch-track {
+                        background-color: var(--cyan);
+                        opacity: 0.35;
+                    }
+                }
+                &.Mui-focusVisible .MuiSwitch-thumb {
+                    outline: 2px solid var(--cyan);
+                    outline-offset: 2px;
+                }
+            }
         }
     }
 }

@@ -34,14 +34,17 @@ export const ButtonRadial: React.FC<ButtonRadialPropsInterface> = ({
   onClick = () => {},
   onMouseEnter = () => {},
   children,
-  ariaLabel = 'Feature Button',
+  ariaLabel,
+  title,
   ...otherProps
 }: any = {}) => {
   return (
     <motion.button
       className={`button-radial-container`}
       style={style}
-      aria-label={ariaLabel}
+      title={title}
+      /* icon-only buttons: fall back to the title, not a generic label */
+      aria-label={ariaLabel || title}
       onClick={event => {
         soundClick.play();
         onClick(event);

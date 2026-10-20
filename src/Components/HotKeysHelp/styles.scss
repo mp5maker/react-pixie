@@ -8,27 +8,36 @@
 .hot-keys-help-section {
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 500px;
+    > div {
+        width: 100%;
+        padding-right: 48px;
+    }
     table {
-        thead {
-            border-bottom: 1px solid var(--primary-color);
-        }
-        thead,
-        tbody {
-            tr {
-                td, th {
-                    padding: 6px;
-                    min-width: 120px;
-                }
-            }
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        th {
+            padding: 0 0 8px;
+            font-weight: 400;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--cyan);
         }
         tbody {
             &.group-item {
-                border: 1px solid var(--secondary-color);
+                tr {
+                    border-top: 1px solid var(--line);
+                }
+                td {
+                    padding: 6px 0;
+                }
                 .group-header-item {
-                    background-color: var(--primary-color);
-                    color: var(--background-color);
+                    padding-top: 16px;
+                    font-size: 12px;
+                    letter-spacing: 0.08em;
+                    text-transform: uppercase;
+                    color: var(--magenta);
                 }
             }
         }

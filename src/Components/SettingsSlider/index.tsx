@@ -10,8 +10,6 @@ import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import { Colors } from 'Constants/Colors';
-import { AppContext } from 'AppContext';
 import { SettingsContext } from 'SettingsContext';
 import { MusicContext } from 'MusicContext';
 import { useMedia } from 'Hooks/UseMedia';
@@ -20,17 +18,23 @@ import './styles.scss';
 
 const settingsSliderVariant = {
   initial: {
-    x: 500,
+    x: 48,
+    opacity: 0,
   },
   animate: {
     x: 0,
+    opacity: 1,
     transition: {
-      duration: 0.1,
+      duration: 0.2,
+      ease: [0.23, 1, 0.32, 1],
     },
   },
   exit: {
-    x: 500,
-    duration: 0.1,
+    x: 48,
+    opacity: 0,
+    transition: {
+      duration: 0.15,
+    },
   },
 };
 
@@ -46,7 +50,6 @@ export const SettingsSlider = ({
   ],
 }: any) => {
   const [show, setShow] = React.useState(false);
-  const { theme }: any = React.useContext(AppContext);
   const { t, i18n } = useTranslation();
   const {
     rotationX,
@@ -81,11 +84,6 @@ export const SettingsSlider = ({
     CLOSE_SETTINGS: () => setShow(false),
   };
 
-  const sliderStyle = {
-    // @ts-ignore
-    color: Colors[theme].primaryColor,
-  };
-
   const content = (
     <div className={`settings-slider-container ${!isPlaying ? `active` : ``}`}>
       <AnimatePresence initial={false} exitBeforeEnter>
@@ -95,27 +93,35 @@ export const SettingsSlider = ({
             initial="initial"
             animate="animate"
             exit="exit"
-            aria-label={`Slider Open`}
+            aria-label={t(`OPEN_SETTINGS_SLIDER`)}
             className={`settings-slider-open-button`}
             onClick={() => setShow(true)}
-            whileHover={{ scale: 0.98 }}
-            whileTap={{ scale: 0.98 }}
             title={t(`OPEN_SETTINGS_SLIDER`)}
             key={`click-me`}>
             <FontAwesomeIcon icon={faAngleLeft} />
           </motion.button>
         ) : (
           <motion.div
-            className={`slider-container`}
+            className={`slider-container hud-panel`}
             variants={settingsSliderVariant}
             initial="initial"
             animate="animate"
             exit="exit"
             key={`i-am-open`}>
+            <div className={`slider-header`}>
+              <h2 className={`hud-rail`}>{t(`SETTINGS`)}</h2>
+              <button
+                title={t(`CLOSE_SETTINGS_SLIDER`)}
+                aria-label={t(`CLOSE_SETTINGS_SLIDER`)}
+                onClick={() => setShow(false)}
+                className={`button`}>
+                <FontAwesomeIcon icon={faAngleRight} />
+              </button>
+            </div>
             {list.includes('rotationX') && (
               <motion.div>
                 <Grid container spacing={2} alignItems="center">
-                  <Grid item style={sliderStyle} className={`width-150`}>
+                  <Grid item className={`width-150`}>
                     {t(`ROTATION_X`)}
                   </Grid>
                   <Grid item xs>
@@ -123,7 +129,7 @@ export const SettingsSlider = ({
                       step={1}
                       min={1}
                       max={100}
-                      style={sliderStyle}
+                     
                       onChange={(event, newValue) =>
                         onSettingsChange({ newValue, name: `rotationX` })
                       }
@@ -136,7 +142,7 @@ export const SettingsSlider = ({
             {list.includes('rotationY') && (
               <motion.div>
                 <Grid container spacing={2} alignItems="center">
-                  <Grid item style={sliderStyle} className={`width-150`}>
+                  <Grid item className={`width-150`}>
                     {t(`ROTATION_Y`)}
                   </Grid>
                   <Grid item xs>
@@ -144,7 +150,7 @@ export const SettingsSlider = ({
                       step={1}
                       min={1}
                       max={100}
-                      style={sliderStyle}
+                     
                       onChange={(event, newValue) =>
                         onSettingsChange({ newValue, name: `rotationY` })
                       }
@@ -157,7 +163,7 @@ export const SettingsSlider = ({
             {list.includes('rotationZ') && (
               <motion.div>
                 <Grid container spacing={2} alignItems="center">
-                  <Grid item style={sliderStyle} className={`width-150`}>
+                  <Grid item className={`width-150`}>
                     {t(`ROTATION_Z`)}
                   </Grid>
                   <Grid item xs>
@@ -165,7 +171,7 @@ export const SettingsSlider = ({
                       step={1}
                       min={1}
                       max={100}
-                      style={sliderStyle}
+                     
                       onChange={(event, newValue) =>
                         onSettingsChange({ newValue, name: `rotationZ` })
                       }
@@ -178,7 +184,7 @@ export const SettingsSlider = ({
             {list.includes('acceleration') && (
               <motion.div>
                 <Grid container spacing={2} alignItems="center">
-                  <Grid item style={sliderStyle} className={`width-150`}>
+                  <Grid item className={`width-150`}>
                     {t(`ACCELERATION`)}
                   </Grid>
                   <Grid item xs>
@@ -186,7 +192,7 @@ export const SettingsSlider = ({
                       step={1}
                       min={1}
                       max={100}
-                      style={sliderStyle}
+                     
                       onChange={(event, newValue) =>
                         onSettingsChange({ newValue, name: `acceleration` })
                       }
@@ -205,15 +211,11 @@ export const SettingsSlider = ({
                     alignItems="center"
                     spacing={1}
                     className={`fire-switch`}>
-                    <Grid item style={sliderStyle} className={`width-150`}>
+                    <Grid item className={`width-150`}>
                       <strong>{t(`FIRE`)}</strong>
                     </Grid>
                     <Grid item>
                       <Switch
-                        style={{
-                          // @ts-ignore
-                          color: Colors[theme].primaryColor,
-                        }}
                         checked={fire}
                         defaultValue={fire}
                         onChange={event =>
@@ -239,15 +241,11 @@ export const SettingsSlider = ({
                     alignItems="center"
                     spacing={1}
                     className={`bloom-switch`}>
-                    <Grid item style={sliderStyle} className={`width-150`}>
+                    <Grid item className={`width-150`}>
                       <strong>{t(`BLOOM`)}</strong>
                     </Grid>
                     <Grid item>
                       <Switch
-                        style={{
-                          // @ts-ignore
-                          color: Colors[theme].primaryColor,
-                        }}
                         checked={bloom}
                         defaultValue={bloom}
                         onChange={event =>
@@ -264,15 +262,6 @@ export const SettingsSlider = ({
                 </Typography>
               </motion.div>
             )}
-            <motion.div className={`button-container`}>
-              <motion.button
-                title={t(`CLOSE_SETTINGS_SLIDER`)}
-                aria-label={`Button Close`}
-                onClick={() => setShow(false)}
-                className={`button`}>
-                <FontAwesomeIcon icon={faAngleRight} />
-              </motion.button>
-            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

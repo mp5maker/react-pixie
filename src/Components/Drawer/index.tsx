@@ -17,8 +17,6 @@ import './styles.scss';
 const BUTTON_SHAPE_ROUND = 'round';
 
 export const Drawer = ({
-  colors,
-  theme,
   drawerVariants,
   children,
   direction = 'top',
@@ -29,9 +27,7 @@ export const Drawer = ({
   openButtonTitle = '',
   closeButtonTitle = '',
 }: any) => {
-  const { setSettings, ...otherSettings }: any = React.useContext(
-    SettingsContext,
-  );
+  const { setSettings }: any = React.useContext(SettingsContext);
   const [show, setShow] = React.useState(false);
   const drawer: any = React.useRef(document.getElementById('drawer')).current;
 
@@ -46,10 +42,16 @@ export const Drawer = ({
         document.body.style.position = 'fixed';
         document.body.style.top = `-${window.scrollY}px`;
       } else {
+        const scrollY = -parseInt(document.body.style.top || '0', 10);
         document.body.style.position = '';
         document.body.style.top = ``;
+        window.scrollTo(0, scrollY);
       }
-      setSettings({ ...otherSettings, allowSwipeNavigation: !status });
+      /* functional update: a closure copy of the settings would reset sliders */
+      setSettings((settings: any) => ({
+        ...settings,
+        allowSwipeNavigation: !status,
+      }));
       setShow(status);
     },
     [],
@@ -62,11 +64,7 @@ export const Drawer = ({
       initial={`initial`}
       animate={`animate`}
       exit={`exit`}
-      style={{
-        color: colors[theme].primaryColor,
-        backgroundColor: colors[theme].backgroundColor,
-      }}
-      className={`${direction} drawer-container`}
+      className={`${direction} drawer-container hud-panel`}
       role="presentation">
       <div className="drawer-content">
         <List>
@@ -107,19 +105,11 @@ export const Drawer = ({
       {buttonShape == BUTTON_SHAPE_ROUND ? (
         <ButtonRadial
           title={openButtonTitle}
-          style={{
-            backgroundColor: colors[theme].backgroundColor,
-            color: colors[theme].primaryColor,
-          }}
           onClick={toggleDrawer(true)}>
           {buttonDisplay}
         </ButtonRadial>
       ) : (
         <ButtonSquare
-          style={{
-            backgroundColor: colors[theme].backgroundColor,
-            color: colors[theme].primaryColor,
-          }}
           onClick={toggleDrawer(true)}>
           {buttonDisplay}
         </ButtonSquare>
@@ -128,10 +118,10 @@ export const Drawer = ({
     </>
   );
 
-  const toggleDrawerDisplay = React.useCallback(() => {
-    setShow(!show);
-    setSettings({ ...otherSettings, allowSwipeNavigation: show });
-  }, [show]);
+  const toggleDrawerDisplay = React.useCallback(
+    () => toggleDrawer(!show)({ type: 'hotkey' }),
+    [show],
+  );
 
   const handlers: any = hotKeyHandler
     ? {

@@ -6,7 +6,6 @@ import {
   faArrowUp,
   faArrowDown,
 } from '@fortawesome/free-solid-svg-icons';
-import { Emoji } from 'Components/Emoji';
 
 import { ButtonRadial } from 'Components/Button/Radial';
 import { useMedia } from 'Hooks/UseMedia';
@@ -24,6 +23,49 @@ const buttonVariants = {
   },
   exit: {
     opacity: 0,
+  },
+};
+
+/* square HUD skin; tooltip fill comes from .hud-panel so the chamfer shows */
+const joyrideStyles = {
+  options: {
+    arrowColor: 'var(--line)',
+    overlayColor: 'rgba(7, 4, 15, 0.72)',
+    primaryColor: 'var(--cyan)',
+    spotlightShadow: 'none',
+    textColor: 'var(--text)',
+    zIndex: 1000,
+  },
+  tooltip: {
+    backgroundColor: 'transparent',
+    borderRadius: 0,
+    fontFamily: 'var(--font-mono)',
+    fontSize: 15,
+    padding: 20,
+  },
+  tooltipContainer: { textAlign: 'left' as const },
+  tooltipContent: { padding: '4px 24px 0 0' },
+  buttonNext: {
+    borderRadius: 0,
+    color: 'var(--background-color)',
+    fontFamily: 'var(--font-mono)',
+    fontSize: 13,
+    letterSpacing: '0.08em',
+    textTransform: 'uppercase' as const,
+    padding: '10px 14px',
+  },
+  buttonBack: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: 13,
+    letterSpacing: '0.08em',
+    textTransform: 'uppercase' as const,
+  },
+  spotlight: { borderRadius: 0 },
+  beaconInner: { borderRadius: 0 },
+  beaconOuter: {
+    borderRadius: 0,
+    backgroundColor: 'transparent',
+    border: '2px solid var(--cyan)',
   },
 };
 
@@ -48,154 +90,51 @@ export const Tour = ({ t, getHelpers = () => {} }: any) => {
     [tour],
   );
 
-  const navigationStep = {
-    target: '.navigation-container',
-    content: (
-      <React.Fragment>
-        <div className={`text-left`}>
-          <div>
-            <span>{t(`NAVIGATE_USING`)} &nbsp;</span>
-            <span>
-              <Emoji emoji={`🖱️`} /> ? &nbsp;
-            </span>
-            <span>
-              <Emoji emoji={`😴`} />
-            </span>
-          </div>
-          <div>
-            <div>
-              <span>{t(`INSTEAD_YOU_CAN_USE_KEYBOARD`)} &nbsp;</span>
-              <kbd>
-                <FontAwesomeIcon icon={faArrowUp} />
-              </kbd>
-              &nbsp;
-              <kbd>
-                <FontAwesomeIcon icon={faArrowDown} />
-              </kbd>
-            </div>
-            <div>{t(`OR_SWIPE_FOR_TOUCH_DEVICES`)}</div>
-          </div>
-          <div className={`mt-3`}>
-            <span className={`help-block`}>
-              <small>{t(`LET_ME_TELL_YOU_A_SECRET`)} &nbsp;</small>
-              <small>
-                <strong>{t(`3`)}</strong> &nbsp;
-              </small>
-              <small>{t(`MORE_ROUTES_TO_EXPLORE`)}</small>
-            </span>
-          </div>
-        </div>
-      </React.Fragment>
-    ),
-  };
+  const step = (target: string, content: React.ReactNode) => ({
+    target,
+    content: <div className={`tour-step`}>{content}</div>,
+  });
 
-  const languageStep = {
-    target: '.language-picker-container',
-    content: (
-      <React.Fragment>
-        <div className={`text-left`}>
-          <div>
-            <span>{t(`CHANGE_LANGUAGE`)}! &nbsp;</span>
-            <span>
-              <Emoji emoji={`🌐`} />
-            </span>
-          </div>
-        </div>
-      </React.Fragment>
-    ),
-  };
-
-  const socialStep = {
-    target: '.social-picker-container',
-    content: (
-      <React.Fragment>
-        <div className={`text-left`}>
-          <div>{t(`GO_TO_MY_SOCIAL_WEBSITES`)}</div>
-          <div>
-            <span>{t(`DONT_FORGET_TO_COME_BACK`)}! &nbsp;</span>
-            <span>
-              <Emoji emoji={`😭`} />
-            </span>
-          </div>
-        </div>
-      </React.Fragment>
-    ),
-  };
-
-  const volumeStep = {
-    target: '.volume-control-container',
-    content: (
-      <React.Fragment>
-        <div className={`text-left`}>
-          <div>
-            <span>{t(`TOGGLES_NAVIGATION_SOUND_ONLY`)} ! &nbsp;</span>
-            <span>
-              <Emoji emoji={`🔊`} />
-            </span>
-          </div>
-        </div>
-      </React.Fragment>
-    ),
-  };
-
-  const hotKeysStep = {
-    target: '.hot-keys-help-container',
-    content: (
-      <React.Fragment>
-        <div className={`text-left`}>
-          <div>
-            <span>{t(`SHOWS_ALL_THE_KEYBOARD_SHORTCUTS`)} &nbsp;</span>
-            <span>
-              <Emoji emoji={`⌨️`} />
-            </span>
-          </div>
-        </div>
-      </React.Fragment>
-    ),
-  };
-
-  const audioStep = {
-    target: '.audio-player-container',
-    content: (
-      <React.Fragment>
-        <div className={`text-left`}>
-          <div>
-            <span>{t(`PLAY_THE_AUDIO`)} &nbsp;</span>
-            <span>
-              <Emoji emoji={`🎶`} />
-            </span>
-          </div>
-          <div>{t(`ENVIRONMENT_REACTS_TO_IT`)}</div>
-          <div>
-            <span>{t(`IF_YOU_LOOK_CLOSELY_INTO_IT`)} &nbsp;</span>
-            <span>
-              <Emoji emoji={`😉`} />
-            </span>
-          </div>
-        </div>
-      </React.Fragment>
-    ),
-  };
-
-  const themeStep = {
-    target: '.theme-picker-container',
-    content: (
-      <React.Fragment>
-        <div className={`text-left`}>
-          <div>
-            <span>{t(`CHOOSE_YOUR_THEME`)} &nbsp;</span>
-            <span>
-              <Emoji emoji={`☀️`} /> &nbsp;
-            </span>
-            <span>{t(`OR`)} &nbsp;</span>
-            <span>
-              <Emoji emoji={`🌙`} /> &nbsp;
-            </span>
-          </div>
-        </div>
-      </React.Fragment>
-    ),
-  };
+  const navigationStep = step(
+    '.navigation-container',
+    <>
+      <div>
+        {t(`NAVIGATE_USING`)}&nbsp;
+        <kbd>
+          <FontAwesomeIcon icon={faArrowUp} />
+        </kbd>
+        &nbsp;
+        <kbd>
+          <FontAwesomeIcon icon={faArrowDown} />
+        </kbd>
+      </div>
+      <div>{t(`OR_SWIPE_FOR_TOUCH_DEVICES`)}</div>
+      <div className={`tour-step-note`}>
+        {t(`3`)} {t(`MORE_ROUTES_TO_EXPLORE`)}
+      </div>
+    </>,
+  );
+  const languageStep = step(
+    '.language-picker-container',
+    t(`CHANGE_LANGUAGE`),
+  );
+  const socialStep = step(
+    '.social-picker-container',
+    t(`GO_TO_MY_SOCIAL_WEBSITES`),
+  );
+  const volumeStep = step(
+    '.volume-control-container',
+    t(`TOGGLES_NAVIGATION_SOUND_ONLY`),
+  );
+  const hotKeysStep = step(
+    '.hot-keys-help-container',
+    t(`SHOWS_ALL_THE_KEYBOARD_SHORTCUTS`),
+  );
+  const audioStep = step(
+    '.audio-player-container',
+    t(`ENVIRONMENT_REACTS_TO_IT`),
+  );
+  const themeStep = step('.theme-picker-container', t(`CHOOSE_YOUR_THEME`));
 
   const steps = [
     navigationStep,
@@ -241,6 +180,7 @@ export const Tour = ({ t, getHelpers = () => {} }: any) => {
             continuous={true}
             disableScrolling={true}
             steps={steps}
+            styles={joyrideStyles}
           />
         </div>
       )}

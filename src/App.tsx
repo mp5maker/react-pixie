@@ -128,24 +128,19 @@ export const App = () => {
   const themeDependentMemo = React.useMemo(() => {
     return (
       <>
-        <SocialPicker colors={Colors} theme={theme} />
-        <ShowKeyCombo colors={Colors} theme={theme} />
-        <Footer colors={Colors} theme={theme} />
+        <ShowKeyCombo />
+        <Footer />
       </>
     );
-  }, [theme]);
+  }, []);
 
   const musicCreditMemo = React.useMemo(() => {
     return (
       <>
-        <MusicCredit
-          isPlaying={musicSettings.isPlaying}
-          theme={theme}
-          colors={Colors}
-        />
+        <MusicCredit isPlaying={musicSettings.isPlaying} />
       </>
     );
-  }, [musicSettings.isPlaying, theme]);
+  }, [musicSettings.isPlaying]);
 
   const settingsSliderMemo = React.useMemo(() => {
     return (
@@ -241,7 +236,7 @@ export const App = () => {
         </div>
       </>
     );
-  }, [theme]);
+  }, [theme, i18n.language]);
 
   return (
     <AppContext.Provider value={{ theme, setTheme }}>
@@ -249,15 +244,15 @@ export const App = () => {
         <MusicContext.Provider value={{ setMusicSettings, ...musicSettings }}>
           {/* // @ts-ignore */}
           <GlobalHotKeys allowChanges={true} keyMap={HotKeyMap}>
-            <main
-              style={{
-                // @ts-ignore
-                backgroundColor: Colors[theme].backgroundColor,
-                // @ts-ignore
-                color: Colors[theme].primaryColor,
-              }}
-              className="container-fluid">
-              <Router history={history}>
+            <Router history={history}>
+              <main
+                style={{
+                  // @ts-ignore
+                  backgroundColor: Colors[theme].backgroundColor,
+                  // @ts-ignore
+                  color: Colors[theme].primaryColor,
+                }}
+                className="container-fluid">
                 <React.Suspense fallback={fallbackMemo}>
                   <Route
                     render={({ location }) => {
@@ -309,20 +304,29 @@ export const App = () => {
                     }}
                   />
                 </React.Suspense>
-                <Navigation history={history} />
-              </Router>
-            </main>
-            {themePickerMemo}
-            {languagePickerMemo}
+              </main>
+              {/* outside <main>: the 404 smooth scroll transforms main, which would drag fixed children */}
+              <Navigation history={history} />
+            </Router>
+            <aside className="hud-panel hud-dock hud-dock-top">
+              {languagePickerMemo}
+              <SocialPicker />
+              <div className="hud-dock-row">
+                <ScreenCapture t={t} />
+                <Tour t={t} />
+              </div>
+            </aside>
+            <aside className="hud-panel hud-dock hud-dock-bottom">
+              {audioPlayerMemo}
+              <VolumeControl t={t} />
+              {themePickerMemo}
+            </aside>
             {settingsSliderMemo}
-            {audioPlayerMemo}
             {musicCreditMemo}
             {themeDependentMemo}
             {loaderMemo}
-            <ScreenCapture t={t} />
-            <VolumeControl t={t} />
-            <Tour t={t} />
             <HotKeysHelp colors={Colors} theme={theme} />
+            <div className="hud-hazard" aria-hidden="true" />
           </GlobalHotKeys>
         </MusicContext.Provider>
       </SettingsContext.Provider>

@@ -1,84 +1,57 @@
 .navigation-container {
-    position: absolute;
-    top: 25px;
+    position: fixed;
+    /* clears the SPK mark above it */
+    top: 36px;
     left: 25px;
-    .navigation-content {
-        position: relative;
-        .navigation-circle {
-            position: absolute;
-            top: -70px;
-            left: -70px;
-            background-color: var(--primary-color);
-            border-radius: 50%;
-            display: block;
-            width: 100px;
-            height: 100px;
-            transition: transform 0.25s ease-in-out;
-            opacity: 0.3;
-            transform: scale(4);
-        }
-        &:hover {
-            .navigation-circle {
-                transform: scale(5);
-                transition: transform 0.25s ease-in-out;
-            }
-        }
-        .navigation-list {
-            list-style-type: none;
-            padding-left: 0;
-            position: relative;
-            &::before {
-                content: "";
-                position: absolute;
-                display: block;
-                top: 0;
-                left: -12px;
-                width: 1px;
-                background-color: var(--primary-color);
-                height: 100%;
-            }
-            .navigation-item {
-                position: relative;
-                display: block;
-                font-size: 24px;
-                font-weight: normal;
-                text-decoration: none;
-                transition: all ease-in-out 0.25s;
-                transform: scale(1);
-                text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-                &.active {
-                    &::before {
-                        content: "";
-                        position: absolute;
-                        display: block;
-                        top: 0;
-                        left: -12px;
-                        width: 1px;
-                        background-color: var(--background-color);
-                        height: 40px;
-                    }
-                }
+    z-index: 2;
+    padding: 14px 20px 14px 14px;
+    .navigation-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        .navigation-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 36px;
+            padding-left: 12px;
+            border-left: 2px solid transparent;
+            font-size: 15px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            /* muted fails 4.5:1 on panel at this size */
+            color: var(--text);
+            transition: color 150ms var(--ease-out), border-color 150ms var(--ease-out);
+            @media (hover: hover) {
                 &:hover {
-                    color: var(--secondary-color) !important;
-                    transition: all ease-in-out 0.25s;
-                    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+                    color: var(--cyan);
                 }
-                svg {
+            }
+            &.active {
+                color: var(--cyan);
+                border-left-color: var(--cyan);
+            }
+            svg {
+                display: none;
+            }
+            &.active svg {
+                display: inline-block;
+            }
+            @media only screen and (max-width: 359px) {
+                &.active svg {
                     display: none;
                 }
-                &.active {
-                    svg {
-                        display: inline-block;
-                    }
-                }
-                @media only screen and (max-width: 359px) {
-                    &.active {
-                        svg {
-                            display: none;
-                        }
-                    }
-                }
             }
+        }
+    }
+    @media (max-width: 767px) {
+        top: 32px;
+        left: 16px;
+        padding: 10px 14px 10px 10px;
+        .navigation-list .navigation-item {
+            min-height: 32px;
+            font-size: 13px;
         }
     }
 }

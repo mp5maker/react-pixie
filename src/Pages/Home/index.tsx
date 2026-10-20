@@ -41,7 +41,7 @@ export const Home = ({ history, location, match }: any) => {
           <AnimeThreeJSHome history={history} theme={theme} colors={Colors} />
         </div>
       </div>
-      <MyNameSvg colors={Colors} theme={theme} />
+      <MyNameSvg />
       <MouseDetector width={50} height={71.3} colors={Colors} theme={theme} />
     </motion.div>
   );

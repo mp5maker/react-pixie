@@ -1,13 +1,6 @@
 .theme-picker-container {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
     .theme-picker-content {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        button {
-            margin-left: 12px;
-        }
+        gap: 8px;
     }
 }

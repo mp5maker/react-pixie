@@ -1,29 +1,28 @@
+/* Data cards: square, line stroke, magenta accent edge, cyan title */
 .cards-container {
-    position: relative;
     .card-list-container {
-        position: relative;
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        align-items: center;
-        perspective: 1000px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
         .card-item-container {
-            margin: 24px;
-            padding: 12px;
-            box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.2);
-            color: var(--primary-color);
-            border-radius: 5px;
-            background-color: var(--background-color);
-            transform: scale(1);
-            transition: transform 0.25s ease-in-out;
-            transform-style: preserve-3d;
-            transform: rotateY(5deg);
-            &:hover {
-                transform: scale(0.98);
-                transition: transform 0.25s ease-in-out;
+            padding: 16px;
+            border: 1px solid var(--line);
+            border-left: 2px solid var(--magenta);
+            background-color: var(--panel);
+            color: var(--text);
+            font-size: 14px;
+            h5 {
+                margin: 0;
+                font-family: var(--font-mono);
+                font-size: 15px;
+                color: var(--cyan);
+            }
+            hr {
+                margin: 12px 0;
+                border-top: 1px solid var(--line);
             }
             .space-more {
-                margin-top: 100px;
+                color: var(--magenta);
             }
         }
     }

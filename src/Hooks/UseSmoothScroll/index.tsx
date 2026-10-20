@@ -36,7 +36,7 @@ export const useSmoothScroll = ({ selector = 'main' }: any) => {
 
       main.style.transform = `translate(-${dx}px, -${dy}px)`;
 
-      window.requestAnimationFrame(animate);
+      animationFrame = window.requestAnimationFrame(animate);
     };
 
     animationFrame = window.requestAnimationFrame(animate);
@@ -44,6 +44,9 @@ export const useSmoothScroll = ({ selector = 'main' }: any) => {
     return () => {
       animationFrame && window.cancelAnimationFrame(animationFrame);
       window.removeEventListener('scroll', onWindowScroll);
+      main.style.transform = '';
+      main.style.top = '';
+      main.style.left = '';
       main.style.position = currentMainStylePosition;
       body.style.height = currentBodyStyleHeight;
       body.style.position = currentBodyStylePosition;

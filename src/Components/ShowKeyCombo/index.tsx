@@ -11,7 +11,7 @@ import { useKeyboard } from 'Hooks/UseKeyboard';
 import { useMedia } from 'Hooks/UseMedia';
 import './styles.scss';
 
-export const ShowKeyCombo = ({ colors, theme }: any) => {
+export const ShowKeyCombo = () => {
   const isOnlyTouchDevice = useMedia({ query: `(pointer: coarse)` });
   const { keyValue } = useKeyboard({ allow: !isOnlyTouchDevice });
   const isArrowUp = keyValue === 'ArrowUp' ? true : false;
@@ -25,11 +25,7 @@ export const ShowKeyCombo = ({ colors, theme }: any) => {
   currentIcon = isArrowRight ? faArrowRight : currentIcon;
 
   return keyValue ? (
-    <div
-      style={{
-        color: colors[theme].primaryColor,
-      }}
-      className="show-key-combo-container">
+    <div className="show-key-combo-container">
       {isArrowUp || isArrowDown || isArrowLeft || isArrowRight ? (
         <React.Fragment>
           <kbd>
