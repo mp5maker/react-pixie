@@ -1,87 +1,93 @@
-import head from 'lodash/head';
 import * as React from 'react';
-import { useFrame, useThree } from 'react-three-fiber';
+import { useFrame } from 'react-three-fiber';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-import { useDimension } from 'Hooks/UseDimension';
-import { RandomRange } from 'Utilities/RandomRange';
+import { blend } from 'Components/Anime/ThreeJS/Ruins';
 
-let mixers: Array<any> = [];
-let animations: Array<any> = [];
-let meshes: Array<any> = [];
-export const Bird = ({ colors }: any) => {
-  const { scene } = useThree();
-  const loader = React.useRef(new GLTFLoader()).current;
-  const { width, height } = useDimension();
+const random = (min: number, max: number) => min + Math.random() * (max - min);
+const SPECIES = ['/AnimationModel/Flamingo.glb', '/AnimationModel/Parrot.glb'];
 
-  useFrame((state, delta: any) => {
-    if (Array.isArray(mixers) && mixers.length > 0) {
-      mixers.forEach(mixer => {
-        mixer.update(delta);
-      });
-    }
-    if (Array.isArray(meshes) && meshes.length > 0) {
-      meshes.forEach(mesh => {
-        mesh.position.y += RandomRange({ min: 0.1, max: 0.5 });
-        mesh.position.z -= RandomRange({ min: 0.1, max: 0.5 });
-        mesh.position.x += RandomRange({ min: 0.1, max: 0.2 });
-        if (
-          mesh.position.y > height / 2 + 300 ||
-          mesh.position.x > width / 2 + 300
-        ) {
-          mesh.position.y = RandomRange({ min: -200, max: 100 });
-          mesh.position.x = RandomRange({
-            min: -(width / 2) - 800,
-            max: -(width / 2),
-          });
-          mesh.position.z = RandomRange({ min: -5, max: 5 });
-        }
-      });
-    }
-  });
-
-  const onSuccessLoad = React.useCallback(({ gltf, name }: any) => {
-    const mesh = gltf.scene;
-    mesh.castShadow = true;
-    mesh.rotation.set(0, -Math.PI, 0);
-    mesh.position.y = RandomRange({ min: -200, max: 100 });
-    mesh.position.x = RandomRange({
-      min: -(width / 2) - 800,
-      max: -(width / 2),
-    });
-    mesh.position.z = RandomRange({ min: -5, max: 5 });
-    mesh.name = name;
-    meshes = [...meshes, mesh];
-    scene.add(mesh);
-
-    /* Animations */
-    let gltfAnimations = gltf.animations;
-    animations = [...animations, [gltfAnimations]];
-
-    /* Animation Mixer */
-    let animationMixer: any = new THREE.AnimationMixer(mesh);
-    mixers = [...mixers, animationMixer];
-
-    /* Flying */
-    let flying: any = animationMixer.clipAction(head(gltfAnimations));
-    flying.enabled = true;
-    flying.setEffectiveTimeScale(1);
-    flying.setEffectiveWeight(1);
-
-    /* Actions */
-    const actions = [flying];
-    actions.forEach((action: any) => action.play());
-  }, []);
+/* the last birds are surveillance holograms now: wireframe, flickering, looping the drowned towers */
+export const Bird = ({ colors, dark, phone, still }: any) => {
+  const group: any = React.useRef();
+  const flock = React.useRef<any[]>([]);
+  const materials = React.useMemo(
+    () =>
+      [colors.infoColor, colors.dangerColor].map(
+        color =>
+          new THREE.MeshBasicMaterial({
+            color,
+            wireframe: true,
+            morphTargets: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: blend(dark),
+            depthWrite: false,
+          }),
+      ),
+    [colors, dark],
+  );
 
   React.useEffect(() => {
-    loader.load('/AnimationModel/Flamingo.glb', gltf =>
-      onSuccessLoad({ gltf, name: `flamingo` }),
+    let live = true;
+    const loader = new GLTFLoader();
+    const count = phone ? 3 : 5;
+    SPECIES.forEach((url, species) =>
+      loader.load(url, gltf => {
+        if (!live || !group.current) return;
+        for (let index = species; index < count; index += SPECIES.length) {
+          const model = gltf.scene.clone();
+          model.traverse((child: any) => {
+            if (child.isMesh) child.material = materials[species];
+          });
+          model.scale.setScalar(0.14);
+          const mixer = new THREE.AnimationMixer(model);
+          mixer.clipAction(gltf.animations[0]).setDuration(random(0.9, 1.3)).play();
+          group.current.add(model);
+          flock.current.push({
+            model,
+            mixer,
+            /* each bird flies its own lazy figure-eight over the water */
+            radius: random(110, 190),
+            height: random(60, 130),
+            speed: random(0.05, 0.08) * (index % 2 ? 1 : -1),
+            phase: random(0, Math.PI * 2),
+          });
+        }
+      }),
     );
-    loader.load('/AnimationModel/Parrot.glb', gltf =>
-      onSuccessLoad({ gltf, name: `parrot` }),
-    );
-  }, []);
+    return () => {
+      live = false;
+      flock.current.forEach(({ model, mixer }) => {
+        mixer.stopAllAction();
+        mixer.uncacheRoot(model);
+        if (group.current) group.current.remove(model);
+      });
+      flock.current = [];
+    };
+  }, [materials, phone]);
 
-  return <></>;
+  React.useEffect(() => () => materials.forEach(material => material.dispose()), [materials]);
+
+  useFrame(({ clock }, rawDelta) => {
+    const delta = still ? 0 : Math.min(rawDelta, 0.1);
+    const t = still ? 0 : clock.elapsedTime;
+    /* a hologram drops out now and then */
+    const glitch = !still && Math.sin(t * 3.1) + Math.sin(t * 7.7) > 1.7;
+    materials.forEach(material => (material.opacity = glitch ? random(0.1, 0.5) : 0.8));
+    flock.current.forEach(({ model, mixer, radius, height, speed, phase }) => {
+      mixer.update(delta);
+      const angle = phase + t * speed;
+      const x = Math.sin(angle) * radius;
+      const z = -160 + Math.sin(angle * 2) * radius * 0.45;
+      const y = height + Math.sin(angle * 3) * 12;
+      const dx = Math.cos(angle) * radius * speed;
+      const dz = Math.cos(angle * 2) * radius * 0.9 * speed;
+      model.position.set(x, y, z);
+      model.rotation.set(0, Math.atan2(dx, dz), -Math.sign(speed) * Math.sin(angle * 2) * 0.35, 'YXZ');
+    });
+  });
+
+  return <group ref={group} />;
 };

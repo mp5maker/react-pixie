@@ -35,7 +35,7 @@ export const MyNameSvg = () => {
       <p className={`hero-sub`}>{t(`HUD_SUBTITLE`)}</p>
 
       <div className={`hero-term`}>
-        <img src="/ok.png" alt={t(`HUD_NAME`)} width={72} height={72} />
+        <img src="/avatar.jpg" alt={t(`HUD_NAME`)} width={72} height={72} />
         {/* keyed by language: switching replays the readout */}
         <ol key={i18n.language}>
           {TERMINAL.map(([prompt, key], index) => (

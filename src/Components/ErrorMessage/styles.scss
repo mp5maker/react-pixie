@@ -47,4 +47,16 @@
             font-size: 80px;
         }
     }
+    /* phone landscape: clear the hotkeys button and bottom dock */
+    @media (max-height: 500px) and (orientation: landscape) {
+        align-items: flex-start;
+        padding-top: 32px;
+        .error-message-content {
+            width: min(360px, 100%);
+            padding: 16px 20px 20px;
+        }
+        .error-code {
+            font-size: 72px;
+        }
+    }
 }

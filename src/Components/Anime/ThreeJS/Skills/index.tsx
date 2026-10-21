@@ -8,7 +8,7 @@ const NONE = { x: 0, y: 0, z: 0 };
 const scale = (value: number) => ({ x: value, y: value, z: value });
 
 /* now: current solutions work, drawn in cyan; the rest is the full stack years */
-const LOGOS = [
+export const LOGOS = [
   {
     name: 'react',
     position: { x: -80, y: 100, z: -400 },
@@ -125,45 +125,41 @@ export const Skills = ({ colors }: any) => {
 
   const onSuccessLoad = ({
     data,
-    color,
+    material,
     position,
     scale,
     rotation,
     clockwise = false,
   }: any) => {
-    let group: any;
-    let paths = data.paths;
-    group = new THREE.Group();
-
-    for (let i = 0; i < paths.length; i++) {
-      let path = paths[i];
-      let material = new THREE.MeshStandardMaterial({
-        color,
-        side: THREE.DoubleSide,
-        depthWrite: false,
-        metalness: 0,
-        roughness: 0,
-      });
-
-      let shapes = path.toShapes(!clockwise);
-      for (let j = 0; j < shapes.length; j++) {
-        let shape = shapes[j];
-        let geometry = new THREE.ShapeBufferGeometry(shape);
-        let mesh = new THREE.Mesh(geometry, material);
-        group.add(mesh);
-      }
-      group.scale.set(scale.x, scale.y, scale.z);
-      group.rotation.set(rotation.x, rotation.y, rotation.z);
-      group.position.set(position.x, position.y, position.z);
-      scene.add(group);
-    }
-
+    const group = new THREE.Group();
+    data.paths.forEach((path: any) =>
+      path
+        .toShapes(!clockwise)
+        .forEach((shape: any) =>
+          group.add(new THREE.Mesh(new THREE.ShapeBufferGeometry(shape), material)),
+        ),
+    );
+    group.scale.set(scale.x, scale.y, scale.z);
+    group.rotation.set(rotation.x, rotation.y, rotation.z);
+    group.position.set(position.x, position.y, position.z);
+    scene.add(group);
     return group;
   };
 
   React.useEffect(() => {
     const groups: any[] = [];
     let unmounted = false;
+    /* two looks for every logo: current stack and past stack */
+    const [current, past] = [colors.infoColor, colors.secondaryColor].map(
+      color =>
+        new THREE.MeshStandardMaterial({
+          color,
+          side: THREE.DoubleSide,
+          depthWrite: false,
+          metalness: 0,
+          roughness: 0,
+        }),
+    );
     LOGOS.forEach(({ name, now, ...placement }) =>
       loader.load(`/Skills/${name}.svg`, data => {
         /* a slow load can land after the scene is gone */
@@ -171,7 +167,7 @@ export const Skills = ({ colors }: any) => {
         groups.push(
           onSuccessLoad({
             data,
-            color: now ? colors.infoColor : colors.secondaryColor,
+            material: now ? current : past,
             ...placement,
           }),
         );
@@ -180,7 +176,12 @@ export const Skills = ({ colors }: any) => {
 
     return () => {
       unmounted = true;
-      groups.forEach(group => scene.remove(group));
+      groups.forEach(group => {
+        scene.remove(group);
+        group.children.forEach((mesh: any) => mesh.geometry.dispose());
+      });
+      current.dispose();
+      past.dispose();
     };
   }, []);
 

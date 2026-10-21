@@ -1,104 +1,63 @@
 import * as React from 'react';
-import * as THREE from 'three';
 import { Canvas } from 'react-three-fiber';
-import { Physics, usePlane, useBox } from 'use-cannon';
+import { Physics } from 'use-cannon';
 
+import { SettingsContext } from 'SettingsContext';
+import { Debris } from 'Components/Anime/ThreeJS/Debris';
+import { EntryCaption, Rig, entryKind } from 'Components/Anime/ThreeJS/Entrance';
+import { Ruins, Sky, city, isDark } from 'Components/Anime/ThreeJS/Ruins';
+import { UnrealBloom } from 'Components/Anime/ThreeJS/UnrealBloom';
 import { useDimension } from 'Hooks/UseDimension';
+import { useLockScroll } from 'Hooks/UseLockScroll';
 import { useMedia } from 'Hooks/UseMedia';
+import { useSceneColors } from 'Hooks/UseSceneColors';
 
-const Plane = ({ colors, ...props }: any) => {
-  const [ref] = usePlane(() => ({ rotation: [-Math.PI / 2, 0, 0], ...props }));
-
-  return (
-    <mesh ref={ref} receiveShadow>
-      <planeBufferGeometry attach={`geometry`} args={[1000, 1000]} />
-      <meshPhongMaterial attach={`material`} color={colors.backgroundColor} />
-    </mesh>
-  );
-};
-
-const Box = ({ colors, ...props }: any) => {
-  const [ref] = useBox(() => ({
-    mass: 1,
-    position: [0, 5, 0],
-    rotation: [0.4, 0.2, 0.5],
-    ...props,
-  }));
-  return (
-    <mesh receiveShadow castShadow ref={ref}>
-      <boxBufferGeometry attach={`geometry`} />
-      <meshLambertMaterial attach={`material`} color={colors.primaryColor} />
-    </mesh>
-  );
-};
-
-export const AnimeThreeJSPhysics = ({ colors, theme, history }: any) => {
+export const AnimeThreeJSPhysics = ({ colors, theme }: any) => {
+  const { bloom }: any = React.useContext(SettingsContext);
   const { width, height } = useDimension();
   const isMediaGreaterThan771px = useMedia({ query: `(min-width: 771px)` });
+  const still = useMedia({ query: `(prefers-reduced-motion: reduce)` });
+  const phone = !isMediaGreaterThan771px;
+  /* read once on arrival: the shot depends on the page we came from */
+  const entry = React.useRef({ kind: entryKind('physics'), p: 0, t: 0 }).current;
+  useLockScroll(isMediaGreaterThan771px);
 
-  React.useEffect(() => {
-    const body: any = document.querySelector('body');
-    if (isMediaGreaterThan771px) {
-      body.style.setProperty('overflow', 'hidden', 'important');
-      body.style.setProperty('position', 'fixed', 'important');
-    } else {
-      body.style.setProperty('position', 'fixed', '');
-    }
-    return () => {
-      body.style.setProperty('overflow', 'hidden', '');
-      body.style.setProperty('position', 'fixed', '');
-    };
-  }, [isMediaGreaterThan771px]);
-
-  /* Colors */
-  const COLORS = {
-    primaryColor: new THREE.Color(colors[theme].primaryColor),
-    backgroundColor: new THREE.Color(colors[theme].backgroundColor),
-    secondaryColor: new THREE.Color(colors[theme].secondaryColor),
-    infoColor: new THREE.Color(colors[theme].infoColor),
-    dangerColor: new THREE.Color(colors[theme].dangerColor),
-    warningColor: new THREE.Color(colors[theme].warningColor),
-    successColor: new THREE.Color(colors[theme].successColor),
-    fogColor: new THREE.Color(colors[theme].fogColor),
-  };
-
-  const memoContent = React.useMemo(() => {
-    return (
-      <>
-        <color
-          attach="background"
-          // @ts-ignore
-          args={[colors[theme].backgroundColor]}
-        />
-        <hemisphereLight color={COLORS.primaryColor} intensity={0.1} />
-        <spotLight
-          color={COLORS.primaryColor}
-          position={[10, 10, 10]}
-          angle={0.3}
-          penumbra={1}
-          intensity={1}
-          castShadow
-        />
-        <Physics>
-          <Plane colors={COLORS} />
-          <Box colors={COLORS} />
-          <Box colors={COLORS} position={[0, 10, -2]} />
-          <Box colors={COLORS} position={[0, 20, -2]} />
-        </Physics>
-      </>
-    );
-  }, [theme]);
+  const COLORS = useSceneColors(colors, theme);
+  const dark = isDark(COLORS);
+  /* the /bird skyline, smaller and pushed back behind the falling towers */
+  const plan = React.useMemo(
+    () => city({ count: phone ? 50 : 90, sunk: true, colors: COLORS }),
+    [COLORS, phone],
+  );
 
   return (
     <div style={{ width, height }}>
       <Canvas
         style={{ width, height }}
-        shadowMap={true}
-        sRGB={true}
-        camera={{ position: [-1, 2, 5], fov: 50 }}
-        pixelRatio={window.devicePixelRatio || 1}>
-        {memoContent}
+        camera={{
+          fov: 50,
+          near: 1,
+          far: 4000,
+          position: [-8, 34, 100],
+        }}
+        pixelRatio={Math.min(window.devicePixelRatio || 1, 2)}>
+        <Sky color={COLORS.backgroundColor} density={0.0014} />
+        <Rig world="physics" entry={entry} phone={phone} still={still} />
+        <group position={[0, 0, -220]}>
+          <Ruins plan={plan} colors={COLORS} dark={dark} entry={entry} still={still} />
+        </group>
+        {/* remounted on a reduced-motion change: the bodies are built once */}
+        <Physics
+          key={String(still)}
+          gravity={still ? [0, 0, 0] : [0, -40, 0]}
+          allowSleep={false}
+          iterations={phone ? 4 : 6}
+          defaultContactMaterial={{ friction: 0.2, restitution: 0.25 }}>
+          <Debris colors={COLORS} dark={dark} phone={phone} still={still} />
+        </Physics>
+        {bloom && <UnrealBloom />}
       </Canvas>
+      <EntryCaption kind={entry.kind} />
     </div>
   );
 };

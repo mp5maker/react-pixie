@@ -105,7 +105,8 @@ canvas {
   align-items: center;
 }
 
-@media (max-width: 767px) {
+/* phones in landscape get the compact docks too */
+@media (max-width: 767px), (max-height: 500px) and (orientation: landscape) {
   .hud-dock {
     right: 16px;
     padding: 10px;

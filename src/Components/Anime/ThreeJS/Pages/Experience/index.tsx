@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { Canvas } from 'react-three-fiber';
-import * as THREE from 'three';
 
 import { Box } from 'Components/Anime/ThreeJS/Box';
+import { EntryCaption, Rig, entryKind } from 'Components/Anime/ThreeJS/Entrance';
 import { OrbitControl } from 'Components/Anime/ThreeJS/OrbitControl';
 import { Skills } from 'Components/Anime/ThreeJS/Skills';
 import { Stars } from 'Components/Anime/ThreeJS/Stars';
 import * as Routes from 'Constants/Routes';
 import { useDimension } from 'Hooks/UseDimension';
+import { useLockScroll } from 'Hooks/UseLockScroll';
 import { useMedia } from 'Hooks/UseMedia';
+import { useSceneColors } from 'Hooks/UseSceneColors';
 import { MusicContext } from 'MusicContext';
 import { SettingsContext } from 'SettingsContext';
 
@@ -22,42 +24,32 @@ export const AnimeThreeJSExperience = ({ colors, theme, history }: any) => {
   const { frequency }: any = React.useContext(MusicContext);
   const { width, height } = useDimension();
   const isMediaGreaterThan771px = useMedia({ query: `(min-width: 771px)` });
+  const reduceMotion = useMedia({ query: `(prefers-reduced-motion: reduce)` });
+  /* the box crash already flew the camera here; any other way in gets its own shot */
+  const entry = React.useRef({
+    kind:
+      history.location.state && history.location.state.crashed
+        ? 'none'
+        : entryKind('experience'),
+    p: 0,
+    t: 0,
+  }).current;
+  /* the orbit controls take the camera only once the entry shot lands */
+  const [settled, setSettled] = React.useState(false);
+  const onSettle = React.useCallback(() => setSettled(true), []);
 
-  React.useEffect(() => {
-    const body: any = document.querySelector('body');
-    if (isMediaGreaterThan771px) {
-      body.style.setProperty('overflow', 'hidden', 'important');
-      body.style.setProperty('position', 'fixed', 'important');
-    } else {
-      body.style.setProperty('position', 'fixed', '');
-    }
-    return () => {
-      body.style.setProperty('overflow', 'hidden', '');
-      body.style.setProperty('position', 'fixed', '');
-    };
-  }, [isMediaGreaterThan771px]);
-
-  /* Colors */
-  const COLORS = {
-    primaryColor: new THREE.Color(colors[theme].primaryColor),
-    backgroundColor: new THREE.Color(colors[theme].backgroundColor),
-    secondaryColor: new THREE.Color(colors[theme].secondaryColor),
-    infoColor: new THREE.Color(colors[theme].infoColor),
-    dangerColor: new THREE.Color(colors[theme].dangerColor),
-    warningColor: new THREE.Color(colors[theme].warningColor),
-    successColor: new THREE.Color(colors[theme].successColor),
-    fogColor: new THREE.Color(colors[theme].fogColor),
-  };
+  useLockScroll(isMediaGreaterThan771px);
+  const COLORS = useSceneColors(colors, theme);
 
   const deviceSizeDependentMemo = React.useMemo(() => {
     return (
       <>
-        {isMediaGreaterThan771px && (
+        {isMediaGreaterThan771px && settled && (
           <OrbitControl minDistance={0} maxDistance={200} />
         )}
       </>
     );
-  }, [isMediaGreaterThan771px]);
+  }, [isMediaGreaterThan771px, settled]);
 
   const themeDeviceSizeDependentMemo = React.useMemo(() => {
     return isMediaGreaterThan771px ? (
@@ -98,38 +90,51 @@ export const AnimeThreeJSExperience = ({ colors, theme, history }: any) => {
         rotationX={rotationX}
         rotationY={rotationY}
         rotationZ={rotationZ}
-        redirectURL={Routes.ROOT}
+        redirectURL={{ pathname: Routes.ROOT, state: { reassemble: true } }}
         wireframe={true}
         colors={COLORS}
         position={[0, 0, -25]}
         history={history}
+        still={reduceMotion}
       />
     );
-  }, [theme, frequency, history, rotationX, rotationY, rotationZ]);
+  }, [theme, frequency, history, rotationX, rotationY, rotationZ, reduceMotion]);
 
   const accelerationThemeHistoryDependentMemo = React.useMemo(() => {
     return (
-      <Stars acceleration={acceleration} colors={COLORS} history={history} />
+      <Stars
+        acceleration={acceleration}
+        colors={COLORS}
+        count={isMediaGreaterThan771px ? 6000 : 2500}
+        still={reduceMotion}
+      />
     );
-  }, [theme, acceleration, history]);
+  }, [theme, acceleration, isMediaGreaterThan771px, reduceMotion]);
 
   return (
     <div style={{ width, height }}>
       <Canvas
         style={{ width, height }}
-        shadowMap={true}
         camera={{
           fov: 75,
           near: 1,
           far: 1000,
         }}
-        pixelRatio={window.devicePixelRatio || 1}>
+        pixelRatio={Math.min(window.devicePixelRatio || 1, 2)}>
+        <Rig
+          world="experience"
+          entry={entry}
+          phone={!isMediaGreaterThan771px}
+          still={reduceMotion}
+          onSettle={onSettle}
+        />
         {deviceSizeDependentMemo}
         {themeDependentMemo}
         {themeDeviceSizeDependentMemo}
         {rotationFrequencyThemeHistoryDependentMemo}
         {accelerationThemeHistoryDependentMemo}
       </Canvas>
+      <EntryCaption kind={entry.kind} top={true} />
     </div>
   );
 };

@@ -1,14 +1,17 @@
 import * as React from 'react';
-import * as THREE from 'three';
 import { Canvas } from 'react-three-fiber';
 
 import { SettingsContext } from 'SettingsContext';
 import { Stars } from 'Components/Anime/ThreeJS/Stars';
 import { useDimension } from 'Hooks/UseDimension';
+import { useMedia } from 'Hooks/UseMedia';
+import { useSceneColors } from 'Hooks/UseSceneColors';
 
-export const AnimeThreeJSError = ({ colors, theme, history }: any) => {
+export const AnimeThreeJSError = ({ colors, theme }: any) => {
   const { acceleration }: any = React.useContext(SettingsContext);
   const { width, height } = useDimension();
+  const isMediaGreaterThan771px = useMedia({ query: `(min-width: 771px)` });
+  const reduceMotion = useMedia({ query: `(prefers-reduced-motion: reduce)` });
 
   React.useEffect(() => {
     const body: any = document.querySelector('body');
@@ -20,64 +23,26 @@ export const AnimeThreeJSError = ({ colors, theme, history }: any) => {
     };
   }, []);
 
-  /* Colors */
-  const COLORS = {
-    primaryColor: new THREE.Color(colors[theme].primaryColor),
-    backgroundColor: new THREE.Color(colors[theme].backgroundColor),
-    secondaryColor: new THREE.Color(colors[theme].secondaryColor),
-    infoColor: new THREE.Color(colors[theme].infoColor),
-    dangerColor: new THREE.Color(colors[theme].dangerColor),
-    warningColor: new THREE.Color(colors[theme].warningColor),
-    successColor: new THREE.Color(colors[theme].successColor),
-    fogColor: new THREE.Color(colors[theme].fogColor),
-  };
+  const COLORS = useSceneColors(colors, theme);
 
-  const memoLights = React.useMemo(() => {
-    return (
-      <>
-        <ambientLight
-          color={COLORS.primaryColor}
-          intensity={1}
-          position={[0, 0, 0]}
-        />
-        <pointLight
-          color={COLORS.primaryColor}
-          intensity={10}
-          position={[0, 0, 0]}
-          distance={5000}
-          decay={500}
-        />
-        <ambientLight
-          color={COLORS.primaryColor}
-          intensity={0.1}
-          position={[0, 0, 0]}
-        />
-      </>
-    );
-  }, [theme]);
-
-  const memoStars = React.useMemo(() => {
-    return (
-      <>
-        <Stars acceleration={acceleration} colors={COLORS} history={history} />
-      </>
-    );
-  }, [acceleration, theme, history]);
-
+  /* the stars are unlit points: no lights or shadows to pay for */
   return (
     <div style={{ width, height }}>
       <Canvas
         style={{ width, height }}
-        shadowMap={true}
         sRGB={true}
         camera={{
           fov: 75,
           near: 1,
           far: 1000,
         }}
-        pixelRatio={window.devicePixelRatio || 1}>
-        {memoLights}
-        {memoStars}
+        pixelRatio={Math.min(window.devicePixelRatio || 1, 2)}>
+        <Stars
+          acceleration={acceleration}
+          colors={COLORS}
+          count={isMediaGreaterThan771px ? 6000 : 2500}
+          still={reduceMotion}
+        />
       </Canvas>
     </div>
   );

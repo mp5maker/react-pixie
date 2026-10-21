@@ -367,6 +367,50 @@
   }
 }
 
+/* phone landscape: compact card under the nav, terminal dropped */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    top: auto;
+    bottom: 16px;
+    left: 16px;
+    right: auto;
+    transform: none;
+    width: 340px;
+    padding: 12px 16px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'status'
+      'title'
+      'rule'
+      'sub';
+  }
+  .hero-status {
+    margin-bottom: 8px;
+    font-size: 11px;
+  }
+  .hero-title {
+    gap: 6px;
+  }
+  .hero-name {
+    font-size: 14px;
+  }
+  .hero-word {
+    font-size: 44px;
+  }
+  .hero-rule {
+    margin: 10px 0 8px;
+  }
+  .hero-term {
+    display: none;
+  }
+  .hero-radar {
+    top: 12px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-word::before,
   .hero-word::after,

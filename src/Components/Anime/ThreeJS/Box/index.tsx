@@ -15,22 +15,31 @@ export const Box = ({
   history,
   wireframe = false,
   redirectURL,
+  onSelect,
   rotationX,
   rotationY,
   rotationZ,
   frequency,
+  still,
   ...props
 }: any) => {
   const mesh: any = React.useRef();
   const [hovered, setHover] = React.useState(false);
 
-  useFrame(() => {
-    mesh.current.rotation.x += rotationX * 0.001;
-    mesh.current.rotation.y += rotationY * 0.001;
-    mesh.current.rotation.z += rotationZ * 0.001;
+  useFrame((_, delta) => {
+    /* rates are per 60 Hz frame; reduced motion holds the box still */
+    const step = still ? 0 : Math.min(delta, 0.1) * 60;
+    mesh.current.rotation.x += rotationX * 0.001 * step;
+    mesh.current.rotation.y += rotationY * 0.001 * step;
+    mesh.current.rotation.z += rotationZ * 0.001 * step;
   });
 
-  const onClick = React.useCallback(event => history.push(redirectURL), []);
+  /* onSelect lets the page play an exit before it navigates; drop the hover glitch so it reads */
+  const onClick = React.useCallback(() => {
+    if (!onSelect) return history.push(redirectURL);
+    setHover(false);
+    onSelect();
+  }, []);
 
   const onPointerOver = React.useCallback(
     (event, value) => {

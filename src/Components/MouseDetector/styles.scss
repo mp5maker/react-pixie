@@ -2,7 +2,7 @@
     position: fixed;
     bottom: 125px;
     right: 25px;
-    @media only screen and (max-width: 767px) {
+    @media only screen and (max-width: 767px), (max-height: 500px) and (orientation: landscape) {
         display: none;
     }
 }

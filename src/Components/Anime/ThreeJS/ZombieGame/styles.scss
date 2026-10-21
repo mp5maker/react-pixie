@@ -1,29 +1,186 @@
+.zombie-game {
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    /* while running every tap is a jump, not a scroll */
+    &.is-run {
+        touch-action: none;
+    }
+}
+
 .zombie-game-summary {
     position: absolute;
     top: 25px;
     left: 25px;
-    padding: 14px 18px 16px;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    .controls {
-        display: flex;
-        gap: 8px;
-        margin-top: 10px;
-        > div {
-            padding: 4px 8px 4px 4px;
-            border: 1px solid var(--line);
-        }
-        kbd {
-            min-width: 22px;
-            padding: 0 6px;
-            font-size: 12px;
+    display: flex;
+    gap: 24px;
+    margin: 0;
+    padding: 12px 18px 14px;
+    dt {
+        margin-bottom: 6px;
+    }
+    dd {
+        margin: 0;
+        font-size: 26px;
+        font-variant-numeric: tabular-nums;
+    }
+    .is-hot dd {
+        color: var(--magenta);
+    }
+    @media (max-width: 767px) {
+        top: 12px;
+        left: 12px;
+        gap: 14px;
+        padding: 10px 12px 12px;
+        dd {
+            font-size: 20px;
         }
     }
 }
 
-.zombie-game-controller {
+.zombie-game-prompt {
     position: absolute;
-    top: 300px;
-    right: 25px;
+    top: 120px;
+    left: 50%;
+    width: min(440px, calc(100% - 24px));
+    padding: 20px 24px 22px;
+    transform: translateX(-50%);
+    animation: zombie-prompt-in 220ms cubic-bezier(0.23, 1, 0.32, 1);
+    .hud-rail {
+        margin-bottom: 14px;
+    }
+    @media (max-width: 767px) {
+        top: 84px;
+        padding: 16px 16px 18px;
+    }
+}
+
+.zombie-game-result {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 0 0 14px;
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    .hud-label {
+        color: var(--magenta);
+    }
+    /* keeps the game-over card clear of the fallen runner on phones */
+    @media (max-width: 767px) {
+        margin-bottom: 10px;
+        font-size: 30px;
+    }
+}
+
+.zombie-game-start {
+    padding: 10px 22px;
+    border: 1px solid var(--cyan);
+    border-radius: 0;
+    background-color: transparent;
+    color: var(--cyan);
+    font-family: var(--font-mono);
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease,
+        transform 100ms cubic-bezier(0.23, 1, 0.32, 1);
+    &:active {
+        transform: scale(0.97);
+    }
+    &:focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 3px;
+    }
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background-color: var(--cyan);
+            color: var(--background-color);
+        }
+    }
+}
+
+.zombie-game-hint {
+    margin: 14px 0 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+    kbd {
+        min-width: 0;
+        padding: 0 6px;
+        font-size: 12px;
+    }
+}
+
+/* hit: the feed tears for a moment */
+.zombie-game-glitch {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    animation: zombie-glitch 360ms steps(6, end);
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+    &::before {
+        top: 34%;
+        height: 12%;
+        background-color: var(--magenta);
+    }
+    &::after {
+        top: 61%;
+        height: 6%;
+        background-color: var(--cyan);
+    }
+}
+
+@keyframes zombie-glitch {
+    0% {
+        opacity: 0.55;
+        transform: translateX(-3%);
+    }
+    40% {
+        opacity: 0.4;
+        transform: translateX(4%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+}
+
+@keyframes zombie-prompt-in {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 8px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .zombie-game-glitch {
+        animation: zombie-flash 300ms ease-out;
+    }
+    .zombie-game-prompt {
+        animation: zombie-flash-in 200ms ease-out;
+    }
+}
+
+@keyframes zombie-flash {
+    from {
+        opacity: 0.35;
+    }
+}
+
+@keyframes zombie-flash-in {
+    from {
+        opacity: 0;
+    }
 }

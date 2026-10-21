@@ -28,6 +28,7 @@ import { useColors } from 'Hooks/UseColors';
 import { MusicContext } from 'MusicContext';
 import { SettingsContext } from 'SettingsContext';
 import { SPK } from 'Svg/SPK';
+import { RouteFrom } from 'Utilities/RouteFrom';
 import { StorageGet, StorageSet } from 'Utilities/Storage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
@@ -58,6 +59,7 @@ const PagesRain = React.lazy(() =>
 export const history = createBrowserHistory();
 
 const listenToRouteChange = ({ hash, key, pathname, search, state }: any) => {
+  RouteFrom.set(pathname);
   window.scrollTo({
     top: 0,
     left: 0,
