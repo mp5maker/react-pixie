@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-labelledby="t d">
+<title id="t">React Pixie</title>
+<desc id="d">Night-city portfolio of Shabuktagin Photon Khan, solutions engineer: a HUD over three.js worlds.</desc>
+<defs>
+<style>
+.m{font-family:"Share Tech Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.d{font-family:"Chakra Petch",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:700}
+.scan{animation:scan 7s linear infinite}
+.flick{animation:flick 5s steps(1) infinite}
+.fly{animation:fly 12s linear infinite}
+@keyframes scan{from{transform:translateY(8px)}to{transform:translateY(290px)}}
+@keyframes flick{0%,100%{opacity:1}46%{opacity:.4}47%{opacity:1}71%{opacity:.7}72%{opacity:1}}
+@keyframes fly{from{transform:translateX(0)}to{transform:translateX(560px)}}
+@media (prefers-reduced-motion:reduce){.scan,.flick,.fly{animation:none}}
+</style>
+<!-- lit windows, laid over every tower in one grid so the floors line up -->
+<pattern id="w" width="10" height="14" patternUnits="userSpaceOnUse">
+<rect x="3" y="4" width="3" height="5" fill="#00F0FF" opacity=".35"/>
+</pattern>
+<g id="city">
+<rect x="812" y="172" width="40" height="120"/>
+<rect x="858" y="122" width="30" height="170"/>
+<rect x="894" y="198" width="50" height="94"/>
+<rect x="950" y="82" width="36" height="210"/>
+<rect x="992" y="152" width="24" height="140"/>
+<rect x="1022" y="112" width="60" height="180"/>
+<rect x="1088" y="172" width="28" height="120"/>
+<rect x="1122" y="62" width="42" height="230"/>
+<rect x="1170" y="202" width="18" height="90"/>
+</g>
+</defs>
+<rect width="1200" height="300" fill="#07040F"/>
+<use href="#city" fill="#0E0A1F" stroke="#241A45" stroke-width="2"/>
+<use href="#city" fill="url(#w)"/>
+<!-- the one volt sign, and the spire light -->
+<rect x="958" y="100" width="6" height="64" fill="#F5FF3D"/>
+<line x1="1143" y1="62" x2="1143" y2="34" stroke="#241A45" stroke-width="2"/>
+<rect x="1140" y="30" width="6" height="6" fill="#FF2BD6"/>
+<line x1="812" y1="292" x2="1192" y2="292" stroke="#00F0FF" stroke-width="2"/>
+<!-- a craft crossing the skyline -->
+<path class="fly" d="M620 104l18 5-18 5 4-5z" fill="#FF2BD6"/>
+<!-- chamfered frame, top-right and bottom-left, with corner ticks -->
+<path d="M8 8H1170L1192 30V292H30L8 270Z" fill="none" stroke="#241A45" stroke-width="2"/>
+<path d="M8 40V8H40M1160 292H1192V260" fill="none" stroke="#00F0FF" stroke-width="3"/>
+<text class="m" x="40" y="56" fill="#6B7399" font-size="16" letter-spacing="4">SECTOR FEED // REACT-PIXIE</text>
+<g class="d" font-size="92" letter-spacing="6">
+<text x="36" y="152" fill="#FF2BD6" opacity=".75">REACT PIXIE</text>
+<text x="44" y="152" fill="#00F0FF" opacity=".75">REACT PIXIE</text>
+<text class="flick" x="40" y="152" fill="#C8D3F5">REACT PIXIE</text>
+</g>
+<text class="m" x="40" y="196" fill="#00F0FF" font-size="20" letter-spacing="3">NIGHT-CITY PORTFOLIO // THREE.JS WORLDS</text>
+<text class="m" x="40" y="226" fill="#6B7399" font-size="16" letter-spacing="3">SHABUKTAGIN PHOTON KHAN // SOLUTIONS ENGINEER</text>
+<rect class="scan" x="10" y="0" width="1180" height="2" fill="#00F0FF" opacity=".12"/>
+</svg>
